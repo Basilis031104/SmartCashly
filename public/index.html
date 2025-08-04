@@ -1,54 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smartcashly</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
     header {
-      background-color: #00994d;
+      background: linear-gradient(135deg, #00994d, #007e40);
       padding: 20px 0;
       text-align: center;
       color: white;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: bold;
       position: relative;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     .auth-buttons {
       position: absolute;
       top: 20px;
       right: 30px;
+      display: flex;
+      gap: 15px;
     }
     .auth-buttons a {
-      margin-left: 10px;
       color: white;
       background: #007bff;
-      padding: 8px 16px;
-      border-radius: 4px;
+      padding: 10px 20px;
+      border-radius: 50px;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 16px;
+      font-weight: normal;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    .auth-buttons a:hover { background: #0056b3; }
-    main { padding: 40px; text-align: center; }
-    .store-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .auth-buttons a:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    main { padding: 40px 20px; text-align: center; max-width: 1200px; margin: 0 auto; }
+    .hero {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      margin: 20px 0 40px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .hero h2 {
+      color: #00994d;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      color: #555;
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    .store-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
     .store-card {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      width: 180px;
-      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      width: 200px;
+      padding: 25px 20px;
       text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
     }
-    .store-card img { width: 100px; height: 100px; object-fit: contain; }
-    .store-card .cashback { color: red; font-weight: bold; }
+    .store-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .store-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+    .store-card h3 {
+      margin: 0 0 10px;
+      color: #333;
+    }
+    .store-card .cashback {
+      color: #e74c3c;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 10px 0;
+    }
     .store-card a {
       display: inline-block;
       margin-top: 10px;
-      padding: 6px 12px;
-      background-color: #00994d;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, #00994d, #007e40);
       color: white;
       text-decoration: none;
-      border-radius: 4px;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .store-card a:hover {
+      background: linear-gradient(135deg, #007e40, #006633);
+      transform: scale(1.05);
+    }
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
     }
   </style>
 </head>
@@ -62,11 +128,37 @@
   </header>
 
   <main>
-    <h2>Προσφορές & Εκπτώσεις από τα αγαπημένα σας καταστήματα</h2>
-    <p>Cashback + Κουπόνια σε πάνω από 1000 καταστήματα</p>
+    <div class="hero">
+      <h2>Προσφορές & Εκπτώσεις από τα αγαπημένα σας καταστήματα</h2>
+      <p>Cashback + Κουπόνια σε πάνω από 1000 καταστήματα</p>
+    </div>
+
     <div class="store-grid">
-      <!-- Store cards here -->
+      <div class="store-card">
+        <h3>Adidas</h3>
+        <div class="cashback">4.5% Cashback</div>
+        <a href="#">Shop Now</a>
+      </div>
+      <div class="store-card">
+        <h3>Nike</h3>
+        <div class="cashback">6.0% Cashback</div>
+        <a href="#">Shop Now</a>
+      </div>
+      <div class="store-card">
+        <h3>Amazon</h3>
+        <div class="cashback">3.2% Cashback</div>
+        <a href="#">Shop Now</a>
+      </div>
+      <div class="store-card">
+        <h3>eBay</h3>
+        <div class="cashback">5.5% Cashback</div>
+        <a href="#">Shop Now</a>
+      </div>
     </div>
   </main>
+
+  <footer>
+    &copy; 2023 Smartcashly. All rights reserved.
+  </footer>
 </body>
 </html>
