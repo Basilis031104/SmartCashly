@@ -101,35 +101,96 @@
       margin-top: 8px;
       display: none;
     }
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .tab.active {
+      border-bottom: 3px solid #007bff;
+      font-weight: bold;
+      color: #007bff;
+    }
   </style>
 </head>
 <body>
   <div class="login-container">
-    <h2>Login to Your Account</h2>
-    <form id="loginForm">
+    <div class="tabs">
+      <div class="tab active" id="loginTab">Login</div>
+      <div class="tab" id="signupTab">Sign Up</div>
+    </div>
+    
+    <div id="loginForm">
+      <h2>Login to Your Account</h2>
       <div class="input-group">
         <input type="email" id="loginEmail" placeholder="Email" required>
-        <div class="error" id="email-error">Please enter a valid email</div>
+        <div class="error" id="login-email-error">Please enter a valid email</div>
       </div>
       
       <div class="input-group">
         <input type="password" id="loginPassword" placeholder="Password" required>
-        <div class="error" id="password-error">Password is required</div>
+        <div class="error" id="login-password-error">Password is required</div>
       </div>
       
       <button type="submit" id="loginButton">Log In</button>
-    </form>
+    </div>
+    
+    <div id="signupForm" style="display: none;">
+      <h2>Create Your Account</h2>
+      <div class="input-group">
+        <input type="text" id="username" placeholder="Username" required>
+        <div class="error" id="username-error">Please enter a valid username (3-20 characters)</div>
+      </div>
+      
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email" required>
+        <div class="error" id="email-error">Please enter a valid email address</div>
+      </div>
+      
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+        <div class="error" id="password-error">Password must be at least 6 characters</div>
+      </div>
+      
+      <button type="submit" id="signupButton">Sign Up</button>
+    </div>
     
     <div class="signup-link">
-      Don't have an account? <a href="signup.html">Sign Up</a>
+      <a href="index.html">← Back to Homepage</a>
     </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('loginForm');
+      // Tab switching functionality
+      const loginTab = document.getElementById('loginTab');
+      const signupTab = document.getElementById('signupTab');
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
       
-      form.addEventListener('submit', function(e) {
+      loginTab.addEventListener('click', function() {
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+      });
+      
+      signupTab.addEventListener('click', function() {
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+        signupForm.style.display = 'block';
+        loginForm.style.display = 'none';
+      });
+      
+      // Login functionality
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
         // Get values
@@ -137,7 +198,7 @@
         const password = document.getElementById('loginPassword').value.trim();
         
         // Clear errors
-        document.querySelectorAll('.error').forEach(el => {
+        document.querySelectorAll('#loginForm .error').forEach(el => {
           el.style.display = 'none';
         });
         
@@ -145,12 +206,12 @@
         let valid = true;
         
         if(!email) {
-          document.getElementById('email-error').style.display = 'block';
+          document.getElementById('login-email-error').style.display = 'block';
           valid = false;
         }
         
         if(!password) {
-          document.getElementById('password-error').style.display = 'block';
+          document.getElementById('login-password-error').style.display = 'block';
           valid = false;
         }
         
@@ -169,6 +230,56 @@
         }
         
         alert('Invalid email or password. Please try again.');
+      });
+      
+      // Signup functionality
+      document.getElementById('signupForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get values
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        
+        // Clear errors
+        document.querySelectorAll('#signupForm .error').forEach(el => {
+          el.style.display = 'none';
+        });
+        
+        // Validate inputs
+        let valid = true;
+        
+        if(username.length < 3 || username.length > 20) {
+          document.getElementById('username-error').style.display = 'block';
+          valid = false;
+        }
+        
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          document.getElementById('email-error').style.display = 'block';
+          valid = false;
+        }
+        
+        if(password.length < 6) {
+          document.getElementById('password-error').style.display = 'block';
+          valid = false;
+        }
+        
+        if(!valid) return;
+        
+        // Save user data
+        const user = { username, email, password };
+        localStorage.setItem('user', JSON.stringify(user));
+        
+        // Success message
+        alert('Account created successfully! You can now login.');
+        
+        // Switch to login tab
+        loginTab.click();
+        
+        // Clear form
+        document.getElementById('username').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
       });
     });
   </script>
