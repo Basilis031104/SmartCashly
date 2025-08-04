@@ -13,7 +13,6 @@
       align-items: center;
       height: 100vh;
     }
-
     .signup-container {
       background-color: white;
       padding: 30px;
@@ -21,12 +20,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       width: 300px;
     }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
+    h2 { text-align: center; margin-bottom: 20px; }
     input[type="text"],
     input[type="email"],
     input[type="password"] {
@@ -36,7 +30,6 @@
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-
     button {
       width: 100%;
       padding: 10px;
@@ -46,34 +39,42 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .back-link {
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .back-link a {
-      color: #007bff;
-      text-decoration: none;
-    }
+    button:hover { background-color: #0056b3; }
+    .back-link { text-align: center; margin-top: 10px; }
+    .back-link a { color: #007bff; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="signup-container">
     <h2>Create Account</h2>
-    <form>
-      <input type="text" placeholder="Username" required />
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
+    <form id="signupForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
       <button type="submit">Sign Up</button>
     </form>
     <div class="back-link">
       <a href="index.html">← Back to Home</a>
     </div>
   </div>
+
+  <!-- JavaScript to handle signup -->
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", (e) => {
+      e.preventDefault(); // Stop page refresh
+      
+      // Get user input
+      const username = document.getElementById("username").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      
+      // Save to localStorage (for demo only)
+      localStorage.setItem("user", JSON.stringify({ username, email, password }));
+      
+      // Redirect to homepage after signup
+      alert("Account created! Redirecting...");
+      window.location.href = "index.html";
+    });
+  </script>
 </body>
 </html>
