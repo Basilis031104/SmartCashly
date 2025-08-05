@@ -8,19 +8,22 @@
 </head>
 <body>
 
-  <!-- ╔════════════════ HEADER ═════════════════╗ -->
+  <!-- animated coin background (behind everything) -->
+  <ul class="coin-rain" aria-hidden="true">
+    <li></li><li></li><li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li><li></li><li></li>
+  </ul>
+
+  <!-- ╔══ HEADER ═════════════════════════════════════╗ -->
   <header>
-    <!-- logo (left) -->
+    <!-- logo -->
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
 
-    <!-- search bar (center) -->
+    <!-- search -->
     <form class="search-bar" action="#" method="get">
-      <input
-        type="search"
-        name="q"
-        placeholder="Search stores, coupons …"
-        aria-label="Search Smartcashly"
-      />
+      <input type="search" name="q"
+             placeholder="Search stores, coupons …"
+             aria-label="Search Smartcashly" />
       <button type="submit" aria-label="Search">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/>
@@ -28,13 +31,13 @@
       </button>
     </form>
 
-    <!-- auth buttons (right) -->
+    <!-- auth -->
     <nav class="auth-nav">
       <a href="login.html"  class="btn">Login</a>
       <a href="signup.html" class="btn btn--secondary">Sign Up</a>
     </nav>
   </header>
-  <!-- ╚═════════════════════════════════════════╝ -->
+  <!-- ╚═══════════════════════════════════════════════╝ -->
 
   <main>
     <h2>Welcome to Smartcashly</h2>
@@ -46,7 +49,8 @@
   </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
