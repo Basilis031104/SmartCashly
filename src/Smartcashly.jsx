@@ -35,7 +35,7 @@ const shops = [
     name: "Box Now",
     cashback: "20% Cashback",
     link: "https://example.com/boxnow",
-    logo: "https://via.placeholder.com/100x50?text=Box+Now"
+    logo: "https://thevape.gr/wp-content/uploads/2024/09/boxnow-logo3.webp"
   },
   {
     name: "e-shop",
