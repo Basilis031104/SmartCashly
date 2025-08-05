@@ -17,7 +17,7 @@ const shops = [
     name: "Public",
     cashback: "3% Cashback",
     link: "https://example.com/public",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/6/6e/Public_logo.svg"
+    logo: "https://mediterraneancosmos.gr/uploads/files/stores/Public/logo-public-mediterranean-cosmos.jpg"
   },
   {
     name: "ASOS",
