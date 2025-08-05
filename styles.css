@@ -138,4 +138,57 @@ footer {
   .auth-nav {
     display: none;          /* hide buttons on tiny screens (optional) */
   }
+
+  /* === animated coin rain ============================================ */
+.coin-rain {
+  position: fixed;
+  inset: 0;                 /* full viewport */
+  overflow: hidden;
+  z-index: -1;              /* sit behind page content */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.coin-rain li {
+  position: absolute;
+  top: -120px;              /* start above viewport */
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 30% 30%, #ffd54f, #f7b71d 70%);
+  border-radius: 50%;
+  box-shadow: inset -4px -8px 0 rgba(0,0,0,0.15);
+  animation: fall 8s linear infinite,
+             spin 4s linear infinite;
+  opacity: 0.85;
+}
+
+/* randomly size & delay each coin */
+.coin-rain li:nth-child(odd)    { width: 40px; height: 40px; animation-duration: 7s, 4s; }
+.coin-rain li:nth-child(3n)     { width: 48px; height: 48px; animation-duration: 9s, 6s; }
+.coin-rain li:nth-child(4n)     { width: 32px; height: 32px; animation-duration: 6s, 3s; }
+
+@keyframes fall {
+  0%   { transform: translateX(var(--start-x,0)) translateY(0) rotate(0deg);   }
+  100% { transform: translateX(var(--end-x,0))   translateY(110vh) rotate(720deg); }
+}
+
+@keyframes spin {
+  to { filter: hue-rotate(360deg); }  /* subtle shimmer */
+}
+
+/* distribute coins horizontally & stagger start times with custom props */
+.coin-rain li:nth-child(1) { --start-x: -10vw; --end-x:  5vw;  animation-delay: 0s;   }
+.coin-rain li:nth-child(2) { --start-x:  0vw;  --end-x: -5vw;  animation-delay: 1s;   }
+.coin-rain li:nth-child(3) { --start-x: 15vw;  --end-x: 10vw;  animation-delay: 2s;   }
+.coin-rain li:nth-child(4) { --start-x: 25vw;  --end-x: 20vw;  animation-delay: 3s;   }
+.coin-rain li:nth-child(5) { --start-x: 35vw;  --end-x: 30vw;  animation-delay: 4s;   }
+.coin-rain li:nth-child(6) { --start-x: 45vw;  --end-x: 40vw;  animation-delay: 0.5s; }
+.coin-rain li:nth-child(7) { --start-x: 55vw;  --end-x: 50vw;  animation-delay: 1.5s; }
+.coin-rain li:nth-child(8) { --start-x: 65vw;  --end-x: 60vw;  animation-delay: 2.5s; }
+.coin-rain li:nth-child(9) { --start-x: 75vw;  --end-x: 70vw;  animation-delay: 3.5s; }
+.coin-rain li:nth-child(10){ --start-x: 85vw;  --end-x: 80vw;  animation-delay: 4.5s; }
+.coin-rain li:nth-child(11){ --start-x: 95vw;  --end-x: 90vw;  animation-delay: 2s;   }
+.coin-rain li:nth-child(12){ --start-x: 105vw; --end-x: 100vw; animation-delay: 3s;   }
+
 }
