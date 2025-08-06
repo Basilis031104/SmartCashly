@@ -5,6 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail, 
   signOut
 } from
   "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -29,6 +30,7 @@ window.smartAuth = {
   signOut: ()            => signOut(auth),
   user   : ()            => auth.currentUser       // null if signed-out
 };
+
 
 
 
