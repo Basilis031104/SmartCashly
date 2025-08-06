@@ -9,7 +9,7 @@ import {
 } from
   "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-/*  ⬇︎  paste YOUR real config from Firebase console here  */
+/* config from Firebase console here  */
 const firebaseConfig = {
   apiKey: "AIzaSy…",
   authDomain: "smartcashly.firebaseapp.com",
@@ -29,3 +29,4 @@ window.smartAuth = {
   signOut: ()            => signOut(auth),
   user   : ()            => auth.currentUser       // null if signed-out
 };
+
