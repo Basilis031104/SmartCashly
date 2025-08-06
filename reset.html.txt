@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Password • Smartcashly</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ✅ HEADER (reuse the logo + nav style) -->
+  <header>
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <nav class="auth-nav">
+      <a href="index.html" class="btn btn--secondary">Home</a>
+    </nav>
+  </header>
+
+  <!-- ✅ MAIN: reset form -->
+  <main class="form-container">
+    <h2>Forgot your password?</h2>
+
+    <form id="reset-form">
+      <input type="email" id="rp_email"
+             placeholder="Enter your email" required />
+      <button class="btn btn--full">Send reset link</button>
+      <p id="rp_msg" class="form-error"></p>
+    </form>
+  </main>
+
+  <footer>© <span id="year"></span> Smartcashly.</footer>
+
+  <!-- Firebase helper -->
+  <script type="module" src="auth.js"></script>
+
+  <!-- Page-specific JS -->
+  <script>
+    /* show current year in footer */
+    year.textContent = new Date().getFullYear();
+
+    /* send reset email */
+    reset_form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      rp_msg.textContent = "";
+
+      try {
+        await smartAuth.reset(rp_email.value.trim());
+        rp_msg.textContent = "Email sent! Check your inbox.";
+        rp_msg.style.color = "#008e45";
+      } catch (err) {
+        rp_msg.textContent = err.code.replace("auth/","");
+      }
+    });
+  </script>
+</body>
+</html>
