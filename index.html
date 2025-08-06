@@ -3,55 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cashback Background</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #0a7f3f; /* Deep green */
-    }
-
-    .coin {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background: gold;
-      border-radius: 50%;
-      box-shadow: inset 0 0 5px #e6b800, 0 0 10px rgba(255, 223, 0, 0.5);
-      animation: float 10s linear infinite;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 0;
-      }
-      20% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(0.8);
-        opacity: 0;
-      }
-    }
-
-    /* Random positions + durations */
-    .coin:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 9s; }
-    .coin:nth-child(2) { left: 25%; animation-delay: 1s; animation-duration: 11s; }
-    .coin:nth-child(3) { left: 40%; animation-delay: 2s; animation-duration: 10s; }
-    .coin:nth-child(4) { left: 55%; animation-delay: 3s; animation-duration: 12s; }
-    .coin:nth-child(5) { left: 70%; animation-delay: 4s; animation-duration: 8s; }
-    .coin:nth-child(6) { left: 85%; animation-delay: 5s; animation-duration: 13s; }
-  </style>
+  <title>Smartcashly</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Floating Coins -->
-  <div class="coin"></div>
-  <div class="coin"></div>
-  <div class="coin"></div>
-  <div class="coin"></div>
-  <div class="coin"></div>
-  <div class="coin"></div>
+
+  <!-- animated bills (background) -->
+  <ul class="cash-rain" aria-hidden="true">
+    <li></li><li></li><li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li><li></li><li></li>
+  </ul>
+
+  <!-- ███ HEADER █████████████████████████████████████ -->
+  <header>
+    <!-- logo -->
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+
+    <!-- search -->
+    <form class="search-bar" action="#" method="get">
+      <input type="search" name="q"
+             placeholder="Search stores, coupons …"
+             aria-label="Search Smartcashly" />
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24"><path
+          d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/>
+        </svg>
+      </button>
+    </form>
+
+    <!-- auth buttons -->
+    <nav class="auth-nav">
+      <a href="login.html"  class="btn">Login</a>
+      <a href="signup.html" class="btn btn--secondary">Sign Up</a>
+    </nav>
+  </header>
+  <!-- ████████████████████████████████████████████████ -->
+
+  <main>
+    <h2>Welcome to Smartcashly</h2>
+    <p>Your favourite cashback &amp; coupon platform.</p>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
