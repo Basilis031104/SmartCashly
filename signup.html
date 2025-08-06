@@ -7,36 +7,52 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <!-- header (reuse your logo/search/buttons markup) -->
   <header>
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
     <nav class="auth-nav">
-      <a href="index.html" class="btn btn--secondary">Home</a>
-      <a href="login.html" class="btn">Login</a>
+      <a href="index.html"  class="btn btn--secondary">Home</a>
+      <a href="login.html"  class="btn">Login</a>
     </nav>
   </header>
 
   <main class="form-container">
     <h2>Create an Account</h2>
-    <form action="#" method="post">
-      <label>Email
-        <input type="email" name="email" required />
-      </label>
-      <label>Password
-        <input type="password" name="password" required />
-      </label>
-      <label>Confirm Password
-        <input type="password" name="confirm" required />
-      </label>
-      <button type="submit" class="btn btn--full">Sign Up</button>
+
+    <form id="signup-form">
+      <input type="email"    id="su_email"    placeholder="Email"    required />
+      <input type="password" id="su_pass"     placeholder="Password" required />
+      <input type="password" id="su_confirm"  placeholder="Confirm"  required />
+      <button class="btn btn--full">Sign Up</button>
+      <p id="su_error" class="form-error"></p>
     </form>
   </main>
 
-  <footer>
-    &copy; <span id="year"></span> Smartcashly. All rights reserved.
-  </footer>
+  <footer>© <span id="year"></span> Smartcashly. All rights reserved.</footer>
 
+  <!-- firebase auth helpers -->
+  <script type="module" src="auth.js"></script>
+
+  <!-- page-specific logic -->
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    signup_form.addEventListener("submit", async e => {
+      e.preventDefault();
+      su_error.textContent = "";                       // clear old errors
+
+      if (su_pass.value !== su_confirm.value) {
+        su_error.textContent = "Passwords mismatch";   // simple client check
+        return;
+      }
+      try {
+        await smartAuth.signUp(su_email.value.trim(), su_pass.value);
+        window.location = "index.html";
+      } catch (err) {
+        su_error.textContent = err.code.replace("auth/","");
+      }
+    });
   </script>
 </body>
 </html>
