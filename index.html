@@ -2,54 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smartcashly</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smartcashly Animated Background</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: white;
+      font-family: sans-serif;
+    }
+
+    .bill {
+      position: absolute;
+      width: 60px;
+      height: 30px;
+      background-color: #2ecc71; /* Green */
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffcc00; /* Yellow $ sign */
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: floatUp 12s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Randomize positions + delay */
+    .bill:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .bill:nth-child(2) { left: 25%; animation-delay: 2s; }
+    .bill:nth-child(3) { left: 40%; animation-delay: 4s; }
+    .bill:nth-child(4) { left: 55%; animation-delay: 6s; }
+    .bill:nth-child(5) { left: 70%; animation-delay: 8s; }
+    .bill:nth-child(6) { left: 85%; animation-delay: 10s; }
+
+    /* Add more for denser effect */
+  </style>
 </head>
 <body>
-
-  <!-- animated bills (background) -->
-  <ul class="cash-rain" aria-hidden="true">
-    <li></li><li></li><li></li><li></li><li></li><li></li>
-    <li></li><li></li><li></li><li></li><li></li><li></li>
-  </ul>
-
-  <!-- ███ HEADER █████████████████████████████████████ -->
-  <header>
-    <!-- logo -->
-    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-
-    <!-- search -->
-    <form class="search-bar" action="#" method="get">
-      <input type="search" name="q"
-             placeholder="Search stores, coupons …"
-             aria-label="Search Smartcashly" />
-      <button type="submit" aria-label="Search">
-        <svg viewBox="0 0 24 24"><path
-          d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/>
-        </svg>
-      </button>
-    </form>
-
-    <!-- auth buttons -->
-    <nav class="auth-nav">
-      <a href="login.html"  class="btn">Login</a>
-      <a href="signup.html" class="btn btn--secondary">Sign Up</a>
-    </nav>
-  </header>
-  <!-- ████████████████████████████████████████████████ -->
-
-  <main>
-    <h2>Welcome to Smartcashly</h2>
-    <p>Your favourite cashback &amp; coupon platform.</p>
-  </main>
-
-  <footer>
-    © <span id="year"></span> Smartcashly. All rights reserved.
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <div class="bill">$</div>
+  <div class="bill">$</div>
+  <div class="bill">$</div>
+  <div class="bill">$</div>
+  <div class="bill">$</div>
+  <div class="bill">$</div>
 </body>
 </html>
