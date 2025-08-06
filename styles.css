@@ -55,24 +55,30 @@ footer{text-align:center;font-size:.875rem;padding:1rem 0;background:#f4f4f4;}
 @media(max-width:600px){.auth-nav{display:none;}}
 
 /* === animated CASH rain =========================================== */
-.cash-rain{
-  position:fixed;inset:0;z-index:-1;overflow:hidden;
-  list-style:none;margin:0;padding:0;
-}
-/* single green bank-note */
 .cash-rain li{
-  position:absolute;top:-120px;width:72px;height:40px;
+  position:absolute;
+  top:-120px;
+  width:72px;
+  height:40px;
   border-radius:6px;
-  background:linear-gradient(135deg,#8bc34a 0%,#388e3c 100%);
+
+  /* solid green bank-note */
+  background:linear-gradient(135deg,#60c04f 0%,#258033 100%);
   box-shadow:
     inset 0 0 0 3px rgba(0,0,0,.15),
     inset 0 0 0 8px rgba(255,255,255,.08);
+
   display:flex;align-items:center;justify-content:center;
+
   font-size:1.6rem;font-weight:700;line-height:1;
-  color:#fffbe6;text-shadow:0 1px 2px rgba(0,0,0,.25);
-  animation:fall 9s linear infinite,spin 7s linear infinite;
+  color:#ffd54f;                /* ✱ yellow dollar sign */
+  text-shadow:0 1px 2px rgba(0,0,0,.25);
+
+  /* just the falling / tumbling motion */
+  animation:fall 9s linear infinite;
   opacity:.9;
 }
+
 .cash-rain li::before{content:"$";}
 
 /* varied sizes + speeds */
