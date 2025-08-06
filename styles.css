@@ -16,7 +16,7 @@ header{
   padding:1rem 1.5rem;
   background:#008e45;color:#fff;
 }
-.logo-img{height:64px;width:auto;flex:0 0 auto;}
+.logo-img{height:100px;width:auto;flex:0 0 auto;}
 
 /* === search bar ==================================================== */
 .search-bar{position:relative;flex:1 1 100%;max-width:460px;}
