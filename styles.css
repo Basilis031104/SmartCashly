@@ -79,7 +79,7 @@ footer{text-align:center;font-size:.875rem;padding:1rem 0;background:#f4f4f4;}
   opacity:.9;
 }
 
-.cash-rain li::before{content:"$";}
+.cash-rain li::before{content:"€";}
 
 
 
