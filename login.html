@@ -7,12 +7,11 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <header>
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
     <nav class="auth-nav">
-      <a href="index.html"   class="btn btn--secondary">Home</a>
-      <a href="signup.html"  class="btn">Sign Up</a>
+      <a href="index.html"  class="btn btn--secondary">Home</a>
+      <a href="signup.html" class="btn">Sign Up</a>
     </nav>
   </header>
 
@@ -25,13 +24,18 @@
       <button class="btn btn--full">Login</button>
       <p id="lo_error" class="form-error"></p>
     </form>
+
+    <!-- ✅ NEW: reset password link -->
+    <p style="text-align:right;margin-top:.5rem;">
+      <a href="reset.html" style="font-size:0.875rem;">Forgot password?</a>
+    </p>
   </main>
 
-  <footer>© <span id="year"></span> Smartcashly. All rights reserved.</footer>
+  <footer>© <span id="year"></span> Smartcashly.</footer>
 
   <script type="module" src="auth.js"></script>
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    year.textContent = new Date().getFullYear();
 
     document.getElementById("login-form").addEventListener("submit", async e => {
       e.preventDefault();
@@ -39,7 +43,7 @@
 
       try {
         await smartAuth.signIn(lo_email.value.trim(), lo_pass.value);
-        window.location = "index.html";
+        location.href = "index.html";
       } catch (err) {
         lo_error.textContent =
           err.code === "auth/wrong-password" ? "Wrong password"
