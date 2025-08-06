@@ -81,10 +81,9 @@ footer{text-align:center;font-size:.875rem;padding:1rem 0;background:#f4f4f4;}
 
 .cash-rain li::before{content:"$";}
 
-/* varied sizes + speeds */
-.cash-rain li:nth-child(odd){width:56px;height:32px;animation-duration:8s,5s;}
+/*size + speed */
 .cash-rain li:nth-child(3n){width:64px;height:36px;animation-duration:10s,6s;}
-.cash-rain li:nth-child(4n){width:48px;height:28px;animation-duration:7s,4s;}
+
 
 /* keyframes */
 @keyframes fall{
