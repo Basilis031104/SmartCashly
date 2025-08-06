@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- ✅ HEADER (reuse the logo + nav style) -->
+  <!-- ▄▄▄ HEADER ▄▄▄ -->
   <header>
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
     <nav class="auth-nav">
@@ -16,13 +16,17 @@
     </nav>
   </header>
 
-  <!-- ✅ MAIN: reset form -->
+  <!-- ▄▄▄ RESET FORM ▄▄▄ -->
   <main class="form-container">
     <h2>Forgot your password?</h2>
 
+    <!-- the dash stays, we will reference by getElementById -->
     <form id="reset-form">
-      <input type="email" id="rp_email"
-             placeholder="Enter your email" required />
+      <input
+        type="email"
+        id="rp_email"
+        placeholder="Enter your email"
+        required />
       <button class="btn btn--full">Send reset link</button>
       <p id="rp_msg" class="form-error"></p>
     </form>
@@ -30,53 +34,34 @@
 
   <footer>© <span id="year"></span> Smartcashly.</footer>
 
-  <!-- Firebase helper -->
+  <!-- Firebase helper (contains smartAuth) -->
   <script type="module" src="auth.js"></script>
 
-  <!-- Page-specific JS -->
+  <!-- Page-specific logic -->
   <script>
     /* show current year in footer */
-    year.textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
 
     /* send reset email */
-    reset_form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      rp_msg.textContent = "";
+    document
+      .getElementById("reset-form")          // explicit reference (no dash issue)
+      .addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const msg = document.getElementById("rp_msg");
+        msg.textContent = "";
+        msg.style.color = "#c00";
 
-      try {
-        await smartAuth.reset(rp_email.value.trim());
-        rp_msg.textContent = "Email sent! Check your inbox.";
-        rp_msg.style.color = "#008e45";
-      } catch (err) {
-        rp_msg.textContent = err.code.replace("auth/","");
-      }
-    });
-
-  <!-- Firebase helper -->
-<script type="module" src="auth.js"></script>
-
-<!-- Page-specific JS -->
-<script>
-  year.textContent = new Date().getFullYear();
-
-  /* explicit reference so the dash doesn’t matter */
-  document.getElementById("reset-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    rp_msg.textContent = "";
-    rp_msg.style.color = "#c00";
-
-    try {
-      await smartAuth.reset(rp_email.value.trim());
-      rp_msg.textContent = "Reset email sent! Check your inbox.";
-      rp_msg.style.color = "#008e45";
-    } catch (err) {
-      console.error(err);
-      rp_msg.textContent = err.code.replace("auth/","");
-    }
-  });
+        try {
+          await smartAuth.reset(
+            document.getElementById("rp_email").value.trim()
+          );
+          msg.textContent = "Reset email sent! Check your inbox.";
+          msg.style.color = "#008e45";       // green success
+        } catch (err) {
+          console.error(err);
+          msg.textContent = err.code.replace("auth/","");
+        }
+      });
   </script>
 </body>
 </html>
-
-
-
