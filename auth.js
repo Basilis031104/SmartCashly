@@ -11,7 +11,7 @@ import {
 
 /* config from Firebase console here  */
 const firebaseConfig = {
-  apiKey: "AIzaSyA1B2C3D4E5F6G7H8I9J0klmnOPQrSt",
+  apiKey: "AIzaSyCHjsbAQcjiTv9obNpwjb3JF0a59-D7uhI",
   authDomain: "smartcashly.firebaseapp.com",
   projectId: "smartcashly",
   storageBucket: "smartcashly.appspot.com",
@@ -29,5 +29,6 @@ window.smartAuth = {
   signOut: ()            => signOut(auth),
   user   : ()            => auth.currentUser       // null if signed-out
 };
+
 
 
