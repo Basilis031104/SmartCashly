@@ -51,6 +51,32 @@
         rp_msg.textContent = err.code.replace("auth/","");
       }
     });
+
+  <!-- Firebase helper -->
+<script type="module" src="auth.js"></script>
+
+<!-- Page-specific JS -->
+<script>
+  year.textContent = new Date().getFullYear();
+
+  /* explicit reference so the dash doesn’t matter */
+  document.getElementById("reset-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    rp_msg.textContent = "";
+    rp_msg.style.color = "#c00";
+
+    try {
+      await smartAuth.reset(rp_email.value.trim());
+      rp_msg.textContent = "Reset email sent! Check your inbox.";
+      rp_msg.style.color = "#008e45";
+    } catch (err) {
+      console.error(err);
+      rp_msg.textContent = err.code.replace("auth/","");
+    }
+  });
   </script>
 </body>
 </html>
+
+
+
