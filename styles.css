@@ -104,3 +104,43 @@ footer{text-align:center;font-size:.875rem;padding:1rem 0;background:#f4f4f4;}
 .cash-rain li:nth-child(10){--sx: 85vw;--ex:80vw; animation-delay:4.5s;}
 .cash-rain li:nth-child(11){--sx: 95vw;--ex:90vw; animation-delay:2s;}
 .cash-rain li:nth-child(12){--sx:105vw;--ex:100vw;animation-delay:3s;}
+
+/* === mobile tweaks (≤ 600 px) ===================================== */
+@media (max-width: 600px) {
+
+  /* 1. header layout ---------------------------------------------- */
+  header{
+    flex-wrap: wrap;               /* allow items to break lines   */
+    padding: 0.75rem 1rem;
+  }
+
+  .logo-img{
+    height: 48px;                  /* smaller logo                 */
+    margin-bottom: 0.5rem;
+  }
+
+  /* show the buttons again and stack them next to the logo */
+  .auth-nav{
+    display: flex;                 /* override earlier "display:none" */
+    gap: 0.5rem;
+    order: 2;                      /* logo (1)  buttons (2)  search (3) */
+  }
+
+  /* full-width search bar under logo/buttons */
+  .search-bar{
+    flex: 1 1 100%;
+    order: 3;
+    margin-top: 0.5rem;
+  }
+
+  /* 2. calm the cash rain ----------------------------------------- */
+  /* hide all but the first 6 notes */
+  .cash-rain li:nth-child(n + 7){ display:none; }
+
+  /* shrink the remaining notes a bit */
+  .cash-rain li{
+    width: 56px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+}
