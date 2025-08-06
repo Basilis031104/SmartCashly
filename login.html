@@ -33,7 +33,7 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    login_form.addEventListener("submit", async e => {
+    document.getElementById("login-form").addEventListener("submit", async e => {
       e.preventDefault();
       lo_error.textContent = "";
 
