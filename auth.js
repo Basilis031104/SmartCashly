@@ -27,9 +27,11 @@ const auth = getAuth(app);
 window.smartAuth = {
   signUp : (email, pass) => createUserWithEmailAndPassword(auth, email, pass),
   signIn : (email, pass) => signInWithEmailAndPassword(auth, email, pass),
+  reset  : (e)   => sendPasswordResetEmail(auth,e),
   signOut: ()            => signOut(auth),
   user   : ()            => auth.currentUser       // null if signed-out
 };
+
 
 
 
