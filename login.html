@@ -7,33 +7,45 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
   <header>
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
     <nav class="auth-nav">
-      <a href="index.html" class="btn btn--secondary">Home</a>
-      <a href="signup.html" class="btn">Sign Up</a>
+      <a href="index.html"   class="btn btn--secondary">Home</a>
+      <a href="signup.html"  class="btn">Sign Up</a>
     </nav>
   </header>
 
   <main class="form-container">
     <h2>Login</h2>
-    <form action="#" method="post">
-      <label>Email
-        <input type="email" name="email" required />
-      </label>
-      <label>Password
-        <input type="password" name="password" required />
-      </label>
-      <button type="submit" class="btn btn--full">Login</button>
+
+    <form id="login-form">
+      <input type="email"    id="lo_email" placeholder="Email"    required />
+      <input type="password" id="lo_pass"  placeholder="Password" required />
+      <button class="btn btn--full">Login</button>
+      <p id="lo_error" class="form-error"></p>
     </form>
   </main>
 
-  <footer>
-    &copy; <span id="year"></span> Smartcashly. All rights reserved.
-  </footer>
+  <footer>© <span id="year"></span> Smartcashly. All rights reserved.</footer>
 
+  <script type="module" src="auth.js"></script>
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    login_form.addEventListener("submit", async e => {
+      e.preventDefault();
+      lo_error.textContent = "";
+
+      try {
+        await smartAuth.signIn(lo_email.value.trim(), lo_pass.value);
+        window.location = "index.html";
+      } catch (err) {
+        lo_error.textContent =
+          err.code === "auth/wrong-password" ? "Wrong password"
+                                             : err.code.replace("auth/","");
+      }
+    });
   </script>
 </body>
 </html>
