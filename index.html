@@ -13,6 +13,7 @@
       font-family: sans-serif;
     }
 
+    /* Background bills */
     .bill {
       position: absolute;
       width: 60px;
@@ -25,8 +26,9 @@
       color: #ffcc00; /* Yellow $ sign */
       font-size: 20px;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      opacity: 0.8;
       animation: floatUp 12s linear infinite;
+      z-index: 0;
     }
 
     @keyframes floatUp {
@@ -43,7 +45,6 @@
       }
     }
 
-    /* Randomize positions + delay */
     .bill:nth-child(1) { left: 10%; animation-delay: 0s; }
     .bill:nth-child(2) { left: 25%; animation-delay: 2s; }
     .bill:nth-child(3) { left: 40%; animation-delay: 4s; }
@@ -51,15 +52,29 @@
     .bill:nth-child(5) { left: 70%; animation-delay: 8s; }
     .bill:nth-child(6) { left: 85%; animation-delay: 10s; }
 
-    /* Add more for denser effect */
+    /* Foreground site content */
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding-top: 100px;
+    }
   </style>
 </head>
 <body>
+  <!-- Animated dollar bills -->
   <div class="bill">$</div>
   <div class="bill">$</div>
   <div class="bill">$</div>
   <div class="bill">$</div>
   <div class="bill">$</div>
   <div class="bill">$</div>
+
+  <!-- Your real site content goes here -->
+  <div class="content">
+    <h1>Welcome to Smartcashly</h1>
+    <p>Your favourite cashback & coupon platform.</p>
+    <!-- Add your signup/login form here -->
+  </div>
 </body>
 </html>
