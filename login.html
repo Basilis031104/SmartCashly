@@ -1,100 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Login • Smartcashly</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in • Smartcashly</title>
 
-  <!-- site-wide styles -->
+  <!-- global styles -->
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- small page-specific tweak -->
-  <style>
-    /* centres the form on very tall screens */
-    main{display:flex;align-items:center;justify-content:center;}
-  </style>
 </head>
 
 <body>
-  <!-- ▸────────── header ──────────▸ -->
+  <!-- ----------  HEADER  ---------- -->
   <header>
-    <a href="index.html"><img class="logo-img" src="logo.png" alt="Smartcashly logo"></a>
+    <img src="img/logo.svg" alt="Smartcashly logo" class="logo-img" />
 
-    <!-- search bar kept exactly as before -->
-    <div class="search-bar">
-      <input type="search" placeholder="Search coupons &amp; stores…" />
-      <button><svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"/></svg></button>
-    </div>
+    <!-- empty space (no search bar on auth pages) -->
+    <div style="flex:1 1 auto;"></div>
 
     <nav class="auth-nav">
-      <a class="btn btn--secondary" href="index.html">Home</a>
-      <a class="btn" href="signup.html">Sign Up</a>
+      <a href="index.html" class="btn btn--secondary">Home</a>
+      <a href="signup.html" class="btn">Sign Up</a>
     </nav>
   </header>
-  <!-- ▸─────────────────────────────▸ -->
 
+  <!-- ----------  MAIN  ---------- -->
   <main>
-    <form id="loginForm"
-          class="mx-auto w-full max-w-xs space-y-4 bg-white/90 p-6 rounded-xl shadow-lg">
+    <h2>Login to Smartcashly</h2>
+    <p>Enter your credentials to continue</p>
 
-      <h1 class="text-2xl font-semibold text-center">Login</h1>
+    <form id="login_form" class="form-container" style="margin-top:2rem;">
+      <label>
+        Email<br/>
+        <input type="email" name="email" id="lg_email" required />
+      </label>
 
-      <!-- e-mail -->
-      <div class="flex flex-col">
-        <label for="email" class="mb-1 font-medium text-gray-700">Email</label>
-        <input id="email"
-               name="email"
-               type="email"
-               placeholder="you@example.com"
-               required
-               class="w-full rounded-md border border-gray-300 px-3 py-2
-                      focus:border-green-600 focus:ring-2 focus:ring-green-300" />
-      </div>
+      <label style="margin-left:1rem;">
+        Password<br/>
+        <input type="password" name="password" id="lg_pass" required />
+      </label>
 
-      <!-- password -->
-      <div class="flex flex-col">
-        <label for="password" class="mb-1 font-medium text-gray-700">Password</label>
-        <input id="password"
-               name="password"
-               type="password"
-               required
-               class="w-full rounded-md border border-gray-300 px-3 py-2
-                      focus:border-green-600 focus:ring-2 focus:ring-green-300" />
-      </div>
-
-      <button type="submit"
-              class="w-full rounded-md bg-green-600 py-2 font-semibold text-white
-                     hover:bg-green-700 active:bg-green-800">
-        Login
-      </button>
-
-      <a href="reset.html"
-         class="block text-center text-sm font-medium text-green-700
-                hover:underline">
-        Forgot password?
-      </a>
+      <button type="submit" class="btn" style="margin-left:1rem;">Login</button>
     </form>
+
+    <p style="margin-top:.6rem;">
+      <a href="reset.html">Forgot your password?</a>
+    </p>
+
+    <p id="lg_msg" style="margin-top:1rem; font-weight:600;"></p>
   </main>
 
-  <footer>© Smartcashly.</footer>
+  <!-- ----------  FOOTER  ---------- -->
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
 
-  <!-- Firebase auth helpers -->
-  <script type="module" src="auth.js"></script>
-  <script type="module">
-    import { smartAuth } from './auth.js';   // already exported globally
+  <!-- falling-cash background (same UL used on landing page) -->
+  <ul class="coin-rain">
+    <li>$</li><li>$</li><li>$</li><li>$</li>
+    <li>$</li><li>$</li><li>$</li><li>$</li>
+  </ul>
 
-    document.getElementById('loginForm')
-      .addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        const email = e.target.email.value.trim();
-        const pass  = e.target.password.value.trim();
-        try {
-          await smartAuth.signIn(email, pass);
-          // simple redirect – tweak for your flow
-          location.href = 'index.html';
-        } catch(err) {
-          alert(err.message);
-        }
-      });
+  <!-- ----------  SCRIPTS  ---------- -->
+  <!-- your minimal wrapper around Firebase JS SDK -->
+  <script src="smartAuth.js"></script>
+
+  <script>
+    /* update footer year */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* login form */
+    const lg_form = document.getElementById('login_form');
+    const lg_email = document.getElementById('lg_email');
+    const lg_pass  = document.getElementById('lg_pass');
+    const lg_msg   = document.getElementById('lg_msg');
+
+    lg_form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      lg_msg.textContent = '';
+
+      try {
+        await smartAuth.login(lg_email.value.trim(), lg_pass.value);
+        lg_msg.style.color = '#008e45';
+        lg_msg.textContent = 'Success! Redirecting…';
+        window.location.href = 'index.html';
+      } catch (err) {
+        lg_msg.style.color = 'crimson';
+        lg_msg.textContent  = err.code.replace('auth/', '');
+      }
+    });
   </script>
 </body>
 </html>
