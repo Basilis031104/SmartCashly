@@ -1,50 +1,168 @@
-/* === auth forms (login / signup / reset) ============================ */
-form.mx-auto{ /* utility classes baked-in for non-Tailwind builds */
-  max-width: 22rem;
-  margin: 0 auto;
-  padding: 1.5rem;
-  background: rgba(255,255,255,.9);
-  border-radius: 1rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+/* =============  GLOBAL RESET  ============================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
 }
-form.mx-auto h1{
-  text-align:center;
-  font-size:1.5rem;
-  margin-bottom:1rem;
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #fff;          /* shows behind falling cash */
+  color: #222;
 }
-form.mx-auto label{
-  display:block;
-  font-weight:600;
-  margin-bottom:.25rem;
+
+/* =============  HEADER  ==================================== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: #008e45;       /* Smartcashly green */
+  color: #fff;
 }
-form.mx-auto input{
-  width:100%;
-  padding:.5rem .75rem;
-  border:1px solid #d1d5db;
-  border-radius:.5rem;
+
+.logo-img {
+  height: 64px;
+  width: auto;
+  flex: 0 0 auto;
 }
-form.mx-auto input:focus{
-  outline:none;
-  border-color:#16a34a;
-  box-shadow:0 0 0 2px rgba(34,197,94,.3);
+
+/* -------------  search bar --------------- */
+.search-bar {
+  position: relative;
+  flex: 1 1 100%;
+  max-width: 480px;
 }
-form.mx-auto button{
-  width:100%;
-  padding:.5rem 0;
-  border:none;
-  border-radius:.5rem;
-  background:#16a34a;
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
+
+.search-bar input {
+  width: 100%;
+  padding: 0.55rem 2.8rem 0.55rem 1rem;
+  border: none;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  outline: none;
+  box-shadow: 0 0 0 2px transparent;
+  transition: box-shadow .18s;
 }
-form.mx-auto button:hover{background:#15803d;}
-form.mx-auto a{
-  display:block;
-  text-align:center;
-  margin-top:.5rem;
-  color:#15803d;
-  font-size:.875rem;
-  text-decoration:none;
+
+.search-bar input:focus {
+  box-shadow: 0 0 0 2px rgba(0,112,243,.35);
 }
-form.mx-auto a:hover{text-decoration:underline;}
+
+.search-bar button {
+  position: absolute;
+  right: .4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: none;
+  border-radius: 50%;
+  background: #0070f3;
+  cursor: pointer;
+  transition: background .18s;
+}
+
+.search-bar button:hover { background: #0059c1; }
+.search-bar button svg   { width: 1rem; height: 1rem; fill: #fff; }
+
+/* -------------  auth buttons ------------- */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: #0070f3;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .18s;
+}
+.btn:hover          { background: #0059c1; }
+.btn--secondary     { background: rgba(255,255,255,.25); }
+.btn--secondary:hover { background: rgba(255,255,255,.40); }
+
+/* hide auth buttons on very small screens */
+@media (max-width: 600px) {
+  .auth-nav { display: none; }
+}
+
+/* =============  MAIN  ====================================== */
+main {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+main h2 { font-size: 1.9rem; margin-bottom: .5rem; }
+main p  { font-size: 1rem;  color: #555; }
+
+/* =============  FOOTER  ==================================== */
+footer {
+  text-align: center;
+  font-size: .875rem;
+  padding: 1rem 0;
+  background: #f4f4f4;
+}
+
+/* =============  FALLING CASH ANIMATION  ==================== */
+.coin-rain {
+  position: fixed;
+  inset: 0;                 /* full viewport */
+  overflow: hidden;
+  z-index: -1;              /* behind everything */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.coin-rain li {
+  position: absolute;
+  top: -120px;              /* start above */
+  width: 72px;
+  height: 40px;
+  border-radius: 6px;
+  background: radial-gradient(circle at 28% 30%, #f7f7f7 8%, #ffd95c 9% 18%, #ffd440 19% 27%, transparent 28%) #2fa64a;
+  box-shadow:
+      inset 0 0 0 3px rgba(0,0,0,.12),
+      inset 0 0 0 8px rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fffbe6;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+  animation: fall 9s linear infinite, spin 7s linear infinite;
+  opacity: .9;
+}
+
+/* smaller identical notes for variety */
+.coin-rain li:nth-child(3n) { width: 56px; height: 32px; animation-duration: 7s; }
+.coin-rain li:nth-child(4n) { width: 88px; height: 48px; animation-duration: 11s; }
+
+@keyframes fall {
+  0%   { transform: translateX(var(--start-x, 0)) translateY(0)  rotate(0deg); }
+  100% { transform: translateX(var(--end-x, 0))   translateY(110vh) rotate(720deg); }
+}
+@keyframes spin { to { filter: hue-rotate(360deg); } }
+
+/* distribute across screen & stagger */
+.coin-rain li:nth-child(1) { --start-x: -10vw; --end-x:  5vw;  animation-delay: .2s; }
+.coin-rain li:nth-child(2) { --start-x:   0vw; --end-x: -5vw;  animation-delay: .9s; }
+.coin-rain li:nth-child(3) { --start-x:  15vw; --end-x: 10vw;  animation-delay: 1.9s; }
+.coin-rain li:nth-child(4) { --start-x:  25vw; --end-x: 20vw;  animation-delay: 2.7s; }
+.coin-rain li:nth-child(5) { --start-x: -20vw; --end-x:-15vw;  animation-delay: 3.4s; }
+.coin-rain li:nth-child(6) { --start-x:  35vw; --end-x: 28vw;  animation-delay: 4.1s; }
+.coin-rain li:nth-child(7) { --start-x: -35vw; --end-x:-22vw;  animation-delay: 4.9s; }
+.coin-rain li:nth-child(8) { --start-x:  10vw; --end-x:-12vw;  animation-delay: 5.6s; }
+
+/* turn off animation on extra-small screens to save CPU */
+@media (max-width: 480px) {
+  .coin-rain { display: none; }
+}
