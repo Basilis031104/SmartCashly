@@ -1,55 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
   <title>Login • Smartcashly</title>
+
+  <!-- site-wide styles -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- small page-specific tweak -->
+  <style>
+    /* centres the form on very tall screens */
+    main{display:flex;align-items:center;justify-content:center;}
+  </style>
 </head>
+
 <body>
+  <!-- ▸────────── header ──────────▸ -->
   <header>
-    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <a href="index.html"><img class="logo-img" src="logo.png" alt="Smartcashly logo"></a>
+
+    <!-- search bar kept exactly as before -->
+    <div class="search-bar">
+      <input type="search" placeholder="Search coupons &amp; stores…" />
+      <button><svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"/></svg></button>
+    </div>
+
     <nav class="auth-nav">
-      <a href="index.html"  class="btn btn--secondary">Home</a>
-      <a href="signup.html" class="btn">Sign Up</a>
+      <a class="btn btn--secondary" href="index.html">Home</a>
+      <a class="btn" href="signup.html">Sign Up</a>
     </nav>
   </header>
+  <!-- ▸─────────────────────────────▸ -->
 
-  <main class="form-container">
-    <h2>Login</h2>
+  <main>
+    <form id="loginForm"
+          class="mx-auto w-full max-w-xs space-y-4 bg-white/90 p-6 rounded-xl shadow-lg">
 
-    <form id="login-form">
-      <input type="email"    id="lo_email" placeholder="Email"    required />
-      <input type="password" id="lo_pass"  placeholder="Password" required />
-      <button class="btn btn--full">Login</button>
-      <p id="lo_error" class="form-error"></p>
+      <h1 class="text-2xl font-semibold text-center">Login</h1>
+
+      <!-- e-mail -->
+      <div class="flex flex-col">
+        <label for="email" class="mb-1 font-medium text-gray-700">Email</label>
+        <input id="email"
+               name="email"
+               type="email"
+               placeholder="you@example.com"
+               required
+               class="w-full rounded-md border border-gray-300 px-3 py-2
+                      focus:border-green-600 focus:ring-2 focus:ring-green-300" />
+      </div>
+
+      <!-- password -->
+      <div class="flex flex-col">
+        <label for="password" class="mb-1 font-medium text-gray-700">Password</label>
+        <input id="password"
+               name="password"
+               type="password"
+               required
+               class="w-full rounded-md border border-gray-300 px-3 py-2
+                      focus:border-green-600 focus:ring-2 focus:ring-green-300" />
+      </div>
+
+      <button type="submit"
+              class="w-full rounded-md bg-green-600 py-2 font-semibold text-white
+                     hover:bg-green-700 active:bg-green-800">
+        Login
+      </button>
+
+      <a href="reset.html"
+         class="block text-center text-sm font-medium text-green-700
+                hover:underline">
+        Forgot password?
+      </a>
     </form>
-
-    <!-- ✅ NEW: reset password link -->
-    <p style="text-align:right;margin-top:.5rem;">
-      <a href="reset.html" style="font-size:0.875rem;">Forgot password?</a>
-    </p>
   </main>
 
-  <footer>© <span id="year"></span> Smartcashly.</footer>
+  <footer>© Smartcashly.</footer>
 
+  <!-- Firebase auth helpers -->
   <script type="module" src="auth.js"></script>
-  <script>
-    year.textContent = new Date().getFullYear();
+  <script type="module">
+    import { smartAuth } from './auth.js';   // already exported globally
 
-    document.getElementById("login-form").addEventListener("submit", async e => {
-      e.preventDefault();
-      lo_error.textContent = "";
-
-      try {
-        await smartAuth.signIn(lo_email.value.trim(), lo_pass.value);
-        location.href = "index.html";
-      } catch (err) {
-        lo_error.textContent =
-          err.code === "auth/wrong-password" ? "Wrong password"
-                                             : err.code.replace("auth/","");
-      }
-    });
+    document.getElementById('loginForm')
+      .addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const email = e.target.email.value.trim();
+        const pass  = e.target.password.value.trim();
+        try {
+          await smartAuth.signIn(email, pass);
+          // simple redirect – tweak for your flow
+          location.href = 'index.html';
+        } catch(err) {
+          alert(err.message);
+        }
+      });
   </script>
 </body>
 </html>
