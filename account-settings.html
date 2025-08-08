@@ -400,7 +400,13 @@
       
       emailDisplay.textContent = user.email;
       
-      if (user.photoURL) {
+      // Check for locally stored profile picture first
+      const userKey = `profile_pic_${user.email}`;
+      const storedImage = localStorage.getItem(userKey);
+      
+      if (storedImage) {
+        currentProfilePic.src = storedImage;
+      } else if (user.photoURL) {
         currentProfilePic.src = user.photoURL;
       } else {
         // Default avatar with user's initial
@@ -442,39 +448,38 @@
       reader.readAsDataURL(file);
     }
 
-    // Save picture using base64 (simpler approach without Firebase Storage)
+    // Save picture using localStorage (simple browser storage)
     document.getElementById('save-picture').addEventListener('click', async function() {
       if (!selectedFile || !currentUser) return;
 
       try {
-        this.textContent = '⏳ Uploading...';
+        this.textContent = '⏳ Saving...';
         this.disabled = true;
 
-        // Convert image to base64 and save to user profile
+        // Convert image to base64 for local storage
         const reader = new FileReader();
-        reader.onload = async function(e) {
+        reader.onload = function(e) {
           try {
             const base64Image = e.target.result;
             
-            // Update user profile with base64 image
-            await updateProfile(currentUser, {
-              photoURL: base64Image
-            });
+            // Store in localStorage with user's email as key
+            const userKey = `profile_pic_${currentUser.email}`;
+            localStorage.setItem(userKey, base64Image);
 
             // Update current profile picture
             document.getElementById('current-profile-pic').src = base64Image;
             
             // Hide preview and show success
             document.getElementById('preview-container').style.display = 'none';
-            showSuccess('Profile picture updated successfully!');
+            showSuccess('Profile picture saved successfully!');
             
             // Reset file input
             document.getElementById('profile-pic-input').value = '';
             selectedFile = null;
 
           } catch (error) {
-            console.error('Error updating profile:', error);
-            showError('Error updating profile. Please try again.');
+            console.error('Error saving profile:', error);
+            showError('Error saving profile. Please try again.');
           } finally {
             document.getElementById('save-picture').textContent = '💾 Save Picture';
             document.getElementById('save-picture').disabled = false;
