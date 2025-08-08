@@ -102,10 +102,6 @@
       font-size: 2rem;
       color: #008e45;
       margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
     }
 
     .history-header p {
@@ -202,10 +198,6 @@
 
     .history-item:hover {
       background: #f0f8ff;
-    }
-
-    .history-item:last-child {
-      border-bottom: none;
     }
 
     .shop-info {
@@ -355,31 +347,6 @@
     .cash-rain li:nth-child(16) { --start-x: 60vw;  --end-x: 65vw;  --start-rotation: -10deg; --end-rotation: 350deg; animation-delay: 4.6s; animation-duration: 8.7s; }
     .cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
     .cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
-
-    @media (max-width: 768px) {
-      .cash-rain { display: none; }
-      
-      .history-stats {
-        grid-template-columns: 1fr;
-      }
-      
-      .history-table-header,
-      .history-item {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-      }
-      
-      .shop-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-      
-      .filter-controls {
-        flex-direction: column;
-        align-items: stretch;
-      }
-    }
   </style>
 </head>
 
@@ -410,19 +377,19 @@
 
       <div class="history-stats">
         <div class="stat-card">
-          <div class="stat-number" id="total-clicks">0</div>
+          <div class="stat-number" id="total-clicks">3</div>
           <div class="stat-label">Total Shop Visits</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number" id="unique-shops">0</div>
+          <div class="stat-number" id="unique-shops">3</div>
           <div class="stat-label">Unique Shops</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number" id="this-month">0</div>
+          <div class="stat-number" id="this-month">2</div>
           <div class="stat-label">This Month</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number" id="total-earned">$0.00</div>
+          <div class="stat-number" id="total-earned">$36.50</div>
           <div class="stat-label">Total Earned</div>
         </div>
       </div>
@@ -453,12 +420,55 @@
           <span>Status</span>
         </div>
         <div id="history-items" class="history-items">
-          <div class="no-history">
-            <div class="no-history-icon">🏪</div>
-            <h3>No shop visits yet!</h3>
-            <p style="font-size: 0.9rem; color: #888; margin-top: 0.5rem;">
-              When you visit partner stores through Smartcashly, they'll appear here.
-            </p>
+          <div class="history-item">
+            <div class="shop-info">
+              <div class="shop-icon">A</div>
+              <div class="shop-details">
+                <div class="shop-name">Amazon</div>
+                <div class="shop-url">amazon.com</div>
+              </div>
+            </div>
+            <div class="click-date">
+              <div>12/7/2024</div>
+              <div style="font-size: 0.8rem; color: #888;">2:30 PM</div>
+            </div>
+            <div class="click-status status-tracked">
+              Tracked<br>$12.50
+            </div>
+          </div>
+          
+          <div class="history-item">
+            <div class="shop-info">
+              <div class="shop-icon">E</div>
+              <div class="shop-details">
+                <div class="shop-name">eBay</div>
+                <div class="shop-url">ebay.com</div>
+              </div>
+            </div>
+            <div class="click-date">
+              <div>12/6/2024</div>
+              <div style="font-size: 0.8rem; color: #888;">10:15 AM</div>
+            </div>
+            <div class="click-status status-pending">
+              Pending<br>$8.75
+            </div>
+          </div>
+          
+          <div class="history-item">
+            <div class="shop-info">
+              <div class="shop-icon">B</div>
+              <div class="shop-details">
+                <div class="shop-name">Best Buy</div>
+                <div class="shop-url">bestbuy.com</div>
+              </div>
+            </div>
+            <div class="click-date">
+              <div>12/5/2024</div>
+              <div style="font-size: 0.8rem; color: #888;">4:45 PM</div>
+            </div>
+            <div class="click-status status-tracked">
+              Tracked<br>$15.25
+            </div>
           </div>
         </div>
       </div>
@@ -477,7 +487,6 @@
     import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
     let currentUser = null;
-    let clickHistory = [];
 
     // Check if user is logged in
     window.addEventListener('load', () => {
@@ -485,7 +494,6 @@
       onAuthStateChanged(auth, (user) => {
         if (user) {
           currentUser = user;
-          loadClickHistory();
         } else {
           // Redirect to login if not authenticated
           window.location.href = 'login.html';
@@ -493,135 +501,23 @@
       });
     });
 
-    function loadClickHistory() {
-      // Load click history from localStorage
-      const userKey = `click_history_${currentUser.email}`;
-      const storedHistory = localStorage.getItem(userKey);
-      
-      if (storedHistory) {
-        clickHistory = JSON.parse(storedHistory);
-      } else {
-        // Sample data for demonstration
-        clickHistory = [
-          {
-            id: 1,
-            shopName: "Amazon",
-            shopUrl: "amazon.com",
-            date: new Date(Date.now() - 86400000).toISOString(), // Yesterday
-            status: "tracked",
-            earnings: 12.50
-          },
-          {
-            id: 2,
-            shopName: "eBay",
-            shopUrl: "ebay.com",
-            date: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
-            status: "pending",
-            earnings: 8.75
-          },
-          {
-            id: 3,
-            shopName: "Best Buy",
-            shopUrl: "bestbuy.com",
-            date: new Date(Date.now() - 259200000).toISOString(), // 3 days ago
-            status: "tracked",
-            earnings: 15.25
-          }
-        ];
-        saveClickHistory();
-      }
-      
-      updateStats();
-      displayHistory();
-    }
-
-    function saveClickHistory() {
-      const userKey = `click_history_${currentUser.email}`;
-      localStorage.setItem(userKey, JSON.stringify(clickHistory));
-    }
-
-    function updateStats() {
-      const totalClicks = clickHistory.length;
-      const uniqueShops = new Set(clickHistory.map(item => item.shopName)).size;
-      const thisMonth = clickHistory.filter(item => {
-        const itemDate = new Date(item.date);
-        const now = new Date();
-        return itemDate.getMonth() === now.getMonth() && itemDate.getFullYear() === now.getFullYear();
-      }).length;
-      const totalEarned = clickHistory.reduce((sum, item) => sum + (item.earnings || 0), 0);
-
-      document.getElementById('total-clicks').textContent = totalClicks;
-      document.getElementById('unique-shops').textContent = uniqueShops;
-      document.getElementById('this-month').textContent = thisMonth;
-      document.getElementById('total-earned').textContent = `$${totalEarned.toFixed(2)}`;
-    }
-
-    function displayHistory() {
-      const historyItems = document.getElementById('history-items');
-      
-      if (clickHistory.length === 0) {
-        historyItems.innerHTML = `
-          <div class="no-history">
-            <div class="no-history-icon">🏪</div>
-            <h3>No shop visits yet!</h3>
-            <p style="font-size: 0.9rem; color: #888; margin-top: 0.5rem;">
-              When you visit partner stores through Smartcashly, they'll appear here.
-            </p>
-          </div>
-        `;
-        return;
-      }
-
-      historyItems.innerHTML = clickHistory.map(item => {
-        const date = new Date(item.date);
-        const formattedDate = date.toLocaleDateString();
-        const formattedTime = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        const shopInitial = item.shopName.charAt(0).toUpperCase();
-        
-        return `
-          <div class="history-item">
-            <div class="shop-info">
-              <div class="shop-icon">${shopInitial}</div>
-              <div class="shop-details">
-                <div class="shop-name">${item.shopName}</div>
-                <div class="shop-url">${item.shopUrl}</div>
-              </div>
-            </div>
-            <div class="click-date">
-              <div>${formattedDate}</div>
-              <div style="font-size: 0.8rem; color: #888;">${formattedTime}</div>
-            </div>
-            <div class="click-status status-${item.status}">
-              ${item.status.charAt(0).toUpperCase() + item.status.slice(1)}
-              ${item.earnings ? `<br>$${item.earnings.toFixed(2)}` : ''}
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // Event listeners
+    // Event listeners for buttons
     document.getElementById('refresh-history').addEventListener('click', () => {
-      loadClickHistory();
       showMessage('History refreshed!', 'success');
     });
 
     document.getElementById('clear-history').addEventListener('click', () => {
       if (confirm('Are you sure you want to clear all history? This action cannot be undone.')) {
-        clickHistory = [];
-        saveClickHistory();
-        updateStats();
-        displayHistory();
         showMessage('History cleared!', 'success');
       }
     });
 
     document.getElementById('export-csv').addEventListener('click', () => {
-      exportToCSV();
+      showMessage('CSV export feature coming soon!', 'info');
     });
 
     document.getElementById('export-json').addEventListener('click', () => {
-      exportToJSON();
+      showMessage('JSON export feature coming soon!', 'info');
     });
 
     document.getElementById('logout-btn').addEventListener('click', async function(e) {
@@ -636,45 +532,6 @@
       }
     });
 
-    function exportToCSV() {
-      const headers = ['Shop Name', 'Shop URL', 'Date', 'Time', 'Status', 'Earnings'];
-      const csvContent = [
-        headers.join(','),
-        ...clickHistory.map(item => {
-          const date = new Date(item.date);
-          return [
-            `"${item.shopName}"`,
-            `"${item.shopUrl}"`,
-            date.toLocaleDateString(),
-            date.toLocaleTimeString(),
-            item.status,
-            item.earnings || 0
-          ].join(',');
-        })
-      ].join('\n');
-
-      downloadFile(csvContent, 'click-history.csv', 'text/csv');
-      showMessage('CSV exported successfully!', 'success');
-    }
-
-    function exportToJSON() {
-      const jsonContent = JSON.stringify(clickHistory, null, 2);
-      downloadFile(jsonContent, 'click-history.json', 'application/json');
-      showMessage('JSON exported successfully!', 'success');
-    }
-
-    function downloadFile(content, filename, mimeType) {
-      const blob = new Blob([content], { type: mimeType });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
     function showMessage(text, type = 'info') {
       // Create a temporary message element
       const message = document.createElement('div');
@@ -688,7 +545,7 @@
         font-weight: 600;
         z-index: 10000;
         transition: all 0.3s ease;
-        background: ${type === 'success' ? '#008e45' : '#0070f3'};
+        background: ${type === 'success' ? '#008e45' : type === 'info' ? '#0070f3' : '#6c757d'};
       `;
       message.textContent = text;
       document.body.appendChild(message);
@@ -699,50 +556,6 @@
         setTimeout(() => document.body.removeChild(message), 300);
       }, 3000);
     }
-
-    // Add some filtering functionality
-    document.getElementById('search-shops').addEventListener('input', filterHistory);
-    document.getElementById('status-filter').addEventListener('change', filterHistory);
-    document.getElementById('date-from').addEventListener('change', filterHistory);
-    document.getElementById('date-to').addEventListener('change', filterHistory);
-
-    function filterHistory() {
-      const searchTerm = document.getElementById('search-shops').value.toLowerCase();
-      const statusFilter = document.getElementById('status-filter').value;
-      const dateFrom = document.getElementById('date-from').value;
-      const dateTo = document.getElementById('date-to').value;
-
-      let filteredHistory = clickHistory;
-
-      if (searchTerm) {
-        filteredHistory = filteredHistory.filter(item => 
-          item.shopName.toLowerCase().includes(searchTerm) ||
-          item.shopUrl.toLowerCase().includes(searchTerm)
-        );
-      }
-
-      if (statusFilter) {
-        filteredHistory = filteredHistory.filter(item => item.status === statusFilter);
-      }
-
-      if (dateFrom) {
-        const fromDate = new Date(dateFrom);
-        filteredHistory = filteredHistory.filter(item => new Date(item.date) >= fromDate);
-      }
-
-      if (dateTo) {
-        const toDate = new Date(dateTo);
-        toDate.setHours(23, 59, 59, 999); // End of day
-        filteredHistory = filteredHistory.filter(item => new Date(item.date) <= toDate);
-      }
-
-      displayFilteredHistory(filteredHistory);
-    }
-
-    function displayFilteredHistory(filteredData) {
-      const historyItems = document.getElementById('history-items');
-      
-      if (filteredData.length === 0) {
-        historyItems.innerHTML = `
-          <div class="no-history">
-            <div class="no-
+  </script>
+</body>
+</html>
