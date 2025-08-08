@@ -376,7 +376,6 @@
     
     // Import Firebase functions
     import { getAuth, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-    import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
 
     let currentUser = null;
     let selectedFile = null;
@@ -443,7 +442,7 @@
       reader.readAsDataURL(file);
     }
 
-    // Save picture
+    // Save picture using base64 (simpler approach without Firebase Storage)
     document.getElementById('save-picture').addEventListener('click', async function() {
       if (!selectedFile || !currentUser) return;
 
@@ -451,33 +450,48 @@
         this.textContent = '⏳ Uploading...';
         this.disabled = true;
 
-        // Upload to Firebase Storage
-        const storage = getStorage();
-        const storageRef = ref(storage, `profile-pictures/${currentUser.uid}/${Date.now()}_${selectedFile.name}`);
-        
-        const snapshot = await uploadBytes(storageRef, selectedFile);
-        const downloadURL = await getDownloadURL(snapshot.ref);
+        // Convert image to base64 and save to user profile
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+          try {
+            const base64Image = e.target.result;
+            
+            // Update user profile with base64 image
+            await updateProfile(currentUser, {
+              photoURL: base64Image
+            });
 
-        // Update user profile
-        await updateProfile(currentUser, {
-          photoURL: downloadURL
-        });
+            // Update current profile picture
+            document.getElementById('current-profile-pic').src = base64Image;
+            
+            // Hide preview and show success
+            document.getElementById('preview-container').style.display = 'none';
+            showSuccess('Profile picture updated successfully!');
+            
+            // Reset file input
+            document.getElementById('profile-pic-input').value = '';
+            selectedFile = null;
 
-        // Update current profile picture
-        document.getElementById('current-profile-pic').src = downloadURL;
-        
-        // Hide preview and show success
-        document.getElementById('preview-container').style.display = 'none';
-        showSuccess('Profile picture updated successfully!');
-        
-        // Reset file input
-        document.getElementById('profile-pic-input').value = '';
-        selectedFile = null;
+          } catch (error) {
+            console.error('Error updating profile:', error);
+            showError('Error updating profile. Please try again.');
+          } finally {
+            document.getElementById('save-picture').textContent = '💾 Save Picture';
+            document.getElementById('save-picture').disabled = false;
+          }
+        };
+
+        reader.onerror = function() {
+          showError('Error reading file. Please try again.');
+          document.getElementById('save-picture').textContent = '💾 Save Picture';
+          document.getElementById('save-picture').disabled = false;
+        };
+
+        reader.readAsDataURL(selectedFile);
 
       } catch (error) {
         console.error('Error uploading picture:', error);
         showError('Error uploading picture. Please try again.');
-      } finally {
         this.textContent = '💾 Save Picture';
         this.disabled = false;
       }
