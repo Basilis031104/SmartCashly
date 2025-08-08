@@ -221,57 +221,13 @@
       border: 1px solid #f5c6cb;
     }
 
-    .quick-links {
+    .password-section {
       margin-top: 2rem;
       background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
       padding: 2rem;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(10px);
-    }
-
-    .quick-links h3 {
-      color: #008e45;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    .link-card {
-      padding: 1.5rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      text-align: center;
-      text-decoration: none;
-      color: #333;
-      transition: all 0.3s ease;
-      background: white;
-    }
-
-    .link-card:hover {
-      border-color: #008e45;
-      box-shadow: 0 4px 12px rgba(0, 142, 69, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .link-card-icon {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .link-card-title {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .link-card-desc {
-      font-size: 0.9rem;
-      color: #666;
     }
 
     footer {
@@ -408,30 +364,38 @@
         </div>
       </div>
 
-      <!-- Quick Links Section -->
-      <div class="quick-links">
-        <h3>Quick Access</h3>
-        <div class="links-grid">
-          <a href="click-history.html" class="link-card">
-            <div class="link-card-icon">🛍️</div>
-            <div class="link-card-title">Click History</div>
-            <div class="link-card-desc">View your shop visits and earnings</div>
-          </a>
-          <a href="index.html" class="link-card">
-            <div class="link-card-icon">🏠</div>
-            <div class="link-card-title">Home</div>
-            <div class="link-card-desc">Return to main page</div>
-          </a>
-          <a href="#" id="change-password-link" class="link-card">
-            <div class="link-card-icon">🔐</div>
-            <div class="link-card-title">Security</div>
-            <div class="link-card-desc">Change password & security settings</div>
-          </a>
-          <a href="#" id="data-export-link" class="link-card">
-            <div class="link-card-icon">📊</div>
-            <div class="link-card-title">Export Data</div>
-            <div class="link-card-desc">Download your account data</div>
-          </a>
+      <!-- Password Change Section -->
+      <div class="password-section">
+        <h3 style="margin-bottom: 1rem; color: #008e45;">Change Password</h3>
+        
+        <form id="password-form" style="max-width: 400px; margin: 0 auto;">
+          <div style="margin-bottom: 1rem;">
+            <label for="current-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Current Password</label>
+            <input type="password" id="current-password" required 
+                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+          </div>
+          
+          <div style="margin-bottom: 1rem;">
+            <label for="new-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">New Password</label>
+            <input type="password" id="new-password" required minlength="6"
+                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+          </div>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label for="confirm-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Confirm New Password</label>
+            <input type="password" id="confirm-password" required minlength="6"
+                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+          </div>
+          
+          <button type="submit" class="btn btn--save" style="width: 100%;">🔐 Change Password</button>
+        </form>
+        
+        <div id="password-success" class="success-message">
+          ✅ Password changed successfully!
+        </div>
+        
+        <div id="password-error" class="error-message">
+          ❌ Error changing password. Please try again.
         </div>
       </div>
     </div>
@@ -593,16 +557,102 @@
       }
     });
 
-    // Quick links functionality
-    document.getElementById('change-password-link').addEventListener('click', function(e) {
+    // Password change form handling
+    document.getElementById('password-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-      alert('Password change functionality coming soon!');
+      
+      const currentPassword = document.getElementById('current-password').value;
+      const newPassword = document.getElementById('new-password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      
+      // Clear previous messages
+      document.getElementById('password-success').style.display = 'none';
+      document.getElementById('password-error').style.display = 'none';
+      
+      // Validate passwords match
+      if (newPassword !== confirmPassword) {
+        showPasswordError('New passwords do not match');
+        return;
+      }
+      
+      // Validate password length
+      if (newPassword.length < 6) {
+        showPasswordError('New password must be at least 6 characters long');
+        return;
+      }
+      
+      try {
+        // Change button text to show loading
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = '⏳ Changing Password...';
+        submitBtn.disabled = true;
+        
+        // Import Firebase auth functions
+        const { EmailAuthProvider, reauthenticateWithCredential, updatePassword } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js');
+        
+        if (!currentUser) {
+          throw new Error('No user logged in');
+        }
+        
+        // Re-authenticate user with current password
+        const credential = EmailAuthProvider.credential(currentUser.email, currentPassword);
+        await reauthenticateWithCredential(currentUser, credential);
+        
+        // Update password
+        await updatePassword(currentUser, newPassword);
+        
+        // Success
+        showPasswordSuccess('Password changed successfully!');
+        
+        // Clear form
+        this.reset();
+        
+      } catch (error) {
+        console.error('Password change error:', error);
+        
+        if (error.code === 'auth/wrong-password') {
+          showPasswordError('Current password is incorrect');
+        } else if (error.code === 'auth/weak-password') {
+          showPasswordError('New password is too weak');
+        } else if (error.code === 'auth/requires-recent-login') {
+          showPasswordError('Please log out and log back in before changing your password');
+        } else {
+          showPasswordError('Error changing password. Please try again.');
+        }
+      } finally {
+        // Reset button
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.textContent = '🔐 Change Password';
+        submitBtn.disabled = false;
+      }
     });
 
-    document.getElementById('data-export-link').addEventListener('click', function(e) {
-      e.preventDefault();
-      alert('Data export functionality coming soon!');
-    });
+    function showPasswordSuccess(message) {
+      const successEl = document.getElementById('password-success');
+      const errorEl = document.getElementById('password-error');
+      
+      errorEl.style.display = 'none';
+      successEl.textContent = message;
+      successEl.style.display = 'block';
+      
+      setTimeout(() => {
+        successEl.style.display = 'none';
+      }, 4000);
+    }
+
+    function showPasswordError(message) {
+      const successEl = document.getElementById('password-success');
+      const errorEl = document.getElementById('password-error');
+      
+      successEl.style.display = 'none';
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+      
+      setTimeout(() => {
+        errorEl.style.display = 'none';
+      }, 4000);
+    }
 
     function showSuccess(message) {
       const successEl = document.getElementById('success-message');
