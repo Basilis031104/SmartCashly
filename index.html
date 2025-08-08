@@ -156,11 +156,12 @@
     .profile-dropdown a {
       display: block;
       padding: 0.75rem 1rem;
-      color: #333;
+      color: #333 !important;
       text-decoration: none;
       font-size: 0.9rem;
       background: white !important;
       transition: background-color 0.2s;
+      cursor: pointer;
     }
 
     .profile-dropdown a:hover {
@@ -280,7 +281,7 @@
         <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
         <div class="profile-container">
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
-          <div class="profile-dropdown">
+          <div class="profile-dropdown" id="profile-dropdown">
             <a href="#" id="account-settings">Account Settings</a>
             <a href="#" id="logout-btn">Logout</a>
           </div>
@@ -303,40 +304,73 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
+    let currentUser = null;
+
     window.addEventListener('load', () => {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
+        currentUser = user;
         updateAuthUI(user);
+        setupProfileDropdown();
+      });
+    });
+
+    function setupProfileDropdown() {
+      const profileContainer = document.querySelector('.profile-container');
+      const profileDropdown = document.getElementById('profile-dropdown');
+      
+      if (!profileContainer || !profileDropdown) return;
+
+      // Clear any existing event listeners
+      profileContainer.onclick = null;
+
+      // Toggle dropdown on profile picture click
+      profileContainer.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Profile clicked');
+        profileDropdown.classList.toggle('show');
       });
 
-      // Profile dropdown functionality
-      const profileContainer = document.querySelector('.profile-container');
-      const profileDropdown = document.querySelector('.profile-dropdown');
-      let dropdownTimeout;
-
-      if (profileContainer && profileDropdown) {
-        // Show dropdown on click
-        profileContainer.addEventListener('click', function(e) {
-          e.stopPropagation();
-          profileDropdown.classList.toggle('show');
-        });
-
-        // Keep dropdown open when hovering over it
-        profileDropdown.addEventListener('mouseenter', function() {
-          clearTimeout(dropdownTimeout);
-        });
-
-        // Hide dropdown when clicking outside
-        document.addEventListener('click', function() {
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!profileContainer.contains(e.target)) {
           profileDropdown.classList.remove('show');
-        });
+        }
+      });
 
-        // Prevent dropdown from closing when clicking inside it
-        profileDropdown.addEventListener('click', function(e) {
+      // Handle dropdown menu clicks
+      const accountSettingsBtn = document.getElementById('account-settings');
+      const logoutBtn = document.getElementById('logout-btn');
+
+      if (accountSettingsBtn) {
+        accountSettingsBtn.addEventListener('click', function(e) {
+          e.preventDefault();
           e.stopPropagation();
+          console.log('Account settings clicked');
+          profileDropdown.classList.remove('show');
+          window.location.href = 'account-settings.html';
         });
       }
-    });
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', async function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Logout clicked');
+          profileDropdown.classList.remove('show');
+          
+          try {
+            if (typeof smartAuth !== 'undefined') {
+              await smartAuth.signOut();
+              console.log('Logged out successfully');
+            }
+          } catch (err) {
+            console.error('Logout error:', err);
+          }
+        });
+      }
+    }
 
     function updateAuthUI(user) {
       const authButtons = document.getElementById('auth-buttons');
@@ -367,24 +401,6 @@
         userProfile.style.display = 'none';
       }
     }
-
-    document.addEventListener('click', async (e) => {
-      if (e.target.id === 'logout-btn') {
-        e.preventDefault();
-        try {
-          if (typeof smartAuth !== 'undefined') {
-            await smartAuth.signOut();
-          }
-        } catch (err) {
-          console.error('Logout error:', err);
-        }
-      }
-      
-      if (e.target.id === 'account-settings') {
-        e.preventDefault();
-        window.location.href = 'account-settings.html';
-      }
-    });
   </script>
 </body>
 </html>
