@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smartcashly</title>
   <style>
-    /* Force yellow background everywhere */
-    * { background-color: yellow !important; }
-    html, body { background-color: yellow !important; background: yellow !important; }
+    /* Apply yellow background only to main areas, not buttons */
+    html { background-color: yellow !important; }
+    body { background-color: yellow !important; background: yellow !important; }
 
     /* =============  GLOBAL RESET  ============================== */
     *, *::before, *::after {
@@ -39,6 +39,7 @@
       height: 64px;
       width: auto;
       flex: 0 0 auto;
+      background: transparent !important;
     }
 
     .search-bar {
@@ -110,6 +111,7 @@
       border: 2px solid rgba(255,255,255,0.3);
       transition: border-color 0.2s;
       object-fit: cover;
+      background: transparent !important;
     }
 
     .profile-pic:hover {
