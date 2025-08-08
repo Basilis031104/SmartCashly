@@ -5,9 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign in • Smartcashly</title>
   <style>
-    /* Force yellow background everywhere */
-    * { background-color: yellow !important; }
-    html, body { background-color: yellow !important; background: yellow !important; }
+    /* Shiny yellow gradient background */
+    html { 
+      background: linear-gradient(135deg, #ffeb3b 0%, #ffd700 25%, #ffeb3b 50%, #fff176 75%, #ffd700 100%) !important;
+      background-size: 400% 400% !important;
+      animation: shimmer 8s ease-in-out infinite !important;
+    }
+    body { 
+      background: linear-gradient(135deg, #ffeb3b 0%, #ffd700 25%, #ffeb3b 50%, #fff176 75%, #ffd700 100%) !important;
+      background-size: 400% 400% !important;
+      animation: shimmer 8s ease-in-out infinite !important;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
     *, *::before, *::after {
       box-sizing: border-box;
@@ -37,6 +51,7 @@
       height: 64px;
       width: auto;
       flex: 0 0 auto;
+      background: transparent !important;
     }
 
     .auth-nav {
@@ -110,18 +125,25 @@
       text-align: center;
       font-size: .875rem;
       padding: 1rem 0;
-      background: #f4f4f4 !important;
+      background: linear-gradient(135deg, #ffeb3b 0%, #ffd700 25%, #ffeb3b 50%, #fff176 75%, #ffd700 100%) !important;
+      background-size: 400% 400% !important;
+      animation: shimmer 8s ease-in-out infinite !important;
+      border-top: 1px solid rgba(0,0,0,0.1);
     }
 
+    /* =============  FALLING CASH ANIMATION  ==================== */
     .cash-rain {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
-      z-index: -1;
+      z-index: 1;
       list-style: none;
       margin: 0;
       padding: 0;
-      background: transparent !important;
+      pointer-events: none;
     }
 
     .cash-rain li {
@@ -137,15 +159,21 @@
       justify-content: center;
       font-size: 1.6rem;
       font-weight: 700;
-      color: #ffd700;
+      color: #ffd700 !important;
       text-shadow: 0 1px 2px rgba(0,0,0,.25);
-      animation: fall 9s linear infinite;
-      opacity: .9;
+      animation: fall linear infinite;
+      opacity: 0.9;
     }
 
     @keyframes fall {
-      0%   { transform: translateX(var(--start-x, 0)) translateY(-120px) rotate(var(--start-rotation, 0deg)); }
-      100% { transform: translateX(var(--end-x, 0)) translateY(100vh) rotate(var(--end-rotation, 360deg)); }
+      0%   { 
+        transform: translateX(var(--start-x, 0)) translateY(-120px) rotate(var(--start-rotation, 0deg));
+        opacity: 0.9;
+      }
+      100% { 
+        transform: translateX(var(--end-x, 0)) translateY(calc(100vh + 120px)) rotate(var(--end-rotation, 360deg));
+        opacity: 0.9;
+      }
     }
 
     .cash-rain li:nth-child(1)  { --start-x: 15vw;  --end-x: 20vw;  --start-rotation: 15deg;  --end-rotation: 405deg; animation-delay: 0.2s; animation-duration: 8.5s; }
@@ -174,6 +202,7 @@
 </head>
 
 <body>
+  <!-- Falling cash animation with 18 bills -->
   <ul class="cash-rain" aria-hidden="true">
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
@@ -236,4 +265,16 @@
         if (err.code.includes("user-not-found")) {
           errorMessage = "ERROR: No account found with this email";
         } else if (err.code.includes("wrong-password")) {
-          errorMessage = "ERROR:
+          errorMessage = "ERROR: Incorrect password";
+        } else if (err.code.includes("invalid-email")) {
+          errorMessage = "ERROR: Invalid email address";
+        } else if (err.code.includes("too-many-requests")) {
+          errorMessage = "ERROR: Too many failed attempts. Try again later";
+        }
+        
+        lg_msg.textContent = errorMessage;
+      }
+    });
+  </script>
+</body>
+</html>
