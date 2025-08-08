@@ -283,6 +283,7 @@
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
           <div class="profile-dropdown" id="profile-dropdown">
             <a href="#" id="account-settings">Account Settings</a>
+            <a href="#" id="click-history">Click History</a>
             <a href="#" id="logout-btn">Logout</a>
           </div>
         </div>
@@ -341,6 +342,7 @@
 
       // Handle dropdown menu clicks
       const accountSettingsBtn = document.getElementById('account-settings');
+      const clickHistoryBtn = document.getElementById('click-history');
       const logoutBtn = document.getElementById('logout-btn');
 
       if (accountSettingsBtn) {
@@ -350,6 +352,16 @@
           console.log('Account settings clicked');
           profileDropdown.classList.remove('show');
           window.location.href = 'account-settings.html';
+        });
+      }
+
+      if (clickHistoryBtn) {
+        clickHistoryBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Click history clicked');
+          profileDropdown.classList.remove('show');
+          window.location.href = 'click-history.html';
         });
       }
 
