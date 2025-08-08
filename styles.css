@@ -10,6 +10,7 @@
       margin: 0 !important;
       padding: 0 !important;
     }
+
     /* =============  GLOBAL RESET  ============================== */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -28,27 +29,9 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 142, 69, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.02) 0%, transparent 50%),
-        linear-gradient(135deg, rgba(0, 142, 69, 0.02) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 215, 0, 0.01) 100%);
+      background-color: yellow !important;
+      background: yellow !important;
       color: #222;
-      position: relative;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(circle at 25% 25%, rgba(0, 142, 69, 0.05) 2px, transparent 2px),
-        radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.04) 1px, transparent 1px);
-      background-size: 60px 60px, 40px 40px;
-      z-index: -2;
-      opacity: 0.3;
     }
 
     /* =============  HEADER  ==================================== */
@@ -122,6 +105,8 @@
       text-decoration: none;
       font-weight: 600;
       transition: background .18s;
+      border: none;
+      cursor: pointer;
     }
     .btn:hover          { background: #0059c1; }
     .btn--secondary     { background: rgba(255,255,255,.25); }
@@ -242,7 +227,6 @@
     .cash-rain li:nth-child(10) { --start-x: 70vw;  --end-x: 75vw;  --start-rotation: -30deg; --end-rotation: 330deg; animation-delay: 3.2s; animation-duration: 10.4s; }
     .cash-rain li:nth-child(11) { --start-x: 30vw;  --end-x: 25vw;  --start-rotation: 40deg;  --end-rotation: 400deg; animation-delay: 5.1s; animation-duration: 8.1s; }
     .cash-rain li:nth-child(12) { --start-x: 82vw;  --end-x: 85vw;  --start-rotation: -20deg; --end-rotation: 340deg; animation-delay: 1.9s; animation-duration: 9.9s; }
-    /* Bills falling in between areas */
     .cash-rain li:nth-child(13) { --start-x: 35vw;  --end-x: 40vw;  --start-rotation: 30deg;  --end-rotation: 390deg; animation-delay: 1.4s; animation-duration: 9.1s; }
     .cash-rain li:nth-child(14) { --start-x: 40vw;  --end-x: 35vw;  --start-rotation: -40deg; --end-rotation: 320deg; animation-delay: 3.7s; animation-duration: 8.4s; }
     .cash-rain li:nth-child(15) { --start-x: 65vw;  --end-x: 70vw;  --start-rotation: 50deg;  --end-rotation: 410deg; animation-delay: 2.1s; animation-duration: 9.8s; }
@@ -255,7 +239,8 @@
     }
   </style>
 </head>
-<body>
+
+<body style="background-color: yellow !important; background: yellow !important;">
 
   <!-- animated bills (background) -->
   <ul class="cash-rain" aria-hidden="true">
