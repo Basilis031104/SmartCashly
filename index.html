@@ -1,256 +1,219 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smartcashly</title>
-  <style>
-    /* =============  GLOBAL RESET  ============================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
-    }
+/* =============  GLOBAL RESET  ============================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
+html {
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 142, 69, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.02) 0%, transparent 50%),
-        linear-gradient(135deg, rgba(0, 142, 69, 0.02) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 215, 0, 0.01) 100%);
-      color: #222;
-      position: relative;
-    }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8fff8;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(circle at 25% 25%, rgba(0, 142, 69, 0.05) 2px, transparent 2px),
-        radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.04) 1px, transparent 1px);
-      background-size: 60px 60px, 40px 40px;
-      z-index: -2;
-      opacity: 0.3;
-    }
+/* =============  HEADER  ==================================== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: #008e45;       /* Smartcashly green */
+  color: #fff;
+  margin: 0;                 /* Remove any margin */
+  border: 0;                 /* Remove any border */
+}
 
-    /* =============  HEADER  ==================================== */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-      padding: 1rem 1.5rem;
-      background: #008e45;
-      color: #fff;
-      margin: 0;
-      border: 0;
-    }
+.logo-img {
+  height: 64px;
+  width: auto;
+  flex: 0 0 auto;
+}
 
-    .logo-img {
-      height: 64px;
-      width: auto;
-      flex: 0 0 auto;
-    }
+/* -------------  search bar --------------- */
+.search-bar {
+  position: relative;
+  flex: 1 1 100%;
+  max-width: 480px;
+}
 
-    /* -------------  search bar --------------- */
-    .search-bar {
-      position: relative;
-      flex: 1 1 100%;
-      max-width: 480px;
-    }
+.search-bar input {
+  width: 100%;
+  padding: 0.55rem 2.8rem 0.55rem 1rem;
+  border: none;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  outline: none;
+  box-shadow: 0 0 0 2px transparent;
+  transition: box-shadow .18s;
+}
 
-    .search-bar input {
-      width: 100%;
-      padding: 0.55rem 2.8rem 0.55rem 1rem;
-      border: none;
-      border-radius: 9999px;
-      font-size: 0.95rem;
-      outline: none;
-      box-shadow: 0 0 0 2px transparent;
-      transition: box-shadow .18s;
-    }
+.search-bar input:focus {
+  box-shadow: 0 0 0 2px rgba(0,112,243,.35);
+}
 
-    .search-bar input:focus {
-      box-shadow: 0 0 0 2px rgba(0,112,243,.35);
-    }
+.search-bar button {
+  position: absolute;
+  right: .4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: none;
+  border-radius: 50%;
+  background: #0070f3;
+  cursor: pointer;
+  transition: background .18s;
+}
 
-    .search-bar button {
-      position: absolute;
-      right: .4rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.2rem;
-      height: 2.2rem;
-      border: none;
-      border-radius: 50%;
-      background: #0070f3;
-      cursor: pointer;
-      transition: background .18s;
-    }
+.search-bar button:hover { background: #0059c1; }
+.search-bar button svg   { width: 1rem; height: 1rem; fill: #fff; }
 
-    .search-bar button:hover { background: #0059c1; }
-    .search-bar button svg   { width: 1rem; height: 1rem; fill: #fff; }
+/* -------------  auth buttons ------------- */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: #0070f3;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .18s;
+}
+.btn:hover          { background: #0059c1; }
+.btn--secondary     { background: rgba(255,255,255,.25); }
+.btn--secondary:hover { background: rgba(255,255,255,.40); }
 
-    /* -------------  auth buttons ------------- */
-    .btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      background: #0070f3;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background .18s;
-    }
-    .btn:hover          { background: #0059c1; }
-    .btn--secondary     { background: rgba(255,255,255,.25); }
-    .btn--secondary:hover { background: rgba(255,255,255,.40); }
+/* hide auth buttons on very small screens */
+@media (max-width: 600px) {
+  .auth-nav { display: none; }
+}
 
-    /* hide auth buttons on very small screens */
-    @media (max-width: 600px) {
-      .auth-nav { display: none; }
-    }
+/* =============  MAIN  ====================================== */
+main {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+main h2 { font-size: 1.9rem; margin-bottom: .5rem; }
+main p  { font-size: 1rem;  color: #555; }
 
-    /* =============  MAIN  ====================================== */
-    main {
-      flex: 1 1 auto;
-      text-align: center;
-      padding: 3rem 1rem;
-    }
-    main h2 { font-size: 1.9rem; margin-bottom: .5rem; }
-    main p  { font-size: 1rem;  color: #555; }
+/* =============  FOOTER  ==================================== */
+footer {
+  text-align: center;
+  font-size: .875rem;
+  padding: 1rem 0;
+  background: #f4f4f4;
+}
 
-    /* =============  FOOTER  ==================================== */
-    footer {
-      text-align: center;
-      font-size: .875rem;
-      padding: 1rem 0;
-      background: #f4f4f4;
-    }
+/* =============  FALLING CASH ANIMATION  ==================== */
+.cash-rain {
+  position: fixed;
+  inset: 0;                 /* full viewport */
+  overflow: hidden;
+  z-index: -1;              /* behind everything */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-    /* =============  FALLING CASH ANIMATION  ==================== */
-    .cash-rain {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      z-index: -1;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+.cash-rain li {
+  position: absolute;
+  top: -120px;              /* start above */
+  width: 72px;
+  height: 40px;
+  border-radius: 6px;
+  background: #008e45;
+  box-shadow:
+      inset 0 0 0 3px rgba(0,0,0,.12),
+      inset 0 0 0 8px rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+  animation: fall 9s linear infinite;
+  opacity: .9;
+}
 
-    .cash-rain li {
-      position: absolute;
-      top: -120px;
-      width: 72px;
-      height: 40px;
-      border-radius: 6px;
-      background: #008e45;
-      box-shadow:
-          inset 0 0 0 3px rgba(0,0,0,.12),
-          inset 0 0 0 8px rgba(255,255,255,.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #ffd700;
-      text-shadow: 0 1px 2px rgba(0,0,0,.25);
-      animation: fall 9s linear infinite;
-      opacity: .9;
-    }
+@keyframes fall {
+  0%   { transform: translateX(var(--start-x, 0)) translateY(-120px) rotate(var(--start-rotation, 0deg)); }
+  100% { transform: translateX(var(--end-x, 0)) translateY(100vh) rotate(var(--end-rotation, 360deg)); }
+}
 
-    @keyframes fall {
-      0%   { transform: translateX(var(--start-x, 0)) translateY(-120px) rotate(var(--start-rotation, 0deg)); }
-      100% { transform: translateX(var(--end-x, 0)) translateY(100vh) rotate(var(--end-rotation, 360deg)); }
-    }
+.cash-rain li:nth-child(1)  { --start-x: 15vw;  --end-x: 20vw;  --start-rotation: 15deg;  --end-rotation: 405deg; animation-delay: 0.2s; animation-duration: 8.5s; }
+.cash-rain li:nth-child(2)  { --start-x: 80vw;  --end-x: 75vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 1.1s; animation-duration: 9.2s; }
+.cash-rain li:nth-child(3)  { --start-x: 50vw;  --end-x: 45vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 2.3s; animation-duration: 7.8s; }
+.cash-rain li:nth-child(4)  { --start-x: 20vw;  --end-x: 15vw;  --start-rotation: -15deg; --end-rotation: 345deg; animation-delay: 0.7s; animation-duration: 10.1s; }
+.cash-rain li:nth-child(5)  { --start-x: 75vw;  --end-x: 80vw;  --start-rotation: 45deg;  --end-rotation: 405deg; animation-delay: 3.9s; animation-duration: 8.8s; }
+.cash-rain li:nth-child(6)  { --start-x: 45vw;  --end-x: 55vw;  --start-rotation: -35deg; --end-rotation: 325deg; animation-delay: 1.6s; animation-duration: 9.5s; }
+.cash-rain li:nth-child(7)  { --start-x: 85vw;  --end-x: 80vw;  --start-rotation: 25deg;  --end-rotation: 385deg; animation-delay: 4.4s; animation-duration: 7.9s; }
+.cash-rain li:nth-child(8)  { --start-x: 25vw;  --end-x: 30vw;  --start-rotation: -45deg; --end-rotation: 315deg; animation-delay: 2.8s; animation-duration: 9.7s; }
+.cash-rain li:nth-child(9)  { --start-x: 55vw;  --end-x: 50vw;  --start-rotation: 20deg;  --end-rotation: 380deg; animation-delay: 0.5s; animation-duration: 8.3s; }
+.cash-rain li:nth-child(10) { --start-x: 70vw;  --end-x: 75vw;  --start-rotation: -30deg; --end-rotation: 330deg; animation-delay: 3.2s; animation-duration: 10.4s; }
+.cash-rain li:nth-child(11) { --start-x: 30vw;  --end-x: 25vw;  --start-rotation: 40deg;  --end-rotation: 400deg; animation-delay: 5.1s; animation-duration: 8.1s; }
+.cash-rain li:nth-child(12) { --start-x: 82vw;  --end-x: 85vw;  --start-rotation: -20deg; --end-rotation: 340deg; animation-delay: 1.9s; animation-duration: 9.9s; }
+.cash-rain li:nth-child(13) { --start-x: 35vw;  --end-x: 40vw;  --start-rotation: 30deg;  --end-rotation: 390deg; animation-delay: 1.4s; animation-duration: 9.1s; }
+.cash-rain li:nth-child(14) { --start-x: 40vw;  --end-x: 35vw;  --start-rotation: -40deg; --end-rotation: 320deg; animation-delay: 3.7s; animation-duration: 8.4s; }
+.cash-rain li:nth-child(15) { --start-x: 65vw;  --end-x: 70vw;  --start-rotation: 50deg;  --end-rotation: 410deg; animation-delay: 2.1s; animation-duration: 9.8s; }
+.cash-rain li:nth-child(16) { --start-x: 60vw;  --end-x: 65vw;  --start-rotation: -10deg; --end-rotation: 350deg; animation-delay: 4.6s; animation-duration: 8.7s; }
+.cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
+.cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
 
-    .cash-rain li:nth-child(1)  { --start-x: 15vw;  --end-x: 20vw;  --start-rotation: 15deg;  --end-rotation: 405deg; animation-delay: 0.2s; animation-duration: 8.5s; }
-    .cash-rain li:nth-child(2)  { --start-x: 80vw;  --end-x: 75vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 1.1s; animation-duration: 9.2s; }
-    .cash-rain li:nth-child(3)  { --start-x: 50vw;  --end-x: 45vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 2.3s; animation-duration: 7.8s; }
-    .cash-rain li:nth-child(4)  { --start-x: 20vw;  --end-x: 15vw;  --start-rotation: -15deg; --end-rotation: 345deg; animation-delay: 0.7s; animation-duration: 10.1s; }
-    .cash-rain li:nth-child(5)  { --start-x: 75vw;  --end-x: 80vw;  --start-rotation: 45deg;  --end-rotation: 405deg; animation-delay: 3.9s; animation-duration: 8.8s; }
-    .cash-rain li:nth-child(6)  { --start-x: 45vw;  --end-x: 55vw;  --start-rotation: -35deg; --end-rotation: 325deg; animation-delay: 1.6s; animation-duration: 9.5s; }
-    .cash-rain li:nth-child(7)  { --start-x: 85vw;  --end-x: 80vw;  --start-rotation: 25deg;  --end-rotation: 385deg; animation-delay: 4.4s; animation-duration: 7.9s; }
-    .cash-rain li:nth-child(8)  { --start-x: 25vw;  --end-x: 30vw;  --start-rotation: -45deg; --end-rotation: 315deg; animation-delay: 2.8s; animation-duration: 9.7s; }
-    .cash-rain li:nth-child(9)  { --start-x: 55vw;  --end-x: 50vw;  --start-rotation: 20deg;  --end-rotation: 380deg; animation-delay: 0.5s; animation-duration: 8.3s; }
-    .cash-rain li:nth-child(10) { --start-x: 70vw;  --end-x: 75vw;  --start-rotation: -30deg; --end-rotation: 330deg; animation-delay: 3.2s; animation-duration: 10.4s; }
-    .cash-rain li:nth-child(11) { --start-x: 30vw;  --end-x: 25vw;  --start-rotation: 40deg;  --end-rotation: 400deg; animation-delay: 5.1s; animation-duration: 8.1s; }
-    .cash-rain li:nth-child(12) { --start-x: 82vw;  --end-x: 85vw;  --start-rotation: -20deg; --end-rotation: 340deg; animation-delay: 1.9s; animation-duration: 9.9s; }
-    /* Bills falling in between areas */
-    .cash-rain li:nth-child(13) { --start-x: 35vw;  --end-x: 40vw;  --start-rotation: 30deg;  --end-rotation: 390deg; animation-delay: 1.4s; animation-duration: 9.1s; }
-    .cash-rain li:nth-child(14) { --start-x: 40vw;  --end-x: 35vw;  --start-rotation: -40deg; --end-rotation: 320deg; animation-delay: 3.7s; animation-duration: 8.4s; }
-    .cash-rain li:nth-child(15) { --start-x: 65vw;  --end-x: 70vw;  --start-rotation: 50deg;  --end-rotation: 410deg; animation-delay: 2.1s; animation-duration: 9.8s; }
-    .cash-rain li:nth-child(16) { --start-x: 60vw;  --end-x: 65vw;  --start-rotation: -10deg; --end-rotation: 350deg; animation-delay: 4.6s; animation-duration: 8.7s; }
-    .cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
-    .cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
+/* turn off animation on extra-small screens to save CPU */
+@media (max-width: 480px) {
+  .cash-rain { display: none; }
+}
 
-    @media (max-width: 480px) {
-      .cash-rain { display: none; }
-    }
-  </style>
-</head>
-<body>
+/* =============  FORM STYLING  ============================== */
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+}
 
-  <!-- animated bills (background) -->
-  <ul class="cash-rain" aria-hidden="true">
-    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
-    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
-    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
-  </ul>
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-  <!-- ███ HEADER █████████████████████████████████████ -->
-  <header>
-    <!-- logo -->
-    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+.form-container input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
 
-    <!-- search -->
-    <form class="search-bar" action="#" method="get">
-      <input type="search" name="q"
-             placeholder="Search stores, coupons …"
-             aria-label="Search Smartcashly" />
-      <button type="submit" aria-label="Search">
-        <svg viewBox="0 0 24 24"><path
-          d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/>
-        </svg>
-      </button>
-    </form>
+.form-container input:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0,112,243,.2);
+}
 
-    <!-- auth buttons -->
-    <nav class="auth-nav">
-      <a href="login.html"  class="btn">Login</a>
-      <a href="signup.html" class="btn btn--secondary">Sign Up</a>
-    </nav>
-  </header>
-  <!-- ████████████████████████████████████████████████ -->
+.btn--full {
+  width: 100%;
+  padding: 0.75rem;
+}
 
-  <main>
-    <h2>Welcome to Smartcashly</h2>
-    <p>Your favourite cashback &amp; coupon platform.</p>
-  </main>
-
-  <footer>
-    © <span id="year"></span> Smartcashly. All rights reserved.
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+.form-error {
+  color: #c00;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
