@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: yellow !important;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign Up • Smartcashly</title>
+  <title>Smartcashly</title>
   <style>
+    html, body {
+      background-color: yellow !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
     /* =============  GLOBAL RESET  ============================== */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -60,15 +65,52 @@
     }
 
     .logo-img {
-      height: 100px;
+      height: 64px;
       width: auto;
       flex: 0 0 auto;
     }
 
-    .auth-nav {
-      display: flex;
-      gap: 0.5rem;
+    /* -------------  search bar --------------- */
+    .search-bar {
+      position: relative;
+      flex: 1 1 100%;
+      max-width: 480px;
     }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.55rem 2.8rem 0.55rem 1rem;
+      border: none;
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      outline: none;
+      box-shadow: 0 0 0 2px transparent;
+      transition: box-shadow .18s;
+    }
+
+    .search-bar input:focus {
+      box-shadow: 0 0 0 2px rgba(0,112,243,.35);
+    }
+
+    .search-bar button {
+      position: absolute;
+      right: .4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border: none;
+      border-radius: 50%;
+      background: #0070f3;
+      cursor: pointer;
+      transition: background .18s;
+    }
+
+    .search-bar button:hover { background: #0059c1; }
+    .search-bar button svg   { width: 1rem; height: 1rem; fill: #fff; }
 
     /* -------------  auth buttons ------------- */
     .btn {
@@ -80,12 +122,59 @@
       text-decoration: none;
       font-weight: 600;
       transition: background .18s;
-      border: none;
-      cursor: pointer;
     }
     .btn:hover          { background: #0059c1; }
     .btn--secondary     { background: rgba(255,255,255,.25); }
     .btn--secondary:hover { background: rgba(255,255,255,.40); }
+
+    /* -------------  profile picture and dropdown ------------- */
+    .profile-container {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s;
+      object-fit: cover;
+    }
+
+    .profile-pic:hover {
+      border-color: rgba(255,255,255,0.8);
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 0.5rem 0;
+      min-width: 160px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .profile-dropdown a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+    }
+
+    .profile-dropdown a:hover {
+      background-color: #f5f5f5;
+    }
+
+    .profile-container:hover .profile-dropdown {
+      display: block;
+    }
 
     /* =============  MAIN  ====================================== */
     main {
@@ -94,45 +183,7 @@
       padding: 3rem 1rem;
     }
     main h2 { font-size: 1.9rem; margin-bottom: .5rem; }
-    main p  { font-size: 1rem;  color: #555; margin-bottom: 2rem; }
-
-    /* =============  FORM STYLING  ============================== */
-    .form-container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .form-container form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-container input {
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    .form-container input:focus {
-      outline: none;
-      border-color: #0070f3;
-      box-shadow: 0 0 0 2px rgba(0,112,243,.2);
-    }
-
-    .btn--full {
-      width: 100%;
-      padding: 0.75rem;
-    }
-
-    .form-error {
-      color: #c00;
-      font-size: 0.875rem;
-      margin-top: 0.5rem;
-    }
+    main p  { font-size: 1rem;  color: #555; }
 
     /* =============  FOOTER  ==================================== */
     footer {
@@ -191,6 +242,7 @@
     .cash-rain li:nth-child(10) { --start-x: 70vw;  --end-x: 75vw;  --start-rotation: -30deg; --end-rotation: 330deg; animation-delay: 3.2s; animation-duration: 10.4s; }
     .cash-rain li:nth-child(11) { --start-x: 30vw;  --end-x: 25vw;  --start-rotation: 40deg;  --end-rotation: 400deg; animation-delay: 5.1s; animation-duration: 8.1s; }
     .cash-rain li:nth-child(12) { --start-x: 82vw;  --end-x: 85vw;  --start-rotation: -20deg; --end-rotation: 340deg; animation-delay: 1.9s; animation-duration: 9.9s; }
+    /* Bills falling in between areas */
     .cash-rain li:nth-child(13) { --start-x: 35vw;  --end-x: 40vw;  --start-rotation: 30deg;  --end-rotation: 390deg; animation-delay: 1.4s; animation-duration: 9.1s; }
     .cash-rain li:nth-child(14) { --start-x: 40vw;  --end-x: 35vw;  --start-rotation: -40deg; --end-rotation: 320deg; animation-delay: 3.7s; animation-duration: 8.4s; }
     .cash-rain li:nth-child(15) { --start-x: 65vw;  --end-x: 70vw;  --start-rotation: 50deg;  --end-rotation: 410deg; animation-delay: 2.1s; animation-duration: 9.8s; }
@@ -212,73 +264,121 @@
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
   </ul>
 
-  <!-- header (reuse your logo/search/buttons markup) -->
+  <!-- ███ HEADER █████████████████████████████████████ -->
   <header>
+    <!-- logo -->
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-    
-    <!-- empty space (no search bar on auth pages) -->
-    <div style="flex:1 1 auto;"></div>
-    
-    <nav class="auth-nav">
-      <a href="index.html"  class="btn btn--secondary">Home</a>
-      <a href="login.html"  class="btn">Login</a>
+
+    <!-- search -->
+    <form class="search-bar" action="#" method="get">
+      <input type="search" name="q"
+             placeholder="Search stores, coupons …"
+             aria-label="Search Smartcashly" />
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24"><path
+          d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/>
+        </svg>
+      </button>
+    </form>
+
+    <!-- auth buttons -->
+    <nav class="auth-nav" id="auth-nav">
+      <!-- Show when NOT logged in -->
+      <div id="auth-buttons" style="display: flex; gap: 0.5rem;">
+        <a href="login.html"  class="btn">Login</a>
+        <a href="signup.html" class="btn btn--secondary">Sign Up</a>
+      </div>
+      
+      <!-- Show when logged in -->
+      <div id="user-profile" style="display: none; align-items: center; gap: 1rem;">
+        <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
+        <div class="profile-container">
+          <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
+          <div class="profile-dropdown">
+            <a href="#" id="account-settings">Account Settings</a>
+            <a href="#" id="logout-btn">Logout</a>
+          </div>
+        </div>
+      </div>
     </nav>
   </header>
+  <!-- ████████████████████████████████████████████████ -->
 
   <main>
-    <h2>Create an Account</h2>
-
-    <div class="form-container">
-      <form id="signup-form">
-        <input type="email"    id="su_email"    placeholder="Email"    required />
-        <input type="password" id="su_pass"     placeholder="Password" required />
-        <input type="password" id="su_confirm"  placeholder="Confirm Password"  required />
-        <button class="btn btn--full">Sign Up</button>
-        <p id="su_error" class="form-error"></p>
-      </form>
-    </div>
+    <h2>Welcome to Smartcashly</h2>
+    <p>Your favourite cashback &amp; coupon platform.</p>
   </main>
 
-  <footer>© <span id="year"></span> Smartcashly. All rights reserved.</footer>
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
 
-  <!-- firebase auth helpers -->
+  <!-- ----------  SCRIPTS  ---------- -->
+  <!-- Firebase auth helpers -->
   <script type="module" src="auth.js"></script>
 
-  <!-- page-specific logic -->
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+  <script type="module">
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    const su_email = document.getElementById("su_email");
-    const su_pass = document.getElementById("su_pass");
-    const su_confirm = document.getElementById("su_confirm");
-    const su_error = document.getElementById("su_error");
+    // Import Firebase auth functions
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-    document.getElementById("signup-form").addEventListener("submit", async e => {
-      e.preventDefault();
-      su_error.textContent = "";                       // clear old errors
+    // Wait for DOM and Firebase to load
+    window.addEventListener('load', () => {
+      // Get Firebase auth instance
+      const auth = getAuth();
+      
+      // Listen for authentication state changes
+      onAuthStateChanged(auth, (user) => {
+        updateAuthUI(user);
+      });
+    });
 
-      if (su_pass.value !== su_confirm.value) {
-        su_error.textContent = "ERROR: Passwords do not match";   // simple client check
-        return;
-      }
-      try {
-        await smartAuth.signUp(su_email.value.trim(), su_pass.value);
-        window.location = "index.html";
-      } catch (err) {
-        // Convert Firebase error codes to user-friendly messages
-        let errorMessage = "ERROR: An error occurred. Please try again.";
+    function updateAuthUI(user) {
+      const authButtons = document.getElementById('auth-buttons');
+      const userProfile = document.getElementById('user-profile');
+      const userEmail = document.getElementById('user-email');
+      const profilePic = document.getElementById('profile-pic');
+
+      if (user) {
+        // User is logged in
+        console.log('User logged in:', user.email);
+        authButtons.style.display = 'none';
+        userProfile.style.display = 'flex';
+        userEmail.textContent = user.email;
         
-        if (err.code.includes("email-already-in-use")) {
-          errorMessage = "ERROR: Email already in use";
-        } else if (err.code.includes("weak-password")) {
-          errorMessage = "ERROR: Password is too weak";
-        } else if (err.code.includes("invalid-email")) {
-          errorMessage = "ERROR: Invalid email address";
-        } else if (err.code.includes("network-request-failed")) {
-          errorMessage = "ERROR: Network error. Please check your connection";
+        // Set default profile picture or user's photo
+        if (user.photoURL) {
+          profilePic.src = user.photoURL;
+        } else {
+          // Default avatar with user's initial
+          const initial = user.email.charAt(0).toUpperCase();
+          profilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%23008e45'/><text x='20' y='26' text-anchor='middle' fill='white' font-size='16' font-family='Arial'>${initial}</text></svg>`;
         }
-        
-        su_error.textContent = errorMessage;
+      } else {
+        // User is not logged in
+        console.log('User not logged in');
+        authButtons.style.display = 'flex';
+        userProfile.style.display = 'none';
+      }
+    }
+
+    // Logout functionality
+    document.addEventListener('click', async (e) => {
+      if (e.target.id === 'logout-btn') {
+        e.preventDefault();
+        try {
+          if (typeof smartAuth !== 'undefined') {
+            await smartAuth.signOut();
+          }
+        } catch (err) {
+          console.error('Logout error:', err);
+        }
+      }
+      
+      if (e.target.id === 'account-settings') {
+        e.preventDefault();
+        alert('Account settings coming soon!');
       }
     });
   </script>
