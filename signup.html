@@ -258,7 +258,7 @@
       su_error.textContent = "";                       // clear old errors
 
       if (su_pass.value !== su_confirm.value) {
-        su_error.textContent = "Warning: Passwords do not match";   // simple client check
+        su_error.textContent = "ERROR: Passwords do not match";   // simple client check
         return;
       }
       try {
@@ -266,16 +266,16 @@
         window.location = "index.html";
       } catch (err) {
         // Convert Firebase error codes to user-friendly messages
-        let errorMessage = "An error occurred. Please try again.";
+        let errorMessage = "ERROR: An error occurred. Please try again.";
         
         if (err.code.includes("email-already-in-use")) {
-          errorMessage = "Warning: Email already in use";
+          errorMessage = "ERROR: Email already in use";
         } else if (err.code.includes("weak-password")) {
-          errorMessage = "Warning: Password is too weak";
+          errorMessage = "ERROR: Password is too weak";
         } else if (err.code.includes("invalid-email")) {
-          errorMessage = "Warning: Invalid email address";
+          errorMessage = "ERROR: Invalid email address";
         } else if (err.code.includes("network-request-failed")) {
-          errorMessage = "Warning: Network error. Please check your connection";
+          errorMessage = "ERROR: Network error. Please check your connection";
         }
         
         su_error.textContent = errorMessage;
