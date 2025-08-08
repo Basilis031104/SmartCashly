@@ -187,11 +187,10 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      z-index: -1;
+      z-index: 1;
       list-style: none;
       margin: 0;
       padding: 0;
-      background: transparent !important;
       pointer-events: none;
     }
 
@@ -212,7 +211,6 @@
       text-shadow: 0 1px 2px rgba(0,0,0,.25);
       animation: fall linear infinite;
       opacity: 0.9;
-      will-change: transform;
     }
 
     @keyframes fall {
@@ -220,11 +218,9 @@
         transform: translateX(var(--start-x, 0)) translateY(-120px) rotate(var(--start-rotation, 0deg));
         opacity: 0.9;
       }
-      10%  { opacity: 0.9; }
-      90%  { opacity: 0.9; }
       100% { 
         transform: translateX(var(--end-x, 0)) translateY(calc(100vh + 120px)) rotate(var(--end-rotation, 360deg));
-        opacity: 0;
+        opacity: 0.9;
       }
     }
 
@@ -246,11 +242,6 @@
     .cash-rain li:nth-child(16) { --start-x: 60vw;  --end-x: 65vw;  --start-rotation: -10deg; --end-rotation: 350deg; animation-delay: 4.6s; animation-duration: 8.7s; }
     .cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
     .cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
-
-    /* Force animation restart */
-    .cash-rain li:hover {
-      animation-play-state: running;
-    }
 
     @media (max-width: 480px) {
       .cash-rain { display: none; }
