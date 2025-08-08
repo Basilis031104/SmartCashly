@@ -308,26 +308,28 @@
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
 
-  <script>
+  <!-- ----------  SCRIPTS  ---------- -->
+  <!-- Firebase auth helpers -->
+  <script type="module" src="auth.js"></script>
+
+  <script type="module">
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Wait for Firebase Auth to load
-    window.addEventListener('load', async () => {
-      // Wait a bit for auth.js to load
-      await new Promise(resolve => setTimeout(resolve, 100));
+    // Import Firebase auth functions
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    // Wait for DOM and Firebase to load
+    window.addEventListener('load', () => {
+      // Get Firebase auth instance
+      const auth = getAuth();
       
-      if (typeof smartAuth !== 'undefined') {
-        checkAuthState();
-        
-        // Listen for auth state changes
-        const checkInterval = setInterval(() => {
-          checkAuthState();
-        }, 1000);
-      }
+      // Listen for authentication state changes
+      onAuthStateChanged(auth, (user) => {
+        updateAuthUI(user);
+      });
     });
 
-    function checkAuthState() {
-      const user = smartAuth.user();
+    function updateAuthUI(user) {
       const authButtons = document.getElementById('auth-buttons');
       const userProfile = document.getElementById('user-profile');
       const userEmail = document.getElementById('user-email');
@@ -335,6 +337,7 @@
 
       if (user) {
         // User is logged in
+        console.log('User logged in:', user.email);
         authButtons.style.display = 'none';
         userProfile.style.display = 'flex';
         userEmail.textContent = user.email;
@@ -349,6 +352,7 @@
         }
       } else {
         // User is not logged in
+        console.log('User not logged in');
         authButtons.style.display = 'flex';
         userProfile.style.display = 'none';
       }
@@ -359,8 +363,9 @@
       if (e.target.id === 'logout-btn') {
         e.preventDefault();
         try {
-          await smartAuth.signOut();
-          window.location.reload();
+          if (typeof smartAuth !== 'undefined') {
+            await smartAuth.signOut();
+          }
         } catch (err) {
           console.error('Logout error:', err);
         }
@@ -369,7 +374,6 @@
       if (e.target.id === 'account-settings') {
         e.preventDefault();
         alert('Account settings coming soon!');
-        // TODO: Redirect to account settings page
       }
     });
   </script>
