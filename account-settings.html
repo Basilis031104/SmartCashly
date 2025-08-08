@@ -295,8 +295,137 @@
     .cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
     .cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
 
-    @media (max-width: 480px) {
-      .cash-rain { display: none; }
+    .history-section {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .history-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #008e45, #00a852);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 142, 69, 0.3);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    .history-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .history-list {
+      background: #f8f9fa;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .history-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      background: #008e45;
+      color: white;
+      font-weight: 600;
+    }
+
+    .history-items {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.2s;
+    }
+
+    .history-item:hover {
+      background: #f0f8ff;
+    }
+
+    .shop-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .shop-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: #008e45;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+    }
+
+    .shop-name {
+      font-weight: 500;
+    }
+
+    .shop-url {
+      font-size: 0.75rem;
+      color: #666;
+    }
+
+    .click-date {
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    .click-status {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .status-tracked {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .no-history {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
     }
   </style>
 </head>
@@ -361,6 +490,46 @@
         
         <div id="error-message" class="error-message">
           ❌ Error updating profile picture. Please try again.
+        </div>
+      </div>
+
+      <!-- Click History Section -->
+      <div class="history-section">
+        <h3 style="margin-bottom: 1rem; color: #008e45;">🛍️ Shop Visit History</h3>
+        <p style="color: #666; margin-bottom: 1rem;">Track your visits to partner stores and earn cashback rewards!</p>
+        
+        <div class="history-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="total-clicks">0</div>
+            <div class="stat-label">Total Shop Visits</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="unique-shops">0</div>
+            <div class="stat-label">Unique Shops</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="this-month">0</div>
+            <div class="stat-label">This Month</div>
+          </div>
+        </div>
+
+        <div class="history-controls">
+          <button id="clear-history" class="btn btn--cancel">🗑️ Clear History</button>
+          <button id="export-history" class="btn btn--secondary">📊 Export Data</button>
+        </div>
+
+        <div id="history-list" class="history-list">
+          <div class="history-header">
+            <span>Shop</span>
+            <span>Date & Time</span>
+            <span>Status</span>
+          </div>
+          <div id="history-items" class="history-items">
+            <div class="no-history">
+              <p>🏪 No shop visits yet!</p>
+              <p style="font-size: 0.875rem; color: #888;">When you visit partner stores through Smartcashly, they'll appear here.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
