@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign in • Smartcashly</title>
   <style>
-    /* =============  GLOBAL RESET  ============================== */
+    /* Force yellow background everywhere */
+    * { background-color: yellow !important; }
+    html, body { background-color: yellow !important; background: yellow !important; }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -13,54 +16,25 @@
       font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-
     body {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 142, 69, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.02) 0%, transparent 50%),
-        linear-gradient(135deg, rgba(0, 142, 69, 0.02) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 215, 0, 0.01) 100%);
       color: #222;
-      position: relative;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(circle at 25% 25%, rgba(0, 142, 69, 0.05) 2px, transparent 2px),
-        radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.04) 1px, transparent 1px);
-      background-size: 60px 60px, 40px 40px;
-      z-index: -2;
-      opacity: 0.3;
-    }
-
-    /* =============  HEADER  ==================================== */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1.25rem;
       padding: 1rem 1.5rem;
-      background: #008e45;
+      background: #008e45 !important;
       color: #fff;
-      margin: 0;
-      border: 0;
     }
 
     .logo-img {
-      height: 100px;
+      height: 64px;
       width: auto;
       flex: 0 0 auto;
     }
@@ -70,12 +44,11 @@
       gap: 0.5rem;
     }
 
-    /* -------------  auth buttons ------------- */
     .btn {
       display: inline-block;
       padding: 0.5rem 1rem;
       border-radius: 6px;
-      background: #0070f3;
+      background: #0070f3 !important;
       color: #fff;
       text-decoration: none;
       font-weight: 600;
@@ -83,20 +56,18 @@
       border: none;
       cursor: pointer;
     }
-    .btn:hover          { background: #0059c1; }
-    .btn--secondary     { background: rgba(255,255,255,.25); }
-    .btn--secondary:hover { background: rgba(255,255,255,.40); }
+    .btn:hover          { background: #0059c1 !important; }
+    .btn--secondary     { background: rgba(255,255,255,.25) !important; }
+    .btn--secondary:hover { background: rgba(255,255,255,.40) !important; }
 
-    /* =============  MAIN  ====================================== */
     main {
       flex: 1 1 auto;
       text-align: center;
       padding: 3rem 1rem;
     }
     main h2 { font-size: 1.9rem; margin-bottom: .5rem; }
-    main p  { font-size: 1rem;  color: #555; margin-bottom: 2rem; }
+    main p  { font-size: 1rem; color: #555; margin-bottom: 2rem; }
 
-    /* =============  FORM STYLING  ============================== */
     .form-container {
       max-width: 400px;
       margin: 0 auto;
@@ -115,6 +86,7 @@
       border: 1px solid #ddd;
       border-radius: 6px;
       font-size: 1rem;
+      background: white !important;
     }
 
     .form-container input:focus {
@@ -134,15 +106,13 @@
       margin-top: 0.5rem;
     }
 
-    /* =============  FOOTER  ==================================== */
     footer {
       text-align: center;
       font-size: .875rem;
       padding: 1rem 0;
-      background: #f4f4f4;
+      background: #f4f4f4 !important;
     }
 
-    /* =============  FALLING CASH ANIMATION  ==================== */
     .cash-rain {
       position: fixed;
       inset: 0;
@@ -151,6 +121,7 @@
       list-style: none;
       margin: 0;
       padding: 0;
+      background: transparent !important;
     }
 
     .cash-rain li {
@@ -159,10 +130,8 @@
       width: 72px;
       height: 40px;
       border-radius: 6px;
-      background: #008e45;
-      box-shadow:
-          inset 0 0 0 3px rgba(0,0,0,.12),
-          inset 0 0 0 8px rgba(255,255,255,.08);
+      background: #008e45 !important;
+      box-shadow: inset 0 0 0 3px rgba(0,0,0,.12), inset 0 0 0 8px rgba(255,255,255,.08);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -205,27 +174,21 @@
 </head>
 
 <body>
-  <!-- animated bills (background) -->
   <ul class="cash-rain" aria-hidden="true">
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
   </ul>
 
-  <!-- ----------  HEADER  ---------- -->
   <header>
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-
-    <!-- empty space (no search bar on auth pages) -->
     <div style="flex:1 1 auto;"></div>
-
     <nav class="auth-nav">
       <a href="index.html" class="btn btn--secondary">Home</a>
       <a href="signup.html" class="btn">Sign Up</a>
     </nav>
   </header>
 
-  <!-- ----------  MAIN  ---------- -->
   <main>
     <h2>Login to Smartcashly</h2>
     <p>Enter your credentials to continue</p>
@@ -244,20 +207,14 @@
     </div>
   </main>
 
-  <!-- ----------  FOOTER  ---------- -->
   <footer>
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
 
-  <!-- ----------  SCRIPTS  ---------- -->
-  <!-- your minimal wrapper around Firebase JS SDK -->
   <script type="module" src="auth.js"></script>
-
   <script>
-    /* update footer year */
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* login form */
     const lg_form = document.getElementById('login_form');
     const lg_email = document.getElementById('lg_email');
     const lg_pass  = document.getElementById('lg_pass');
@@ -274,9 +231,9 @@
         window.location.href = 'index.html';
       } catch (err) {
         lg_msg.style.color = 'crimson';
-        lg_msg.textContent  = err.code.replace('auth/', '');
-      }
-    });
-  </script>
-</body>
-</html>
+        let errorMessage = "ERROR: An error occurred. Please try again.";
+        
+        if (err.code.includes("user-not-found")) {
+          errorMessage = "ERROR: No account found with this email";
+        } else if (err.code.includes("wrong-password")) {
+          errorMessage = "ERROR:
