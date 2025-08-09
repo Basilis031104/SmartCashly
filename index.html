@@ -1,18 +1,4 @@
-@media (max-width: 480px) {
-      .cash-rain { display: none; }
-      
-      .support-bubble {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-      }
-      
-      .support-form {
-        margin: 1rem;
-        width: calc(100% - 2rem);
-      }
-    }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -264,6 +250,10 @@
     .cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
     .cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
 
+    @media (max-width: 480px) {
+      .cash-rain { display: none; }
+    }
+
     /* Support Chat Bubble */
     .support-bubble {
       position: fixed;
@@ -290,10 +280,9 @@
     .support-bubble::before {
       content: "💬";
       font-size: 24px;
-      color: white;
     }
 
-    /* Support Form Modal */
+    /* Support Modal */
     .support-modal {
       position: fixed;
       top: 0;
@@ -338,7 +327,7 @@
       text-align: center;
     }
 
-    .support-form .close-btn {
+    .close-btn {
       position: absolute;
       top: 15px;
       right: 20px;
@@ -349,7 +338,7 @@
       color: #999;
     }
 
-    .support-form .close-btn:hover {
+    .close-btn:hover {
       color: #333;
     }
 
@@ -389,7 +378,7 @@
     }
 
     .support-submit {
-      background: #008e45 !important;
+      background: #008e45;
       color: white;
       border: none;
       padding: 0.75rem 2rem;
@@ -402,22 +391,7 @@
     }
 
     .support-submit:hover {
-      background: #006633 !important;
-    }
-
-    .support-success {
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .support-success h3 {
-      color: #008e45;
-      margin-bottom: 1rem;
-    }
-
-    .support-success p {
-      color: #666;
-      margin-bottom: 1.5rem;
+      background: #006633;
     }
   </style>
 </head>
@@ -469,9 +443,9 @@
   <!-- Support Chat Bubble -->
   <div class="support-bubble" id="support-bubble"></div>
 
-  <!-- Support Form Modal -->
+  <!-- Support Modal -->
   <div class="support-modal" id="support-modal">
-    <div class="support-form" id="support-form-content">
+    <div class="support-form">
       <button class="close-btn" id="close-support">&times;</button>
       <h3>💬 Contact Support</h3>
       
@@ -619,145 +593,43 @@
       }
     }
 
-    // Support chat functionality
-    const supportBubble = document.getElementById('support-bubble');
-    const supportModal = document.getElementById('support-modal');
-    const supportForm = document.getElementById('support-form');
-    const supportFormContent = document.getElementById('support-form-content');
-    const closeSupportBtn = document.getElementById('close-support');
-
-    // Open support modal
-    supportBubble.addEventListener('click', () => {
-      supportModal.classList.add('show');
-      
-      // Pre-fill email if user is logged in
+    // Support functionality
+    document.getElementById('support-bubble').addEventListener('click', () => {
+      document.getElementById('support-modal').classList.add('show');
       if (currentUser) {
         document.getElementById('support-email').value = currentUser.email;
       }
     });
 
-    // Close support modal
-    closeSupportBtn.addEventListener('click', () => {
-      supportModal.classList.remove('show');
-      resetSupportForm();
+    document.getElementById('close-support').addEventListener('click', () => {
+      document.getElementById('support-modal').classList.remove('show');
     });
 
-    // Close modal when clicking outside
-    supportModal.addEventListener('click', (e) => {
-      if (e.target === supportModal) {
-        supportModal.classList.remove('show');
-        resetSupportForm();
+    document.getElementById('support-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'support-modal') {
+        document.getElementById('support-modal').classList.remove('show');
       }
     });
 
-    // Handle support form submission
-    supportForm.addEventListener('submit', (e) => {
+    document.getElementById('support-form').addEventListener('submit', (e) => {
       e.preventDefault();
       
-      const email = document.getElementById('support-email').value;
-      const reason = document.getElementById('support-reason').value;
-      const message = document.getElementById('support-message').value;
-      
-      // Show loading state
-      const submitBtn = supportForm.querySelector('.support-submit');
-      const originalText = submitBtn.textContent;
+      const submitBtn = document.querySelector('.support-submit');
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
       
-      // Simulate sending (replace with actual API call)
       setTimeout(() => {
-        // Show success message
-        supportFormContent.innerHTML = `
-          <button class="close-btn" onclick="document.getElementById('support-modal').classList.remove('show'); resetSupportForm();">&times;</button>
-          <div class="support-success">
-            <h3>✅ Message Sent!</h3>
-            <p>Thank you for contacting us. We have received your message and will respond within 24 hours.</p>
-            <p><strong>Reference:</strong> #SUP${Date.now().toString().slice(-6)}</p>
-            <button class="btn" onclick="document.getElementById('support-modal').classList.remove('show'); resetSupportForm();">Close</button>
+        document.querySelector('.support-form').innerHTML = `
+          <button class="close-btn" onclick="document.getElementById('support-modal').classList.remove('show')">&times;</button>
+          <div style="text-align: center; padding: 1rem;">
+            <h3 style="color: #008e45; margin-bottom: 1rem;">✅ Message Sent!</h3>
+            <p style="color: #666; margin-bottom: 1rem;">Thank you for contacting us. We will respond within 24 hours.</p>
+            <p style="color: #666; margin-bottom: 1.5rem;"><strong>Reference:</strong> #SUP${Date.now().toString().slice(-6)}</p>
+            <button class="btn" onclick="document.getElementById('support-modal').classList.remove('show')" style="background: #008e45; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer;">Close</button>
           </div>
         `;
-        
-        // Log the support request (in real app, send to server)
-        console.log('Support request:', { email, reason, message, timestamp: new Date() });
       }, 1500);
     });
-
-    function resetSupportForm() {
-      setTimeout(() => {
-        supportFormContent.innerHTML = `
-          <button class="close-btn" id="close-support">&times;</button>
-          <h3>💬 Contact Support</h3>
-          
-          <form id="support-form">
-            <div class="form-group">
-              <label for="support-email">Your Email</label>
-              <input type="email" id="support-email" required placeholder="Enter your email address">
-            </div>
-            
-            <div class="form-group">
-              <label for="support-reason">Reason for Contact</label>
-              <select id="support-reason" required>
-                <option value="">Select a reason</option>
-                <option value="cashback-not-given">Cashback not given</option>
-                <option value="missing-transaction">Missing transaction</option>
-                <option value="account-issues">Account issues</option>
-                <option value="technical-problems">Technical problems</option>
-                <option value="payment-issues">Payment issues</option>
-                <option value="general-inquiry">General inquiry</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="support-message">Message</label>
-              <textarea id="support-message" required placeholder="Please describe your issue in detail..."></textarea>
-            </div>
-            
-            <button type="submit" class="support-submit">Send Message</button>
-          </form>
-        `;
-        
-        // Re-attach event listeners
-        const newCloseBtn = document.getElementById('close-support');
-        const newForm = document.getElementById('support-form');
-        
-        newCloseBtn.addEventListener('click', () => {
-          supportModal.classList.remove('show');
-        });
-        
-        newForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          
-          const email = document.getElementById('support-email').value;
-          const reason = document.getElementById('support-reason').value;
-          const message = document.getElementById('support-message').value;
-          
-          const submitBtn = newForm.querySelector('.support-submit');
-          const originalText = submitBtn.textContent;
-          submitBtn.textContent = 'Sending...';
-          submitBtn.disabled = true;
-          
-          setTimeout(() => {
-            supportFormContent.innerHTML = `
-              <button class="close-btn" onclick="document.getElementById('support-modal').classList.remove('show'); resetSupportForm();">&times;</button>
-              <div class="support-success">
-                <h3>✅ Message Sent!</h3>
-                <p>Thank you for contacting us. We have received your message and will respond within 24 hours.</p>
-                <p><strong>Reference:</strong> #SUP${Date.now().toString().slice(-6)}</p>
-                <button class="btn" onclick="document.getElementById('support-modal').classList.remove('show'); resetSupportForm();">Close</button>
-              </div>
-            `;
-            
-            console.log('Support request:', { email, reason, message, timestamp: new Date() });
-          }, 1500);
-        });
-        
-        // Pre-fill email if user is logged in
-        if (currentUser) {
-          document.getElementById('support-email').value = currentUser.email;
-        }
-      }, 300);
-    }
   </script>
 </body>
 </html>
