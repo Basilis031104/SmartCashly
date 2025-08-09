@@ -281,7 +281,7 @@
                    err.code === 'auth/invalid-login-credentials') {
           // For security, Firebase often returns this for both wrong email and wrong password
           // We'll show a generic message that covers both cases
-          lg_msg.textContent = "ERROR: Invalid email or password. Please check and try again";
+          lg_msg.textContent = "ERROR: Invalid email or password. Please try again";
         } else if (err.code === 'auth/too-many-requests') {
           lg_msg.textContent = "ERROR: Too many failed attempts. Try again later";
         } else if (err.code === 'auth/user-disabled') {
