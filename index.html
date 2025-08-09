@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+@media (max-width: 480px) {
+      .cash-rain { display: none; }
+      
+      .support-bubble {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+      }
+      
+      .support-form {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+      }
+    }<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -250,8 +264,160 @@
     .cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
     .cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
 
-    @media (max-width: 480px) {
-      .cash-rain { display: none; }
+    /* Support Chat Bubble */
+    .support-bubble {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: #008e45;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 142, 69, 0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .support-bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 142, 69, 0.4);
+    }
+
+    .support-bubble::before {
+      content: "💬";
+      font-size: 24px;
+      color: white;
+    }
+
+    /* Support Form Modal */
+    .support-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .support-modal.show {
+      display: flex;
+    }
+
+    .support-form {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .support-form h3 {
+      color: #008e45;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .support-form .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .support-form .close-btn:hover {
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #008e45;
+      box-shadow: 0 0 0 2px rgba(0, 142, 69, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .support-submit {
+      background: #008e45 !important;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s;
+    }
+
+    .support-submit:hover {
+      background: #006633 !important;
+    }
+
+    .support-success {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .support-success h3 {
+      color: #008e45;
+      margin-bottom: 1rem;
+    }
+
+    .support-success p {
+      color: #666;
+      margin-bottom: 1.5rem;
     }
   </style>
 </head>
@@ -299,6 +465,45 @@
   <footer>
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
+
+  <!-- Support Chat Bubble -->
+  <div class="support-bubble" id="support-bubble"></div>
+
+  <!-- Support Form Modal -->
+  <div class="support-modal" id="support-modal">
+    <div class="support-form" id="support-form-content">
+      <button class="close-btn" id="close-support">&times;</button>
+      <h3>💬 Contact Support</h3>
+      
+      <form id="support-form">
+        <div class="form-group">
+          <label for="support-email">Your Email</label>
+          <input type="email" id="support-email" required placeholder="Enter your email address">
+        </div>
+        
+        <div class="form-group">
+          <label for="support-reason">Reason for Contact</label>
+          <select id="support-reason" required>
+            <option value="">Select a reason</option>
+            <option value="cashback-not-given">Cashback not given</option>
+            <option value="missing-transaction">Missing transaction</option>
+            <option value="account-issues">Account issues</option>
+            <option value="technical-problems">Technical problems</option>
+            <option value="payment-issues">Payment issues</option>
+            <option value="general-inquiry">General inquiry</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="support-message">Message</label>
+          <textarea id="support-message" required placeholder="Please describe your issue in detail..."></textarea>
+        </div>
+        
+        <button type="submit" class="support-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
 
   <script type="module" src="auth.js"></script>
   <script type="module">
@@ -412,6 +617,146 @@
         authButtons.style.display = 'flex';
         userProfile.style.display = 'none';
       }
+    }
+
+    // Support chat functionality
+    const supportBubble = document.getElementById('support-bubble');
+    const supportModal = document.getElementById('support-modal');
+    const supportForm = document.getElementById('support-form');
+    const supportFormContent = document.getElementById('support-form-content');
+    const closeSupportBtn = document.getElementById('close-support');
+
+    // Open support modal
+    supportBubble.addEventListener('click', () => {
+      supportModal.classList.add('show');
+      
+      // Pre-fill email if user is logged in
+      if (currentUser) {
+        document.getElementById('support-email').value = currentUser.email;
+      }
+    });
+
+    // Close support modal
+    closeSupportBtn.addEventListener('click', () => {
+      supportModal.classList.remove('show');
+      resetSupportForm();
+    });
+
+    // Close modal when clicking outside
+    supportModal.addEventListener('click', (e) => {
+      if (e.target === supportModal) {
+        supportModal.classList.remove('show');
+        resetSupportForm();
+      }
+    });
+
+    // Handle support form submission
+    supportForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('support-email').value;
+      const reason = document.getElementById('support-reason').value;
+      const message = document.getElementById('support-message').value;
+      
+      // Show loading state
+      const submitBtn = supportForm.querySelector('.support-submit');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      
+      // Simulate sending (replace with actual API call)
+      setTimeout(() => {
+        // Show success message
+        supportFormContent.innerHTML = `
+          <button class="close-btn" onclick="document.getElementById('support-modal').classList.remove('show'); resetSupportForm();">&times;</button>
+          <div class="support-success">
+            <h3>✅ Message Sent!</h3>
+            <p>Thank you for contacting us. We have received your message and will respond within 24 hours.</p>
+            <p><strong>Reference:</strong> #SUP${Date.now().toString().slice(-6)}</p>
+            <button class="btn" onclick="document.getElementById('support-modal').classList.remove('show'); resetSupportForm();">Close</button>
+          </div>
+        `;
+        
+        // Log the support request (in real app, send to server)
+        console.log('Support request:', { email, reason, message, timestamp: new Date() });
+      }, 1500);
+    });
+
+    function resetSupportForm() {
+      setTimeout(() => {
+        supportFormContent.innerHTML = `
+          <button class="close-btn" id="close-support">&times;</button>
+          <h3>💬 Contact Support</h3>
+          
+          <form id="support-form">
+            <div class="form-group">
+              <label for="support-email">Your Email</label>
+              <input type="email" id="support-email" required placeholder="Enter your email address">
+            </div>
+            
+            <div class="form-group">
+              <label for="support-reason">Reason for Contact</label>
+              <select id="support-reason" required>
+                <option value="">Select a reason</option>
+                <option value="cashback-not-given">Cashback not given</option>
+                <option value="missing-transaction">Missing transaction</option>
+                <option value="account-issues">Account issues</option>
+                <option value="technical-problems">Technical problems</option>
+                <option value="payment-issues">Payment issues</option>
+                <option value="general-inquiry">General inquiry</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="support-message">Message</label>
+              <textarea id="support-message" required placeholder="Please describe your issue in detail..."></textarea>
+            </div>
+            
+            <button type="submit" class="support-submit">Send Message</button>
+          </form>
+        `;
+        
+        // Re-attach event listeners
+        const newCloseBtn = document.getElementById('close-support');
+        const newForm = document.getElementById('support-form');
+        
+        newCloseBtn.addEventListener('click', () => {
+          supportModal.classList.remove('show');
+        });
+        
+        newForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const email = document.getElementById('support-email').value;
+          const reason = document.getElementById('support-reason').value;
+          const message = document.getElementById('support-message').value;
+          
+          const submitBtn = newForm.querySelector('.support-submit');
+          const originalText = submitBtn.textContent;
+          submitBtn.textContent = 'Sending...';
+          submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            supportFormContent.innerHTML = `
+              <button class="close-btn" onclick="document.getElementById('support-modal').classList.remove('show'); resetSupportForm();">&times;</button>
+              <div class="support-success">
+                <h3>✅ Message Sent!</h3>
+                <p>Thank you for contacting us. We have received your message and will respond within 24 hours.</p>
+                <p><strong>Reference:</strong> #SUP${Date.now().toString().slice(-6)}</p>
+                <button class="btn" onclick="document.getElementById('support-modal').classList.remove('show'); resetSupportForm();">Close</button>
+              </div>
+            `;
+            
+            console.log('Support request:', { email, reason, message, timestamp: new Date() });
+          }, 1500);
+        });
+        
+        // Pre-fill email if user is logged in
+        if (currentUser) {
+          document.getElementById('support-email').value = currentUser.email;
+        }
+      }, 300);
     }
   </script>
 </body>
