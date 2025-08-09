@@ -307,38 +307,14 @@
         </p>
         
         <div class="upload-area">
-          <h4 style="color: #008e45; margin-bottom: 1rem;">Choose an Avatar:</h4>
-          
-          <div class="avatar-options">
-            <div class="avatar-option color-avatar" data-avatar="A" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">A</div>
-            <div class="avatar-option color-avatar" data-avatar="B" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">B</div>
-            <div class="avatar-option color-avatar" data-avatar="C" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">C</div>
-            <div class="avatar-option color-avatar" data-avatar="D" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">D</div>
-            <div class="avatar-option color-avatar" data-avatar="E" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">E</div>
-            <div class="avatar-option color-avatar" data-avatar="F" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">F</div>
-            <div class="avatar-option" data-avatar="🎭">🎭</div>
-            <div class="avatar-option" data-avatar="🎨">🎨</div>
-            <div class="avatar-option" data-avatar="🎪">🎪</div>
-            <div class="avatar-option" data-avatar="🎯">🎯</div>
-            <div class="avatar-option" data-avatar="🎲">🎲</div>
-            <div class="avatar-option" data-avatar="🎸">🎸</div>
-            <div class="avatar-option" data-avatar="🚀">🚀</div>
-            <div class="avatar-option" data-avatar="⭐">⭐</div>
-            <div class="avatar-option" data-avatar="🌟">🌟</div>
-            <div class="avatar-option" data-avatar="💎">💎</div>
+          <div class="file-input-wrapper">
+            <input type="file" id="profile-pic-input" class="file-input" accept="image/*" />
+            <label for="profile-pic-input" class="file-input-label">
+              📷 Choose New Picture
+            </label>
           </div>
-
-          <div style="margin: 1.5rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
-            <p style="margin-bottom: 0.5rem; font-weight: 600; color: #333;">Or upload a custom image:</p>
-            <div class="file-input-wrapper">
-              <input type="file" id="profile-pic-input" class="file-input" accept="image/*" />
-              <label for="profile-pic-input" class="file-input-label">
-                📷 Choose File
-              </label>
-            </div>
-            <div class="upload-info">
-              Supported formats: JPG, PNG, GIF (Max: 2MB)
-            </div>
+          <div class="upload-info">
+            Supported formats: JPG, PNG, GIF (Max: 5MB)
           </div>
         </div>
 
@@ -352,9 +328,9 @@
           </div>
         </div>
 
-        <div class="action-buttons" id="avatar-actions" style="display: none;">
-          <button id="save-avatar" class="btn btn--save">💾 Save Avatar</button>
-          <button id="cancel-avatar" class="btn btn--cancel">❌ Cancel</button>
+        <div class="action-buttons" id="main-actions" style="display: none;">
+          <button id="save-picture" class="btn btn--save">💾 Save Picture</button>
+          <button id="cancel-upload" class="btn btn--cancel">❌ Cancel</button>
         </div>
 
         <div id="success-message" class="success-message">
@@ -416,7 +392,6 @@
 
     let currentUser = null;
     let selectedFile = null;
-    let selectedAvatar = null;
 
     // Check if user is logged in
     window.addEventListener('load', () => {
@@ -438,90 +413,23 @@
       
       emailDisplay.textContent = user.email;
       
-      // Load existing profile picture or default
-      if (user.photoURL && user.photoURL.startsWith('http')) {
+      // Check if user has a profile picture URL in Firebase
+      if (user.photoURL) {
         currentProfilePic.src = user.photoURL;
-      } else if (user.photoURL && !user.photoURL.startsWith('data:')) {
-        // It's a simple avatar identifier
-        generateAvatarFromIdentifier(user.photoURL, currentProfilePic);
       } else {
         // Default avatar with user's initial
         const initial = user.email.charAt(0).toUpperCase();
-        generateDefaultAvatar(initial, currentProfilePic);
+        currentProfilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='60' fill='%23008e45'/><text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>${initial}</text></svg>`;
       }
     }
-
-    function generateAvatarFromIdentifier(identifier, imgElement) {
-      if (identifier.length === 1 && /[A-F]/.test(identifier)) {
-        // It's a colored letter avatar
-        const gradients = {
-          'A': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          'B': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-          'C': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-          'D': 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-          'E': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-          'F': 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
-        };
-        const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>
-          <defs>
-            <linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'>
-              <stop offset='0%' style='stop-color:#667eea;stop-opacity:1' />
-              <stop offset='100%' style='stop-color:#764ba2;stop-opacity:1' />
-            </linearGradient>
-          </defs>
-          <circle cx='60' cy='60' r='60' fill='url(#grad)'/>
-          <text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial' font-weight='bold'>${identifier}</text>
-        </svg>`;
-        imgElement.src = `data:image/svg+xml,${encodeURIComponent(svg)}`;
-      } else {
-        // It's an emoji avatar
-        const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>
-          <circle cx='60' cy='60' r='60' fill='#f0f0f0'/>
-          <text x='60' y='75' text-anchor='middle' font-size='48'>${identifier}</text>
-        </svg>`;
-        imgElement.src = `data:image/svg+xml,${encodeURIComponent(svg)}`;
-      }
-    }
-
-    function generateDefaultAvatar(initial, imgElement) {
-      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>
-        <circle cx='60' cy='60' r='60' fill='#008e45'/>
-        <text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>${initial}</text>
-      </svg>`;
-      imgElement.src = `data:image/svg+xml,${encodeURIComponent(svg)}`;
-    }
-
-    // Avatar selection handling
-    document.querySelectorAll('.avatar-option').forEach(option => {
-      option.addEventListener('click', function() {
-        // Remove previous selection
-        document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
-        
-        // Select this avatar
-        this.classList.add('selected');
-        selectedAvatar = this.dataset.avatar;
-        
-        // Show save/cancel buttons
-        document.getElementById('avatar-actions').style.display = 'flex';
-        document.getElementById('preview-container').style.display = 'none';
-        
-        // Update preview
-        const currentProfilePic = document.getElementById('current-profile-pic');
-        generateAvatarFromIdentifier(selectedAvatar, currentProfilePic);
-        
-        // Clear file input
-        document.getElementById('profile-pic-input').value = '';
-        selectedFile = null;
-      });
-    });
 
     // File input handling
     document.getElementById('profile-pic-input').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if (file) {
-        // Validate file size (2MB max to avoid Firebase issues)
-        if (file.size > 2 * 1024 * 1024) {
-          showError('File size must be less than 2MB');
+        // Validate file size (5MB max)
+        if (file.size > 5 * 1024 * 1024) {
+          showError('File size must be less than 5MB');
           return;
         }
 
@@ -532,13 +440,10 @@
         }
 
         selectedFile = file;
-        selectedAvatar = null;
-        
-        // Clear avatar selection
-        document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
-        document.getElementById('avatar-actions').style.display = 'none';
-        
         showPreview(file);
+        
+        // Show main action buttons
+        document.getElementById('main-actions').style.display = 'flex';
       }
     });
 
@@ -554,51 +459,7 @@
       reader.readAsDataURL(file);
     }
 
-    // Save avatar (simple identifier)
-    document.getElementById('save-avatar').addEventListener('click', async function() {
-      if (!selectedAvatar || !currentUser) return;
-
-      try {
-        this.textContent = '⏳ Saving...';
-        this.disabled = true;
-
-        // Update user's Firebase profile with simple avatar identifier
-        await updateProfile(currentUser, {
-          photoURL: selectedAvatar
-        });
-        
-        console.log('Avatar updated successfully');
-        
-        // Hide action buttons and show success
-        document.getElementById('avatar-actions').style.display = 'none';
-        showSuccess('Profile avatar updated successfully!');
-        
-        // Clear selection
-        document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
-        selectedAvatar = null;
-
-      } catch (error) {
-        console.error('Error updating avatar:', error);
-        showError(`Error updating avatar: ${error.message}`);
-      } finally {
-        this.textContent = '💾 Save Avatar';
-        this.disabled = false;
-      }
-    });
-
-    // Cancel avatar selection
-    document.getElementById('cancel-avatar').addEventListener('click', function() {
-      document.getElementById('avatar-actions').style.display = 'none';
-      document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
-      selectedAvatar = null;
-      
-      // Restore original profile picture
-      if (currentUser) {
-        loadUserProfile(currentUser);
-      }
-    });
-
-    // Save picture using external image hosting (to avoid Firebase URL length limit)
+    // Save picture using a simple base64 storage solution
     document.getElementById('save-picture').addEventListener('click', async function() {
       if (!selectedFile || !currentUser) return;
 
@@ -606,30 +467,25 @@
         this.textContent = '⏳ Uploading...';
         this.disabled = true;
 
-        // Convert to base64 for upload to image hosting service
-        const base64 = await fileToBase64(selectedFile);
+        // For small images, we can use a data URL approach
+        // First, let's resize the image to reduce size
+        const resizedImage = await resizeImage(selectedFile, 200, 200);
         
-        // Upload to a free image hosting service (using ImgBB as example)
-        // Note: You would need to get a free API key from ImgBB
-        const formData = new FormData();
-        formData.append('image', base64.split(',')[1]); // Remove data:image/... prefix
+        console.log('Updating Firebase profile with resized image...');
         
-        // For demo purposes, we'll use a placeholder service
-        // In production, you'd replace this with actual image hosting
-        const imageUrl = await uploadToImageHost(base64);
-        
-        // Update user's Firebase profile with hosted image URL
+        // Update user's Firebase profile with resized base64 image
         await updateProfile(currentUser, {
-          photoURL: imageUrl
+          photoURL: resizedImage
         });
         
-        console.log('Profile updated with hosted image');
+        console.log('Profile updated successfully');
         
         // Update the displayed image
-        document.getElementById('current-profile-pic').src = imageUrl;
+        document.getElementById('current-profile-pic').src = resizedImage;
         
-        // Hide preview and show success
+        // Hide preview and actions, show success
         document.getElementById('preview-container').style.display = 'none';
+        document.getElementById('main-actions').style.display = 'none';
         showSuccess('Profile picture updated successfully!');
         
         // Reset file input
@@ -645,35 +501,52 @@
       }
     });
 
-    async function fileToBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-      });
-    }
-
-    async function uploadToImageHost(base64) {
-      // For demo purposes, we'll simulate an upload
-      // In production, you would use a real image hosting service like:
-      // - ImgBB (free tier available)
-      // - Cloudinary (free tier available)
-      // - Firebase Storage (requires setup)
-      
-      // Simulated upload - returns a placeholder
+    // Helper function to resize image to reduce file size
+    function resizeImage(file, maxWidth, maxHeight) {
       return new Promise((resolve) => {
-        setTimeout(() => {
-          // Generate a unique placeholder URL based on the user's email
-          const userHash = btoa(currentUser.email).substring(0, 10);
-          resolve(`https://picsum.photos/200/200?random=${userHash}`);
-        }, 1000);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        
+        img.onload = function() {
+          // Calculate new dimensions
+          let { width, height } = img;
+          
+          if (width > height) {
+            if (width > maxWidth) {
+              height = (height * maxWidth) / width;
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width = (width * maxHeight) / height;
+              height = maxHeight;
+            }
+          }
+          
+          // Set canvas dimensions and draw resized image
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          // Convert to base64 with compression
+          const resizedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+          resolve(resizedDataUrl);
+        };
+        
+        // Load the image
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
       });
     }
 
     // Cancel upload
     document.getElementById('cancel-upload').addEventListener('click', function() {
       document.getElementById('preview-container').style.display = 'none';
+      document.getElementById('main-actions').style.display = 'none';
       document.getElementById('profile-pic-input').value = '';
       selectedFile = null;
       
