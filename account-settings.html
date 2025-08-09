@@ -5,18 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Account Settings • Smartcashly</title>
   <style>
-    /* Shiny yellow gradient background */
-    html { 
-      background: linear-gradient(135deg, #ffeb3b 0%, #ffd700 25%, #ffeb3b 50%, #fff176 75%, #ffd700 100%) !important;
+    /* Shiny yellow gradient background (no cash rain here) */
+    html, body { 
+      background: linear-gradient(135deg,#ffeb3b 0%,#ffd700 25%,#ffeb3b 50%,#fff176 75%,#ffd700 100%) !important;
       background-size: 400% 400% !important;
       animation: shimmer 8s ease-in-out infinite !important;
+      margin: 0;
+      padding: 0;
     }
-    body { 
-      background: linear-gradient(135deg, #ffeb3b 0%, #ffd700 25%, #ffeb3b 50%, #fff176 75%, #ffd700 100%) !important;
-      background-size: 400% 400% !important;
-      animation: shimmer 8s ease-in-out infinite !important;
-    }
-
     @keyframes shimmer {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -74,6 +70,10 @@
     .btn:hover          { background: #0059c1 !important; }
     .btn--secondary     { background: rgba(255,255,255,.25) !important; }
     .btn--secondary:hover { background: rgba(255,255,255,.40) !important; }
+    .btn--save { background: #008e45 !important; }
+    .btn--save:hover { background: #006633 !important; }
+    .btn--cancel { background: #6c757d !important; }
+    .btn--cancel:hover { background: #545b62 !important; }
 
     main {
       flex: 1 1 auto;
@@ -127,23 +127,14 @@
       background: #f0f0f0;
     }
 
-    .upload-area {
-      margin: 1rem 0;
-    }
+    .upload-area { margin: 1rem 0; }
 
     .file-input-wrapper {
       position: relative;
       display: inline-block;
       margin: 1rem;
     }
-
-    .file-input {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
+    .file-input { position: absolute; opacity: 0; width: 0; height: 0; }
     .file-input-label {
       display: inline-block;
       padding: 0.75rem 1.5rem;
@@ -153,10 +144,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
-    .file-input-label:hover {
-      background: #0059c1;
-    }
+    .file-input-label:hover { background: #0059c1; }
 
     .upload-info {
       font-size: 0.875rem;
@@ -164,11 +152,8 @@
       margin-top: 0.5rem;
     }
 
-    .preview-container {
-      margin: 1rem 0;
-      display: none;
-    }
-
+    .preview-container { margin: 1rem 0; display: none; }
+    .preview-title { font-weight: 700; color: #2e7d32; margin-bottom: .5rem; }
     .preview-image {
       width: 120px;
       height: 120px;
@@ -176,29 +161,14 @@
       border: 4px solid #ffd700;
       object-fit: cover;
       margin: 0 auto;
+      background: #fafafa;
     }
 
     .action-buttons {
       display: flex;
       gap: 1rem;
       justify-content: center;
-      margin-top: 1.5rem;
-    }
-
-    .btn--save {
-      background: #008e45 !important;
-    }
-
-    .btn--save:hover {
-      background: #006633 !important;
-    }
-
-    .btn--cancel {
-      background: #6c757d !important;
-    }
-
-    .btn--cancel:hover {
-      background: #545b62 !important;
+      margin-top: 1rem;
     }
 
     .success-message, .error-message {
@@ -208,107 +178,22 @@
       text-align: center;
       display: none;
     }
-
-    .success-message {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-
-    .error-message {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
-
-    .password-section {
-      margin-top: 2rem;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-    }
+    .success-message { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .error-message   { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
     footer {
       text-align: center;
       font-size: .875rem;
       padding: 1rem 0;
-      background: linear-gradient(135deg, #ffeb3b 0%, #ffd700 25%, #ffeb3b 50%, #fff176 75%, #ffd700 100%) !important;
+      background: linear-gradient(135deg,#ffeb3b 0%,#ffd700 25%,#ffeb3b 50%,#fff176 75%,#ffd700 100%) !important;
       background-size: 400% 400% !important;
       animation: shimmer 8s ease-in-out infinite !important;
       border-top: 1px solid rgba(0,0,0,0.1);
     }
-
-    /* =============  FALLING CASH ANIMATION  ==================== */
-    .cash-rain {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 1;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      pointer-events: none;
-    }
-
-    .cash-rain li {
-      position: absolute;
-      top: -120px;
-      width: 72px;
-      height: 40px;
-      border-radius: 6px;
-      background: #008e45 !important;
-      box-shadow: inset 0 0 0 3px rgba(0,0,0,.12), inset 0 0 0 8px rgba(255,255,255,.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #ffd700 !important;
-      text-shadow: 0 1px 2px rgba(0,0,0,.25);
-      animation: fall linear infinite;
-      opacity: 0.9;
-    }
-
-    @keyframes fall {
-      0%   { 
-        transform: translateX(var(--start-x, 0)) translateY(-120px) rotate(var(--start-rotation, 0deg));
-        opacity: 0.9;
-      }
-      100% { 
-        transform: translateX(var(--end-x, 0)) translateY(calc(100vh + 120px)) rotate(var(--end-rotation, 360deg));
-        opacity: 0.9;
-      }
-    }
-
-    .cash-rain li:nth-child(1)  { --start-x: 15vw;  --end-x: 20vw;  --start-rotation: 15deg;  --end-rotation: 405deg; animation-delay: 0.2s; animation-duration: 8.5s; }
-    .cash-rain li:nth-child(2)  { --start-x: 80vw;  --end-x: 75vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 1.1s; animation-duration: 9.2s; }
-    .cash-rain li:nth-child(3)  { --start-x: 50vw;  --end-x: 45vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 2.3s; animation-duration: 7.8s; }
-    .cash-rain li:nth-child(4)  { --start-x: 20vw;  --end-x: 15vw;  --start-rotation: -15deg; --end-rotation: 345deg; animation-delay: 0.7s; animation-duration: 10.1s; }
-    .cash-rain li:nth-child(5)  { --start-x: 75vw;  --end-x: 80vw;  --start-rotation: 45deg;  --end-rotation: 405deg; animation-delay: 3.9s; animation-duration: 8.8s; }
-    .cash-rain li:nth-child(6)  { --start-x: 45vw;  --end-x: 55vw;  --start-rotation: -35deg; --end-rotation: 325deg; animation-delay: 1.6s; animation-duration: 9.5s; }
-    .cash-rain li:nth-child(7)  { --start-x: 85vw;  --end-x: 80vw;  --start-rotation: 25deg;  --end-rotation: 385deg; animation-delay: 4.4s; animation-duration: 7.9s; }
-    .cash-rain li:nth-child(8)  { --start-x: 25vw;  --end-x: 30vw;  --start-rotation: -45deg; --end-rotation: 315deg; animation-delay: 2.8s; animation-duration: 9.7s; }
-    .cash-rain li:nth-child(9)  { --start-x: 55vw;  --end-x: 50vw;  --start-rotation: 20deg;  --end-rotation: 380deg; animation-delay: 0.5s; animation-duration: 8.3s; }
-    .cash-rain li:nth-child(10) { --start-x: 70vw;  --end-x: 75vw;  --start-rotation: -30deg; --end-rotation: 330deg; animation-delay: 3.2s; animation-duration: 10.4s; }
-    .cash-rain li:nth-child(11) { --start-x: 30vw;  --end-x: 25vw;  --start-rotation: 40deg;  --end-rotation: 400deg; animation-delay: 5.1s; animation-duration: 8.1s; }
-    .cash-rain li:nth-child(12) { --start-x: 82vw;  --end-x: 85vw;  --start-rotation: -20deg; --end-rotation: 340deg; animation-delay: 1.9s; animation-duration: 9.9s; }
-    .cash-rain li:nth-child(13) { --start-x: 35vw;  --end-x: 40vw;  --start-rotation: 30deg;  --end-rotation: 390deg; animation-delay: 1.4s; animation-duration: 9.1s; }
-    .cash-rain li:nth-child(14) { --start-x: 40vw;  --end-x: 35vw;  --start-rotation: -40deg; --end-rotation: 320deg; animation-delay: 3.7s; animation-duration: 8.4s; }
-    .cash-rain li:nth-child(15) { --start-x: 65vw;  --end-x: 70vw;  --start-rotation: 50deg;  --end-rotation: 410deg; animation-delay: 2.1s; animation-duration: 9.8s; }
-    .cash-rain li:nth-child(16) { --start-x: 60vw;  --end-x: 65vw;  --start-rotation: -10deg; --end-rotation: 350deg; animation-delay: 4.6s; animation-duration: 8.7s; }
-    .cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
-    .cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
   </style>
 </head>
 
 <body>
-  <!-- NO CASH RAIN ON ACCOUNT SETTINGS -->
-
   <header>
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
     <div style="flex:1 1 auto;"></div>
@@ -325,362 +210,159 @@
         <p>Manage your profile and account preferences</p>
       </div>
 
+      <!-- Profile Picture -->
       <div class="profile-section">
         <h3 style="margin-bottom: 1rem; color: #008e45;">Profile Picture</h3>
-        
+
         <img id="current-profile-pic" src="" alt="Current Profile" class="current-profile-pic" />
         <p style="color: #666; margin-bottom: 1rem;">
           <span id="user-email-display">user@example.com</span>
         </p>
-        
+
         <div class="upload-area">
           <div class="file-input-wrapper">
             <input type="file" id="profile-pic-input" class="file-input" accept="image/*" />
-            <label for="profile-pic-input" class="file-input-label">
-              📷 Choose New Picture
-            </label>
+            <label for="profile-pic-input" class="file-input-label">📷 Choose New Picture</label>
           </div>
-          <div class="upload-info">
-            Supported formats: JPG, PNG, GIF (Max: 5MB)
-          </div>
+          <div class="upload-info">Supported formats: JPG, PNG, GIF • Max 5MB</div>
         </div>
 
         <div id="preview-container" class="preview-container">
-          <h4 style="color: #008e45; margin-bottom: 0.5rem;">Preview:</h4>
-          <img id="preview-image" class="preview-image" />
-          
+          <div class="preview-title">Preview:</div>
+          <img id="preview-image" class="preview-image" alt="Preview" />
           <div class="action-buttons">
             <button id="save-picture" class="btn btn--save">💾 Save Picture</button>
-            <button id="cancel-upload" class="btn btn--cancel">❌ Cancel</button>
+            <button id="cancel-upload" class="btn btn--cancel" type="button">✖ Cancel</button>
           </div>
         </div>
 
-        <div id="success-message" class="success-message">
-          ✅ Profile picture updated successfully!
-        </div>
-        
-        <div id="error-message" class="error-message">
-          ❌ Error updating profile picture. Please try again.
-        </div>
-      </div>
-
-      <!-- Password Change Section -->
-      <div class="password-section">
-        <h3 style="margin-bottom: 1rem; color: #008e45;">Change Password</h3>
-        
-        <form id="password-form" style="max-width: 400px; margin: 0 auto;">
-          <div style="margin-bottom: 1rem;">
-            <label for="current-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Current Password</label>
-            <input type="password" id="current-password" required 
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
-          </div>
-          
-          <div style="margin-bottom: 1rem;">
-            <label for="new-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">New Password</label>
-            <input type="password" id="new-password" required minlength="6"
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="confirm-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Confirm New Password</label>
-            <input type="password" id="confirm-password" required minlength="6"
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
-          </div>
-          
-          <button type="submit" class="btn btn--save" style="width: 100%;">🔐 Change Password</button>
-        </form>
-        
-        <div id="password-success" class="success-message">
-          ✅ Password changed successfully!
-        </div>
-        
-        <div id="password-error" class="error-message">
-          ❌ Error changing password. Please try again.
-        </div>
+        <div id="success-message" class="success-message"></div>
+        <div id="error-message" class="error-message"></div>
       </div>
     </div>
   </main>
 
-  <footer>
-    © <span id="year"></span> Smartcashly. All rights reserved.
-  </footer>
+  <footer>© <span id="year"></span> Smartcashly.</footer>
 
+  <!-- Firebase helpers -->
   <script type="module" src="auth.js"></script>
+
+  <!-- Page logic -->
   <script type="module">
     document.getElementById('year').textContent = new Date().getFullYear();
-    
-    // Import Firebase functions (removed Storage since we're not using it)
-    import { getAuth, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    // Firebase SDKs
+    import {
+      getAuth, onAuthStateChanged, updateProfile
+    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    import {
+      getStorage, ref as storageRef, uploadBytes, getDownloadURL
+    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
+
+    const auth = getAuth();
+    const storage = getStorage();
 
     let currentUser = null;
     let selectedFile = null;
 
-    // Check if user is logged in
-    window.addEventListener('load', () => {
-      const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          currentUser = user;
-          loadUserProfile(user);
-        } else {
-          // Redirect to login if not authenticated
-          window.location.href = 'login.html';
-        }
-      });
+    // Require auth
+    onAuthStateChanged(auth, (user) => {
+      if (!user) return (window.location.href = 'login.html');
+      currentUser = user;
+      populateUser(user);
     });
 
-    function loadUserProfile(user) {
-      const emailDisplay = document.getElementById('user-email-display');
-      const currentProfilePic = document.getElementById('current-profile-pic');
-      
-      emailDisplay.textContent = user.email;
-      
-      // Check if user has a profile picture URL in Firebase
+    function populateUser(user) {
+      document.getElementById('user-email-display').textContent = user.email;
+
+      // Use existing photoURL or generate a simple placeholder
+      const img = document.getElementById('current-profile-pic');
       if (user.photoURL) {
-        currentProfilePic.src = user.photoURL;
+        img.src = user.photoURL;
       } else {
-        // Default avatar with user's initial
-        const initial = user.email.charAt(0).toUpperCase();
-        currentProfilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='60' fill='%23008e45'/><text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>${initial}</text></svg>`;
+        const initial = (user.email || '?').charAt(0).toUpperCase();
+        img.src =
+          `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='60' fill='%23008e45'/><text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>${initial}</text></svg>`;
       }
     }
 
-    // File input handling
-    document.getElementById('profile-pic-input').addEventListener('change', function(e) {
+    // Pick file → preview
+    document.getElementById('profile-pic-input').addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if (file) {
-        // Validate file size (5MB max)
-        if (file.size > 5 * 1024 * 1024) {
-          showError('File size must be less than 5MB');
-          return;
-        }
+      if (!file) return;
 
-        // Validate file type
-        if (!file.type.startsWith('image/')) {
-          showError('Please select a valid image file');
-          return;
-        }
+      if (!file.type.startsWith('image/')) return showError('Please select an image file.');
+      if (file.size > 5 * 1024 * 1024)   return showError('File too large (max 5MB).');
 
-        selectedFile = file;
-        showPreview(file);
-      }
-    });
+      selectedFile = file;
 
-    function showPreview(file) {
-      const previewContainer = document.getElementById('preview-container');
-      const previewImage = document.getElementById('preview-image');
-      
       const reader = new FileReader();
-      reader.onload = function(e) {
-        previewImage.src = e.target.result;
-        previewContainer.style.display = 'block';
+      reader.onload = ev => {
+        document.getElementById('preview-image').src = ev.target.result;
+        document.getElementById('preview-container').style.display = 'block';
       };
       reader.readAsDataURL(file);
-    }
+    });
 
-    // Save picture using Firebase Profile (base64) - No CORS issues
-    document.getElementById('save-picture').addEventListener('click', async function() {
+    // Save → upload to Storage → set photoURL to download URL
+    document.getElementById('save-picture').addEventListener('click', async function () {
       if (!selectedFile || !currentUser) return;
 
+      this.textContent = '⏳ Uploading…';
+      this.disabled = true;
+
       try {
-        this.textContent = '⏳ Uploading...';
-        this.disabled = true;
+        const path = `profile-pictures/${currentUser.uid}/${Date.now()}-${selectedFile.name}`;
+        const ref = storageRef(storage, path);
+        const metadata = { contentType: selectedFile.type, cacheControl: 'public,max-age=3600' };
 
-        // Convert image to base64
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-          try {
-            const base64Image = e.target.result;
-            
-            console.log('Updating Firebase profile with base64 image...');
-            
-            // Update user's Firebase profile with base64 image
-            await updateProfile(currentUser, {
-              photoURL: base64Image
-            });
-            
-            console.log('Profile updated successfully');
-            
-            // Update the displayed image
-            document.getElementById('current-profile-pic').src = base64Image;
-            
-            // Hide preview and show success
-            document.getElementById('preview-container').style.display = 'none';
-            showSuccess('Profile picture updated successfully!');
-            
-            // Reset file input
-            document.getElementById('profile-pic-input').value = '';
-            selectedFile = null;
+        await uploadBytes(ref, selectedFile, metadata);
+        const url = await getDownloadURL(ref);
 
-          } catch (error) {
-            console.error('Error updating profile:', error);
-            showError(`Error updating profile: ${error.message}`);
-          } finally {
-            document.getElementById('save-picture').textContent = '💾 Save Picture';
-            document.getElementById('save-picture').disabled = false;
-          }
-        };
+        await updateProfile(currentUser, { photoURL: url });
 
-        reader.onerror = function() {
-          showError('Error reading file. Please try again.');
-          document.getElementById('save-picture').textContent = '💾 Save Picture';
-          document.getElementById('save-picture').disabled = false;
-        };
-
-        reader.readAsDataURL(selectedFile);
-
-      } catch (error) {
-        console.error('Error processing picture:', error);
-        showError('Error processing picture. Please try again.');
+        // Update UI
+        document.getElementById('current-profile-pic').src = url;
+        document.getElementById('preview-container').style.display = 'none';
+        document.getElementById('profile-pic-input').value = '';
+        selectedFile = null;
+        showSuccess('Profile picture updated successfully!');
+      } catch (err) {
+        console.error(err);
+        showError(err.message || 'Upload failed');
+      } finally {
         this.textContent = '💾 Save Picture';
         this.disabled = false;
       }
     });
 
-    // Cancel upload
-    document.getElementById('cancel-upload').addEventListener('click', function() {
+    // Cancel preview/upload
+    document.getElementById('cancel-upload').addEventListener('click', () => {
       document.getElementById('preview-container').style.display = 'none';
       document.getElementById('profile-pic-input').value = '';
       selectedFile = null;
     });
 
-    // Logout functionality
-    document.getElementById('logout-btn').addEventListener('click', async function(e) {
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', async (e) => {
       e.preventDefault();
-      try {
-        if (typeof smartAuth !== 'undefined') {
-          await smartAuth.signOut();
-          window.location.href = 'index.html';
-        }
-      } catch (err) {
-        console.error('Logout error:', err);
-      }
+      try { await smartAuth.signOut(); } catch {}
+      window.location.href = 'index.html';
     });
 
-    // Password change form handling
-    document.getElementById('password-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      const currentPassword = document.getElementById('current-password').value;
-      const newPassword = document.getElementById('new-password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-      
-      // Clear previous messages
-      document.getElementById('password-success').style.display = 'none';
-      document.getElementById('password-error').style.display = 'none';
-      
-      // Validate passwords match
-      if (newPassword !== confirmPassword) {
-        showPasswordError('New passwords do not match');
-        return;
-      }
-      
-      // Validate password length
-      if (newPassword.length < 6) {
-        showPasswordError('New password must be at least 6 characters long');
-        return;
-      }
-      
-      try {
-        // Change button text to show loading
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = '⏳ Changing Password...';
-        submitBtn.disabled = true;
-        
-        // Import Firebase auth functions
-        const { EmailAuthProvider, reauthenticateWithCredential, updatePassword } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js');
-        
-        if (!currentUser) {
-          throw new Error('No user logged in');
-        }
-        
-        // Re-authenticate user with current password
-        const credential = EmailAuthProvider.credential(currentUser.email, currentPassword);
-        await reauthenticateWithCredential(currentUser, credential);
-        
-        // Update password
-        await updatePassword(currentUser, newPassword);
-        
-        // Success
-        showPasswordSuccess('Password changed successfully!');
-        
-        // Clear form
-        this.reset();
-        
-      } catch (error) {
-        console.error('Password change error:', error);
-        console.log('Error code:', error.code); // Debug log
-        
-        if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
-          showPasswordError('Current password is incorrect');
-        } else if (error.code === 'auth/weak-password') {
-          showPasswordError('New password is too weak');
-        } else if (error.code === 'auth/requires-recent-login') {
-          showPasswordError('Please log out and log back in before changing your password');
-        } else if (error.code === 'auth/too-many-requests') {
-          showPasswordError('Too many failed attempts. Please try again later');
-        } else {
-          showPasswordError(`Error: ${error.message || 'Please try again'}`);
-        }
-      } finally {
-        // Reset button
-        const submitBtn = this.querySelector('button[type="submit"]');
-        submitBtn.textContent = '🔐 Change Password';
-        submitBtn.disabled = false;
-      }
-    });
-
-    function showPasswordSuccess(message) {
-      const successEl = document.getElementById('password-success');
-      const errorEl = document.getElementById('password-error');
-      
-      errorEl.style.display = 'none';
-      successEl.textContent = message;
-      successEl.style.display = 'block';
-      
-      setTimeout(() => {
-        successEl.style.display = 'none';
-      }, 4000);
+    function showSuccess(msg) {
+      const ok = document.getElementById('success-message');
+      const bad = document.getElementById('error-message');
+      ok.textContent = `✅ ${msg}`;
+      ok.style.display = 'block';
+      bad.style.display = 'none';
     }
-
-    function showPasswordError(message) {
-      const successEl = document.getElementById('password-success');
-      const errorEl = document.getElementById('password-error');
-      
-      successEl.style.display = 'none';
-      errorEl.textContent = message;
-      errorEl.style.display = 'block';
-      
-      setTimeout(() => {
-        errorEl.style.display = 'none';
-      }, 4000);
-    }
-
-    function showSuccess(message) {
-      const successEl = document.getElementById('success-message');
-      const errorEl = document.getElementById('error-message');
-      
-      errorEl.style.display = 'none';
-      successEl.textContent = message;
-      successEl.style.display = 'block';
-      
-      setTimeout(() => {
-        successEl.style.display = 'none';
-      }, 4000);
-    }
-
-    function showError(message) {
-      const successEl = document.getElementById('success-message');
-      const errorEl = document.getElementById('error-message');
-      
-      successEl.style.display = 'none';
-      errorEl.textContent = message;
-      errorEl.style.display = 'block';
-      
-      setTimeout(() => {
-        errorEl.style.display = 'none';
-      }, 4000);
+    function showError(msg) {
+      const ok = document.getElementById('success-message');
+      const bad = document.getElementById('error-message');
+      bad.textContent = `❌ ${msg}`;
+      bad.style.display = 'block';
+      ok.style.display = 'none';
     }
   </script>
 </body>
