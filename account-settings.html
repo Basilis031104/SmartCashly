@@ -1,6 +1,7 @@
 <script type="module" src="auth.js"></script>
   <script type="module">
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
     
     // Import Firebase functions (ADDED Storage for cross-device sync)
     import { getAuth, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
@@ -323,3 +324,4 @@
       }, 8000);
     }
   </script>
+
