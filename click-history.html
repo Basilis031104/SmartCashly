@@ -174,7 +174,7 @@
 
     .history-table-header {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 2fr 1fr;
       gap: 1rem;
       padding: 1rem;
       background: #008e45;
@@ -183,84 +183,43 @@
     }
 
     .history-items {
-      max-height: 400px;
+      max-height: 600px;
       overflow-y: auto;
     }
 
     .history-item {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 2fr 1fr;
       gap: 1rem;
-      padding: 1rem;
+      padding: 0.75rem 1rem;
       border-bottom: 1px solid #eee;
       transition: background-color 0.2s;
+      font-size: 0.9rem;
     }
 
     .history-item:hover {
       background: #f0f8ff;
     }
 
-    .shop-info {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .shop-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      background: #008e45;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 0.8rem;
-      font-weight: bold;
-    }
-
-    .shop-details {
-      flex: 1;
-    }
-
-    .shop-name {
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 0.25rem;
-    }
-
-    .shop-url {
-      font-size: 0.8rem;
-      color: #666;
-    }
-
     .click-date {
-      color: #666;
+      color: #333;
       font-size: 0.9rem;
     }
 
-    .click-status {
-      display: inline-block;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
+    .shop-name {
       font-weight: 500;
-      text-align: center;
+      color: #333;
     }
 
-    .status-tracked {
-      background: #d4edda;
-      color: #155724;
+    .cashback {
+      font-weight: 500;
+      color: #28a745;
     }
 
-    .status-pending {
-      background: #fff3cd;
-      color: #856404;
-    }
-
-    .status-expired {
-      background: #f8d7da;
-      color: #721c24;
+    .click-id {
+      font-family: monospace;
+      color: #666;
+      font-size: 0.85rem;
     }
 
     .no-history {
@@ -300,103 +259,32 @@
     <div class="history-container">
       <div class="history-header">
         <h1>🛍️ Click History</h1>
-        <p>Track your visits to partner stores and earn cashback rewards!</p>
+        <p style="color: #28a745; font-weight: 600;">Detailed history of your last 50 clicks</p>
       </div>
 
-      <div class="history-stats">
-        <div class="stat-card">
-          <div class="stat-number" id="total-clicks">3</div>
-          <div class="stat-label">Total Shop Visits</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="unique-shops">3</div>
-          <div class="stat-label">Unique Shops</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="this-month">2</div>
-          <div class="stat-label">This Month</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="total-earned">$36.50</div>
-          <div class="stat-label">Total Earned</div>
-        </div>
-      </div>
+      <!-- Removed stats cards section -->
 
       <div class="filter-controls">
         <input type="text" id="search-shops" class="filter-input" placeholder="Search shops..." />
-        <select id="status-filter" class="filter-input">
-          <option value="">All Statuses</option>
-          <option value="tracked">Tracked</option>
-          <option value="pending">Pending</option>
-          <option value="expired">Expired</option>
-        </select>
         <input type="date" id="date-from" class="filter-input" />
         <input type="date" id="date-to" class="filter-input" />
       </div>
 
-      <div class="history-controls">
-        <button id="refresh-history" class="btn">🔄 Refresh</button>
-        <button id="clear-history" class="btn btn--cancel">🗑️ Clear History</button>
-        <button id="export-csv" class="btn btn--secondary">📊 Export CSV</button>
-        <button id="export-json" class="btn btn--secondary">📋 Export JSON</button>
-      </div>
+      <!-- Removed history controls section -->
 
       <div id="history-list" class="history-list">
         <div class="history-table-header">
-          <span>Shop</span>
-          <span>Date & Time</span>
-          <span>Status</span>
+          <span>Date</span>
+          <span>Store</span>
+          <span>Click ID</span>
         </div>
         <div id="history-items" class="history-items">
-          <div class="history-item">
-            <div class="shop-info">
-              <div class="shop-icon">A</div>
-              <div class="shop-details">
-                <div class="shop-name">Amazon</div>
-                <div class="shop-url">amazon.com</div>
-              </div>
-            </div>
-            <div class="click-date">
-              <div>12/7/2024</div>
-              <div style="font-size: 0.8rem; color: #888;">2:30 PM</div>
-            </div>
-            <div class="click-status status-tracked">
-              Tracked<br>$12.50
-            </div>
-          </div>
-          
-          <div class="history-item">
-            <div class="shop-info">
-              <div class="shop-icon">E</div>
-              <div class="shop-details">
-                <div class="shop-name">eBay</div>
-                <div class="shop-url">ebay.com</div>
-              </div>
-            </div>
-            <div class="click-date">
-              <div>12/6/2024</div>
-              <div style="font-size: 0.8rem; color: #888;">10:15 AM</div>
-            </div>
-            <div class="click-status status-pending">
-              Pending<br>$8.75
-            </div>
-          </div>
-          
-          <div class="history-item">
-            <div class="shop-info">
-              <div class="shop-icon">B</div>
-              <div class="shop-details">
-                <div class="shop-name">Best Buy</div>
-                <div class="shop-url">bestbuy.com</div>
-              </div>
-            </div>
-            <div class="click-date">
-              <div>12/5/2024</div>
-              <div style="font-size: 0.8rem; color: #888;">4:45 PM</div>
-            </div>
-            <div class="click-status status-tracked">
-              Tracked<br>$15.25
-            </div>
+          <div class="no-history">
+            <div class="no-history-icon">🏪</div>
+            <h3>No clicks yet!</h3>
+            <p style="font-size: 0.9rem; color: #888; margin-top: 0.5rem;">
+              When you visit partner stores through Smartcashly, they'll appear here.
+            </p>
           </div>
         </div>
       </div>
@@ -429,25 +317,8 @@
       });
     });
 
-    // Event listeners for buttons
-    document.getElementById('refresh-history').addEventListener('click', () => {
-      showMessage('History refreshed!', 'success');
-    });
-
-    document.getElementById('clear-history').addEventListener('click', () => {
-      if (confirm('Are you sure you want to clear all history? This action cannot be undone.')) {
-        showMessage('History cleared!', 'success');
-      }
-    });
-
-    document.getElementById('export-csv').addEventListener('click', () => {
-      showMessage('CSV export feature coming soon!', 'info');
-    });
-
-    document.getElementById('export-json').addEventListener('click', () => {
-      showMessage('JSON export feature coming soon!', 'info');
-    });
-
+    // Event listeners removed - no buttons to handle
+    
     document.getElementById('logout-btn').addEventListener('click', async function(e) {
       e.preventDefault();
       try {
