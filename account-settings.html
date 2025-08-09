@@ -5,365 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Account Settings • Smartcashly</title>
   <style>
-    /* Shiny yellow gradient background (no cash rain here) */
-    html, body { 
+    /* shimmering yellow background */
+    html, body {
       background: linear-gradient(135deg,#ffeb3b 0%,#ffd700 25%,#ffeb3b 50%,#fff176 75%,#ffd700 100%) !important;
       background-size: 400% 400% !important;
       animation: shimmer 8s ease-in-out infinite !important;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
     }
-    @keyframes shimmer {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      color: #222;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-      padding: 1rem 1.5rem;
-      background: #008e45 !important;
-      color: #fff;
-    }
-
-    .logo-img {
-      height: 64px;
-      width: auto;
-      flex: 0 0 auto;
-      background: transparent !important;
-    }
-
-    .auth-nav {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      background: #0070f3 !important;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background .18s;
-      border: none;
-      cursor: pointer;
-    }
-    .btn:hover          { background: #0059c1 !important; }
-    .btn--secondary     { background: rgba(255,255,255,.25) !important; }
-    .btn--secondary:hover { background: rgba(255,255,255,.40) !important; }
-    .btn--save { background: #008e45 !important; }
-    .btn--save:hover { background: #006633 !important; }
-    .btn--cancel { background: #6c757d !important; }
-    .btn--cancel:hover { background: #545b62 !important; }
-
-    main {
-      flex: 1 1 auto;
-      padding: 3rem 1rem;
-      max-width: 800px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .settings-container {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-    }
-
-    .settings-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .settings-header h1 {
-      font-size: 2rem;
-      color: #008e45;
-      margin-bottom: 0.5rem;
-    }
-
-    .settings-header p {
-      color: #666;
-      font-size: 1rem;
-    }
-
-    .profile-section {
-      text-align: center;
-      margin-bottom: 2rem;
-      padding: 2rem;
-      border: 2px dashed #ddd;
-      border-radius: 12px;
-      background: rgba(248, 250, 252, 0.8);
-    }
-
-    .current-profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid #008e45;
-      margin: 0 auto 1rem;
-      display: block;
-      object-fit: cover;
-      background: #f0f0f0;
-    }
-
-    .upload-area { margin: 1rem 0; }
-
-    .file-input-wrapper {
-      position: relative;
-      display: inline-block;
-      margin: 1rem;
-    }
-    .file-input { position: absolute; opacity: 0; width: 0; height: 0; }
-    .file-input-label {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: #0070f3;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .file-input-label:hover { background: #0059c1; }
-
-    .upload-info {
-      font-size: 0.875rem;
-      color: #666;
-      margin-top: 0.5rem;
-    }
-
-    .preview-container { margin: 1rem 0; display: none; }
-    .preview-title { font-weight: 700; color: #2e7d32; margin-bottom: .5rem; }
-    .preview-image {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid #ffd700;
-      object-fit: cover;
-      margin: 0 auto;
-      background: #fafafa;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .success-message, .error-message {
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
-      text-align: center;
-      display: none;
-    }
-    .success-message { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-    .error-message   { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-
-    footer {
-      text-align: center;
-      font-size: .875rem;
-      padding: 1rem 0;
-      background: linear-gradient(135deg,#ffeb3b 0%,#ffd700 25%,#ffeb3b 50%,#fff176 75%,#ffd700 100%) !important;
-      background-size: 400% 400% !important;
-      animation: shimmer 8s ease-in-out infinite !important;
-      border-top: 1px solid rgba(0,0,0,0.1);
-    }
+    @keyframes shimmer { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    *,*:before,*:after{box-sizing:border-box;font-family:system-ui,-apple-system,Helvetica,Arial,sans-serif}
+    body{min-height:100vh;display:flex;flex-direction:column;color:#222}
+    header{display:flex;align-items:center;justify-content:space-between;gap:1.25rem;padding:1rem 1.5rem;background:#008e45;color:#fff}
+    .logo-img{height:64px}
+    .btn{display:inline-block;padding:.5rem 1rem;border-radius:6px;background:#0070f3;color:#fff;text-decoration:none;font-weight:600;border:none;cursor:pointer;transition:background .18s}
+    .btn:hover{background:#0059c1}
+    .btn--secondary{background:rgba(255,255,255,.25)}
+    .btn--secondary:hover{background:rgba(255,255,255,.40)}
+    .btn--save{background:#008e45}.btn--save:hover{background:#066b38}
+    .btn--cancel{background:#6c757d}.btn--cancel:hover{background:#545b62}
+    main{flex:1 1 auto;padding:3rem 1rem;max-width:900px;margin:0 auto;width:100%}
+    .card{background:rgba(255,255,255,.95);border-radius:12px;padding:2rem;box-shadow:0 8px 32px rgba(0,0,0,.1);backdrop-filter:blur(10px);margin-bottom:1.5rem}
+    h1{color:#008e45;text-align:center;margin:0 0 .75rem 0}
+    .muted{text-align:center;color:#666;margin-bottom:2rem}
+    /* profile */
+    .profile-block{text-align:center;border:2px dashed #ddd;border-radius:12px;padding:2rem;background:rgba(248,250,252,.8)}
+    .current-pic,.preview-image{width:120px;height:120px;border-radius:50%;object-fit:cover;background:#f0f0f0}
+    .current-pic{border:4px solid #008e45}
+    .preview-image{border:4px solid #ffd700}
+    .file-input{position:absolute;opacity:0;width:0;height:0}
+    .file-label{display:inline-block;padding:.75rem 1.5rem;background:#0070f3;color:#fff;border-radius:8px;cursor:pointer}
+    .preview{display:none;margin-top:1rem}
+    .row{display:flex;gap:1rem;align-items:center}
+    .row > *{flex:1}
+    input[type=password], input[type=email]{padding:.75rem;border:1px solid #ddd;border-radius:6px;font-size:1rem;background:#fff}
+    .msgs{margin-top:1rem}
+    .success{display:none;background:#d4edda;color:#155724;border:1px solid #c3e6cb;padding:1rem;border-radius:8px;text-align:center}
+    .error{display:none;background:#f8d7da;color:#721c24;border:1px solid #f5c6cb;padding:1rem;border-radius:8px;text-align:center}
+    footer{text-align:center;font-size:.875rem;padding:1rem 0;background:linear-gradient(135deg,#ffeb3b 0%,#ffd700 25%,#ffeb3b 50%,#fff176 75%,#ffd700 100%) !important;background-size:400% 400% !important;animation:shimmer 8s ease-in-out infinite !important;border-top:1px solid rgba(0,0,0,.1)}
   </style>
 </head>
-
 <body>
   <header>
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-    <div style="flex:1 1 auto;"></div>
-    <nav class="auth-nav">
-      <a href="index.html" class="btn btn--secondary">Home</a>
-      <a href="#" id="logout-btn" class="btn">Logout</a>
+    <nav>
+      <a class="btn btn--secondary" href="index.html">Home</a>
+      <a class="btn" id="logout-btn" href="#">Logout</a>
     </nav>
   </header>
 
   <main>
-    <div class="settings-container">
-      <div class="settings-header">
-        <h1>Account Settings</h1>
-        <p>Manage your profile and account preferences</p>
-      </div>
+    <div class="card">
+      <h1>Account Settings</h1>
+      <p class="muted">Manage your profile and account preferences</p>
 
-      <!-- Profile Picture -->
-      <div class="profile-section">
-        <h3 style="margin-bottom: 1rem; color: #008e45;">Profile Picture</h3>
+      <!-- Profile picture -->
+      <div class="profile-block">
+        <img id="current-pic" class="current-pic" alt="Profile" />
+        <p id="user-email" style="color:#666;margin:.75rem 0 1rem 0">user@example.com</p>
 
-        <img id="current-profile-pic" src="" alt="Current Profile" class="current-profile-pic" />
-        <p style="color: #666; margin-bottom: 1rem;">
-          <span id="user-email-display">user@example.com</span>
-        </p>
+        <input id="file" class="file-input" type="file" accept="image/*" />
+        <label class="file-label" for="file">📷 Choose New Picture</label>
+        <div style="font-size:.85rem;color:#666;margin-top:.25rem">Supported formats: JPG, PNG, GIF • Max 5MB</div>
 
-        <div class="upload-area">
-          <div class="file-input-wrapper">
-            <input type="file" id="profile-pic-input" class="file-input" accept="image/*" />
-            <label for="profile-pic-input" class="file-input-label">📷 Choose New Picture</label>
-          </div>
-          <div class="upload-info">Supported formats: JPG, PNG, GIF • Max 5MB</div>
-        </div>
-
-        <div id="preview-container" class="preview-container">
-          <div class="preview-title">Preview:</div>
-          <img id="preview-image" class="preview-image" alt="Preview" />
-          <div class="action-buttons">
-            <button id="save-picture" class="btn btn--save">💾 Save Picture</button>
-            <button id="cancel-upload" class="btn btn--cancel" type="button">✖ Cancel</button>
+        <div id="preview" class="preview">
+          <div style="font-weight:700;color:#2e7d32;margin:.75rem 0">Preview:</div>
+          <img id="preview-img" class="preview-image" alt="Preview" />
+          <div class="row" style="justify-content:center;margin-top:1rem;gap:.75rem;flex-wrap:wrap">
+            <button id="save" class="btn btn--save">💾 Save Picture</button>
+            <button id="cancel" class="btn btn--cancel" type="button">✖ Cancel</button>
           </div>
         </div>
 
-        <div id="success-message" class="success-message"></div>
-        <div id="error-message" class="error-message"></div>
+        <div class="msgs">
+          <div id="ok" class="success"></div>
+          <div id="err" class="error"></div>
+        </div>
       </div>
     </div>
-  </main>
 
-  <footer>© <span id="year"></span> Smartcashly.</footer>
-
-  <!-- Firebase helpers -->
-  <script type="module" src="auth.js"></script>
-
-  <!-- Page logic -->
-  <script type="module">
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Firebase SDKs
-    import {
-      getAuth, onAuthStateChanged, updateProfile
-    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-    import {
-      getStorage, ref as storageRef, uploadBytes, getDownloadURL
-    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
-
-    const auth = getAuth();
-    const storage = getStorage();
-
-    let currentUser = null;
-    let selectedFile = null;
-
-    // Require auth
-    onAuthStateChanged(auth, (user) => {
-      if (!user) return (window.location.href = 'login.html');
-      currentUser = user;
-      populateUser(user);
-    });
-
-    function populateUser(user) {
-      document.getElementById('user-email-display').textContent = user.email;
-
-      // Use existing photoURL or generate a simple placeholder
-      const img = document.getElementById('current-profile-pic');
-      if (user.photoURL) {
-        img.src = user.photoURL;
-      } else {
-        const initial = (user.email || '?').charAt(0).toUpperCase();
-        img.src =
-          `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='60' fill='%23008e45'/><text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>${initial}</text></svg>`;
-      }
-    }
-
-    // Pick file → preview
-    document.getElementById('profile-pic-input').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      if (!file.type.startsWith('image/')) return showError('Please select an image file.');
-      if (file.size > 5 * 1024 * 1024)   return showError('File too large (max 5MB).');
-
-      selectedFile = file;
-
-      const reader = new FileReader();
-      reader.onload = ev => {
-        document.getElementById('preview-image').src = ev.target.result;
-        document.getElementById('preview-container').style.display = 'block';
-      };
-      reader.readAsDataURL(file);
-    });
-
-    // Save → upload to Storage → set photoURL to download URL
-    document.getElementById('save-picture').addEventListener('click', async function () {
-      if (!selectedFile || !currentUser) return;
-
-      this.textContent = '⏳ Uploading…';
-      this.disabled = true;
-
-      try {
-        const path = `profile-pictures/${currentUser.uid}/${Date.now()}-${selectedFile.name}`;
-        const ref = storageRef(storage, path);
-        const metadata = { contentType: selectedFile.type, cacheControl: 'public,max-age=3600' };
-
-        await uploadBytes(ref, selectedFile, metadata);
-        const url = await getDownloadURL(ref);
-
-        await updateProfile(currentUser, { photoURL: url });
-
-        // Update UI
-        document.getElementById('current-profile-pic').src = url;
-        document.getElementById('preview-container').style.display = 'none';
-        document.getElementById('profile-pic-input').value = '';
-        selectedFile = null;
-        showSuccess('Profile picture updated successfully!');
-      } catch (err) {
-        console.error(err);
-        showError(err.message || 'Upload failed');
-      } finally {
-        this.textContent = '💾 Save Picture';
-        this.disabled = false;
-      }
-    });
-
-    // Cancel preview/upload
-    document.getElementById('cancel-upload').addEventListener('click', () => {
-      document.getElementById('preview-container').style.display = 'none';
-      document.getElementById('profile-pic-input').value = '';
-      selectedFile = null;
-    });
-
-    // Logout
-    document.getElementById('logout-btn').addEventListener('click', async (e) => {
-      e.preventDefault();
-      try { await smartAuth.signOut(); } catch {}
-      window.location.href = 'index.html';
-    });
-
-    function showSuccess(msg) {
-      const ok = document.getElementById('success-message');
-      const bad = document.getElementById('error-message');
-      ok.textContent = `✅ ${msg}`;
-      ok.style.display = 'block';
-      bad.style.display = 'none';
-    }
-    function showError(msg) {
-      const ok = document.getElementById('success-message');
-      const bad = document.getElementById('error-message');
-      bad.textContent = `❌ ${msg}`;
-      bad.style.display = 'block';
-      ok.style.display = 'none';
-    }
-  </script>
-</body>
-</html>
+    <!-- Change password -->
+    <div class="card">
+      <h2 style="color:#008e45;margin-bottom:1rem">Change Password</h2>
+      <div class="row" style="flex-direction:column;gap:.75rem;max-width:520px;margin:0 auto">
+        <input id="curPass" type="password" placeholder="Current password" autocomplete="current-password" />
+        <input id="newPass" type="password" placeholder="New password (min 6 chars)" autocomplete="new-password" />
