@@ -119,6 +119,7 @@
       color: #c00;
       font-size: 0.875rem;
       margin-top: 0.5rem;
+      font-weight: 600;
     }
 
     footer {
@@ -260,21 +261,25 @@
         window.location.href = 'index.html';
       } catch (err) {
         lg_msg.style.color = 'crimson';
-        let errorMessage = "ERROR: An error occurred. Please try again.";
+        console.log('Firebase error code:', err.code); // For debugging
         
-        if (err.code.includes("user-not-found")) {
-          errorMessage = "ERROR: No account found with this email";
-        } else if (err.code.includes("wrong-password")) {
-          errorMessage = "ERROR: Incorrect password";
-        } else if (err.code.includes("invalid-email")) {
-          errorMessage = "ERROR: Invalid email address";
-        } else if (err.code.includes("too-many-requests")) {
-          errorMessage = "ERROR: Too many failed attempts. Try again later";
+        // Specific error messages
+        if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-email') {
+          lg_msg.textContent = "ERROR: The email doesn't exist";
+        } else if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+          lg_msg.textContent = "ERROR: Password is wrong. Please try again";
+        } else if (err.code === 'auth/too-many-requests') {
+          lg_msg.textContent = "ERROR: Too many failed attempts. Try again later";
+        } else if (err.code === 'auth/user-disabled') {
+          lg_msg.textContent = "ERROR: This account has been disabled";
+        } else if (err.code === 'auth/network-request-failed') {
+          lg_msg.textContent = "ERROR: Network error. Check your connection";
+        } else {
+          lg_msg.textContent = "ERROR: An error occurred. Please try again";
         }
-        
-        lg_msg.textContent = errorMessage;
       }
     });
   </script>
 </body>
+</html>
 </html>
