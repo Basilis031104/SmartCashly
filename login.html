@@ -261,12 +261,21 @@
         window.location.href = 'index.html';
       } catch (err) {
         lg_msg.style.color = 'crimson';
-        console.log('Firebase error code:', err.code); // For debugging
+        console.log('Full Firebase error:', err); // For debugging
+        console.log('Firebase error code:', err.code);
+        console.log('Firebase error message:', err.message);
         
-        // Specific error messages
-        if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-email') {
+        // Specific error messages - updated with more error codes
+        if (err.code === 'auth/user-not-found' || 
+            err.code === 'auth/invalid-email' ||
+            err.message?.includes('user-not-found') ||
+            err.message?.includes('no user record')) {
           lg_msg.textContent = "ERROR: The email doesn't exist";
-        } else if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+        } else if (err.code === 'auth/wrong-password' || 
+                   err.code === 'auth/invalid-credential' ||
+                   err.code === 'auth/invalid-login-credentials' ||
+                   err.message?.includes('wrong-password') ||
+                   err.message?.includes('invalid-credential')) {
           lg_msg.textContent = "ERROR: Password is wrong. Please try again";
         } else if (err.code === 'auth/too-many-requests') {
           lg_msg.textContent = "ERROR: Too many failed attempts. Try again later";
@@ -275,11 +284,11 @@
         } else if (err.code === 'auth/network-request-failed') {
           lg_msg.textContent = "ERROR: Network error. Check your connection";
         } else {
-          lg_msg.textContent = "ERROR: An error occurred. Please try again";
+          // Show the actual error code for debugging
+          lg_msg.textContent = `ERROR: ${err.code || 'Unknown error'}. Please try again`;
         }
       }
     });
   </script>
 </body>
-</html>
 </html>
