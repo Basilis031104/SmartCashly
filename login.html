@@ -265,18 +265,23 @@
         console.log('Firebase error code:', err.code);
         console.log('Firebase error message:', err.message);
         
-        // Specific error messages - updated with more error codes
+        // Specific error messages
         if (err.code === 'auth/user-not-found' || 
-            err.code === 'auth/invalid-email' ||
             err.message?.includes('user-not-found') ||
             err.message?.includes('no user record')) {
           lg_msg.textContent = "ERROR: The email doesn't exist";
+        } else if (err.code === 'auth/invalid-email' ||
+                   err.message?.includes('invalid-email') ||
+                   err.message?.includes('badly formatted')) {
+          lg_msg.textContent = "ERROR: Please enter a valid email address";
         } else if (err.code === 'auth/wrong-password' || 
-                   err.code === 'auth/invalid-credential' ||
-                   err.code === 'auth/invalid-login-credentials' ||
-                   err.message?.includes('wrong-password') ||
-                   err.message?.includes('invalid-credential')) {
+                   err.message?.includes('wrong-password')) {
           lg_msg.textContent = "ERROR: Password is wrong. Please try again";
+        } else if (err.code === 'auth/invalid-credential' ||
+                   err.code === 'auth/invalid-login-credentials') {
+          // For security, Firebase often returns this for both wrong email and wrong password
+          // We'll show a generic message that covers both cases
+          lg_msg.textContent = "ERROR: Invalid email or password. Please check and try again";
         } else if (err.code === 'auth/too-many-requests') {
           lg_msg.textContent = "ERROR: Too many failed attempts. Try again later";
         } else if (err.code === 'auth/user-disabled') {
