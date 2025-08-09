@@ -489,22 +489,37 @@
 
         // Get Firebase Storage reference
         const storage = getStorage();
-        const imageRef = ref(storage, `profile_pictures/${currentUser.uid}/profile.jpg`);
         
-        // Upload the file
-        console.log('Uploading file to Firebase Storage...');
-        const snapshot = await uploadBytes(imageRef, selectedFile);
-        console.log('File uploaded successfully');
+        // Create a unique filename to avoid conflicts
+        const timestamp = Date.now();
+        const imageRef = ref(storage, `profile_pictures/${currentUser.uid}/profile_${timestamp}.jpg`);
+        
+        console.log('Starting upload to Firebase Storage...');
+        console.log('Storage reference:', imageRef.fullPath);
+        
+        // Upload the file with metadata
+        const metadata = {
+          contentType: selectedFile.type,
+          customMetadata: {
+            uploadedBy: currentUser.uid,
+            uploadedAt: new Date().toISOString()
+          }
+        };
+        
+        const snapshot = await uploadBytes(imageRef, selectedFile, metadata);
+        console.log('File uploaded successfully:', snapshot);
         
         // Get the download URL
+        console.log('Getting download URL...');
         const downloadURL = await getDownloadURL(snapshot.ref);
-        console.log('Download URL:', downloadURL);
+        console.log('Download URL obtained:', downloadURL);
         
         // Update user's Firebase profile with the new photo URL
+        console.log('Updating user profile...');
         await updateProfile(currentUser, {
           photoURL: downloadURL
         });
-        console.log('Profile updated with new photo URL');
+        console.log('Profile updated successfully');
         
         // Update the displayed image
         document.getElementById('current-profile-pic').src = downloadURL;
@@ -518,8 +533,19 @@
         selectedFile = null;
 
       } catch (error) {
-        console.error('Error uploading picture:', error);
-        showError(`Error uploading picture: ${error.message}`);
+        console.error('Detailed error uploading picture:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        
+        if (error.code === 'storage/unauthorized') {
+          showError('Permission denied. Please check Firebase Storage rules.');
+        } else if (error.code === 'storage/cors') {
+          showError('CORS error. Storage not properly configured.');
+        } else if (error.message.includes('CORS')) {
+          showError('Upload blocked by CORS policy. Please check Firebase Storage settings.');
+        } else {
+          showError(`Upload failed: ${error.message}`);
+        }
       } finally {
         this.textContent = '💾 Save Picture';
         this.disabled = false;
