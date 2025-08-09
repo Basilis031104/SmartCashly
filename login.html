@@ -281,7 +281,7 @@
           // We'll show a generic message that covers both cases
           lg_msg.textContent = "ERROR: Invalid email or password. Please try again";
         } else if (err.code === 'auth/too-many-requests') {
-          lg_msg.textContent = "ERROR: Too many failed attempts. Try again later";
+          lg_msg.textContent = "ERROR: Too many failed attempts. Try again later.";
         } else if (err.code === 'auth/user-disabled') {
           lg_msg.textContent = "ERROR: This account has been disabled";
         } else if (err.code === 'auth/network-request-failed') {
