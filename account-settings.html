@@ -167,6 +167,10 @@
     .preview-container {
       margin: 1rem 0;
       display: none;
+      padding: 1rem;
+      border: 2px solid #008e45;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
     }
 
     .preview-image {
@@ -175,7 +179,8 @@
       border-radius: 50%;
       border: 4px solid #ffd700;
       object-fit: cover;
-      margin: 0 auto;
+      margin: 0 auto 1rem;
+      display: block;
     }
 
     .action-buttons {
@@ -201,7 +206,7 @@
       background: #545b62 !important;
     }
 
-    .success-message, .error-message {
+    .message {
       padding: 1rem;
       border-radius: 8px;
       margin: 1rem 0;
@@ -209,13 +214,13 @@
       display: none;
     }
 
-    .success-message {
+    .success {
       background: #d4edda;
       color: #155724;
       border: 1px solid #c3e6cb;
     }
 
-    .error-message {
+    .error {
       background: #f8d7da;
       color: #721c24;
       border: 1px solid #f5c6cb;
@@ -238,45 +243,6 @@
       background-size: 400% 400% !important;
       animation: shimmer 8s ease-in-out infinite !important;
       border-top: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .avatar-options {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 1rem;
-      margin: 1rem 0;
-      max-width: 400px;
-      margin: 1rem auto;
-    }
-
-    .avatar-option {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 3px solid transparent;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      background: #f0f0f0;
-    }
-
-    .avatar-option:hover {
-      border-color: #0070f3;
-      transform: scale(1.05);
-    }
-
-    .avatar-option.selected {
-      border-color: #008e45;
-      background: #e8f5e8;
-    }
-
-    .avatar-option.color-avatar {
-      color: white;
-      font-weight: bold;
-      font-size: 2rem;
     }
   </style>
 </head>
@@ -328,13 +294,7 @@
           </div>
         </div>
 
-        <div id="success-message" class="success-message">
-          ✅ Profile picture updated successfully!
-        </div>
-        
-        <div id="error-message" class="error-message">
-          ❌ Error updating profile picture. Please try again.
-        </div>
+        <div id="message" class="message"></div>
       </div>
 
       <!-- Password Change Section -->
@@ -363,13 +323,7 @@
           <button type="submit" class="btn btn--save" style="width: 100%;">🔐 Change Password</button>
         </form>
         
-        <div id="password-success" class="success-message">
-          ✅ Password changed successfully!
-        </div>
-        
-        <div id="password-error" class="error-message">
-          ❌ Error changing password. Please try again.
-        </div>
+        <div id="password-message" class="message"></div>
       </div>
     </div>
   </main>
@@ -378,29 +332,250 @@
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
 
-  <script type="module" src="auth.js"></script>
+  <!-- Load Firebase first -->
   <script type="module">
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    // Import Firebase functions
-    import { getAuth, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    // Import Firebase functions directly
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { 
+      getAuth, 
+      onAuthStateChanged, 
+      updateProfile,
+      EmailAuthProvider,
+      reauthenticateWithCredential,
+      updatePassword,
+      signOut
+    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCHjsbAQcjiTv9obNpwjb3JF0a59-D7uhI",
+      authDomain: "smartcashly.firebaseapp.com",
+      projectId: "smartcashly",
+      storageBucket: "smartcashly.appspot.com",
+      messagingSenderId: "381392374609",
+      appId: "1:381392374609:web:f500a5e781af3fd45b13c"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    
     let currentUser = null;
     let selectedFile = null;
 
-    // Check if user is logged in
-    window.addEventListener('load', () => {
-      const auth = getAuth();
+    // Set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, setting up event listeners');
+      
+      // Check authentication
       onAuthStateChanged(auth, (user) => {
+        console.log('Auth state changed:', user ? user.email : 'No user');
         if (user) {
           currentUser = user;
           loadUserProfile(user);
+          setupEventListeners();
         } else {
-          // Redirect to login if not authenticated
           window.location.href = 'login.html';
         }
       });
     });
+
+    function setupEventListeners() {
+      console.log('Setting up event listeners');
+      
+      // File input handler
+      const fileInput = document.getElementById('profile-pic-input');
+      if (fileInput) {
+        fileInput.addEventListener('change', handleFileSelect);
+        console.log('File input listener added');
+      } else {
+        console.error('File input not found');
+      }
+
+      // Save button handler
+      const saveBtn = document.getElementById('save-picture');
+      if (saveBtn) {
+        saveBtn.addEventListener('click', handleSavePicture);
+        console.log('Save button listener added');
+      }
+
+      // Cancel button handler
+      const cancelBtn = document.getElementById('cancel-upload');
+      if (cancelBtn) {
+        cancelBtn.addEventListener('click', handleCancelUpload);
+        console.log('Cancel button listener added');
+      }
+
+      // Logout handler
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
+      }
+
+      // Password form handler
+      const passwordForm = document.getElementById('password-form');
+      if (passwordForm) {
+        passwordForm.addEventListener('submit', handlePasswordChange);
+      }
+    }
+
+    function handleFileSelect(event) {
+      console.log('File input changed');
+      const file = event.target.files[0];
+      
+      if (file) {
+        console.log('File selected:', file.name, file.size, file.type);
+        
+        // Validate file size
+        if (file.size > 5 * 1024 * 1024) {
+          showMessage('File size must be less than 5MB', 'error');
+          return;
+        }
+
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+          showMessage('Please select a valid image file', 'error');
+          return;
+        }
+
+        selectedFile = file;
+        showPreview(file);
+      } else {
+        console.log('No file selected');
+      }
+    }
+
+    function showPreview(file) {
+      console.log('Showing preview');
+      const previewContainer = document.getElementById('preview-container');
+      const previewImage = document.getElementById('preview-image');
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        console.log('File loaded, showing preview');
+        previewImage.src = e.target.result;
+        previewContainer.style.display = 'block';
+      };
+      reader.onerror = function() {
+        console.error('Error reading file');
+        showMessage('Error reading file', 'error');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function handleSavePicture() {
+      console.log('Save picture clicked');
+      
+      if (!selectedFile || !currentUser) {
+        showMessage('Please select a file first', 'error');
+        return;
+      }
+
+      const saveBtn = document.getElementById('save-picture');
+      const originalText = saveBtn.textContent;
+      
+      try {
+        saveBtn.textContent = '⏳ Uploading...';
+        saveBtn.disabled = true;
+
+        console.log('Resizing image...');
+        const resizedImage = await resizeImage(selectedFile, 150, 150);
+        
+        console.log('Updating Firebase profile...');
+        await updateProfile(currentUser, {
+          photoURL: resizedImage
+        });
+        
+        console.log('Profile updated successfully');
+        
+        // Update display
+        document.getElementById('current-profile-pic').src = resizedImage;
+        document.getElementById('preview-container').style.display = 'none';
+        document.getElementById('profile-pic-input').value = '';
+        selectedFile = null;
+        
+        showMessage('Profile picture updated successfully!', 'success');
+
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        showMessage('Error updating profile: ' + error.message, 'error');
+      } finally {
+        saveBtn.textContent = originalText;
+        saveBtn.disabled = false;
+      }
+    }
+
+    function handleCancelUpload() {
+      console.log('Cancel upload clicked');
+      document.getElementById('preview-container').style.display = 'none';
+      document.getElementById('profile-pic-input').value = '';
+      selectedFile = null;
+      showMessage('Upload cancelled', 'success');
+    }
+
+    async function handleLogout(e) {
+      e.preventDefault();
+      try {
+        await signOut(auth);
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+    }
+
+    async function handlePasswordChange(e) {
+      e.preventDefault();
+      
+      const currentPassword = document.getElementById('current-password').value;
+      const newPassword = document.getElementById('new-password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      
+      if (newPassword !== confirmPassword) {
+        showPasswordMessage('New passwords do not match', 'error');
+        return;
+      }
+      
+      if (newPassword.length < 6) {
+        showPasswordMessage('New password must be at least 6 characters long', 'error');
+        return;
+      }
+      
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      
+      try {
+        submitBtn.textContent = '⏳ Changing Password...';
+        submitBtn.disabled = true;
+        
+        // Re-authenticate
+        const credential = EmailAuthProvider.credential(currentUser.email, currentPassword);
+        await reauthenticateWithCredential(currentUser, credential);
+        
+        // Update password
+        await updatePassword(currentUser, newPassword);
+        
+        showPasswordMessage('Password changed successfully!', 'success');
+        e.target.reset();
+        
+      } catch (error) {
+        console.error('Password change error:', error);
+        
+        let message = 'Error changing password';
+        if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+          message = 'Current password is incorrect';
+        } else if (error.code === 'auth/weak-password') {
+          message = 'New password is too weak';
+        }
+        
+        showPasswordMessage(message, 'error');
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    }
 
     function loadUserProfile(user) {
       const emailDisplay = document.getElementById('user-email-display');
@@ -408,132 +583,24 @@
       
       emailDisplay.textContent = user.email;
       
-      // Check if user has a profile picture URL in Firebase
       if (user.photoURL) {
         currentProfilePic.src = user.photoURL;
       } else {
-        // Default avatar with user's initial
         const initial = user.email.charAt(0).toUpperCase();
         currentProfilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='60' fill='%23008e45'/><text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>${initial}</text></svg>`;
       }
     }
 
-    // File input handling with debugging
-    document.getElementById('profile-pic-input').addEventListener('change', function(e) {
-      console.log('File input changed'); // Debug log
-      const file = e.target.files[0];
-      
-      if (file) {
-        console.log('File selected:', file.name, file.size); // Debug log
-        
-        // Validate file size (5MB max)
-        if (file.size > 5 * 1024 * 1024) {
-          console.log('File too large'); // Debug log
-          showError('File size must be less than 5MB');
-          return;
-        }
-
-        // Validate file type
-        if (!file.type.startsWith('image/')) {
-          console.log('Invalid file type'); // Debug log
-          showError('Please select a valid image file');
-          return;
-        }
-
-        console.log('File validation passed, showing preview'); // Debug log
-        selectedFile = file;
-        showPreview(file);
-      } else {
-        console.log('No file selected'); // Debug log
-      }
-    });
-
-    function showPreview(file) {
-      console.log('Showing preview for:', file.name); // Debug log
-      const previewContainer = document.getElementById('preview-container');
-      const previewImage = document.getElementById('preview-image');
-      
-      if (!previewContainer || !previewImage) {
-        console.error('Preview elements not found'); // Debug log
-        return;
-      }
-      
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        console.log('File read complete, displaying preview'); // Debug log
-        previewImage.src = e.target.result;
-        previewContainer.style.display = 'block';
-      };
-      reader.onerror = function(error) {
-        console.error('Error reading file:', error); // Debug log
-        showError('Error reading file. Please try again.');
-      };
-      reader.readAsDataURL(file);
-    }
-
-    // Save picture using a simple base64 storage solution
-    document.getElementById('save-picture').addEventListener('click', async function() {
-      console.log('Save picture clicked'); // Debug log
-      
-      if (!selectedFile || !currentUser) {
-        console.log('No file selected or no user logged in'); // Debug log
-        showError('Please select a file first');
-        return;
-      }
-
-      try {
-        this.textContent = '⏳ Uploading...';
-        this.disabled = true;
-
-        console.log('Starting image resize...'); // Debug log
-        // For small images, we can use a data URL approach
-        // First, let's resize the image to reduce size
-        const resizedImage = await resizeImage(selectedFile, 200, 200);
-        
-        console.log('Image resized, updating Firebase profile...'); // Debug log
-        
-        // Update user's Firebase profile with resized base64 image
-        await updateProfile(currentUser, {
-          photoURL: resizedImage
-        });
-        
-        console.log('Profile updated successfully'); // Debug log
-        
-        // Update the displayed image
-        document.getElementById('current-profile-pic').src = resizedImage;
-        
-        // Hide preview and show success
-        document.getElementById('preview-container').style.display = 'none';
-        showSuccess('Profile picture updated successfully!');
-        
-        // Reset file input
-        document.getElementById('profile-pic-input').value = '';
-        selectedFile = null;
-
-      } catch (error) {
-        console.error('Error updating profile:', error); // Debug log
-        showError(`Error updating profile: ${error.message}`);
-      } finally {
-        this.textContent = '💾 Save Picture';
-        this.disabled = false;
-      }
-    });
-
-    // Helper function to resize image to reduce file size
     function resizeImage(file, maxWidth, maxHeight) {
       return new Promise((resolve, reject) => {
-        console.log('Starting image resize process'); // Debug log
-        
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         const img = new Image();
         
         img.onload = function() {
-          console.log('Image loaded for resize:', img.width, 'x', img.height); // Debug log
-          
-          // Calculate new dimensions
           let { width, height } = img;
           
+          // Calculate new dimensions
           if (width > height) {
             if (width > maxWidth) {
               height = (height * maxWidth) / width;
@@ -546,131 +613,46 @@
             }
           }
           
-          console.log('New dimensions:', width, 'x', height); // Debug log
-          
-          // Set canvas dimensions and draw resized image
+          // Resize
           canvas.width = width;
           canvas.height = height;
           ctx.drawImage(img, 0, 0, width, height);
           
-          // Convert to base64 with compression
-          const resizedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
-          console.log('Image resized and converted to base64'); // Debug log
+          // Convert to base64 with high compression
+          const resizedDataUrl = canvas.toDataURL('image/jpeg', 0.5);
           resolve(resizedDataUrl);
         };
         
-        img.onerror = function(error) {
-          console.error('Error loading image for resize:', error); // Debug log
-          reject(error);
-        };
+        img.onerror = reject;
         
-        // Load the image
         const reader = new FileReader();
-        reader.onload = function(e) {
-          console.log('File read for resize, loading into image element'); // Debug log
-          img.src = e.target.result;
-        };
-        reader.onerror = function(error) {
-          console.error('Error reading file for resize:', error); // Debug log
-          reject(error);
-        };
+        reader.onload = e => img.src = e.target.result;
+        reader.onerror = reject;
         reader.readAsDataURL(file);
       });
     }
 
-    // Cancel upload
-    document.getElementById('cancel-upload').addEventListener('click', function() {
-      console.log('Cancel upload clicked'); // Debug log
-      document.getElementById('preview-container').style.display = 'none';
-      document.getElementById('profile-pic-input').value = '';
-      selectedFile = null;
+    function showMessage(text, type) {
+      const messageEl = document.getElementById('message');
+      messageEl.textContent = text;
+      messageEl.className = `message ${type}`;
+      messageEl.style.display = 'block';
       
-      // Restore original profile picture
-      if (currentUser) {
-        loadUserProfile(currentUser);
-      }
-    });
+      setTimeout(() => {
+        messageEl.style.display = 'none';
+      }, 4000);
+    }
 
-    // Logout functionality
-    document.getElementById('logout-btn').addEventListener('click', async function(e) {
-      e.preventDefault();
-      try {
-        if (typeof smartAuth !== 'undefined') {
-          await smartAuth.signOut();
-          window.location.href = 'index.html';
-        }
-      } catch (err) {
-        console.error('Logout error:', err);
-      }
-    });
-
-    // Password change form handling
-    document.getElementById('password-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
+    function showPasswordMessage(text, type) {
+      const messageEl = document.getElementById('password-message');
+      messageEl.textContent = text;
+      messageEl.className = `message ${type}`;
+      messageEl.style.display = 'block';
       
-      const currentPassword = document.getElementById('current-password').value;
-      const newPassword = document.getElementById('new-password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-      
-      // Clear previous messages
-      document.getElementById('password-success').style.display = 'none';
-      document.getElementById('password-error').style.display = 'none';
-      
-      // Validate passwords match
-      if (newPassword !== confirmPassword) {
-        showPasswordError('New passwords do not match');
-        return;
-      }
-      
-      // Validate password length
-      if (newPassword.length < 6) {
-        showPasswordError('New password must be at least 6 characters long');
-        return;
-      }
-      
-      try {
-        // Change button text to show loading
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = '⏳ Changing Password...';
-        submitBtn.disabled = true;
-        
-        // Import Firebase auth functions
-        const { EmailAuthProvider, reauthenticateWithCredential, updatePassword } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js');
-        
-        if (!currentUser) {
-          throw new Error('No user logged in');
-        }
-        
-        // Re-authenticate user with current password
-        const credential = EmailAuthProvider.credential(currentUser.email, currentPassword);
-        await reauthenticateWithCredential(currentUser, credential);
-        
-        // Update password
-        await updatePassword(currentUser, newPassword);
-        
-        // Success
-        showPasswordSuccess('Password changed successfully!');
-        
-        // Clear form
-        this.reset();
-        
-      } catch (error) {
-        console.error('Password change error:', error);
-        
-        if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
-          showPasswordError('Current password is incorrect');
-        } else if (error.code === 'auth/weak-password') {
-          showPasswordError('New password is too weak');
-        } else if (error.code === 'auth/requires-recent-login') {
-          showPasswordError('Please log out and log back in before changing your password');
-        } else if (error.code === 'auth/too-many-requests') {
-          showPasswordError('Too many failed attempts. Please try again later');
-        } else {
-          showPasswordError(`Error: ${error.message || 'Please try again'}`);
-        }
-      } finally {
-        // Reset button
-        const submitBtn = this.querySelector('button[type="submit"]');
-        submitBtn.textContent = '🔐 Change Password';
-        submitBtn.disabled = false;
+      setTimeout(() => {
+        messageEl.style.display = 'none';
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
