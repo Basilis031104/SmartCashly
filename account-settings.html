@@ -69,7 +69,7 @@
             <br>
             <button class="btn" id="upload-btn">Upload Picture</button>
             <p style="color: #666; font-size: 14px; margin-top: 10px;">
-                Max file size: 500KB • JPG, PNG only
+                Max file size: 5MB • JPG, PNG, GIF
             </p>
         </div>
 
@@ -106,86 +106,4 @@
         });
 
         document.getElementById('upload-btn').onclick = async () => {
-            const fileInput = document.getElementById('file-input');
-            const file = fileInput.files[0];
-            
-            if (!file) {
-                showError('Please select a file first');
-                return;
-            }
-            
-            if (file.size > 500000) { // 500KB
-                showError('File too large. Please choose a smaller image.');
-                return;
-            }
-            
-            if (!file.type.startsWith('image/')) {
-                showError('Please select an image file (JPG or PNG)');
-                return;
-            }
-            
-            try {
-                document.getElementById('upload-btn').textContent = 'Uploading...';
-                
-                // Compress image
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                const img = new Image();
-                
-                img.onload = async () => {
-                    // Resize to 150x150 max
-                    canvas.width = 150;
-                    canvas.height = 150;
-                    ctx.drawImage(img, 0, 0, 150, 150);
-                    
-                    const compressedImage = canvas.toDataURL('image/jpeg', 0.6);
-                    
-                    await updateProfile(currentUser, {
-                        photoURL: compressedImage
-                    });
-                    
-                    document.getElementById('profile-pic').src = compressedImage;
-                    showSuccess('Profile picture updated successfully!');
-                    fileInput.value = '';
-                    document.getElementById('upload-btn').textContent = 'Upload Picture';
-                };
-                
-                const reader = new FileReader();
-                reader.onload = (e) => img.src = e.target.result;
-                reader.readAsDataURL(file);
-                
-            } catch (error) {
-                showError('Upload failed: ' + error.message);
-                document.getElementById('upload-btn').textContent = 'Upload Picture';
-            }
-        };
-
-        document.getElementById('logout-btn').onclick = async () => {
-            try {
-                await smartAuth.signOut();
-                window.location.href = 'index.html';
-            } catch (err) {
-                console.error('Logout error:', err);
-            }
-        };
-
-        function showSuccess(message) {
-            const success = document.getElementById('success-msg');
-            const error = document.getElementById('error-msg');
-            error.style.display = 'none';
-            success.textContent = message;
-            success.style.display = 'block';
-            setTimeout(() => success.style.display = 'none', 4000);
-        }
-
-        function showError(message) {
-            const success = document.getElementById('success-msg');
-            const error = document.getElementById('error-msg');
-            success.style.display = 'none';
-            error.textContent = message;
-            error.style.display = 'block';
-            setTimeout(() => error.style.display = 'none', 4000);
-        }
-    </script>
-</body>
-</html>
+            const fileInput = document.getElementById('fi
