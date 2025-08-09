@@ -574,13 +574,8 @@
         userProfile.style.display = 'flex';
         userEmail.textContent = user.email;
         
-        // Check for locally stored profile picture first
-        const userKey = `profile_pic_${user.email}`;
-        const storedImage = localStorage.getItem(userKey);
-        
-        if (storedImage) {
-          profilePic.src = storedImage;
-        } else if (user.photoURL) {
+        // Load profile picture from Firebase (syncs across devices)
+        if (user.photoURL) {
           profilePic.src = user.photoURL;
         } else {
           // Default avatar with user's initial
