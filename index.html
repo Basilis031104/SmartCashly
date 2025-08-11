@@ -322,7 +322,7 @@
       padding: 0.5rem 0;
       min-width: 160px;
       display: none !important;
-      z-index: 10000 !important;
+      z-index: 99999 !important;
       opacity: 0;
       transform: translateY(-10px);
       transition: all 0.2s ease;
@@ -332,6 +332,18 @@
       display: block !important;
       opacity: 1 !important;
       transform: translateY(0) !important;
+      z-index: 99999 !important;
+    }
+
+    /* Ensure main content stays below dropdown */
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Ensure particles stay in background */
+    body::before, body::after {
+      z-index: 0;
     }
 
     .profile-dropdown a {
