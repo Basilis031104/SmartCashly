@@ -318,11 +318,11 @@
       right: 0;
       background: white !important;
       border-radius: 8px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25) !important;
       padding: 0.5rem 0;
       min-width: 160px;
-      display: none;
-      z-index: 10000;
+      display: none !important;
+      z-index: 10000 !important;
       opacity: 0;
       transform: translateY(-10px);
       transition: all 0.2s ease;
@@ -649,7 +649,7 @@
         <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
         <div class="profile-container" style="position: relative; z-index: 1001;">
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
-          <div class="profile-dropdown" id="profile-dropdown" style="position: absolute; top: 50px; right: 0; z-index: 10000; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); padding: 0.5rem 0; min-width: 160px; display: none;">
+          <div class="profile-dropdown" id="profile-dropdown">
             <a href="#" id="account-settings">Account Settings</a>
             <a href="#" id="click-history">Click History</a>
             <a href="#" id="logout-btn">Logout</a>
