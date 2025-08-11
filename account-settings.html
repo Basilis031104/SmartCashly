@@ -380,6 +380,59 @@
       backdrop-filter: blur(15px);
       border: 3px solid #008e45;
     }
+
+    footer {
+      text-align: center;
+      font-size: .875rem;
+      padding: 1rem 0;
+      background: #000000 !important;  /* Black background */
+      color: #ffffff !important;       /* White text */
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    /* Make footer text appear above particles with white color */
+    footer * {
+      position: relative;
+      z-index: 3;
+      color: #ffffff !important;  /* Ensure all text is white */
+    }
+
+    /* Enhanced footer particles for black background */
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: footerParticles 15s ease-in-out infinite;
+    }
+
+    @keyframes footerParticles {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      50% { 
+        background-position: 15% 15%, 20% 20%, 25% 25%, 30% 30%;
+        opacity: 0.8;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
   </style>
 </head>
 
@@ -464,6 +517,10 @@
     </div>
   </main>
 
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
+
   <script type="module" src="auth.js"></script>
   <script type="module">
     // Import Firebase functions directly
@@ -498,6 +555,9 @@
     // Wait for DOM to be ready
     window.addEventListener('load', function() {
       console.log('DOM loaded, setting up event listeners');
+      
+      // Set the year to 2025
+      document.getElementById('year').textContent = 2025;
       
       // Check authentication
       onAuthStateChanged(auth, (user) => {
@@ -766,4 +826,3 @@
   </script>
 </body>
 </html>
-
