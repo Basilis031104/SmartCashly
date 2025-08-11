@@ -342,8 +342,8 @@
       text-align: center;
       font-size: .875rem;
       padding: 1rem 0;
-      background: rgba(255, 255, 255, 0.1) !important;
-      backdrop-filter: blur(10px);
+      background: #000000 !important;  /* Black background */
+      color: #ffffff !important;       /* White text */
       border-top: 1px solid rgba(255, 215, 0, 0.3);
       position: relative;
       z-index: 10;
@@ -354,6 +354,7 @@
     footer * {
       position: relative;
       z-index: 3;
+      color: #ffffff !important;
     }
 
     /* Enhanced footer particles */
@@ -365,14 +366,14 @@
       width: 100%;
       height: 100%;
       background-image: 
-        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.6) 1px, transparent 1px),
-        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.4) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.4) 1px, transparent 1px);
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
       background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
       pointer-events: none !important;
       z-index: 1;
-      animation: footerParticles 15s ease-in-out infinite;
+      animation: footerParticles 20s ease-in-out infinite;
     }
 
     @keyframes footerParticles {
@@ -627,7 +628,7 @@
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
           <div class="profile-dropdown" id="profile-dropdown">
             <a href="account-settings.html">⚙️ Account Settings</a>
-            <a href="click-history.html">📊 Click History</a>
+            <a href="click-history.html">🛍️ Click History</a>
             <a href="#" id="logout-btn">🚪 Logout</a>
           </div>
         </div>
@@ -685,7 +686,7 @@
 
   <script type="module" src="auth.js"></script>
   <script type="module">
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = 2025;
     import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
     let currentUser = null;
@@ -783,8 +784,11 @@
         userProfile.style.display = 'flex';
         userEmail.textContent = user.email;
         
-        // Load profile picture from Firebase (syncs across devices)
-        if (user.photoURL) {
+        // Load profile picture from localStorage or use default
+        const savedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
+        if (savedProfilePic) {
+          profilePic.src = savedProfilePic;
+        } else if (user.photoURL) {
           profilePic.src = user.photoURL;
         } else {
           // Default avatar with user's initial
