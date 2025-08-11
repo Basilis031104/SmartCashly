@@ -760,4 +760,24 @@
     function showMessage(text, type) {
       const messageEl = document.getElementById('message');
       messageEl.textContent = text;
-      messageEl.className = `message ${type
+      messageEl.className = `message ${type}`;
+      messageEl.style.display = 'block';
+      
+      setTimeout(() => {
+        messageEl.style.display = 'none';
+      }, 4000);
+    }
+
+    function showPasswordMessage(text, type) {
+      const messageEl = document.getElementById('password-message');
+      messageEl.textContent = text;
+      messageEl.className = `message ${type}`;
+      messageEl.style.display = 'block';
+      
+      setTimeout(() => {
+        messageEl.style.display = 'none';
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
