@@ -640,16 +640,16 @@
         <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
       </button>
     </form>
-    <nav class="auth-nav" id="auth-nav">
+    <nav class="auth-nav" id="auth-nav" style="position: relative; z-index: 1000;">
       <div id="auth-buttons" style="display: flex; gap: 0.5rem;">
         <a href="login.html" class="btn">Login</a>
         <a href="signup.html" class="btn btn--secondary">Sign Up</a>
       </div>
-      <div id="user-profile" style="display: none; align-items: center; gap: 1rem;">
+      <div id="user-profile" style="display: none; align-items: center; gap: 1rem; position: relative; z-index: 1000;">
         <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
-        <div class="profile-container">
+        <div class="profile-container" style="position: relative; z-index: 1001;">
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
-          <div class="profile-dropdown" id="profile-dropdown">
+          <div class="profile-dropdown" id="profile-dropdown" style="position: absolute; top: 50px; right: 0; z-index: 10000; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); padding: 0.5rem 0; min-width: 160px; display: none;">
             <a href="#" id="account-settings">Account Settings</a>
             <a href="#" id="click-history">Click History</a>
             <a href="#" id="logout-btn">Logout</a>
