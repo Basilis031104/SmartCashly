@@ -278,6 +278,7 @@
     .profile-container {
       position: relative;
       cursor: pointer;
+      z-index: 3;
     }
 
     .profile-pic {
@@ -288,6 +289,8 @@
       transition: border-color 0.2s;
       object-fit: cover;
       background: transparent !important;
+      position: relative;
+      z-index: 3;
     }
 
     .profile-pic:hover {
@@ -304,7 +307,7 @@
       padding: 0.5rem 0;
       min-width: 160px;
       display: none;
-      z-index: 1000;
+      z-index: 9999;
       opacity: 0;
       transform: translateY(-10px);
       transition: all 0.2s ease;
