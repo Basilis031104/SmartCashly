@@ -250,11 +250,12 @@
     }
 
     .history-container {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: 12px;
       padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
     .history-header {
@@ -269,8 +270,9 @@
     }
 
     .history-header p {
-      color: #666;
+      color: #008e45;
       font-size: 1rem;
+      font-weight: 700;
     }
 
     .history-stats {
@@ -323,17 +325,43 @@
 
     .filter-input {
       padding: 0.5rem;
-      border: 1px solid #ddd;
+      border: 2px solid #008e45;
       border-radius: 6px;
       font-size: 0.9rem;
       background: white;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .filter-input:focus {
+      outline: none;
+      border-color: #006633;
+      box-shadow: 0 0 0 3px rgba(0, 142, 69, 0.2);
+    }
+
+    .filter-input.date-input {
+      padding: 0.5rem;
+      border: 2px solid #008e45;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      background: white;
+      color: #333;
+      font-weight: 600;
+      font-family: monospace;
+    }
+
+    .filter-input.date-input::placeholder {
+      color: #555;
+      font-weight: 600;
+      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
     }
 
     .history-list {
-      background: #f8f9fa;
+      background: rgba(248, 249, 250, 0.98);
       border-radius: 8px;
       overflow: hidden;
       margin-top: 1rem;
+      border: 2px solid rgba(0, 142, 69, 0.2);
     }
 
     .history-table-header {
@@ -389,7 +417,19 @@
     .no-history {
       text-align: center;
       padding: 4rem 2rem;
-      color: #666;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .no-history h3 {
+      color: #008e45;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .no-history p {
+      color: #555 !important;
+      font-weight: 500 !important;
     }
 
     .no-history-icon {
@@ -413,13 +453,13 @@
     <div class="history-container">
       <div class="history-header">
         <h1>🛍️ Click History</h1>
-        <p style="color: #28a745; font-weight: 600;">Detailed history of your last 50 clicks</p>
+        <p style="color: #008e45; font-weight: 700;">Detailed history of your last 50 clicks</p>
       </div>
 
       <div class="filter-controls">
         <input type="text" id="search-shops" class="filter-input" placeholder="Search shops..." />
-        <input type="date" id="date-from" class="filter-input" />
-        <input type="date" id="date-to" class="filter-input" />
+        <input type="text" id="date-from" class="filter-input date-input" placeholder="dd/mm/yyyy" maxlength="10" />
+        <input type="text" id="date-to" class="filter-input date-input" placeholder="dd/mm/yyyy" maxlength="10" />
       </div>
 
       <div id="history-list" class="history-list">
@@ -458,6 +498,30 @@
           // Redirect to login if not authenticated
           window.location.href = 'login.html';
         }
+      });
+
+      // Add date formatting to date inputs
+      const dateInputs = document.querySelectorAll('.date-input');
+      dateInputs.forEach(input => {
+        input.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+          
+          if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2);
+          }
+          if (value.length >= 5) {
+            value = value.substring(0, 5) + '/' + value.substring(5, 9);
+          }
+          
+          e.target.value = value;
+        });
+
+        input.addEventListener('keypress', function(e) {
+          // Only allow numbers and forward slash
+          if (!/[\d\/]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter'].includes(e.key)) {
+            e.preventDefault();
+          }
+        });
       });
     });
     
