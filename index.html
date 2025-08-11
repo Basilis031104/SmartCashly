@@ -171,6 +171,7 @@
       color: #fff;
       position: relative;
       overflow: hidden;
+      z-index: 1000;
     }
 
     /* Particles overlay for header */
@@ -213,7 +214,7 @@
       flex: 0 0 auto;
       background: transparent !important;
       position: relative;
-      z-index: 2;
+      z-index: 1002;
     }
 
     .search-bar {
@@ -221,7 +222,7 @@
       flex: 1 1 100%;
       max-width: 480px;
       margin-left: 80px;
-      z-index: 2;
+      z-index: 1002;
     }
 
     .search-bar input {
@@ -275,25 +276,26 @@
     .btn--secondary     { background: rgba(255,255,255,.25) !important; }
     .btn--secondary:hover { background: rgba(255,255,255,.40) !important; }
 
+    /* FIXED NAVIGATION AND DROPDOWN */
     nav {
       position: relative;
-      z-index: 1000;
+      z-index: 10000 !important;
     }
 
     #auth-nav {
       position: relative;
-      z-index: 1000;
+      z-index: 10000 !important;
     }
 
     #user-profile {
       position: relative;
-      z-index: 1000;
+      z-index: 10000 !important;
     }
 
     .profile-container {
       position: relative;
       cursor: pointer;
-      z-index: 1001;
+      z-index: 10001 !important;
     }
 
     .profile-pic {
@@ -305,7 +307,7 @@
       object-fit: cover;
       background: transparent !important;
       position: relative;
-      z-index: 1001;
+      z-index: 10001 !important;
     }
 
     .profile-pic:hover {
@@ -314,20 +316,34 @@
 
     .profile-dropdown {
       position: absolute !important;
-      top: 50px !important;
+      top: 55px !important;
       right: 0 !important;
       background: white !important;
       border: 2px solid #008e45 !important;
       border-radius: 8px !important;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6) !important;
       padding: 0.5rem 0 !important;
-      min-width: 180px !important;
+      min-width: 200px !important;
       display: none !important;
       z-index: 999999 !important;
+      transform: translateZ(0) !important;
+      will-change: transform !important;
     }
 
     .profile-dropdown.show {
       display: block !important;
+    }
+
+    .profile-dropdown a {
+      display: block !important;
+      padding: 0.75rem 1rem !important;
+      color: #333 !important;
+      text-decoration: none !important;
+      font-size: 0.9rem !important;
+      background: white !important;
+      transition: background-color 0.2s !important;
+      border: none !important;
+      z-index: 999999 !important;
     }
 
     .profile-dropdown a:hover {
@@ -338,6 +354,8 @@
       flex: 1 1 auto;
       text-align: center;
       padding: 3rem 1rem;
+      position: relative;
+      z-index: 10;
     }
     main h2 { font-size: 1.9rem; margin-bottom: .5rem; }
     main p  { font-size: 1rem;  color: #555; }
@@ -625,19 +643,19 @@
         <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
       </button>
     </form>
-    <nav class="auth-nav" id="auth-nav" style="position: relative; z-index: 1000;">
+    <nav class="auth-nav" id="auth-nav">
       <div id="auth-buttons" style="display: flex; gap: 0.5rem;">
         <a href="login.html" class="btn">Login</a>
         <a href="signup.html" class="btn btn--secondary">Sign Up</a>
       </div>
-      <div id="user-profile" style="display: none; align-items: center; gap: 1rem; position: relative; z-index: 1000;">
+      <div id="user-profile" style="display: none; align-items: center; gap: 1rem;">
         <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
-        <div class="profile-container" style="position: relative; z-index: 1001;">
+        <div class="profile-container">
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
           <div class="profile-dropdown" id="profile-dropdown">
-            <a href="account-settings.html" style="display: block; padding: 0.75rem 1rem; color: #333; text-decoration: none; font-size: 0.9rem; background: white; transition: background-color 0.2s;">Account Settings</a>
-            <a href="click-history.html" style="display: block; padding: 0.75rem 1rem; color: #333; text-decoration: none; font-size: 0.9rem; background: white; transition: background-color 0.2s;">Click History</a>
-            <a href="#" id="logout-btn" style="display: block; padding: 0.75rem 1rem; color: #333; text-decoration: none; font-size: 0.9rem; background: white; transition: background-color 0.2s;">Logout</a>
+            <a href="account-settings.html">Account Settings</a>
+            <a href="click-history.html">Click History</a>
+            <a href="#" id="logout-btn">Logout</a>
           </div>
         </div>
       </div>
@@ -704,7 +722,9 @@
       onAuthStateChanged(auth, (user) => {
         currentUser = user;
         updateAuthUI(user);
-        setupProfileDropdown();
+        if (user) {
+          setupProfileDropdown();
+        }
       });
     });
 
@@ -713,6 +733,11 @@
       const profileDropdown = document.getElementById('profile-dropdown');
       
       if (!profileContainer || !profileDropdown) return;
+
+      // Force maximum z-index and proper positioning
+      profileDropdown.style.zIndex = '999999';
+      profileDropdown.style.position = 'absolute';
+      profileDropdown.style.transform = 'translateZ(0)';
 
       // Clear any existing event listeners
       profileContainer.onclick = null;
@@ -725,31 +750,15 @@
         profileDropdown.classList.toggle('show');
       });
 
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!profileContainer.contains(e.target)) {
+          profileDropdown.classList.remove('show');
+        }
+      });
+
       // Handle dropdown menu clicks
-      const accountSettingsBtn = document.getElementById('account-settings');
-      const clickHistoryBtn = document.getElementById('click-history');
       const logoutBtn = document.getElementById('logout-btn');
-
-      if (accountSettingsBtn) {
-        accountSettingsBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('Account settings clicked');
-          profileDropdown.classList.remove('show');
-          window.location.href = 'account-settings.html';
-        });
-      }
-
-      if (clickHistoryBtn) {
-        clickHistoryBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('Click history clicked');
-          profileDropdown.classList.remove('show');
-          window.location.href = 'click-history.html';
-        });
-      }
-
       if (logoutBtn) {
         logoutBtn.addEventListener('click', async function(e) {
           e.preventDefault();
