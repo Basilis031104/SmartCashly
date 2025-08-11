@@ -316,7 +316,7 @@
 
     .profile-dropdown {
       position: fixed !important;
-      top: 70px !important;
+      top: 80px !important;
       right: 20px !important;
       background: white !important;
       border: 2px solid #008e45 !important;
@@ -758,7 +758,28 @@
       });
 
       // Handle dropdown menu clicks
+      const accountLink = profileDropdown.querySelector('a[href="account-settings.html"]');
+      const historyLink = profileDropdown.querySelector('a[href="click-history.html"]');
       const logoutBtn = document.getElementById('logout-btn');
+
+      if (accountLink) {
+        accountLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          profileDropdown.classList.remove('show');
+          window.location.href = 'account-settings.html';
+        });
+      }
+
+      if (historyLink) {
+        historyLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          profileDropdown.classList.remove('show');
+          window.location.href = 'click-history.html';
+        });
+      }
+
       if (logoutBtn) {
         logoutBtn.addEventListener('click', async function(e) {
           e.preventDefault();
