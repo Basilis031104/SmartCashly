@@ -8,31 +8,31 @@
     /* Advanced shiny dark yellow background with floating particles */
     html { 
       background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
         linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
-      background-size: 400% 400%, 300% 300%, 200% 200%, 350% 350%, 400% 400% !important;
-      animation: shimmer 8s ease-in-out infinite, particleFloat 15s ease-in-out infinite !important;
-      position: relative;
-      overflow: hidden;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
     }
     
     body { 
       background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
         linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
-      background-size: 400% 400%, 300% 300%, 200% 200%, 350% 350%, 400% 400% !important;
-      animation: shimmer 8s ease-in-out infinite, particleFloat 15s ease-in-out infinite !important;
-      position: relative;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
       overflow-x: hidden;
+      overflow-y: auto;
     }
 
-    /* Golden floating particles overlay */
+    /* Enhanced golden floating particles overlay */
     body::before {
       content: '';
       position: fixed;
@@ -41,20 +41,20 @@
       width: 100%;
       height: 100%;
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
-        radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.7) 1px, transparent 1px),
-        radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-        radial-gradient(circle at 90% 70%, rgba(255, 193, 7, 0.4) 1px, transparent 1px),
-        radial-gradient(circle at 30% 40%, rgba(255, 160, 0, 0.6) 2px, transparent 2px),
-        radial-gradient(circle at 70% 90%, rgba(255, 215, 0, 0.5) 1px, transparent 1px),
-        radial-gradient(circle at 50% 30%, rgba(255, 235, 59, 0.7) 1.5px, transparent 1.5px);
-      background-size: 100px 100px, 150px 150px, 200px 200px, 120px 120px, 80px 80px, 180px 180px, 90px 90px;
-      pointer-events: none;
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.6) 1px, transparent 1px),
+        radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 85% 15%, rgba(255, 193, 7, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 25% 85%, rgba(255, 160, 0, 0.4) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 65% 45%, rgba(255, 235, 59, 0.5) 1px, transparent 1px);
+      background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+      pointer-events: none !important;
       z-index: 1;
-      animation: floatParticles 20s linear infinite;
+      animation: gentleFloat 25s ease-in-out infinite;
+      will-change: background-position;
     }
 
-    /* Additional golden sparkle layer */
+    /* Enhanced sparkle layer */
     body::after {
       content: '';
       position: fixed;
@@ -63,15 +63,16 @@
       width: 100%;
       height: 100%;
       background-image: 
-        radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 85% 60%, rgba(255, 215, 0, 0.6) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 45% 70%, rgba(255, 255, 255, 0.9) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 75% 25%, rgba(255, 160, 0, 0.7) 1px, transparent 1px),
-        radial-gradient(circle at 25% 50%, rgba(255, 193, 7, 0.5) 0.8px, transparent 0.8px);
-      background-size: 60px 60px, 90px 90px, 40px 40px, 70px 70px, 55px 55px;
-      pointer-events: none;
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 65% 20%, rgba(255, 215, 0, 0.5) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 35% 70%, rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 60%, rgba(255, 193, 7, 0.4) 0.8px, transparent 0.8px),
+        radial-gradient(circle at 15% 80%, rgba(255, 160, 0, 0.5) 0.5px, transparent 0.5px);
+      background-size: 70px 70px, 90px 90px, 60px 60px, 80px 80px, 65px 65px;
+      pointer-events: none !important;
       z-index: 1;
-      animation: sparkle 12s ease-in-out infinite;
+      animation: gentleSparkle 20s ease-in-out infinite;
+      will-change: background-position;
     }
 
     @keyframes shimmer {
@@ -80,64 +81,41 @@
       100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
     }
 
-    @keyframes particleFloat {
+    @keyframes gentleFloat {
       0% { 
-        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-        filter: brightness(1) contrast(1);
-      }
-      25% { 
-        background-position: 50% 25%, 25% 50%, 75% 25%, 25% 75%, 60% 40%;
-        filter: brightness(1.1) contrast(1.05);
-      }
-      50% { 
-        background-position: 100% 50%, 50% 100%, 50% 50%, 50% 50%, 100% 80%;
-        filter: brightness(1.2) contrast(1.1);
-      }
-      75% { 
-        background-position: 50% 75%, 75% 50%, 25% 75%, 75% 25%, 40% 60%;
-        filter: brightness(1.1) contrast(1.05);
-      }
-      100% { 
-        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-        filter: brightness(1) contrast(1);
-      }
-    }
-
-    @keyframes floatParticles {
-      0% { 
-        background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
         opacity: 0.6;
       }
       33% { 
-        background-position: 30px -30px, -20px 20px, 40px -10px, -15px -25px, 25px 15px, -10px 30px, 35px -20px;
-        opacity: 1;
+        background-position: 30% 20%, 20% 40%, 50% 30%, 40% 10%, 60% 50%, 70% 20%;
+        opacity: 0.9;
       }
       66% { 
-        background-position: -20px -20px, 40px -40px, -30px 30px, 35px 10px, -25px -20px, 20px -15px, -30px 25px;
+        background-position: 60% 40%, 40% 80%, 80% 60%, 10% 70%, 30% 80%, 90% 40%;
         opacity: 0.7;
       }
       100% { 
-        background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
         opacity: 0.6;
       }
     }
 
-    @keyframes sparkle {
+    @keyframes gentleSparkle {
       0%, 100% { 
-        opacity: 0.3;
-        transform: scale(1);
+        opacity: 0.4;
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
       }
       25% { 
         opacity: 0.8;
-        transform: scale(1.1);
+        background-position: 15% 15%, 25% 25%, 35% 35%, 45% 45%, 55% 55%;
       }
       50% { 
-        opacity: 1;
-        transform: scale(1);
+        opacity: 0.9;
+        background-position: 30% 30%, 50% 50%, 70% 70%, 90% 90%, 10% 90%;
       }
       75% { 
-        opacity: 0.5;
-        transform: scale(0.9);
+        opacity: 0.6;
+        background-position: 20% 40%, 40% 20%, 60% 80%, 80% 60%, 100% 40%;
       }
     }
 
@@ -173,7 +151,7 @@
       overflow: hidden;
     }
 
-    /* Particles overlay for header */
+    /* Enhanced header particles */
     header::before {
       content: '';
       position: absolute;
@@ -182,28 +160,28 @@
       width: 100%;
       height: 100%;
       background-image: 
-        radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
-        radial-gradient(circle at 85% 70%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-        radial-gradient(circle at 45% 20%, rgba(255, 255, 255, 0.4) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 75% 50%, rgba(255, 215, 0, 0.3) 1px, transparent 1px);
-      background-size: 80px 80px, 120px 120px, 60px 60px, 100px 100px;
-      pointer-events: none;
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 75% 60%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.3) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 15% 80%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 80px 80px, 100px 100px, 60px 60px, 90px 90px;
+      pointer-events: none !important;
       z-index: 1;
-      animation: headerParticles 15s linear infinite;
+      animation: headerParticles 20s ease-in-out infinite;
     }
 
     @keyframes headerParticles {
       0% { 
-        background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-        opacity: 0.7;
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
       }
       50% { 
-        background-position: 20px -10px, -15px 15px, 25px -5px, -10px 20px;
-        opacity: 1;
+        background-position: 30% 30%, 40% 40%, 20% 50%, 60% 20%;
+        opacity: 0.9;
       }
       100% { 
-        background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-        opacity: 0.7;
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
       }
     }
 
@@ -436,6 +414,59 @@
       font-size: 4rem;
       margin-bottom: 1rem;
     }
+
+    footer {
+      text-align: center;
+      font-size: .875rem;
+      padding: 1rem 0;
+      background: #000000 !important;  /* Black background */
+      color: #ffffff !important;       /* White text */
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    /* Make footer text appear above particles with white color */
+    footer * {
+      position: relative;
+      z-index: 3;
+      color: #ffffff !important;  /* Ensure all text is white */
+    }
+
+    /* Enhanced footer particles for black background */
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: footerParticles 15s ease-in-out infinite;
+    }
+
+    @keyframes footerParticles {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      50% { 
+        background-position: 15% 15%, 20% 20%, 25% 25%, 30% 30%;
+        opacity: 0.8;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
   </style>
 </head>
 
@@ -481,6 +512,10 @@
     </div>
   </main>
 
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
+
   <script type="module" src="auth.js"></script>
   <script type="module">
     // Import Firebase functions
@@ -523,6 +558,9 @@
           }
         });
       });
+
+      // Set the current year
+      document.getElementById('year').textContent = new Date().getFullYear();
     });
     
     document.getElementById('logout-btn').addEventListener('click', async function(e) {
