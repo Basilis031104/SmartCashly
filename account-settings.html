@@ -149,7 +149,7 @@
     }
 
     /* Ensure content appears above particles */
-    header, main, footer {
+    header, main {
       position: relative;
       z-index: 10;
     }
@@ -248,11 +248,12 @@
     }
 
     .settings-container {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: 12px;
       padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(15px);
+      border: 3px solid #008e45;
     }
 
     .settings-header {
@@ -267,17 +268,18 @@
     }
 
     .settings-header p {
-      color: #666;
+      color: #000;
       font-size: 1rem;
+      font-weight: 700;
     }
 
     .profile-section {
       text-align: center;
       margin-bottom: 2rem;
       padding: 2rem;
-      border: 2px dashed #ddd;
+      border: 3px solid #008e45;
       border-radius: 12px;
-      background: rgba(248, 250, 252, 0.8);
+      background: rgba(248, 250, 252, 0.98);
     }
 
     .current-profile-pic {
@@ -324,7 +326,8 @@
 
     .upload-info {
       font-size: 0.875rem;
-      color: #666;
+      color: #000;
+      font-weight: 700;
       margin-top: 0.5rem;
     }
 
@@ -332,9 +335,9 @@
       margin: 1rem 0;
       display: none;
       padding: 1rem;
-      border: 2px solid #008e45;
+      border: 3px solid #008e45;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.98);
     }
 
     .preview-image {
@@ -392,22 +395,12 @@
 
     .password-section {
       margin-top: 2rem;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: 12px;
       padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-    }
-
-    footer {
-      text-align: center;
-      font-size: .875rem;
-      padding: 1rem 0;
-      background: rgba(255, 255, 255, 0.1) !important;
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255, 215, 0, 0.3);
-      position: relative;
-      z-index: 10;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(15px);
+      border: 3px solid #008e45;
     }
   </style>
 </head>
@@ -433,7 +426,7 @@
         <h3 style="margin-bottom: 1rem; color: #008e45;">Profile Picture</h3>
         
         <img id="current-profile-pic" src="" alt="Current Profile" class="current-profile-pic" />
-        <p style="color: #666; margin-bottom: 1rem;">
+        <p style="color: #000; margin-bottom: 1rem; font-weight: 700; font-size: 1.1rem;">
           <span id="user-email-display">user@example.com</span>
         </p>
         
@@ -468,21 +461,21 @@
         
         <form id="password-form" style="max-width: 400px; margin: 0 auto;">
           <div style="margin-bottom: 1rem;">
-            <label for="current-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Current Password</label>
+            <label for="current-password" style="display: block; margin-bottom: 0.5rem; font-weight: 700; color: #000;">Current Password</label>
             <input type="password" id="current-password" required 
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+                   style="width: 100%; padding: 0.75rem; border: 3px solid #0070f3; border-radius: 6px; font-size: 1rem; background: white;">
           </div>
           
           <div style="margin-bottom: 1rem;">
-            <label for="new-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">New Password</label>
+            <label for="new-password" style="display: block; margin-bottom: 0.5rem; font-weight: 700; color: #000;">New Password</label>
             <input type="password" id="new-password" required minlength="6"
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+                   style="width: 100%; padding: 0.75rem; border: 3px solid #0070f3; border-radius: 6px; font-size: 1rem; background: white;">
           </div>
           
           <div style="margin-bottom: 1.5rem;">
-            <label for="confirm-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Confirm New Password</label>
+            <label for="confirm-password" style="display: block; margin-bottom: 0.5rem; font-weight: 700; color: #000;">Confirm New Password</label>
             <input type="password" id="confirm-password" required minlength="6"
-                   style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+                   style="width: 100%; padding: 0.75rem; border: 3px solid #0070f3; border-radius: 6px; font-size: 1rem; background: white;">
           </div>
           
           <button type="submit" class="btn btn--save" style="width: 100%;">🔐 Change Password</button>
@@ -492,10 +485,6 @@
       </div>
     </div>
   </main>
-
-  <footer>
-    © <span id="year"></span> Smartcashly. All rights reserved.
-  </footer>
 
   <!-- Load Firebase first -->
   <script type="module">
@@ -527,9 +516,6 @@
     
     let currentUser = null;
     let selectedFile = null;
-
-    // Set year
-    document.getElementById('year').textContent = new Date().getFullYear();
 
     // Wait for DOM to be ready
     document.addEventListener('DOMContentLoaded', function() {
@@ -771,84 +757,4 @@
           throw new Error('Upload failed');
         }
         
-        const data = await response.json();
-        
-        if (data.success) {
-          return data.data.url;
-        } else {
-          throw new Error('Upload failed: ' + data.error.message);
-        }
-      } catch (error) {
-        console.error('ImgBB upload error:', error);
-        // Fallback to a simple approach if ImgBB fails
-        return await createSimpleImageUrl(file);
-      }
-    }
-
-    async function createSimpleImageUrl(file) {
-      // Fallback: create a very small, highly compressed image
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      
-      return new Promise((resolve, reject) => {
-        img.onload = function() {
-          // Make it very small to reduce URL length
-          canvas.width = 64;
-          canvas.height = 64;
-          ctx.drawImage(img, 0, 0, 64, 64);
-          
-          // Very high compression
-          const compressedUrl = canvas.toDataURL('image/jpeg', 0.3);
-          
-          // If still too long, use a placeholder
-          if (compressedUrl.length > 2000) {
-            // Generate a unique color-based avatar instead
-            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FECA57', '#FF9FF3'];
-            const colorIndex = currentUser.email.charCodeAt(0) % colors.length;
-            const initial = currentUser.email.charAt(0).toUpperCase();
-            
-            const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>
-              <circle cx='60' cy='60' r='60' fill='${colors[colorIndex]}'/>
-              <text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>${initial}</text>
-            </svg>`;
-            
-            resolve(`data:image/svg+xml,${encodeURIComponent(svg)}`);
-          } else {
-            resolve(compressedUrl);
-          }
-        };
-        
-        img.onerror = reject;
-        
-        const reader = new FileReader();
-        reader.onload = e => img.src = e.target.result;
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function showMessage(text, type) {
-      const messageEl = document.getElementById('message');
-      messageEl.textContent = text;
-      messageEl.className = `message ${type}`;
-      messageEl.style.display = 'block';
-      
-      setTimeout(() => {
-        messageEl.style.display = 'none';
-      }, 4000);
-    }
-
-    function showPasswordMessage(text, type) {
-      const messageEl = document.getElementById('password-message');
-      messageEl.textContent = text;
-      messageEl.className = `message ${type}`;
-      messageEl.style.display = 'block';
-      
-      setTimeout(() => {
-        messageEl.style.display = 'none';
-      }, 4000);
-    }
-  </script>
-</body>
-</html>
+        const data = await response.json
