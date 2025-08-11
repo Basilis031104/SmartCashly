@@ -619,21 +619,20 @@
       const originalText = saveBtn.textContent;
       
       try {
-        saveBtn.textContent = '⏳ Uploading...';
+        saveBtn.textContent = '⏳ Saving...';
         saveBtn.disabled = true;
 
-        console.log('Creating image URL...');
-        const imageUrl = await createSimpleImageUrl(selectedFile);
+        console.log('Creating compressed image...');
+        const compressedImageUrl = await createCompressedImageUrl(selectedFile);
         
-        console.log('Updating Firebase profile...');
-        await updateProfile(currentUser, {
-          photoURL: imageUrl
-        });
+        console.log('Saving to localStorage...');
+        // Store in localStorage instead of Firebase
+        localStorage.setItem(`profile_pic_${currentUser.uid}`, compressedImageUrl);
         
-        console.log('Profile updated successfully');
+        console.log('Profile picture saved successfully');
         
         // Update display
-        document.getElementById('current-profile-pic').src = imageUrl;
+        document.getElementById('current-profile-pic').src = compressedImageUrl;
         document.getElementById('preview-container').style.display = 'none';
         document.getElementById('profile-pic-input').value = '';
         selectedFile = null;
@@ -724,7 +723,12 @@
       
       emailDisplay.textContent = user.email;
       
-      if (user.photoURL) {
+      // Check localStorage first for profile picture
+      const savedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
+      
+      if (savedProfilePic) {
+        currentProfilePic.src = savedProfilePic;
+      } else if (user.photoURL) {
         currentProfilePic.src = user.photoURL;
       } else {
         const initial = user.email.charAt(0).toUpperCase();
