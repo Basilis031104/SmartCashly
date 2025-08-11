@@ -313,48 +313,21 @@
     }
 
     .profile-dropdown {
-      position: absolute;
-      top: 50px;
-      right: 0;
+      position: absolute !important;
+      top: 50px !important;
+      right: 0 !important;
       background: white !important;
-      border-radius: 8px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25) !important;
-      padding: 0.5rem 0;
-      min-width: 160px;
+      border: 2px solid #008e45 !important;
+      border-radius: 8px !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+      padding: 0.5rem 0 !important;
+      min-width: 180px !important;
       display: none !important;
-      z-index: 99999 !important;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: all 0.2s ease;
+      z-index: 999999 !important;
     }
 
     .profile-dropdown.show {
       display: block !important;
-      opacity: 1 !important;
-      transform: translateY(0) !important;
-      z-index: 99999 !important;
-    }
-
-    /* Ensure main content stays below dropdown */
-    main {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Ensure particles stay in background */
-    body::before, body::after {
-      z-index: 0;
-    }
-
-    .profile-dropdown a {
-      display: block;
-      padding: 0.75rem 1rem;
-      color: #333 !important;
-      text-decoration: none;
-      font-size: 0.9rem;
-      background: white !important;
-      transition: background-color 0.2s;
-      cursor: pointer;
     }
 
     .profile-dropdown a:hover {
@@ -662,9 +635,9 @@
         <div class="profile-container" style="position: relative; z-index: 1001;">
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
           <div class="profile-dropdown" id="profile-dropdown">
-            <a href="account-settings.html" id="account-settings">Account Settings</a>
-            <a href="click-history.html" id="click-history">Click History</a>
-            <a href="#" id="logout-btn">Logout</a>
+            <a href="account-settings.html" style="display: block; padding: 0.75rem 1rem; color: #333; text-decoration: none; font-size: 0.9rem; background: white; transition: background-color 0.2s;">Account Settings</a>
+            <a href="click-history.html" style="display: block; padding: 0.75rem 1rem; color: #333; text-decoration: none; font-size: 0.9rem; background: white; transition: background-color 0.2s;">Click History</a>
+            <a href="#" id="logout-btn" style="display: block; padding: 0.75rem 1rem; color: #333; text-decoration: none; font-size: 0.9rem; background: white; transition: background-color 0.2s;">Logout</a>
           </div>
         </div>
       </div>
