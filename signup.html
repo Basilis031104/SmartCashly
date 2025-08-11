@@ -266,15 +266,22 @@
       text-align: center;
       font-size: .875rem;
       padding: 1rem 0;
-      background: rgba(255, 255, 255, 0.1) !important;
-      backdrop-filter: blur(10px);
+      background: #000000 !important;  /* Black background */
+      color: #ffffff !important;       /* White text */
       border-top: 1px solid rgba(255, 215, 0, 0.3);
       position: relative;
       z-index: 10;
       overflow: hidden;
     }
 
-    /* Enhanced footer particles */
+    /* Make footer text appear above particles with white color */
+    footer * {
+      position: relative;
+      z-index: 3;
+      color: #ffffff !important;  /* Ensure all text is white */
+    }
+
+    /* Enhanced footer particles for black background */
     footer::before {
       content: '';
       position: absolute;
@@ -283,10 +290,10 @@
       width: 100%;
       height: 100%;
       background-image: 
-        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.6) 1px, transparent 1px),
-        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.4) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.4) 1px, transparent 1px);
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
       background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
       pointer-events: none !important;
       z-index: 1;
@@ -371,6 +378,8 @@
     .cash-rain li:nth-child(16) { --start-x: 60vw;  --end-x: 65vw;  --start-rotation: -10deg; --end-rotation: 350deg; animation-delay: 4.6s; animation-duration: 8.7s; }
     .cash-rain li:nth-child(17) { --start-x: 10vw;  --end-x: 15vw;  --start-rotation: 35deg;  --end-rotation: 395deg; animation-delay: 6.2s; animation-duration: 7.5s; }
     .cash-rain li:nth-child(18) { --start-x: 90vw;  --end-x: 85vw;  --start-rotation: -25deg; --end-rotation: 335deg; animation-delay: 0.8s; animation-duration: 10.2s; }
+    .cash-rain li:nth-child(19) { --start-x: 5vw;   --end-x: 10vw;  --start-rotation: 60deg;  --end-rotation: 420deg; animation-delay: 3.5s; animation-duration: 8.9s; }
+    .cash-rain li:nth-child(20) { --start-x: 95vw;  --end-x: 90vw;  --start-rotation: -50deg; --end-rotation: 310deg; animation-delay: 1.3s; animation-duration: 9.6s; }
 
     @media (max-width: 480px) {
       .cash-rain { display: none; }
@@ -379,11 +388,12 @@
 </head>
 
 <body>
-  <!-- Falling cash animation with 18 bills -->
+  <!-- Falling cash animation with 20 bills -->
   <ul class="cash-rain" aria-hidden="true">
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
     <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
+    <li>$</li><li>$</li>
   </ul>
 
   <header>
@@ -413,7 +423,7 @@
 
   <script type="module" src="auth.js"></script>
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = 2025;
 
     const su_email = document.getElementById("su_email");
     const su_pass = document.getElementById("su_pass");
