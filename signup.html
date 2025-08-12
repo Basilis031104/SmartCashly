@@ -262,6 +262,16 @@
       margin-top: 0.5rem;
     }
 
+    .referral-note {
+      font-size: 0.85rem;
+      color: #000;
+      margin-top: -0.5rem;
+      margin-bottom: 0.5rem;
+      text-align: left;
+      font-style: italic;
+    }: italic;
+    }
+
     footer {
       text-align: center;
       font-size: .875rem;
@@ -413,6 +423,8 @@
         <input type="email"    id="su_email"    placeholder="Email"    required />
         <input type="password" id="su_pass"     placeholder="Password" required />
         <input type="password" id="su_confirm"  placeholder="Confirm Password"  required />
+        <input type="text"     id="su_referral" placeholder="Referral Code (Optional)" />
+        <p class="referral-note">👥 Have a friend's referral code? Enter it above to help them earn rewards!</p>
         <button class="btn btn--full">Sign Up</button>
         <p id="su_error" class="form-error"></p>
       </form>
@@ -425,9 +437,19 @@
   <script>
     document.getElementById("year").textContent = 2025;
 
+    // Check if there's a referral code in the URL
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const referralCode = urlParams.get('ref');
+      if (referralCode) {
+        document.getElementById('su_referral').value = referralCode;
+      }
+    });
+
     const su_email = document.getElementById("su_email");
     const su_pass = document.getElementById("su_pass");
     const su_confirm = document.getElementById("su_confirm");
+    const su_referral = document.getElementById("su_referral");
     const su_error = document.getElementById("su_error");
 
     document.getElementById("signup-form").addEventListener("submit", async e => {
@@ -438,8 +460,16 @@
         su_error.textContent = "ERROR: Passwords do not match";
         return;
       }
+      
       try {
         await smartAuth.signUp(su_email.value.trim(), su_pass.value);
+        
+        // Store referral code if provided
+        if (su_referral.value.trim()) {
+          localStorage.setItem('signup_referral_code', su_referral.value.trim().toUpperCase());
+          console.log('Referral code saved:', su_referral.value.trim().toUpperCase());
+        }
+        
         window.location = "index.html";
       } catch (err) {
         let errorMessage = "ERROR: An error occurred. Please try again.";
