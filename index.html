@@ -1423,9 +1423,29 @@
       }
     });
 
+    // When modal opens, ensure code is generated
+    const referModal = document.getElementById('refer-modal');
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target.classList.contains('show') && currentUser) {
+          console.log('Refer modal opened, generating code...');
+          setTimeout(() => {
+            setupReferralCode(currentUser);
+          }, 100);
+        }
+      });
+    });
+    observer.observe(referModal, { attributes: true, attributeFilter: ['class'] });
+
     // Copy referral code
     document.getElementById('copy-code-btn').addEventListener('click', () => {
-      const code = document.getElementById('refer-code').textContent;
+      // Generate code first if it's still "Loading..."
+      const codeElement = document.getElementById('refer-code');
+      if (codeElement.textContent === 'Loading...' && currentUser) {
+        setupReferralCode(currentUser);
+      }
+      
+      const code = codeElement.textContent;
       navigator.clipboard.writeText(code).then(() => {
         const btn = document.getElementById('copy-code-btn');
         btn.textContent = '✅ Copied!';
@@ -1439,7 +1459,13 @@
 
     // Copy referral link
     document.getElementById('copy-link-btn').addEventListener('click', () => {
-      const code = document.getElementById('refer-code').textContent;
+      // Generate code first if it's still "Loading..."
+      const codeElement = document.getElementById('refer-code');
+      if (codeElement.textContent === 'Loading...' && currentUser) {
+        setupReferralCode(currentUser);
+      }
+      
+      const code = codeElement.textContent;
       const referralLink = `https://smartcashly.com/signup.html?ref=${code}`;
       navigator.clipboard.writeText(referralLink).then(() => {
         const btn = document.getElementById('copy-link-btn');
@@ -1475,22 +1501,26 @@
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`, '_blank');
     });
 
+    // TEST FUNCTION - Available immediately in console
+    window.testReferralCode = function() {
+      console.log('=== MANUAL TEST ===');
+      if (currentUser) {
+        console.log('Current user:', currentUser.email);
+        console.log('User UID:', currentUser.uid);
+        localStorage.removeItem(`referral_code_${currentUser.uid}`);
+        setupReferralCode(currentUser);
+      } else {
+        console.log('No user logged in - currentUser is:', currentUser);
+      }
+    };
+
+    // Also make setupReferralCode available globally for testing
+    window.setupReferralCode = setupReferralCode;
+
     // Demo functions available for testing:
     // simulateReferralSignup('Sarah', 'SMART30E7YM');
     // simulateCashbackEarned('3.25', 'eBay');
     // simulateReferralBonus('5.00');
-
-    // TEST FUNCTION - Run this in console to force update referral code
-    window.testReferralCode = function() {
-      if (currentUser) {
-        console.log('=== MANUAL TEST ===');
-        console.log('Current user:', currentUser.email);
-        localStorage.removeItem(`referral_code_${currentUser.uid}`);
-        setupReferralCode(currentUser);
-      } else {
-        console.log('No user logged in');
-      }
-    };
   </script>
 </body>
 </html>
