@@ -410,7 +410,7 @@
     .mark-all-read {
       background: none;
       border: none;
-      color: #222;
+      color: #000;
       font-size: 0.8rem;
       cursor: pointer;
       text-decoration: underline;
@@ -1002,7 +1002,7 @@
       
       <div class="refer-code-container">
         <p style="margin: 0; font-weight: 600; color: #333;">Your Referral Code:</p>
-        <div class="refer-code" id="refer-code">SMART2025</div>
+        <div class="refer-code" id="refer-code">Loading...</div>
         <button class="copy-btn" id="copy-code-btn">📋 Copy Code</button>
         <button class="copy-btn" id="copy-link-btn" style="margin-left: 0.5rem; background: #007BFF;">🔗 Copy Link</button>
       </div>
@@ -1187,9 +1187,28 @@
     });
 
     function setupReferralCode(user) {
-      // Generate a referral code based on user ID
-      const userCode = 'SMART' + user.uid.substring(0, 6).toUpperCase();
-      document.getElementById('refer-code').textContent = userCode;
+      // Check if user already has a stored referral code
+      const storedCode = localStorage.getItem(`referral_code_${user.uid}`);
+      
+      if (storedCode) {
+        console.log('Using stored referral code:', storedCode);
+        document.getElementById('refer-code').textContent = storedCode;
+        return;
+      }
+      
+      // Generate a truly unique referral code
+      const timestamp = Date.now().toString().slice(-4); // Last 4 digits of timestamp
+      const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase(); // 4 random chars
+      const userPart = user.uid.substring(0, 4).toUpperCase(); // First 4 chars of user ID
+      
+      const uniqueCode = `SMART-${userPart}${randomPart}${timestamp}`;
+      
+      console.log('Generated NEW referral code:', uniqueCode, 'for user:', user.email);
+      console.log('User ID:', user.uid);
+      
+      // Store and display the code
+      localStorage.setItem(`referral_code_${user.uid}`, uniqueCode);
+      document.getElementById('refer-code').textContent = uniqueCode;
     }
 
     function setupProfileDropdown() {
