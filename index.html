@@ -793,7 +793,7 @@
       <button class="close-btn" id="close-refer">&times;</button>
       <h3>👥 Refer a Friend</h3>
       
-      <p style="text-align: center; margin-bottom: 1rem; color: #666;">
+      <p style="text-align: center; margin-bottom: 1rem; color: #000;">
         Share Smartcashly with your friends and earn rewards when they sign up!
       </p>
       
@@ -804,7 +804,7 @@
       </div>
       
       <div style="text-align: center; margin: 1rem 0;">
-        <p style="color: #666; font-size: 0.9rem;">Share via:</p>
+        <p style="color: #000; font-size: 0.9rem;">Share via:</p>
         <div class="social-share">
           <a href="#" class="social-btn whatsapp-btn" id="share-whatsapp">
             📱 WhatsApp
@@ -820,12 +820,12 @@
       
       <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
         <h4 style="color: #008e45; margin-bottom: 0.5rem;">How it works:</h4>
-        <ul style="text-align: left; color: #666; font-size: 0.9rem;">
+        <ul style="text-align: left; color: #000; font-size: 0.9rem;">
           <li>Share your referral code with friends</li>
           <li>They sign up using your code</li>
-          <li>Both of you need to earn at least $5 in cashback from shopping</li>
-          <li>Once you both reach $5 in cashback, you each get an additional $5 bonus!</li>
-          <li>No limit on referrals</li>
+          <li>Once your friend earns at least $5 in cashback from shopping</li>
+          <li>You get $5 bonus cashback as a reward!</li>
+          <li>No limit on referrals - refer more friends, earn more bonuses!</li>
         </ul>
       </div>
     </div>
@@ -1032,7 +1032,7 @@
     document.getElementById('share-whatsapp').addEventListener('click', (e) => {
       e.preventDefault();
       const code = document.getElementById('refer-code').textContent;
-      const message = `Join Smartcashly and get cashback on your shopping! Use my referral code: ${code} and we both get $5 bonus! 💰 https://smartcashly.com`;
+      const message = `Join Smartcashly and get cashback on your shopping! Use my referral code: ${code} when you sign up. Once you earn $5 in cashback, I get a $5 bonus! 💰 https://smartcashly.com`;
       window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
     });
 
@@ -1040,14 +1040,14 @@
       e.preventDefault();
       const code = document.getElementById('refer-code').textContent;
       const subject = 'Join Smartcashly and earn cashback!';
-      const body = `Hi there!\n\nI wanted to share Smartcashly with you - it's an amazing cashback platform where you can earn money back on your shopping!\n\nUse my referral code: ${code} when you sign up and we both get $5 bonus cashback!\n\nJoin here: https://smartcashly.com\n\nHappy shopping!\n`;
+      const body = `Hi there!\n\nI wanted to share Smartcashly with you - it's an amazing cashback platform where you can earn money back on your shopping!\n\nUse my referral code: ${code} when you sign up. Once you earn $5 in cashback from shopping, I'll get a $5 bonus!\n\nJoin here: https://smartcashly.com\n\nHappy shopping!\n`;
       window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
     });
 
     document.getElementById('share-twitter').addEventListener('click', (e) => {
       e.preventDefault();
       const code = document.getElementById('refer-code').textContent;
-      const message = `💰 Earn cashback on every purchase with @Smartcashly! Use my code ${code} and get $5 bonus when you sign up! #cashback #savings`;
+      const message = `💰 Earn cashback on every purchase with @Smartcashly! Use my code ${code} when you sign up - I get a bonus when you reach $5 in cashback! #cashback #savings`;
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`, '_blank');
     });
   </script>
