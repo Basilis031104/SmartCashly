@@ -1477,10 +1477,30 @@
       // Add click handler for individual notification
       notificationItem.addEventListener('click', function() {
         this.classList.remove('unread');
-        updateNotificationBadge();
+        // Update badge after clicking
+        const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+        const badge = document.getElementById('notification-badge');
+        if (badge) {
+          if (unreadCount > 0) {
+            badge.textContent = unreadCount;
+            badge.style.display = 'flex';
+          } else {
+            badge.style.display = 'none';
+          }
+        }
       });
       
-      updateNotificationBadge();
+      // Update notification badge count
+      const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+      const badge = document.getElementById('notification-badge');
+      if (badge) {
+        if (unreadCount > 0) {
+          badge.textContent = unreadCount;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
       
       console.log('Referral notification created successfully');
     }
