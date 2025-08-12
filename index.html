@@ -1203,6 +1203,9 @@
       if (storedCode) {
         console.log('Using stored referral code:', storedCode);
         referCodeElement.textContent = storedCode;
+        
+        // Store the mapping of code to user for notifications
+        storeReferralMapping(storedCode, user);
         return;
       }
       
@@ -1219,7 +1222,22 @@
       localStorage.setItem(`referral_code_${user.uid}`, uniqueCode);
       referCodeElement.textContent = uniqueCode;
       
+      // Store the mapping of code to user for notifications
+      storeReferralMapping(uniqueCode, user);
+      
       console.log('=== REFERRAL CODE SETUP COMPLETE ===');
+    }
+
+    // Store mapping of referral codes to users for notification system
+    function storeReferralMapping(referralCode, user) {
+      const mappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
+      mappings[referralCode] = {
+        userId: user.uid,
+        email: user.email,
+        createdAt: new Date().toISOString()
+      };
+      localStorage.setItem('referral_code_mappings', JSON.stringify(mappings));
+      console.log('Stored referral mapping:', referralCode, '→', user.email);
     }
 
     // Manual function to force regenerate code (for testing)
@@ -1355,6 +1373,8 @@
         console.log('User authenticated, setting up referral code...');
         setTimeout(() => {
           setupReferralCode(user);
+          // Check for new referral notifications
+          checkForReferralNotifications(user);
         }, 1000);
         
         // Load profile picture from localStorage or use default
@@ -1372,6 +1392,54 @@
         authButtons.style.display = 'flex';
         userProfile.style.display = 'none';
       }
+    }
+
+    // Check for new referral notifications when user logs in
+    function checkForReferralNotifications(user) {
+      console.log('=== CHECKING FOR REFERRAL NOTIFICATIONS ===');
+      
+      // Get pending referral notifications
+      const pendingReferrals = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      const referralMappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
+      const processedNotifications = JSON.parse(localStorage.getItem(`processed_notifications_${user.uid}`) || '[]');
+      
+      console.log('Pending referrals:', pendingReferrals);
+      console.log('Referral mappings:', referralMappings);
+      
+      let newNotifications = 0;
+      
+      pendingReferrals.forEach(referral => {
+        // Check if this referral code belongs to the current user
+        const mapping = referralMappings[referral.referralCode];
+        
+        if (mapping && mapping.userId === user.uid) {
+          // Check if we already processed this notification
+          const notificationId = `${referral.referralCode}_${referral.timestamp}`;
+          
+          if (!processedNotifications.includes(notificationId)) {
+            console.log('Creating notification for referral:', referral);
+            
+            // Create the notification
+            const friendName = referral.newUserEmail.split('@')[0]; // Get name part of email
+            addNotification('referral', 'New Referral!', `${friendName} signed up using your code ${referral.referralCode}`);
+            
+            // Mark as processed
+            processedNotifications.push(notificationId);
+            newNotifications++;
+          }
+        }
+      });
+      
+      // Save processed notifications
+      localStorage.setItem(`processed_notifications_${user.uid}`, JSON.stringify(processedNotifications));
+      
+      if (newNotifications > 0) {
+        console.log(`Created ${newNotifications} new referral notifications`);
+      } else {
+        console.log('No new referral notifications');
+      }
+      
+      console.log('=== REFERRAL NOTIFICATION CHECK COMPLETE ===');
     }
 
     // Support functionality
@@ -1514,11 +1582,50 @@
       }
     };
 
+    // TEST FUNCTION - Simulate someone signing up with your referral code
+    window.simulateReferralSignup = function(newUserEmail) {
+      if (!currentUser) {
+        console.log('No user logged in');
+        return;
+      }
+      
+      const userReferralCode = localStorage.getItem(`referral_code_${currentUser.uid}`);
+      if (!userReferralCode) {
+        console.log('No referral code found for current user');
+        return;
+      }
+      
+      console.log('=== SIMULATING REFERRAL SIGNUP ===');
+      console.log('New user email:', newUserEmail);
+      console.log('Using referral code:', userReferralCode);
+      
+      // Create a fake referral usage
+      const referralUsage = {
+        referralCode: userReferralCode,
+        newUserEmail: newUserEmail,
+        signupDate: new Date().toISOString(),
+        timestamp: Date.now()
+      };
+      
+      // Store in localStorage
+      const existingReferrals = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      existingReferrals.push(referralUsage);
+      localStorage.setItem('pending_referral_notifications', JSON.stringify(existingReferrals));
+      
+      console.log('Simulated referral signup stored. Now checking for notifications...');
+      
+      // Trigger notification check
+      setTimeout(() => {
+        checkForReferralNotifications(currentUser);
+      }, 500);
+    };
+
     // Also make setupReferralCode available globally for testing
     window.setupReferralCode = setupReferralCode;
+    window.checkForReferralNotifications = checkForReferralNotifications;
 
     // Demo functions available for testing:
-    // simulateReferralSignup('Sarah', 'SMART30E7YM');
+    // simulateReferralSignup('sarah@example.com');
     // simulateCashbackEarned('3.25', 'eBay');
     // simulateReferralBonus('5.00');
   </script>
