@@ -430,46 +430,97 @@
   </footer>
 
   <script type="module" src="auth.js"></script>
-  <script>
+  <script type="module">
+    // Set the year
     document.getElementById('year').textContent = 2025;
 
-    const lg_form = document.getElementById('login_form');
-    const lg_email = document.getElementById('lg_email');
-    const lg_pass  = document.getElementById('lg_pass');
-    const lg_msg   = document.getElementById('lg_msg');
+    // Import Firebase functions
+    import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-    lg_form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      lg_msg.textContent = '';
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, setting up login form');
+      
+      const lg_form = document.getElementById('login_form');
+      const lg_email = document.getElementById('lg_email');
+      const lg_pass = document.getElementById('lg_pass');
+      const lg_msg = document.getElementById('lg_msg');
 
-      try {
-        await smartAuth.signIn(lg_email.value.trim(), lg_pass.value);
-        lg_msg.style.color = '#008e45';
-        lg_msg.textContent = 'Success! Redirecting…';
-        window.location.href = 'index.html';
-      } catch (err) {
-        lg_msg.style.color = 'crimson';
-        console.log('Full Firebase error:', err);
-        console.log('Firebase error code:', err.code);
-        console.log('Firebase error message:', err.message);
-        
-        if (err.code === 'auth/wrong-password' || 
-            err.message?.includes('wrong-password')) {
-          lg_msg.textContent = "ERROR: Password is wrong. Please try again.";
-        } else if (err.code === 'auth/invalid-credential' ||
-                   err.code === 'auth/invalid-login-credentials') {
-          lg_msg.textContent = "ERROR: Invalid email or password. Please try again";
-        } else if (err.code === 'auth/too-many-requests') {
-          lg_msg.textContent = "ERROR: Too many failed attempts. Try again later.";
-        } else if (err.code === 'auth/user-disabled') {
-          lg_msg.textContent = "ERROR: This account has been disabled";
-        } else if (err.code === 'auth/network-request-failed') {
-          lg_msg.textContent = "ERROR: Network error. Check your connection";
-        } else {
-          lg_msg.textContent = `ERROR: ${err.code || 'Unknown error'}. Please try again`;
-        }
+      if (!lg_form) {
+        console.error('Login form not found!');
+        return;
       }
+
+      lg_form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        lg_msg.textContent = '';
+        console.log('Login form submitted');
+
+        const email = lg_email.value.trim();
+        const password = lg_pass.value;
+
+        if (!email || !password) {
+          lg_msg.style.color = 'crimson';
+          lg_msg.textContent = 'Please fill in all fields';
+          return;
+        }
+
+        try {
+          console.log('Attempting login with smartAuth...');
+          
+          // Try smartAuth first
+          if (typeof smartAuth !== 'undefined' && smartAuth.signIn) {
+            await smartAuth.signIn(email, password);
+          } else {
+            // Fallback to direct Firebase
+            console.log('smartAuth not available, using direct Firebase');
+            const auth = getAuth();
+            await signInWithEmailAndPassword(auth, email, password);
+          }
+          
+          lg_msg.style.color = '#008e45';
+          lg_msg.textContent = 'Success! Redirecting…';
+          console.log('Login successful!');
+          
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
+          
+        } catch (err) {
+          lg_msg.style.color = 'crimson';
+          console.error('Login error:', err);
+          
+          if (err.code === 'auth/wrong-password' || 
+              err.message?.includes('wrong-password')) {
+            lg_msg.textContent = "ERROR: Password is wrong. Please try again.";
+          } else if (err.code === 'auth/invalid-credential' ||
+                     err.code === 'auth/invalid-login-credentials') {
+            lg_msg.textContent = "ERROR: Invalid email or password. Please try again";
+          } else if (err.code === 'auth/too-many-requests') {
+            lg_msg.textContent = "ERROR: Too many failed attempts. Try again later.";
+          } else if (err.code === 'auth/user-disabled') {
+            lg_msg.textContent = "ERROR: This account has been disabled";
+          } else if (err.code === 'auth/network-request-failed') {
+            lg_msg.textContent = "ERROR: Network error. Check your connection";
+          } else {
+            lg_msg.textContent = `ERROR: ${err.code || err.message || 'Unknown error'}. Please try again`;
+          }
+        }
+      });
+
+      console.log('Login form event listener attached successfully');
     });
+
+    // Backup event listener in case DOMContentLoaded already fired
+    if (document.readyState === 'loading') {
+      // DOM is still loading, wait for DOMContentLoaded
+    } else {
+      // DOM is already loaded, run the setup immediately
+      setTimeout(() => {
+        const event = new Event('DOMContentLoaded');
+        document.dispatchEvent(event);
+      }, 100);
+    }
   </script>
 </body>
 </html>
