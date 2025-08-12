@@ -1455,7 +1455,10 @@
       }
       
       // Hide "no notifications" message
-      hideNoNotificationsMessage();
+      const noNotificationsElement = document.getElementById('no-notifications');
+      if (noNotificationsElement) {
+        noNotificationsElement.style.display = 'none';
+      }
       
       const notificationItem = document.createElement('div');
       notificationItem.className = 'notification-item unread';
