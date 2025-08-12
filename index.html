@@ -1187,12 +1187,22 @@
     });
 
     function setupReferralCode(user) {
+      console.log('=== REFERRAL CODE SETUP ===');
+      console.log('User:', user.email);
+      console.log('User UID:', user.uid);
+      
+      const referCodeElement = document.getElementById('refer-code');
+      if (!referCodeElement) {
+        console.error('Refer code element not found!');
+        return;
+      }
+      
       // Check if user already has a stored referral code
       const storedCode = localStorage.getItem(`referral_code_${user.uid}`);
       
       if (storedCode) {
         console.log('Using stored referral code:', storedCode);
-        document.getElementById('refer-code').textContent = storedCode;
+        referCodeElement.textContent = storedCode;
         return;
       }
       
@@ -1203,12 +1213,24 @@
       
       const uniqueCode = `SMART-${userPart}${randomPart}${timestamp}`;
       
-      console.log('Generated NEW referral code:', uniqueCode, 'for user:', user.email);
-      console.log('User ID:', user.uid);
+      console.log('Generated NEW referral code:', uniqueCode);
       
       // Store and display the code
       localStorage.setItem(`referral_code_${user.uid}`, uniqueCode);
-      document.getElementById('refer-code').textContent = uniqueCode;
+      referCodeElement.textContent = uniqueCode;
+      
+      console.log('=== REFERRAL CODE SETUP COMPLETE ===');
+    }
+
+    // Manual function to force regenerate code (for testing)
+    function forceNewReferralCode() {
+      if (currentUser) {
+        localStorage.removeItem(`referral_code_${currentUser.uid}`);
+        setupReferralCode(currentUser);
+        console.log('Forced new referral code generation');
+      } else {
+        console.log('No user logged in');
+      }
     }
 
     function setupProfileDropdown() {
