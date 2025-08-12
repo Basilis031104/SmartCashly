@@ -1419,9 +1419,11 @@
           if (!processedNotifications.includes(notificationId)) {
             console.log('Creating notification for referral:', referral);
             
-            // Create the notification
-            const friendName = referral.newUserEmail.split('@')[0]; // Get name part of email
-            addNotification('referral', 'New Referral!', `${friendName} signed up using your code ${referral.referralCode}`);
+            // Create the notification manually (since addNotification might not be available yet)
+            setTimeout(() => {
+              const friendName = referral.newUserEmail.split('@')[0]; // Get name part of email
+              createReferralNotification(friendName, referral.referralCode);
+            }, 1000);
             
             // Mark as processed
             processedNotifications.push(notificationId);
@@ -1440,6 +1442,44 @@
       }
       
       console.log('=== REFERRAL NOTIFICATION CHECK COMPLETE ===');
+    }
+
+    // Create referral notification manually
+    function createReferralNotification(friendName, referralCode) {
+      console.log('Creating referral notification for:', friendName, referralCode);
+      
+      const notificationList = document.getElementById('notification-list');
+      if (!notificationList) {
+        console.error('Notification list not found');
+        return;
+      }
+      
+      // Hide "no notifications" message
+      hideNoNotificationsMessage();
+      
+      const notificationItem = document.createElement('div');
+      notificationItem.className = 'notification-item unread';
+      
+      notificationItem.innerHTML = `
+        <div class="notification-icon">👥</div>
+        <div class="notification-content">
+          <p><strong>New Referral!</strong></p>
+          <p>${friendName} signed up using your code ${referralCode}</p>
+          <span class="notification-time">Just now</span>
+        </div>
+      `;
+      
+      notificationList.insertBefore(notificationItem, notificationList.firstChild);
+      
+      // Add click handler for individual notification
+      notificationItem.addEventListener('click', function() {
+        this.classList.remove('unread');
+        updateNotificationBadge();
+      });
+      
+      updateNotificationBadge();
+      
+      console.log('Referral notification created successfully');
     }
 
     // Support functionality
@@ -1591,7 +1631,12 @@
       
       const userReferralCode = localStorage.getItem(`referral_code_${currentUser.uid}`);
       if (!userReferralCode) {
-        console.log('No referral code found for current user');
+        console.log('No referral code found for current user. Generating one...');
+        setupReferralCode(currentUser);
+        // Wait a bit for code to be generated
+        setTimeout(() => {
+          window.simulateReferralSignup(newUserEmail);
+        }, 1000);
         return;
       }
       
