@@ -1307,6 +1307,14 @@
           e.stopPropagation();
           profileDropdown.classList.remove('show');
           document.getElementById('refer-modal').classList.add('show');
+          
+          // Generate referral code immediately when modal opens
+          if (currentUser) {
+            console.log('Refer modal opened, generating code for:', currentUser.email);
+            setupReferralCode(currentUser);
+          } else {
+            console.log('No current user when opening refer modal');
+          }
         });
       }
 
@@ -1342,6 +1350,12 @@
         authButtons.style.display = 'none';
         userProfile.style.display = 'flex';
         userEmail.textContent = user.email;
+        
+        // Generate referral code immediately when user logs in
+        console.log('User authenticated, setting up referral code...');
+        setTimeout(() => {
+          setupReferralCode(user);
+        }, 1000);
         
         // Load profile picture from localStorage or use default
         const savedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
@@ -1465,6 +1479,18 @@
     // simulateReferralSignup('Sarah', 'SMART30E7YM');
     // simulateCashbackEarned('3.25', 'eBay');
     // simulateReferralBonus('5.00');
+
+    // TEST FUNCTION - Run this in console to force update referral code
+    window.testReferralCode = function() {
+      if (currentUser) {
+        console.log('=== MANUAL TEST ===');
+        console.log('Current user:', currentUser.email);
+        localStorage.removeItem(`referral_code_${currentUser.uid}`);
+        setupReferralCode(currentUser);
+      } else {
+        console.log('No user logged in');
+      }
+    };
   </script>
 </body>
 </html>
