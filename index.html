@@ -1568,6 +1568,11 @@
     });
     observer.observe(referModal, { attributes: true, attributeFilter: ['class'] });
 
+    // Ensure notification system is set up when page loads
+    setTimeout(() => {
+      setupNotifications();
+    }, 2000);
+
     // Copy referral code
     document.getElementById('copy-code-btn').addEventListener('click', () => {
       // Generate code first if it's still "Loading..."
