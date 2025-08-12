@@ -893,7 +893,7 @@
         <div class="notification-container">
           <div class="notification-bell" id="notification-bell">
             🔔
-            <span class="notification-badge" id="notification-badge">3</span>
+            <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
           </div>
           <div class="notification-dropdown" id="notification-dropdown">
             <div class="notification-header">
@@ -901,30 +901,11 @@
               <button class="mark-all-read" id="mark-all-read">Mark all as read</button>
             </div>
             <div class="notification-list" id="notification-list">
-              <!-- Sample notifications - these would be dynamically generated -->
-              <div class="notification-item unread">
-                <div class="notification-icon">👥</div>
-                <div class="notification-content">
-                  <p><strong>New Referral!</strong></p>
-                  <p>John signed up using your code SMART30E7YM</p>
-                  <span class="notification-time">2 hours ago</span>
-                </div>
-              </div>
-              <div class="notification-item unread">
-                <div class="notification-icon">💰</div>
-                <div class="notification-content">
-                  <p><strong>Cashback Earned!</strong></p>
-                  <p>You earned $2.50 cashback from Amazon</p>
-                  <span class="notification-time">1 day ago</span>
-                </div>
-              </div>
-              <div class="notification-item unread">
-                <div class="notification-icon">🎉</div>
-                <div class="notification-content">
-                  <p><strong>Referral Bonus!</strong></p>
-                  <p>Your friend earned $5! You got $5 bonus cashback</p>
-                  <span class="notification-time">2 days ago</span>
-                </div>
+              <!-- Notifications will be dynamically added here -->
+              <div class="no-notifications" id="no-notifications" style="padding: 2rem; text-align: center; color: #666;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔔</div>
+                <p>No notifications yet</p>
+                <p style="font-size: 0.8rem; margin-top: 0.5rem;">You'll see updates about referrals and cashback here</p>
               </div>
             </div>
             <div class="notification-footer">
@@ -1058,16 +1039,25 @@
 
     function setupNotifications() {
       const markAllReadBtn = document.getElementById('mark-all-read');
-      const notificationItems = document.querySelectorAll('.notification-item');
       const notificationBadge = document.getElementById('notification-badge');
 
       // Mark all notifications as read
       if (markAllReadBtn) {
         markAllReadBtn.addEventListener('click', function(e) {
           e.preventDefault();
+          
+          // Remove all notification items
+          const notificationList = document.getElementById('notification-list');
+          const notificationItems = notificationList.querySelectorAll('.notification-item');
+          
           notificationItems.forEach(item => {
-            item.classList.remove('unread');
+            item.remove();
           });
+          
+          // Show "no notifications" message
+          showNoNotificationsMessage();
+          
+          // Hide badge
           notificationBadge.style.display = 'none';
           
           // Store in localStorage that notifications are read
@@ -1075,16 +1065,35 @@
         });
       }
 
-      // Click on individual notifications
-      notificationItems.forEach(item => {
-        item.addEventListener('click', function() {
-          this.classList.remove('unread');
-          updateNotificationBadge();
-        });
-      });
-
-      // Update badge count
+      // Update badge count on load
       updateNotificationBadge();
+    }
+
+    function showNoNotificationsMessage() {
+      const notificationList = document.getElementById('notification-list');
+      const noNotificationsElement = document.getElementById('no-notifications');
+      
+      if (!noNotificationsElement) {
+        const noNotifications = document.createElement('div');
+        noNotifications.className = 'no-notifications';
+        noNotifications.id = 'no-notifications';
+        noNotifications.style.cssText = 'padding: 2rem; text-align: center; color: #666;';
+        noNotifications.innerHTML = `
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔔</div>
+          <p>No notifications yet</p>
+          <p style="font-size: 0.8rem; margin-top: 0.5rem;">You'll see updates about referrals and cashback here</p>
+        `;
+        notificationList.appendChild(noNotifications);
+      } else {
+        noNotificationsElement.style.display = 'block';
+      }
+    }
+
+    function hideNoNotificationsMessage() {
+      const noNotificationsElement = document.getElementById('no-notifications');
+      if (noNotificationsElement) {
+        noNotificationsElement.style.display = 'none';
+      }
     }
 
     function updateNotificationBadge() {
@@ -1101,6 +1110,10 @@
 
     function addNotification(type, title, message) {
       const notificationList = document.getElementById('notification-list');
+      
+      // Hide "no notifications" message
+      hideNoNotificationsMessage();
+      
       const notificationItem = document.createElement('div');
       notificationItem.className = 'notification-item unread';
       
@@ -1124,7 +1137,7 @@
       
       notificationList.insertBefore(notificationItem, notificationList.firstChild);
       
-      // Add click handler
+      // Add click handler for individual notification
       notificationItem.addEventListener('click', function() {
         this.classList.remove('unread');
         updateNotificationBadge();
@@ -1136,6 +1149,11 @@
       const allNotifications = notificationList.querySelectorAll('.notification-item');
       if (allNotifications.length > 10) {
         notificationList.removeChild(allNotifications[allNotifications.length - 1]);
+      }
+      
+      // Check if we need to show "no notifications" message
+      if (allNotifications.length === 0) {
+        showNoNotificationsMessage();
       }
     }
 
@@ -1386,6 +1404,11 @@
       const message = `💰 Earn cashback on every purchase with @Smartcashly! Use my code ${code} when you sign up - I get a bonus when you reach $5 in cashback! https://smartcashly.com/signup.html?ref=${code} #cashback #savings`;
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`, '_blank');
     });
+
+    // Demo functions available for testing:
+    // simulateReferralSignup('Sarah', 'SMART30E7YM');
+    // simulateCashbackEarned('3.25', 'eBay');
+    // simulateReferralBonus('5.00');
   </script>
 </body>
 </html>
