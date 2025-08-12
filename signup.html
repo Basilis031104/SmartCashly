@@ -466,8 +466,23 @@
         
         // Store referral code if provided
         if (su_referral.value.trim()) {
-          localStorage.setItem('signup_referral_code', su_referral.value.trim().toUpperCase());
-          console.log('Referral code saved:', su_referral.value.trim().toUpperCase());
+          const referralCode = su_referral.value.trim().toUpperCase();
+          console.log('Signup completed with referral code:', referralCode);
+          
+          // Store the referral usage
+          const referralUsage = {
+            referralCode: referralCode,
+            newUserEmail: su_email.value.trim(),
+            signupDate: new Date().toISOString(),
+            timestamp: Date.now()
+          };
+          
+          // Store in localStorage for the notification system
+          const existingReferrals = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+          existingReferrals.push(referralUsage);
+          localStorage.setItem('pending_referral_notifications', JSON.stringify(existingReferrals));
+          
+          console.log('Referral usage stored for notification system');
         }
         
         window.location = "index.html";
