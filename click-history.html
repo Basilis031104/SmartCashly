@@ -248,7 +248,7 @@
     }
 
     .history-header p {
-      color: #008e45;
+      color: #000000 !important;
       font-size: 1rem;
       font-weight: 700;
     }
@@ -400,19 +400,38 @@
     }
 
     .no-history h3 {
-      color: #008e45;
+      color: #000000 !important;
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
 
     .no-history p {
-      color: #008e45 !important;
+      color: #000000 !important;
       font-weight: 700 !important;
     }
 
     .no-history-icon {
       font-size: 4rem;
       margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Custom 50 icon */
+    .custom-50-icon {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      background: #008e45;
+      border-radius: 12px;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: bold;
+      line-height: 80px;
+      text-align: center;
+      margin-bottom: 1rem;
+      border: 3px solid #006633;
+      box-shadow: 0 4px 12px rgba(0, 142, 69, 0.3);
     }
 
     footer {
@@ -484,7 +503,7 @@
     <div class="history-container">
       <div class="history-header">
         <h1>🛍️ Click History</h1>
-        <p style="color: #008e45; font-weight: 700;">Detailed history of your last 50 clicks</p>
+        <p style="color: #000000 !important; font-weight: 700;">Detailed history of your last 50 clicks</p>
       </div>
 
       <div class="filter-controls">
@@ -501,9 +520,9 @@
         </div>
         <div id="history-items" class="history-items">
           <div class="no-history">
-            <div class="no-history-icon">🏪</div>
-            <h3>No clicks yet!</h3>
-            <p style="font-size: 0.9rem; color: #888; margin-top: 0.5rem;">
+            <div class="custom-50-icon">50</div>
+            <h3 style="color: #000000 !important;">No clicks yet!</h3>
+            <p style="font-size: 0.9rem; color: #000000 !important; margin-top: 0.5rem; font-weight: 700 !important;">
               When you visit partner stores through Smartcashly, they'll appear here.
             </p>
           </div>
