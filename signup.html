@@ -452,56 +452,90 @@
     const su_referral = document.getElementById("su_referral");
     const su_error = document.getElementById("su_error");
 
-    document.getElementById("signup-form").addEventListener("submit", async e => {
-      e.preventDefault();
-      su_error.textContent = "";
+    // REPLACE the existing signup form handler with this:
+document.getElementById("signup-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  su_error.textContent = "";
 
-      if (su_pass.value !== su_confirm.value) {
-        su_error.textContent = "ERROR: Passwords do not match";
-        return;
-      }
+  if (su_pass.value !== su_confirm.value) {
+    su_error.textContent = "ERROR: Passwords do not match";
+    return;
+  }
+  
+  try {
+    // Create the user account first
+    const userCredential = await smartAuth.signUp(su_email.value.trim(), su_pass.value);
+    const newUser = userCredential.user;
+    
+    // Process referral code AFTER successful signup
+    if (su_referral.value.trim()) {
+      const referralCode = su_referral.value.trim().toUpperCase();
+      const newUserEmail = su_email.value.trim();
       
-      try {
-        await smartAuth.signUp(su_email.value.trim(), su_pass.value);
-        
-        // Store referral code if provided
-        if (su_referral.value.trim()) {
-          const referralCode = su_referral.value.trim().toUpperCase();
-          console.log('Signup completed with referral code:', referralCode);
-          
-          // Store the referral usage
-          const referralUsage = {
-            referralCode: referralCode,
-            newUserEmail: su_email.value.trim(),
-            signupDate: new Date().toISOString(),
-            timestamp: Date.now()
-          };
-          
-          // Store in localStorage for the notification system
-          const existingReferrals = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-          existingReferrals.push(referralUsage);
-          localStorage.setItem('pending_referral_notifications', JSON.stringify(existingReferrals));
-          
-          console.log('Referral usage stored for notification system');
-        }
-        
-        window.location = "index.html";
-      } catch (err) {
-        let errorMessage = "ERROR: An error occurred. Please try again.";
-        
-        if (err.code.includes("email-already-in-use")) {
-          errorMessage = "ERROR: Email already in use";
-        } else if (err.code.includes("weak-password")) {
-          errorMessage = "ERROR: Password is too weak";
-        } else if (err.code.includes("invalid-email")) {
-          errorMessage = "ERROR: Invalid email address";
-        } else if (err.code.includes("network-request-failed")) {
-          errorMessage = "ERROR: Network error. Please check your connection";
-        }
-        
-        su_error.textContent = errorMessage;
-      }
-    });
+      console.log('🎯 Processing referral signup:', {
+        referralCode,
+        newUserEmail,
+        newUserId: newUser.uid
+      });
+      
+      // Create notification data
+      const referralNotification = {
+        id: `referral_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        type: 'referral_signup',
+        referralCode: referralCode,
+        newUserEmail: newUserEmail,
+        newUserId: newUser.uid,
+        newUserDisplayName: newUserEmail.split('@')[0], // Use email prefix as display name
+        timestamp: Date.now(),
+        signupDate: new Date().toISOString(),
+        read: false,
+        processed: false
+      };
+      
+      // Store the notification in pending queue
+      const pendingNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      pendingNotifications.push(referralNotification);
+      localStorage.setItem('pending_referral_notifications', JSON.stringify(pendingNotifications));
+      
+      // Also store referral usage for analytics
+      const referralUsages = JSON.parse(localStorage.getItem('referral_usages') || '[]');
+      referralUsages.push({
+        referralCode,
+        newUserEmail,
+        newUserId: newUser.uid,
+        timestamp: Date.now(),
+        signupDate: new Date().toISOString()
+      });
+      localStorage.setItem('referral_usages', JSON.stringify(referralUsages));
+      
+      console.log('✅ Referral notification queued successfully');
+      
+      // Show success message to the new user
+      su_error.style.color = '#008e45';
+      su_error.textContent = `✅ Account created! You used referral code: ${referralCode}`;
+    }
+    
+    // Small delay then redirect
+    setTimeout(() => {
+      window.location = "index.html";
+    }, 1500);
+    
+  } catch (err) {
+    let errorMessage = "ERROR: An error occurred. Please try again.";
+    
+    if (err.code.includes("email-already-in-use")) {
+      errorMessage = "ERROR: Email already in use";
+    } else if (err.code.includes("weak-password")) {
+      errorMessage = "ERROR: Password is too weak";
+    } else if (err.code.includes("invalid-email")) {
+      errorMessage = "ERROR: Invalid email address";
+    } else if (err.code.includes("network-request-failed")) {
+      errorMessage = "ERROR: Network error. Please check your connection";
+    }
+    
+    su_error.textContent = errorMessage;
+  }
+});
   </script>
 </body>
 </html>
