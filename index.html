@@ -1049,8 +1049,16 @@
         if (user) {
           setupProfileDropdown();
           setupReferralCode(user);
+          // Check for new referral notifications when user logs in
+          setTimeout(() => {
+            checkForReferralNotifications(user);
+          }, 1000);
         }
       });
+
+      // Setup notification system immediately
+      setupNotifications();
+    });
 
     function setupNotifications() {
       const markAllReadBtn = document.getElementById('mark-all-read');
@@ -1111,81 +1119,6 @@
       }
     }
 
-    function updateNotificationBadge() {
-      const unreadCount = document.querySelectorAll('.notification-item.unread').length;
-      const badge = document.getElementById('notification-badge');
-      
-      if (unreadCount > 0) {
-        badge.textContent = unreadCount;
-        badge.style.display = 'flex';
-      } else {
-        badge.style.display = 'none';
-      }
-    }
-
-    function addNotification(type, title, message) {
-      const notificationList = document.getElementById('notification-list');
-      
-      // Hide "no notifications" message
-      hideNoNotificationsMessage();
-      
-      const notificationItem = document.createElement('div');
-      notificationItem.className = 'notification-item unread';
-      
-      const icons = {
-        referral: '👥',
-        cashback: '💰',
-        bonus: '🎉',
-        system: '🔔'
-      };
-      
-      const timeAgo = 'Just now';
-      
-      notificationItem.innerHTML = `
-        <div class="notification-icon">${icons[type] || '🔔'}</div>
-        <div class="notification-content">
-          <p><strong>${title}</strong></p>
-          <p>${message}</p>
-          <span class="notification-time">${timeAgo}</span>
-        </div>
-      `;
-      
-      notificationList.insertBefore(notificationItem, notificationList.firstChild);
-      
-      // Add click handler for individual notification
-      notificationItem.addEventListener('click', function() {
-        this.classList.remove('unread');
-        updateNotificationBadge();
-      });
-      
-      updateNotificationBadge();
-      
-      // Auto-remove old notifications (keep max 10)
-      const allNotifications = notificationList.querySelectorAll('.notification-item');
-      if (allNotifications.length > 10) {
-        notificationList.removeChild(allNotifications[allNotifications.length - 1]);
-      }
-      
-      // Check if we need to show "no notifications" message
-      if (allNotifications.length === 0) {
-        showNoNotificationsMessage();
-      }
-    }
-
-    // Example functions to simulate notifications (these would be called by your backend)
-    function simulateReferralSignup(friendName, referralCode) {
-      addNotification('referral', 'New Referral!', `${friendName} signed up using your code ${referralCode}`);
-    }
-
-    function simulateCashbackEarned(amount, store) {
-      addNotification('cashback', 'Cashback Earned!', `You earned ${amount} cashback from ${store}`);
-    }
-
-    function simulateReferralBonus(amount) {
-      addNotification('bonus', 'Referral Bonus!', `Your friend earned $5! You got ${amount} bonus cashback`);
-    }
-    });
-
     function setupReferralCode(user) {
       console.log('=== REFERRAL CODE SETUP ===');
       console.log('User:', user.email);
@@ -1203,17 +1136,14 @@
       if (storedCode) {
         console.log('Using stored referral code:', storedCode);
         referCodeElement.textContent = storedCode;
-        
-        // Store the mapping of code to user for notifications
         storeReferralMapping(storedCode, user);
         return;
       }
       
-      // Generate a truly unique referral code
-      const timestamp = Date.now().toString().slice(-4); // Last 4 digits of timestamp
-      const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase(); // 4 random chars
-      const userPart = user.uid.substring(0, 4).toUpperCase(); // First 4 chars of user ID
-      
+      // Generate a unique referral code
+      const timestamp = Date.now().toString().slice(-4);
+      const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
+      const userPart = user.uid.substring(0, 4).toUpperCase();
       const uniqueCode = `SMART-${userPart}${randomPart}${timestamp}`;
       
       console.log('Generated NEW referral code:', uniqueCode);
@@ -1221,33 +1151,152 @@
       // Store and display the code
       localStorage.setItem(`referral_code_${user.uid}`, uniqueCode);
       referCodeElement.textContent = uniqueCode;
-      
-      // Store the mapping of code to user for notifications
       storeReferralMapping(uniqueCode, user);
       
       console.log('=== REFERRAL CODE SETUP COMPLETE ===');
     }
 
-    // Store mapping of referral codes to users for notification system
+    // Store mapping of referral codes to users
     function storeReferralMapping(referralCode, user) {
       const mappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
       mappings[referralCode] = {
         userId: user.uid,
         email: user.email,
+        displayName: user.displayName || user.email.split('@')[0],
         createdAt: new Date().toISOString()
       };
       localStorage.setItem('referral_code_mappings', JSON.stringify(mappings));
-      console.log('Stored referral mapping:', referralCode, '→', user.email);
+      console.log('📝 Stored referral mapping:', referralCode, '→', user.email);
     }
 
-    // Manual function to force regenerate code (for testing)
-    function forceNewReferralCode() {
-      if (currentUser) {
-        localStorage.removeItem(`referral_code_${currentUser.uid}`);
-        setupReferralCode(currentUser);
-        console.log('Forced new referral code generation');
+    // Enhanced notification checking
+    function checkForReferralNotifications(user) {
+      console.log('=== 🔔 CHECKING FOR REFERRAL NOTIFICATIONS ===');
+      
+      const pendingNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      const referralMappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
+      const processedNotifications = JSON.parse(localStorage.getItem(`processed_notifications_${user.uid}`) || '[]');
+      
+      console.log('📦 Pending notifications:', pendingNotifications.length);
+      console.log('🗺️ Referral mappings:', Object.keys(referralMappings).length);
+      
+      let newNotifications = 0;
+      
+      // Process each pending notification
+      pendingNotifications.forEach((notification, index) => {
+        // Check if this referral code belongs to the current user
+        const mapping = referralMappings[notification.referralCode];
+        
+        if (mapping && mapping.userId === user.uid && !notification.processed) {
+          // Check if we already processed this notification
+          if (!processedNotifications.includes(notification.id)) {
+            console.log('🎉 Creating notification for referral:', notification);
+            
+            // Create the notification
+            setTimeout(() => {
+              createReferralNotification(
+                notification.newUserDisplayName, 
+                notification.referralCode,
+                notification.timestamp
+              );
+            }, 500);
+            
+            // Mark as processed
+            processedNotifications.push(notification.id);
+            notification.processed = true;
+            newNotifications++;
+          }
+        }
+      });
+      
+      // Update storage
+      localStorage.setItem('pending_referral_notifications', JSON.stringify(pendingNotifications));
+      localStorage.setItem(`processed_notifications_${user.uid}`, JSON.stringify(processedNotifications));
+      
+      if (newNotifications > 0) {
+        console.log(`✅ Created ${newNotifications} new referral notifications`);
+        updateNotificationBadge();
       } else {
-        console.log('No user logged in');
+        console.log('ℹ️ No new referral notifications');
+      }
+      
+      console.log('=== 🔔 NOTIFICATION CHECK COMPLETE ===');
+    }
+
+    // Enhanced notification creation
+    function createReferralNotification(friendName, referralCode, timestamp = null) {
+      console.log('🔔 Creating referral notification:', {friendName, referralCode});
+      
+      const notificationList = document.getElementById('notification-list');
+      if (!notificationList) {
+        console.error('❌ Notification list not found');
+        return;
+      }
+      
+      // Hide "no notifications" message
+      const noNotificationsElement = document.getElementById('no-notifications');
+      if (noNotificationsElement) {
+        noNotificationsElement.style.display = 'none';
+      }
+      
+      // Create notification element
+      const notificationItem = document.createElement('div');
+      notificationItem.className = 'notification-item unread';
+      notificationItem.dataset.timestamp = timestamp || Date.now();
+      
+      // Calculate time ago
+      const timeAgo = timestamp ? getTimeAgo(timestamp) : 'Just now';
+      
+      notificationItem.innerHTML = `
+        <div class="notification-icon">🎉</div>
+        <div class="notification-content">
+          <p><strong>🎊 New Referral!</strong></p>
+          <p><strong>${friendName}</strong> signed up using your referral code <strong>${referralCode}</strong></p>
+          <span class="notification-time">${timeAgo}</span>
+        </div>
+      `;
+      
+      // Add to top of list
+      notificationList.insertBefore(notificationItem, notificationList.firstChild);
+      
+      // Add click handler
+      notificationItem.addEventListener('click', function() {
+        this.classList.remove('unread');
+        updateNotificationBadge();
+      });
+      
+      // Update badge
+      updateNotificationBadge();
+      
+      console.log('✅ Referral notification created successfully');
+    }
+
+    // Utility function to calculate time ago
+    function getTimeAgo(timestamp) {
+      const now = Date.now();
+      const diff = now - timestamp;
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
+      
+      if (minutes < 1) return 'Just now';
+      if (minutes < 60) return `${minutes}m ago`;
+      if (hours < 24) return `${hours}h ago`;
+      return `${days}d ago`;
+    }
+
+    // Enhanced badge update
+    function updateNotificationBadge() {
+      const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+      const badge = document.getElementById('notification-badge');
+      
+      if (badge) {
+        if (unreadCount > 0) {
+          badge.textContent = unreadCount;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
       }
     }
 
@@ -1353,9 +1402,6 @@
           }
         });
       }
-
-      // Setup notification functionality
-      setupNotifications();
     }
 
     function updateAuthUI(user) {
@@ -1368,14 +1414,6 @@
         authButtons.style.display = 'none';
         userProfile.style.display = 'flex';
         userEmail.textContent = user.email;
-        
-        // Generate referral code immediately when user logs in
-        console.log('User authenticated, setting up referral code...');
-        setTimeout(() => {
-          setupReferralCode(user);
-          // Check for new referral notifications
-          checkForReferralNotifications(user);
-        }, 1000);
         
         // Load profile picture from localStorage or use default
         const savedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
@@ -1392,137 +1430,6 @@
         authButtons.style.display = 'flex';
         userProfile.style.display = 'none';
       }
-    }
-
-    // Check for new referral notifications when user logs in
-   // REPLACE the existing checkForReferralNotifications function with this:
-function checkForReferralNotifications(user) {
-  console.log('=== 🔔 CHECKING FOR REFERRAL NOTIFICATIONS ===');
-  
-  const pendingNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-  const referralMappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
-  const processedNotifications = JSON.parse(localStorage.getItem(`processed_notifications_${user.uid}`) || '[]');
-  
-  console.log('📦 Pending notifications:', pendingNotifications.length);
-  console.log('🗺️ Referral mappings:', Object.keys(referralMappings).length);
-  
-  let newNotifications = 0;
-  
-  // Process each pending notification
-  pendingNotifications.forEach((notification, index) => {
-    // Check if this referral code belongs to the current user
-    const mapping = referralMappings[notification.referralCode];
-    
-    if (mapping && mapping.userId === user.uid && !notification.processed) {
-      // Check if we already processed this notification
-      if (!processedNotifications.includes(notification.id)) {
-        console.log('🎉 Creating notification for referral:', notification);
-        
-        // Create the notification
-        setTimeout(() => {
-          createReferralNotification(
-            notification.newUserDisplayName, 
-            notification.referralCode,
-            notification.timestamp
-          );
-        }, 500);
-        
-        // Mark as processed
-        processedNotifications.push(notification.id);
-        notification.processed = true;
-        newNotifications++;
-      }
-    }
-  });
-  
-  // Update storage
-  localStorage.setItem('pending_referral_notifications', JSON.stringify(pendingNotifications));
-  localStorage.setItem(`processed_notifications_${user.uid}`, JSON.stringify(processedNotifications));
-  
-  if (newNotifications > 0) {
-    console.log(`✅ Created ${newNotifications} new referral notifications`);
-    updateNotificationBadge();
-  } else {
-    console.log('ℹ️ No new referral notifications');
-  }
-  
-  console.log('=== 🔔 NOTIFICATION CHECK COMPLETE ===');
-}
-      
-      // Save processed notifications
-      localStorage.setItem(`processed_notifications_${user.uid}`, JSON.stringify(processedNotifications));
-      
-      if (newNotifications > 0) {
-        console.log(`Created ${newNotifications} new referral notifications`);
-      } else {
-        console.log('No new referral notifications');
-      }
-      
-      console.log('=== REFERRAL NOTIFICATION CHECK COMPLETE ===');
-    }
-
-    // Create referral notification manually
-    // REPLACE the existing createReferralNotification function with this:
-function createReferralNotification(friendName, referralCode, timestamp = null) {
-  console.log('🔔 Creating referral notification:', {friendName, referralCode});
-  
-  const notificationList = document.getElementById('notification-list');
-  if (!notificationList) {
-    console.error('❌ Notification list not found');
-    return;
-  }
-  
-  // Hide "no notifications" message
-  const noNotificationsElement = document.getElementById('no-notifications');
-  if (noNotificationsElement) {
-    noNotificationsElement.style.display = 'none';
-  }
-  
-  // Create notification element
-  const notificationItem = document.createElement('div');
-  notificationItem.className = 'notification-item unread';
-  notificationItem.dataset.timestamp = timestamp || Date.now();
-  
-  // Calculate time ago
-  const timeAgo = timestamp ? getTimeAgo(timestamp) : 'Just now';
-  
-  notificationItem.innerHTML = `
-    <div class="notification-icon">🎉</div>
-    <div class="notification-content">
-      <p><strong>🎊 New Referral!</strong></p>
-      <p><strong>${friendName}</strong> signed up using your referral code <strong>${referralCode}</strong></p>
-      <span class="notification-time">${timeAgo}</span>
-    </div>
-  `;
-  
-  // Add to top of list
-  notificationList.insertBefore(notificationItem, notificationList.firstChild);
-  
-  // Add click handler
-  notificationItem.addEventListener('click', function() {
-    this.classList.remove('unread');
-    updateNotificationBadge();
-  });
-  
-  // Update badge
-  updateNotificationBadge();
-  
-  console.log('✅ Referral notification created successfully');
-}
-      
-      // Update notification badge count
-      const unreadCount = document.querySelectorAll('.notification-item.unread').length;
-      const badge = document.getElementById('notification-badge');
-      if (badge) {
-        if (unreadCount > 0) {
-          badge.textContent = unreadCount;
-          badge.style.display = 'flex';
-        } else {
-          badge.style.display = 'none';
-        }
-      }
-      
-      console.log('Referral notification created successfully');
     }
 
     // Support functionality
@@ -1587,11 +1494,6 @@ function createReferralNotification(friendName, referralCode, timestamp = null) 
       });
     });
     observer.observe(referModal, { attributes: true, attributeFilter: ['class'] });
-
-    // Ensure notification system is set up when page loads
-    setTimeout(() => {
-      setupNotifications();
-    }, 2000);
 
     // Copy referral code
     document.getElementById('copy-code-btn').addEventListener('click', () => {
@@ -1658,69 +1560,68 @@ function createReferralNotification(friendName, referralCode, timestamp = null) 
     });
 
     // TEST FUNCTION - Available immediately in console
-    window.testReferralCode = function() {
-      console.log('=== MANUAL TEST ===');
-      if (currentUser) {
-        console.log('Current user:', currentUser.email);
-        console.log('User UID:', currentUser.uid);
-        localStorage.removeItem(`referral_code_${currentUser.uid}`);
-        setupReferralCode(currentUser);
-      } else {
-        console.log('No user logged in - currentUser is:', currentUser);
-      }
-    };
-
-    // TEST FUNCTION - Simulate someone signing up with your referral code
-    window.simulateReferralSignup = function(newUserEmail) {
+    window.testReferralNotification = function(testUserEmail = 'john@example.com') {
       if (!currentUser) {
-        console.log('No user logged in');
+        console.log('❌ No user logged in');
         return;
       }
       
+      console.log('🧪 Testing referral notification system...');
+      
+      // Get current user's referral code
       const userReferralCode = localStorage.getItem(`referral_code_${currentUser.uid}`);
       if (!userReferralCode) {
-        console.log('No referral code found for current user. Generating one...');
+        console.log('⚠️ No referral code found. Generating one...');
         setupReferralCode(currentUser);
-        // Wait a bit for code to be generated
-        setTimeout(() => {
-          window.simulateReferralSignup(newUserEmail);
-        }, 1000);
+        setTimeout(() => window.testReferralNotification(testUserEmail), 1000);
         return;
       }
       
-      console.log('=== SIMULATING REFERRAL SIGNUP ===');
-      console.log('New user email:', newUserEmail);
-      console.log('Using referral code:', userReferralCode);
+      console.log('📋 Using referral code:', userReferralCode);
       
-      // Create a fake referral usage
-      const referralUsage = {
+      // Simulate someone signing up with the current user's referral code
+      const mockSignup = {
+        id: `test_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        type: 'referral_signup',
         referralCode: userReferralCode,
-        newUserEmail: newUserEmail,
+        newUserEmail: testUserEmail,
+        newUserId: 'test_user_' + Date.now(),
+        newUserDisplayName: testUserEmail.split('@')[0],
+        timestamp: Date.now(),
         signupDate: new Date().toISOString(),
-        timestamp: Date.now()
+        read: false,
+        processed: false
       };
       
-      // Store in localStorage
-      const existingReferrals = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-      existingReferrals.push(referralUsage);
-      localStorage.setItem('pending_referral_notifications', JSON.stringify(existingReferrals));
+      // Add to pending notifications
+      const pendingNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      pendingNotifications.push(mockSignup);
+      localStorage.setItem('pending_referral_notifications', JSON.stringify(pendingNotifications));
       
-      console.log('Simulated referral signup stored. Now checking for notifications...');
+      console.log('✅ Mock signup created. Checking for notifications...');
       
       // Trigger notification check
       setTimeout(() => {
         checkForReferralNotifications(currentUser);
       }, 500);
+      
+      console.log('🎉 Test completed! Check your notification bell.');
     };
 
-    // Also make setupReferralCode available globally for testing
+    // Clear test data
+    window.clearTestData = function() {
+      localStorage.removeItem('pending_referral_notifications');
+      localStorage.removeItem('referral_usages');
+      if (currentUser) {
+        localStorage.removeItem(`processed_notifications_${currentUser.uid}`);
+      }
+      console.log('🧹 Test data cleared');
+    };
+
+    // Make key functions available globally for testing
     window.setupReferralCode = setupReferralCode;
     window.checkForReferralNotifications = checkForReferralNotifications;
-
-    // Demo functions available for testing:
-    // simulateReferralSignup('sarah@example.com');
-    // simulateCashbackEarned('3.25', 'eBay');
-    // simulateReferralBonus('5.00');
+    window.createReferralNotification = createReferralNotification;
   </script>
 </body>
 </html>
