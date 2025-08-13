@@ -1395,42 +1395,59 @@
     }
 
     // Check for new referral notifications when user logs in
-    function checkForReferralNotifications(user) {
-      console.log('=== CHECKING FOR REFERRAL NOTIFICATIONS ===');
-      
-      // Get pending referral notifications
-      const pendingReferrals = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-      const referralMappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
-      const processedNotifications = JSON.parse(localStorage.getItem(`processed_notifications_${user.uid}`) || '[]');
-      
-      console.log('Pending referrals:', pendingReferrals);
-      console.log('Referral mappings:', referralMappings);
-      
-      let newNotifications = 0;
-      
-      pendingReferrals.forEach(referral => {
-        // Check if this referral code belongs to the current user
-        const mapping = referralMappings[referral.referralCode];
+   // REPLACE the existing checkForReferralNotifications function with this:
+function checkForReferralNotifications(user) {
+  console.log('=== 🔔 CHECKING FOR REFERRAL NOTIFICATIONS ===');
+  
+  const pendingNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+  const referralMappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
+  const processedNotifications = JSON.parse(localStorage.getItem(`processed_notifications_${user.uid}`) || '[]');
+  
+  console.log('📦 Pending notifications:', pendingNotifications.length);
+  console.log('🗺️ Referral mappings:', Object.keys(referralMappings).length);
+  
+  let newNotifications = 0;
+  
+  // Process each pending notification
+  pendingNotifications.forEach((notification, index) => {
+    // Check if this referral code belongs to the current user
+    const mapping = referralMappings[notification.referralCode];
+    
+    if (mapping && mapping.userId === user.uid && !notification.processed) {
+      // Check if we already processed this notification
+      if (!processedNotifications.includes(notification.id)) {
+        console.log('🎉 Creating notification for referral:', notification);
         
-        if (mapping && mapping.userId === user.uid) {
-          // Check if we already processed this notification
-          const notificationId = `${referral.referralCode}_${referral.timestamp}`;
-          
-          if (!processedNotifications.includes(notificationId)) {
-            console.log('Creating notification for referral:', referral);
-            
-            // Create the notification manually (since addNotification might not be available yet)
-            setTimeout(() => {
-              const friendName = referral.newUserEmail.split('@')[0]; // Get name part of email
-              createReferralNotification(friendName, referral.referralCode);
-            }, 1000);
-            
-            // Mark as processed
-            processedNotifications.push(notificationId);
-            newNotifications++;
-          }
-        }
-      });
+        // Create the notification
+        setTimeout(() => {
+          createReferralNotification(
+            notification.newUserDisplayName, 
+            notification.referralCode,
+            notification.timestamp
+          );
+        }, 500);
+        
+        // Mark as processed
+        processedNotifications.push(notification.id);
+        notification.processed = true;
+        newNotifications++;
+      }
+    }
+  });
+  
+  // Update storage
+  localStorage.setItem('pending_referral_notifications', JSON.stringify(pendingNotifications));
+  localStorage.setItem(`processed_notifications_${user.uid}`, JSON.stringify(processedNotifications));
+  
+  if (newNotifications > 0) {
+    console.log(`✅ Created ${newNotifications} new referral notifications`);
+    updateNotificationBadge();
+  } else {
+    console.log('ℹ️ No new referral notifications');
+  }
+  
+  console.log('=== 🔔 NOTIFICATION CHECK COMPLETE ===');
+}
       
       // Save processed notifications
       localStorage.setItem(`processed_notifications_${user.uid}`, JSON.stringify(processedNotifications));
