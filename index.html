@@ -1462,50 +1462,53 @@ function checkForReferralNotifications(user) {
     }
 
     // Create referral notification manually
-    function createReferralNotification(friendName, referralCode) {
-      console.log('Creating referral notification for:', friendName, referralCode);
-      
-      const notificationList = document.getElementById('notification-list');
-      if (!notificationList) {
-        console.error('Notification list not found');
-        return;
-      }
-      
-      // Hide "no notifications" message
-      const noNotificationsElement = document.getElementById('no-notifications');
-      if (noNotificationsElement) {
-        noNotificationsElement.style.display = 'none';
-      }
-      
-      const notificationItem = document.createElement('div');
-      notificationItem.className = 'notification-item unread';
-      
-      notificationItem.innerHTML = `
-        <div class="notification-icon">👥</div>
-        <div class="notification-content">
-          <p><strong>New Referral!</strong></p>
-          <p>${friendName} signed up using your code ${referralCode}</p>
-          <span class="notification-time">Just now</span>
-        </div>
-      `;
-      
-      notificationList.insertBefore(notificationItem, notificationList.firstChild);
-      
-      // Add click handler for individual notification
-      notificationItem.addEventListener('click', function() {
-        this.classList.remove('unread');
-        // Update badge after clicking
-        const unreadCount = document.querySelectorAll('.notification-item.unread').length;
-        const badge = document.getElementById('notification-badge');
-        if (badge) {
-          if (unreadCount > 0) {
-            badge.textContent = unreadCount;
-            badge.style.display = 'flex';
-          } else {
-            badge.style.display = 'none';
-          }
-        }
-      });
+    // REPLACE the existing createReferralNotification function with this:
+function createReferralNotification(friendName, referralCode, timestamp = null) {
+  console.log('🔔 Creating referral notification:', {friendName, referralCode});
+  
+  const notificationList = document.getElementById('notification-list');
+  if (!notificationList) {
+    console.error('❌ Notification list not found');
+    return;
+  }
+  
+  // Hide "no notifications" message
+  const noNotificationsElement = document.getElementById('no-notifications');
+  if (noNotificationsElement) {
+    noNotificationsElement.style.display = 'none';
+  }
+  
+  // Create notification element
+  const notificationItem = document.createElement('div');
+  notificationItem.className = 'notification-item unread';
+  notificationItem.dataset.timestamp = timestamp || Date.now();
+  
+  // Calculate time ago
+  const timeAgo = timestamp ? getTimeAgo(timestamp) : 'Just now';
+  
+  notificationItem.innerHTML = `
+    <div class="notification-icon">🎉</div>
+    <div class="notification-content">
+      <p><strong>🎊 New Referral!</strong></p>
+      <p><strong>${friendName}</strong> signed up using your referral code <strong>${referralCode}</strong></p>
+      <span class="notification-time">${timeAgo}</span>
+    </div>
+  `;
+  
+  // Add to top of list
+  notificationList.insertBefore(notificationItem, notificationList.firstChild);
+  
+  // Add click handler
+  notificationItem.addEventListener('click', function() {
+    this.classList.remove('unread');
+    updateNotificationBadge();
+  });
+  
+  // Update badge
+  updateNotificationBadge();
+  
+  console.log('✅ Referral notification created successfully');
+}
       
       // Update notification badge count
       const unreadCount = document.querySelectorAll('.notification-item.unread').length;
