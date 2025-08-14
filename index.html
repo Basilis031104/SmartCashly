@@ -512,8 +512,152 @@
       position: relative;
       z-index: 5;
     }
-    main h2 { font-size: 1.9rem; margin-bottom: .5rem; color: #222; }
-    main p  { font-size: 1rem;  color: #222; font-weight: bold; }
+    
+    .welcome-section {
+      margin-bottom: 4rem;
+    }
+    
+    .welcome-section h2 { 
+      font-size: 1.9rem; 
+      margin-bottom: .5rem; 
+      color: #222; 
+    }
+    
+    .welcome-section p  { 
+      font-size: 1rem;  
+      color: #222; 
+      font-weight: bold; 
+    }
+
+    /* STORES SECTION */
+    .stores-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #008e45;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .stores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .store-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .store-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      border-color: #008e45;
+    }
+
+    .store-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #008e45, #00a852);
+    }
+
+    .store-logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+      display: block;
+    }
+
+    .store-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #008e45;
+      margin-bottom: 0.5rem;
+    }
+
+    .store-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .cashback-badge {
+      background: linear-gradient(135deg, #ff6b35, #ff8a50);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    }
+
+    .store-features {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .store-features li {
+      color: #666;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .store-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #008e45;
+      font-weight: bold;
+    }
+
+    .shop-now-btn {
+      background: #008e45;
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    .shop-now-btn:hover {
+      background: #006633;
+      transform: scale(1.02);
+    }
 
     footer {
       text-align: center;
@@ -876,6 +1020,18 @@
       background: #1DA1F2;
       color: white;
     }
+
+    @media (max-width: 768px) {
+      .stores-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .search-bar {
+        margin-left: 20px;
+        max-width: 300px;
+      }
+    }
   </style>
 </head>
 
@@ -943,8 +1099,46 @@
   </header>
 
   <main>
-    <h2>Welcome to Smartcashly</h2>
-    <p>Your favourite cashback &amp; coupon platform.</p>
+    <div class="welcome-section">
+      <h2>Welcome to Smartcashly</h2>
+      <p>Your favourite cashback &amp; coupon platform.</p>
+    </div>
+
+    <!-- STORES SECTION -->
+    <div class="stores-section">
+      <h2 class="section-title">🛍️ Featured Stores</h2>
+      <div class="stores-grid">
+        <!-- Box Now Store Card -->
+        <a href="store-boxnow.html" class="store-card">
+          <img src="box-now.png" alt="Box Now Logo" class="store-logo" />
+          <div class="store-name">Box Now Greece</div>
+          <div class="store-description">Fast and reliable delivery service throughout Greece with amazing cashback rewards</div>
+          <div class="cashback-badge">💰 Up to 20% Cashback</div>
+          <ul class="store-features">
+            <li>Package delivery across Greece</li>
+            <li>Special rates to Bulgaria</li>
+            <li>Send packages from 2€</li>
+            <li>50% discount offers available</li>
+          </ul>
+          <button class="shop-now-btn">🚀 Shop Now & Earn Cashback</button>
+        </a>
+
+        <!-- Placeholder for more stores -->
+        <div class="store-card" style="opacity: 0.6; cursor: not-allowed;">
+          <div style="width: 100px; height: 100px; background: #f0f0f0; border-radius: 12px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🏪</div>
+          <div class="store-name">More Stores</div>
+          <div class="store-description">We're constantly adding new partner stores to give you more cashback opportunities!</div>
+          <div class="cashback-badge">💰 Coming Soon</div>
+          <ul class="store-features">
+            <li>Fashion & Clothing</li>
+            <li>Electronics & Tech</li>
+            <li>Home & Garden</li>
+            <li>Travel & Hotels</li>
+          </ul>
+          <button class="shop-now-btn" disabled>📅 Coming Soon</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -1166,7 +1360,7 @@
         createdAt: new Date().toISOString()
       };
       localStorage.setItem('referral_code_mappings', JSON.stringify(mappings));
-      console.log('📝 Stored referral mapping:', referralCode, '→', user.email);
+      console.log('🗂️ Stored referral mapping:', referralCode, '→', user.email);
     }
 
     // Enhanced notification checking
