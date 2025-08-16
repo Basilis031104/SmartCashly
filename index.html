@@ -542,6 +542,13 @@
       font-weight: bold;
       margin-bottom: 2rem;
       text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: inline-block;
     }
 
     .stores-grid {
@@ -572,15 +579,7 @@
       border-color: #008e45;
     }
 
-    .store-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #008e45, #00a852);
-    }
+
 
     .store-logo {
       width: 100px;
@@ -600,10 +599,11 @@
     }
 
     .store-description {
-      color: #666;
+      color: #333;
       font-size: 0.9rem;
       margin-bottom: 1rem;
       line-height: 1.4;
+      font-weight: bold;
     }
 
     .cashback-badge {
@@ -625,38 +625,21 @@
     }
 
     .store-features li {
-      color: #666;
+      color: #333;
       font-size: 0.85rem;
       margin-bottom: 0.5rem;
       padding-left: 1.2rem;
       position: relative;
+      font-weight: bold;
     }
 
     .store-features li::before {
-      content: '';
+      content: '•';
       position: absolute;
       left: 0;
-      width: 8px;
-      height: 2px;
-      background: #008e45;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .store-features li:nth-child(1)::before {
-      transform: translateY(-50%) rotate(0deg); /* horizontal line */
-    }
-
-    .store-features li:nth-child(2)::before {
-      transform: translateY(-50%) rotate(90deg); /* vertical line */
-    }
-
-    .store-features li:nth-child(3)::before {
-      transform: translateY(-50%) rotate(45deg); /* diagonal line */
-    }
-
-    .store-features li:nth-child(4)::before {
-      transform: translateY(-50%) rotate(-45deg); /* diagonal line other direction */
+      color: #008e45;
+      font-weight: bold;
+      font-size: 1.2rem;
     }
 
     .shop-now-btn {
@@ -1125,17 +1108,17 @@
 
     <!-- STORES SECTION -->
     <div class="stores-section">
-      <h2 class="section-title">🛍️ Featured Stores</h2>
+      <h2 class="section-title">🛒 Featured Stores</h2>
       <div class="stores-grid">
         <!-- Box Now Store Card -->
         <a href="store-boxnow.html" class="store-card">
           <img src="boxnow-logo.png" alt="Box Now Logo" class="store-logo" />
-          <div class="store-name">Box Now Greece</div>
-          <div class="store-description">Fast and reliable delivery service throughout Greece with amazing cashback rewards</div>
-          <div class="cashback-badge">💰 Up to 20% Cashback</div>
+          <div class="store-name">Box Now</div>
+          <div class="store-description">Fast and reliable delivery service with amazing cashback rewards on every shipment</div>
+          <div class="cashback-badge">💰 Up to 35% Cashback</div>
           <ul class="store-features">
-            <li>Package delivery across Greece</li>
-            <li>Special rates to Bulgaria</li>
+            <li>Package delivery service</li>
+            <li>International shipping options</li>
             <li>Send packages from 2€</li>
             <li>50% discount offers available</li>
           </ul>
