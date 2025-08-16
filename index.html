@@ -633,11 +633,30 @@
     }
 
     .store-features li::before {
-      content: '✓';
+      content: '';
       position: absolute;
       left: 0;
-      color: #008e45;
-      font-weight: bold;
+      width: 8px;
+      height: 2px;
+      background: #008e45;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .store-features li:nth-child(1)::before {
+      transform: translateY(-50%) rotate(0deg); /* horizontal line */
+    }
+
+    .store-features li:nth-child(2)::before {
+      transform: translateY(-50%) rotate(90deg); /* vertical line */
+    }
+
+    .store-features li:nth-child(3)::before {
+      transform: translateY(-50%) rotate(45deg); /* diagonal line */
+    }
+
+    .store-features li:nth-child(4)::before {
+      transform: translateY(-50%) rotate(-45deg); /* diagonal line other direction */
     }
 
     .shop-now-btn {
