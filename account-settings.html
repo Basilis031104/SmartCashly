@@ -246,9 +246,8 @@
     }
 
     .settings-header p {
-      color: #000;
+      color: #333;
       font-size: 1rem;
-      font-weight: 700;
     }
 
     .profile-section {
@@ -304,8 +303,7 @@
 
     .upload-info {
       font-size: 0.875rem;
-      color: #000;
-      font-weight: 700;
+      color: #333;
       margin-top: 0.5rem;
     }
 
@@ -457,7 +455,7 @@
         <h3 style="margin-bottom: 1rem; color: #008e45;">Profile Picture</h3>
         
         <img id="current-profile-pic" src="" alt="Current Profile" class="current-profile-pic" />
-        <p style="color: #000; margin-bottom: 1rem; font-weight: 700; font-size: 1.1rem;">
+        <p style="color: #333; margin-bottom: 1rem; font-size: 1.1rem;">
           <span id="user-email-display">user@example.com</span>
         </p>
         
@@ -492,19 +490,19 @@
         
         <form id="password-form" style="max-width: 400px; margin: 0 auto;">
           <div style="margin-bottom: 1rem;">
-            <label for="current-password" style="display: block; margin-bottom: 0.5rem; font-weight: 700; color: #000;">Current Password</label>
+            <label for="current-password" style="display: block; margin-bottom: 0.5rem; color: #333;">Current Password</label>
             <input type="password" id="current-password" required 
                    style="width: 100%; padding: 0.75rem; border: 3px solid #0070f3; border-radius: 6px; font-size: 1rem; background: white;">
           </div>
           
           <div style="margin-bottom: 1rem;">
-            <label for="new-password" style="display: block; margin-bottom: 0.5rem; font-weight: 700; color: #000;">New Password</label>
+            <label for="new-password" style="display: block; margin-bottom: 0.5rem; color: #333;">New Password</label>
             <input type="password" id="new-password" required minlength="6"
                    style="width: 100%; padding: 0.75rem; border: 3px solid #0070f3; border-radius: 6px; font-size: 1rem; background: white;">
           </div>
           
           <div style="margin-bottom: 1.5rem;">
-            <label for="confirm-password" style="display: block; margin-bottom: 0.5rem; font-weight: 700; color: #000;">Confirm New Password</label>
+            <label for="confirm-password" style="display: block; margin-bottom: 0.5rem; color: #333;">Confirm New Password</label>
             <input type="password" id="confirm-password" required minlength="6"
                    style="width: 100%; padding: 0.75rem; border: 3px solid #0070f3; border-radius: 6px; font-size: 1rem; background: white;">
           </div>
@@ -744,85 +742,4 @@
         let message = 'Error changing password';
         if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
           message = 'Current password is incorrect';
-        } else if (error.code === 'auth/weak-password') {
-          message = 'New password is too weak';
-        }
-        
-        showPasswordMessage(message, 'error');
-      } finally {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }
-    }
-
-    function loadUserProfile(user) {
-      const emailDisplay = document.getElementById('user-email-display');
-      const currentProfilePic = document.getElementById('current-profile-pic');
-      
-      emailDisplay.textContent = user.email;
-      
-      // Check localStorage first for profile picture
-      const savedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
-      
-      if (savedProfilePic) {
-        currentProfilePic.src = savedProfilePic;
-      } else if (user.photoURL) {
-        currentProfilePic.src = user.photoURL;
-      } else {
-        const initial = user.email.charAt(0).toUpperCase();
-        currentProfilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='60' fill='%23008e45'/><text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>${initial}</text></svg>`;
-      }
-    }
-
-    async function compressImage(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          const img = new Image();
-          
-          img.onload = function() {
-            // Much smaller size to avoid Firebase URL length limit
-            canvas.width = 80;
-            canvas.height = 80;
-            ctx.drawImage(img, 0, 0, 80, 80);
-            
-            // High compression to minimize size
-            const compressedUrl = canvas.toDataURL('image/jpeg', 0.3);
-            resolve(compressedUrl);
-          };
-          
-          img.onerror = reject;
-          img.src = e.target.result;
-        };
-        
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function showMessage(text, type) {
-      const messageEl = document.getElementById('message');
-      messageEl.textContent = text;
-      messageEl.className = `message ${type}`;
-      messageEl.style.display = 'block';
-      
-      setTimeout(() => {
-        messageEl.style.display = 'none';
-      }, 4000);
-    }
-
-    function showPasswordMessage(text, type) {
-      const messageEl = document.getElementById('password-message');
-      messageEl.textContent = text;
-      messageEl.className = `message ${type}`;
-      messageEl.style.display = 'block';
-      
-      setTimeout(() => {
-        messageEl.style.display = 'none';
-      }, 4000);
-    }
-  </script>
-</body>
-</html>
+        } else if (error.code === 'auth/weak-
