@@ -577,9 +577,112 @@
         });
       });
 
+      // Add search functionality
+      setupSearchFilters();
+
       // Set the current year
       document.getElementById('year').textContent = new Date().getFullYear();
     });
+
+    function setupSearchFilters() {
+      const searchInput = document.getElementById('search-shops');
+      const dateFromInput = document.getElementById('date-from');
+      const dateToInput = document.getElementById('date-to');
+
+      // Add event listeners for search
+      searchInput.addEventListener('input', filterClickHistory);
+      dateFromInput.addEventListener('input', filterClickHistory);
+      dateToInput.addEventListener('input', filterClickHistory);
+    }
+
+    function filterClickHistory() {
+      const searchTerm = document.getElementById('search-shops').value.toLowerCase();
+      const dateFrom = document.getElementById('date-from').value;
+      const dateTo = document.getElementById('date-to').value;
+      
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      let filteredHistory = clickHistory;
+
+      // Filter by shop name
+      if (searchTerm) {
+        filteredHistory = filteredHistory.filter(click => 
+          click.store.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      // Filter by date range
+      if (dateFrom) {
+        const fromDate = parseDate(dateFrom);
+        if (fromDate) {
+          filteredHistory = filteredHistory.filter(click => {
+            const clickDate = new Date(click.timestamp);
+            return clickDate >= fromDate;
+          });
+        }
+      }
+
+      if (dateTo) {
+        const toDate = parseDate(dateTo);
+        if (toDate) {
+          // Set to end of day
+          toDate.setHours(23, 59, 59, 999);
+          filteredHistory = filteredHistory.filter(click => {
+            const clickDate = new Date(click.timestamp);
+            return clickDate <= toDate;
+          });
+        }
+      }
+
+      displayFilteredHistory(filteredHistory);
+    }
+
+    function parseDate(dateString) {
+      // Parse dd/mm/yyyy format
+      const parts = dateString.split('/');
+      if (parts.length === 3) {
+        const day = parseInt(parts[0]);
+        const month = parseInt(parts[1]) - 1; // Month is 0-indexed
+        const year = parseInt(parts[2]);
+        return new Date(year, month, day);
+      }
+      return null;
+    }
+
+    function displayFilteredHistory(filteredHistory) {
+      const historyItems = document.getElementById('history-items');
+      
+      if (filteredHistory.length === 0) {
+        historyItems.innerHTML = `
+          <div class="no-history">
+            <div class="custom-50-icon">50</div>
+            <h3>No matching clicks found!</h3>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+              Try adjusting your search criteria.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      historyItems.innerHTML = '';
+      filteredHistory.forEach(click => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+        
+        const date = new Date(click.timestamp);
+        // Force English date/time format
+        const formattedDate = date.toLocaleDateString('en-GB').replace(/\//g, '/') + ' ' + 
+                             date.toLocaleTimeString('en-GB', { hour12: false });
+        
+        historyItem.innerHTML = `
+          <div class="click-date">${formattedDate}</div>
+          <div class="shop-name">${click.store}</div>
+          <div class="click-id">${click.clickId}</div>
+        `;
+        
+        historyItems.appendChild(historyItem);
+      });
+    }
 
     function loadClickHistory() {
       const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
@@ -606,7 +709,9 @@
         historyItem.className = 'history-item';
         
         const date = new Date(click.timestamp);
-        const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        // Force English date/time format using en-GB for dd/mm/yyyy and 24-hour time
+        const formattedDate = date.toLocaleDateString('en-GB').replace(/\//g, '/') + ' ' + 
+                             date.toLocaleTimeString('en-GB', { hour12: false });
         
         historyItem.innerHTML = `
           <div class="click-date">${formattedDate}</div>
