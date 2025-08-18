@@ -616,6 +616,36 @@
         setTimeout(() => document.body.removeChild(message), 300);
       }, 3000);
     }
+
+    function trackClick(offerId) {
+      // Store click data
+      const clickData = {
+        store: 'Box Now',
+        offerId: offerId,
+        timestamp: new Date().toISOString(),
+        clickId: 'BN' + Date.now().toString().slice(-6)
+      };
+      
+      // Store in localStorage for click history
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      clickHistory.unshift(clickData);
+      
+      // Keep only last 50 clicks
+      if (clickHistory.length > 50) {
+        clickHistory.splice(50);
+      }
+      
+      localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      
+      // Show success message
+      showMessage('Click tracked! Redirecting to Box Now...', 'success');
+      
+      // Redirect to Box Now website
+      console.log('Click tracked:', clickData);
+      setTimeout(() => {
+        window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=58a30ce22e1-1d64-3510-bbc7-da0f2e15ded8', '_blank');
+      }, 1000);
+    }
   </script>
 </body>
 </html>
