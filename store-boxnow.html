@@ -469,7 +469,7 @@
         <h1 class="store-title">Box Now</h1>
         <p class="store-subtitle">Delivery service with cashback rewards</p>
         <div class="cashback-highlight">💰 Earn up to 35% Cashback</div>
-        <p>Go to the Box Now website through our link and start earning cashback on your orders!</p>
+        <p>Box Now is an online platform offering innovative parcel delivery and pickup services. Box Now has developed a vast network of automated parcel pickup machines (lockers), catering to both individuals and businesses. These lockers are placed in key urban locations, enabling convenient, fast, and secure 24/7 parcel deliveries.</p>
       </div>
     </div>
 
@@ -483,7 +483,7 @@
           </div>
           <h3 class="offer-title">Weekly Cashback 35% from Box Now!</h3>
           <p class="offer-description">Go to Box Now website through our affiliate link and earn more from your purchases.</p>
-          <div style="margin-bottom: 1rem;"></div>
+          <div class="offer-cashback" style="margin-bottom: 1rem; opacity: 0; pointer-events: none;">+ Get Extra 35% Cashback</div>
           <button class="offer-button" onclick="trackClick('boxnow-main')">🚀 Get Cashback</button>
         </div>
 
@@ -505,6 +505,7 @@
           </div>
           <h3 class="offer-title">Send a Mini Package</h3>
           <p class="offer-description">Send a mini package with 1.5€!</p>
+          <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
           <button class="offer-button" onclick="trackClick('boxnow-mini')">📦 Get Offer</button>
         </div>
@@ -583,11 +584,9 @@
         button.style.background = '#4CAF50';
       }, 2000);
       
-      // In a real scenario, this would redirect to Box Now with affiliate tracking
+      // Redirect to Box Now website
       console.log('Click tracked:', clickData);
-      
-      // Simulate opening Box Now (replace with real affiliate link)
-      // window.open('https://www.boxnow.gr/?ref=smartcashly', '_blank');
+      window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=58a30ce22e1-1d64-3510-bbc7-da0f2e15ded8', '_blank');
     }
   </script>
 </body>
