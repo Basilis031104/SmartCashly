@@ -434,12 +434,23 @@
     // Set the year
     document.getElementById('year').textContent = 2025;
 
-    // Import Firebase functions
-    import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-
-    // Wait for DOM to be fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
+    // Wait for both DOM and auth.js to be fully loaded
+    window.addEventListener('load', async function() {
       console.log('🔄 Login page loaded');
+      
+      // Wait for smartAuth to be available
+      let attempts = 0;
+      while (typeof smartAuth === 'undefined' && attempts < 50) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+      }
+      
+      if (typeof smartAuth === 'undefined') {
+        console.error('❌ smartAuth not available after waiting');
+        return;
+      }
+      
+      console.log('✅ smartAuth is available');
       
       const lg_form = document.getElementById('login_form');
       const lg_email = document.getElementById('lg_email');
@@ -467,21 +478,15 @@
 
         // Disable button during login
         const submitBtn = lg_form.querySelector('button');
+        const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
         submitBtn.textContent = 'Logging in...';
 
         try {
           console.log('🔄 Attempting login with:', email);
           
-          // Try smartAuth first
-          if (typeof smartAuth !== 'undefined' && smartAuth.signIn) {
-            await smartAuth.signIn(email, password);
-          } else {
-            // Fallback to direct Firebase
-            console.log('smartAuth not available, using direct Firebase');
-            const auth = getAuth();
-            await signInWithEmailAndPassword(auth, email, password);
-          }
+          // Use smartAuth consistently
+          await smartAuth.signIn(email, password);
           
           console.log('✅ Login successful! Redirecting...');
           lg_msg.style.color = '#008e45';
@@ -514,7 +519,7 @@
 
           // Re-enable button
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Login';
+          submitBtn.textContent = originalText;
         }
       });
 
