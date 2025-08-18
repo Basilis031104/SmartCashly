@@ -253,7 +253,7 @@
 
     .store-title {
       font-size: 2rem;
-      color: #000000;
+      color: #008e45;
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
@@ -297,6 +297,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 1.5rem;
+      align-items: stretch;
     }
 
     .offer-card {
@@ -307,6 +308,9 @@
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
       border: 3px solid #008e45;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .offer-card:hover {
@@ -359,6 +363,7 @@
       font-size: 0.9rem;
       margin-bottom: 1rem;
       line-height: 1.4;
+      flex-grow: 1;
     }
 
     .offer-cashback {
@@ -384,6 +389,8 @@
       cursor: pointer;
       transition: background 0.3s;
       width: 100%;
+      margin-top: auto;
+      min-height: 48px;
     }
 
     .offer-button:hover {
@@ -482,10 +489,10 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">1000+ products up to 50% off</h3>
-          <p class="offer-description">Over 1000 Nike products with discounts up to 50%.</p>
+          <h3 class="offer-title">Air Max Collection - Up to 40% Off</h3>
+          <p class="offer-description">Discover the iconic Air Max sneakers with revolutionary Air cushioning technology.</p>
           <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
-          <button class="offer-button" onclick="trackClick('nike-1000-products')">🏃 Get Offer</button>
+          <button class="offer-button" onclick="trackClick('nike-air-max-40')">👟 Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -493,10 +500,10 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">50% off on men's items!</h3>
-          <p class="offer-description">Special discount on selected men's Nike products.</p>
+          <h3 class="offer-title">Nike Dri-FIT Apparel - 30% Off</h3>
+          <p class="offer-description">Stay dry and comfortable with moisture-wicking Dri-FIT technology clothing.</p>
           <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
-          <button class="offer-button" onclick="trackClick('nike-mens-50')">👕 Get Offer</button>
+          <button class="offer-button" onclick="trackClick('nike-dri-fit-30')">👕 Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -504,10 +511,10 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">40% off on kids' items!</h3>
-          <p class="offer-description">Nike kids' products with great discounts.</p>
+          <h3 class="offer-title">Jordan Retro Sneakers - Limited Time</h3>
+          <p class="offer-description">Classic Jordan retro styles that never go out of fashion. Limited stock available.</p>
           <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
-          <button class="offer-button" onclick="trackClick('nike-kids-40')">👶 Get Offer</button>
+          <button class="offer-button" onclick="trackClick('nike-jordan-retro')">🏀 Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -515,10 +522,10 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">40% off on women's items!</h3>
-          <p class="offer-description">Nike women's products up to 40% off.</p>
+          <h3 class="offer-title">Women's Nike React Running - 35% Off</h3>
+          <p class="offer-description">Lightweight and responsive Nike React foam for ultimate running comfort.</p>
           <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
-          <button class="offer-button" onclick="trackClick('nike-womens-40')">👩 Get Offer</button>
+          <button class="offer-button" onclick="trackClick('nike-react-women-35')">🏃‍♀️ Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -526,10 +533,10 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Men's shoes running up to -50%</h3>
-          <p class="offer-description">Premium men's Nike running shoes with amazing discounts.</p>
+          <h3 class="offer-title">Kids' Nike Sportswear - Buy 2 Get 1 Free</h3>
+          <p class="offer-description">Complete kids' athletic wardrobe with this amazing buy 2 get 1 free deal.</p>
           <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
-          <button class="offer-button" onclick="trackClick('nike-mens-shoes')">👟 Get Offer</button>
+          <button class="offer-button" onclick="trackClick('nike-kids-b2g1')">👶 Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -537,10 +544,10 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Sports bras up to 50% off</h3>
-          <p class="offer-description">Nike sports bras with up to 50% discount.</p>
+          <h3 class="offer-title">Nike Training Gear - Up to 45% Off</h3>
+          <p class="offer-description">Professional training equipment and accessories for your workout routine.</p>
           <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
-          <button class="offer-button" onclick="trackClick('nike-sports-bras')">🏃‍♀️ Get Offer</button>
+          <button class="offer-button" onclick="trackClick('nike-training-45')">💪 Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -548,10 +555,32 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">-30% on athletic uniforms</h3>
-          <p class="offer-description">Nike uniforms for men and women with 30% off.</p>
+          <h3 class="offer-title">Nike SB Skateboarding - 25% Off</h3>
+          <p class="offer-description">Durable skateboarding shoes and apparel designed for street performance.</p>
           <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
-          <button class="offer-button" onclick="trackClick('nike-uniforms')">⚽ Get Offer</button>
+          <button class="offer-button" onclick="trackClick('nike-sb-25')">🛹 Get Offer</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Nike Football Cleats - Season Sale</h3>
+          <p class="offer-description">Professional football cleats for enhanced performance on the field.</p>
+          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <button class="offer-button" onclick="trackClick('nike-football-cleats')">⚽ Get Offer</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Nike Tech Fleece - Winter Collection</h3>
+          <p class="offer-description">Innovative Tech Fleece fabric provides warmth without the weight.</p>
+          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <button class="offer-button" onclick="trackClick('nike-tech-fleece')">🧥 Get Offer</button>
         </div>
       </div>
     </div>
@@ -595,9 +624,26 @@
         button.style.background = '#4CAF50';
       }, 2000);
       
-      // Redirect to Nike website
+      // Define specific Nike URLs for each offer
+      const nikeUrls = {
+        'nike-air-max-40': 'https://www.nike.com/w/air-max-shoes-a6d8nzy7ok',
+        'nike-dri-fit-30': 'https://www.nike.com/w/dri-fit-clothing-6ymx6znik1',
+        'nike-jordan-retro': 'https://www.nike.com/w/jordan-retro-shoes-37v7jzzy02u',
+        'nike-react-women-35': 'https://www.nike.com/w/womens-react-shoes-5e1x6z8ttg5',
+        'nike-kids-b2g1': 'https://www.nike.com/w/kids-25kdv',
+        'nike-training-45': 'https://www.nike.com/w/mens-training-gym-shoes-58jtgznik1',
+        'nike-sb-25': 'https://www.nike.com/w/nike-sb-shoes-641k7',
+        'nike-football-cleats': 'https://www.nike.com/w/mens-football-cleats-1gdj0znik1',
+        'nike-tech-fleece': 'https://www.nike.com/w/tech-fleece-clothing-4ykdl'
+      };
+      
+      // Get the specific URL or default to Nike homepage
+      const targetUrl = nikeUrls[offerId] || 'https://www.nike.com';
+      
+      // Redirect to specific Nike page
       console.log('Click tracked:', clickData);
-      window.open('https://www.nike.com', '_blank');
+      console.log('Redirecting to:', targetUrl);
+      window.open(targetUrl, '_blank');
     }
   </script>
 </body>
