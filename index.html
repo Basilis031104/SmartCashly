@@ -16,18 +16,6 @@
       background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
       animation: shimmer 12s ease-in-out infinite !important;
       min-height: 100vh;
-    }
-    
-    body { 
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
-        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
-      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
-      animation: shimmer 12s ease-in-out infinite !important;
-      min-height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -130,13 +118,6 @@
     header, main, footer {
       position: relative;
       z-index: 10;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      color: #222;
     }
 
     header {
@@ -1155,7 +1136,17 @@
         <!-- Placeholder for more stores -->
         <div class="store-card" style="opacity: 0.6; cursor: not-allowed;">
           <div style="width: 100px; height: 100px; background: #f0f0f0; border-radius: 12px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🏪</div>
-          <div
+          <div class="store-name">More Stores</div>
+          <div class="store-description">Coming soon! We're adding more amazing partner stores with great cashback offers</div>
+          <div class="cashback-badge">💰 Up to 15% Cashback</div>
+          <ul class="store-features">
+            <li>Electronics & gadgets</li>
+            <li>Fashion & accessories</li>
+            <li>Home & garden</li>
+            <li>Travel & booking</li>
+          </ul>
+          <button class="shop-now-btn" disabled>🔄 Coming Soon</button>
+        </div>
       </div>
     </div>
   </main>
@@ -1257,28 +1248,36 @@
     window.addEventListener('load', () => {
       console.log('🔄 Index page loaded, initializing auth...');
       
-      // Wait a bit for auth.js to load
-      setTimeout(() => {
-        const auth = getAuth();
-        console.log('🔥 Firebase auth instance:', auth);
-        
-        onAuthStateChanged(auth, (user) => {
-          console.log('🔄 Auth state changed:', user ? user.email : 'No user');
-          currentUser = user;
-          updateAuthUI(user);
-          if (user) {
-            console.log('✅ User is logged in, setting up profile...');
-            setupProfileDropdown();
-            setupReferralCode(user);
-            // Check for new referral notifications when user logs in
-            setTimeout(() => {
-              checkForReferralNotifications(user);
-            }, 1000);
-          } else {
-            console.log('❌ No user logged in');
-          }
-        });
-      }, 500);
+      // Wait a bit for auth.js to load and try multiple times
+      let attempts = 0;
+      const initAuth = async () => {
+        if (typeof smartAuth !== 'undefined' || attempts > 50) {
+          const auth = getAuth();
+          console.log('🔥 Firebase auth instance:', auth);
+          
+          onAuthStateChanged(auth, (user) => {
+            console.log('🔄 Auth state changed:', user ? user.email : 'No user');
+            currentUser = user;
+            updateAuthUI(user);
+            if (user) {
+              console.log('✅ User is logged in, setting up profile...');
+              setupProfileDropdown();
+              setupReferralCode(user);
+              // Check for new referral notifications when user logs in
+              setTimeout(() => {
+                checkForReferralNotifications(user);
+              }, 1000);
+            } else {
+              console.log('❌ No user logged in');
+            }
+          });
+        } else {
+          attempts++;
+          setTimeout(initAuth, 100);
+        }
+      };
+      
+      initAuth();
 
       // Setup notification system immediately
       setupNotifications();
@@ -1295,6 +1294,122 @@
         setupProfileDropdown();
       }
     });
+
+    function updateAuthUI(user) {
+      const authButtons = document.getElementById('auth-buttons');
+      const userProfile = document.getElementById('user-profile');
+      const userEmail = document.getElementById('user-email');
+      const profilePic = document.getElementById('profile-pic');
+
+      if (user) {
+        // User is logged in
+        console.log('User logged in:', user.email);
+        authButtons.style.display = 'none';
+        userProfile.style.display = 'flex';
+        userEmail.textContent = user.email;
+        
+        // Load saved profile picture or use default
+        const savedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
+        if (savedProfilePic) {
+          profilePic.src = savedProfilePic;
+        } else if (user.photoURL) {
+          profilePic.src = user.photoURL;
+        } else {
+          // Default avatar with user's initial
+          const initial = user.email.charAt(0).toUpperCase();
+          profilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%23008e45'/><text x='20' y='26' text-anchor='middle' fill='white' font-size='16' font-family='Arial'>${initial}</text></svg>`;
+        }
+      } else {
+        // User is not logged in
+        console.log('User not logged in');
+        authButtons.style.display = 'flex';
+        userProfile.style.display = 'none';
+      }
+    }
+
+    function setupProfileDropdown() {
+      const profileContainer = document.querySelector('.profile-container');
+      const profileDropdown = document.getElementById('profile-dropdown');
+      const notificationBell = document.getElementById('notification-bell');
+      const notificationDropdown = document.getElementById('notification-dropdown');
+      
+      // Profile dropdown toggle
+      if (profileContainer) {
+        profileContainer.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const isVisible = profileDropdown.classList.contains('show');
+          
+          // Hide notification dropdown
+          notificationDropdown.classList.remove('show');
+          
+          // Toggle profile dropdown
+          if (isVisible) {
+            profileDropdown.classList.remove('show');
+          } else {
+            profileDropdown.classList.add('show');
+          }
+        });
+      }
+      
+      // Notification dropdown toggle
+      if (notificationBell) {
+        notificationBell.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const isVisible = notificationDropdown.classList.contains('show');
+          
+          // Hide profile dropdown
+          profileDropdown.classList.remove('show');
+          
+          // Toggle notification dropdown
+          if (isVisible) {
+            notificationDropdown.classList.remove('show');
+          } else {
+            notificationDropdown.classList.add('show');
+          }
+        });
+      }
+      
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function() {
+        profileDropdown.classList.remove('show');
+        notificationDropdown.classList.remove('show');
+      });
+      
+      // Logout functionality
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', async function(e) {
+          e.preventDefault();
+          try {
+            if (typeof smartAuth !== 'undefined') {
+              await smartAuth.signOut();
+              window.location.href = 'index.html';
+            }
+          } catch (err) {
+            console.error('Logout error:', err);
+          }
+        });
+      }
+      
+      // Refer friend functionality
+      const referFriendBtn = document.getElementById('refer-friend-btn');
+      const referModal = document.getElementById('refer-modal');
+      const closeReferBtn = document.getElementById('close-refer');
+      
+      if (referFriendBtn) {
+        referFriendBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          referModal.classList.add('show');
+          setupReferralModal();
+        });
+      }
+      
+      if (closeReferBtn) {
+        closeReferBtn.addEventListener('click', function() {
+          referModal.classList.remove('show');
+        });
+      }
+    }
 
     function setupNotifications() {
       const markAllReadBtn = document.getElementById('mark-all-read');
@@ -1345,13 +1460,6 @@
         notificationList.appendChild(noNotifications);
       } else {
         noNotificationsElement.style.display = 'block';
-      }
-    }
-
-    function hideNoNotificationsMessage() {
-      const noNotificationsElement = document.getElementById('no-notifications');
-      if (noNotificationsElement) {
-        noNotificationsElement.style.display = 'none';
       }
     }
 
@@ -1495,4 +1603,138 @@
       // Add to top of list
       notificationList.insertBefore(notificationItem, notificationList.firstChild);
       
-      // Add click handler
+      // Update badge
+      updateNotificationBadge();
+    }
+
+    function updateNotificationBadge() {
+      const notificationBadge = document.getElementById('notification-badge');
+      const notificationItems = document.querySelectorAll('.notification-item');
+      
+      if (notificationItems.length > 0) {
+        notificationBadge.textContent = notificationItems.length;
+        notificationBadge.style.display = 'flex';
+      } else {
+        notificationBadge.style.display = 'none';
+      }
+    }
+
+    function getTimeAgo(timestamp) {
+      const now = Date.now();
+      const diff = now - timestamp;
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
+      
+      if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+      if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+      if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+      return 'Just now';
+    }
+
+    function setupReferralModal() {
+      const copyCodeBtn = document.getElementById('copy-code-btn');
+      const copyLinkBtn = document.getElementById('copy-link-btn');
+      const shareWhatsApp = document.getElementById('share-whatsapp');
+      const shareEmail = document.getElementById('share-email');
+      const shareTwitter = document.getElementById('share-twitter');
+      
+      const referralCode = document.getElementById('refer-code').textContent;
+      const referralLink = `${window.location.origin}/signup.html?ref=${referralCode}`;
+      
+      // Copy code button
+      if (copyCodeBtn) {
+        copyCodeBtn.addEventListener('click', function() {
+          navigator.clipboard.writeText(referralCode).then(() => {
+            copyCodeBtn.textContent = '✅ Copied!';
+            setTimeout(() => {
+              copyCodeBtn.textContent = '📋 Copy Code';
+            }, 2000);
+          });
+        });
+      }
+      
+      // Copy link button
+      if (copyLinkBtn) {
+        copyLinkBtn.addEventListener('click', function() {
+          navigator.clipboard.writeText(referralLink).then(() => {
+            copyLinkBtn.textContent = '✅ Copied!';
+            setTimeout(() => {
+              copyLinkBtn.textContent = '🔗 Copy Link';
+            }, 2000);
+          });
+        });
+      }
+      
+      // Social sharing
+      if (shareWhatsApp) {
+        shareWhatsApp.href = `https://wa.me/?text=Join Smartcashly and earn cashback on your purchases! Use my referral code: ${referralCode} or sign up here: ${referralLink}`;
+      }
+      
+      if (shareEmail) {
+        shareEmail.href = `mailto:?subject=Join Smartcashly and earn cashback!&body=Hi! I wanted to share Smartcashly with you - it's a great cashback platform where you earn money back on your purchases. Use my referral code "${referralCode}" when you sign up, or click this link: ${referralLink}`;
+      }
+      
+      if (shareTwitter) {
+        shareTwitter.href = `https://twitter.com/intent/tweet?text=Join Smartcashly and earn cashback! Use code ${referralCode} or ${referralLink}`;
+      }
+    }
+
+    // Support system setup
+    window.addEventListener('load', function() {
+      const supportBubble = document.getElementById('support-bubble');
+      const supportModal = document.getElementById('support-modal');
+      const closeSupportBtn = document.getElementById('close-support');
+      const supportForm = document.getElementById('support-form');
+      
+      if (supportBubble) {
+        supportBubble.addEventListener('click', function() {
+          supportModal.classList.add('show');
+        });
+      }
+      
+      if (closeSupportBtn) {
+        closeSupportBtn.addEventListener('click', function() {
+          supportModal.classList.remove('show');
+        });
+      }
+      
+      if (supportModal) {
+        supportModal.addEventListener('click', function(e) {
+          if (e.target === supportModal) {
+            supportModal.classList.remove('show');
+          }
+        });
+      }
+      
+      if (supportForm) {
+        supportForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const email = document.getElementById('support-email').value;
+          const reason = document.getElementById('support-reason').value;
+          const message = document.getElementById('support-message').value;
+          
+          // Simulate sending support message
+          alert(`Thank you! Your support request has been submitted.\n\nEmail: ${email}\nReason: ${reason}\nMessage: ${message}\n\nOur team will get back to you within 24 hours.`);
+          
+          supportForm.reset();
+          supportModal.classList.remove('show');
+        });
+      }
+    });
+  </script>
+</body>
+</html>;
+    }
+    
+    body { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh
