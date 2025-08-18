@@ -1255,22 +1255,45 @@
     let currentUser = null;
 
     window.addEventListener('load', () => {
-      const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
-        currentUser = user;
-        updateAuthUI(user);
-        if (user) {
-          setupProfileDropdown();
-          setupReferralCode(user);
-          // Check for new referral notifications when user logs in
-          setTimeout(() => {
-            checkForReferralNotifications(user);
-          }, 1000);
-        }
-      });
+      console.log('🔄 Index page loaded, initializing auth...');
+      
+      // Wait a bit for auth.js to load
+      setTimeout(() => {
+        const auth = getAuth();
+        console.log('🔥 Firebase auth instance:', auth);
+        
+        onAuthStateChanged(auth, (user) => {
+          console.log('🔄 Auth state changed:', user ? user.email : 'No user');
+          currentUser = user;
+          updateAuthUI(user);
+          if (user) {
+            console.log('✅ User is logged in, setting up profile...');
+            setupProfileDropdown();
+            setupReferralCode(user);
+            // Check for new referral notifications when user logs in
+            setTimeout(() => {
+              checkForReferralNotifications(user);
+            }, 1000);
+          } else {
+            console.log('❌ No user logged in');
+          }
+        });
+      }, 500);
 
       // Setup notification system immediately
       setupNotifications();
+    });
+
+    // Force check auth state on window focus (in case user logged in on another tab)
+    window.addEventListener('focus', () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user && !currentUser) {
+        console.log('🔄 Window focused, found user:', user.email);
+        currentUser = user;
+        updateAuthUI(user);
+        setupProfileDropdown();
+      }
     });
 
     function setupNotifications() {
