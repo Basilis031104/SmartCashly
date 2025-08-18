@@ -435,7 +435,7 @@
     document.getElementById('year').textContent = 2025;
 
     // Import Firebase functions
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
     // Wait for DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
@@ -450,16 +450,6 @@
         console.error('❌ Login form not found!');
         return;
       }
-
-      const auth = getAuth();
-
-      // Check if user is already logged in
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          console.log('✅ User already logged in, redirecting...');
-          window.location.href = 'index.html';
-        }
-      });
 
       lg_form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -481,28 +471,45 @@
         submitBtn.textContent = 'Logging in...';
 
         try {
-          console.log('🔄 Attempting login...');
+          console.log('🔄 Attempting login with:', email);
           
-          // Use the authentication
-          await signInWithEmailAndPassword(auth, email, password);
+          // Try smartAuth first
+          if (typeof smartAuth !== 'undefined' && smartAuth.signIn) {
+            await smartAuth.signIn(email, password);
+          } else {
+            // Fallback to direct Firebase
+            console.log('smartAuth not available, using direct Firebase');
+            const auth = getAuth();
+            await signInWithEmailAndPassword(auth, email, password);
+          }
           
           console.log('✅ Login successful! Redirecting...');
           lg_msg.style.color = '#008e45';
           lg_msg.textContent = 'Success! Redirecting…';
           
-          // Force immediate redirect
-          window.location.href = 'index.html';
+          // Small delay then redirect
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
           
         } catch (err) {
           console.error('❌ Login error:', err);
           lg_msg.style.color = 'crimson';
           
-          if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
-            lg_msg.textContent = "ERROR: Invalid email or password";
+          if (err.code === 'auth/wrong-password' || 
+              err.message?.includes('wrong-password')) {
+            lg_msg.textContent = "ERROR: Password is wrong. Please try again.";
+          } else if (err.code === 'auth/invalid-credential' ||
+                     err.code === 'auth/invalid-login-credentials') {
+            lg_msg.textContent = "ERROR: Invalid email or password. Please try again";
           } else if (err.code === 'auth/too-many-requests') {
-            lg_msg.textContent = "ERROR: Too many attempts. Try again later";
+            lg_msg.textContent = "ERROR: Too many failed attempts. Try again later.";
+          } else if (err.code === 'auth/user-disabled') {
+            lg_msg.textContent = "ERROR: This account has been disabled";
+          } else if (err.code === 'auth/network-request-failed') {
+            lg_msg.textContent = "ERROR: Network error. Check your connection";
           } else {
-            lg_msg.textContent = `ERROR: ${err.message}`;
+            lg_msg.textContent = `ERROR: ${err.code || err.message || 'Unknown error'}. Please try again`;
           }
 
           // Re-enable button
