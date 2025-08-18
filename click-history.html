@@ -546,6 +546,7 @@
       onAuthStateChanged(auth, (user) => {
         if (user) {
           currentUser = user;
+          loadClickHistory();
         } else {
           // Redirect to login if not authenticated
           window.location.href = 'login.html';
@@ -579,6 +580,43 @@
       // Set the current year
       document.getElementById('year').textContent = new Date().getFullYear();
     });
+
+    function loadClickHistory() {
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      const historyItems = document.getElementById('history-items');
+      
+      if (clickHistory.length === 0) {
+        // Show no history message
+        historyItems.innerHTML = `
+          <div class="no-history">
+            <div class="custom-50-icon">50</div>
+            <h3>No clicks yet!</h3>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+              When you visit partner stores through Smartcashly, they'll appear here.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      // Display click history
+      historyItems.innerHTML = '';
+      clickHistory.forEach(click => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+        
+        const date = new Date(click.timestamp);
+        const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        
+        historyItem.innerHTML = `
+          <div class="click-date">${formattedDate}</div>
+          <div class="shop-name">${click.store}</div>
+          <div class="click-id">${click.clickId}</div>
+        `;
+        
+        historyItems.appendChild(historyItem);
+      });
+    }
     
     document.getElementById('logout-btn').addEventListener('click', async function(e) {
       e.preventDefault();
@@ -636,6 +674,9 @@
       }
       
       localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      
+      // Reload the click history display
+      loadClickHistory();
       
       // Show success message
       showMessage('Click tracked! Redirecting to Box Now...', 'success');
