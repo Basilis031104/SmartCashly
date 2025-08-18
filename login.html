@@ -451,12 +451,12 @@
         return;
       }
 
-      // Check if user is already logged in
       const auth = getAuth();
+
+      // Check if user is already logged in
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log('✅ User already logged in:', user.email);
-          console.log('🔄 Redirecting to index...');
+          console.log('✅ User already logged in, redirecting...');
           window.location.href = 'index.html';
         }
       });
@@ -475,55 +475,39 @@
           return;
         }
 
-        // Disable form during login
-        lg_form.querySelector('button').disabled = true;
-        lg_form.querySelector('button').textContent = 'Logging in...';
+        // Disable button during login
+        const submitBtn = lg_form.querySelector('button');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Logging in...';
 
         try {
-          console.log('🔄 Attempting login with:', email);
+          console.log('🔄 Attempting login...');
           
-          const auth = getAuth();
-          const userCredential = await signInWithEmailAndPassword(auth, email, password);
-          const user = userCredential.user;
+          // Use the authentication
+          await signInWithEmailAndPassword(auth, email, password);
           
-          console.log('✅ Login successful!', user.email);
-          
+          console.log('✅ Login successful! Redirecting...');
           lg_msg.style.color = '#008e45';
           lg_msg.textContent = 'Success! Redirecting…';
           
-          // Wait a moment then redirect
-          setTimeout(() => {
-            console.log('🔄 Redirecting to index.html');
-            window.location.href = 'index.html';
-          }, 1000);
+          // Force immediate redirect
+          window.location.href = 'index.html';
           
         } catch (err) {
           console.error('❌ Login error:', err);
           lg_msg.style.color = 'crimson';
           
-          let errorMessage = "ERROR: An error occurred. Please try again.";
-          
-          if (err.code === 'auth/wrong-password' || 
-              err.message?.includes('wrong-password')) {
-            errorMessage = "ERROR: Password is wrong. Please try again.";
-          } else if (err.code === 'auth/invalid-credential' ||
-                     err.code === 'auth/invalid-login-credentials') {
-            errorMessage = "ERROR: Invalid email or password. Please try again";
+          if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+            lg_msg.textContent = "ERROR: Invalid email or password";
           } else if (err.code === 'auth/too-many-requests') {
-            errorMessage = "ERROR: Too many failed attempts. Try again later.";
-          } else if (err.code === 'auth/user-disabled') {
-            errorMessage = "ERROR: This account has been disabled";
-          } else if (err.code === 'auth/network-request-failed') {
-            errorMessage = "ERROR: Network error. Check your connection";
+            lg_msg.textContent = "ERROR: Too many attempts. Try again later";
           } else {
-            errorMessage = `ERROR: ${err.code || err.message || 'Unknown error'}. Please try again`;
+            lg_msg.textContent = `ERROR: ${err.message}`;
           }
-          
-          lg_msg.textContent = errorMessage;
-          
-          // Re-enable form
-          lg_form.querySelector('button').disabled = false;
-          lg_form.querySelector('button').textContent = 'Login';
+
+          // Re-enable button
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Login';
         }
       });
 
