@@ -616,9 +616,25 @@
         button.style.background = '#4CAF50';
       }, 2000);
       
-      // Redirect to Nike website with affiliate tracking
+      // Define specific Nike category URLs with affiliate tracking
+      const nikeUrls = {
+        'nike-airmax-40': 'https://www.nike.com/w/air-max-shoes-a6d8hzy7ok?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'nike-drifit': 'https://www.nike.com/w/dri-fit-clothing-32dxrz6ymx6?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'nike-jordan': 'https://www.nike.com/w/jordan-shoes-37eefzy7ok?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'nike-running': 'https://www.nike.com/w/running-37v7j?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'nike-kids': 'https://www.nike.com/w/kids-25kdv?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'nike-basketball': 'https://www.nike.com/w/basketball-3glsmzysj?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'nike-training': 'https://www.nike.com/w/training-gym-58jtgzym9?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'nike-lifestyle': 'https://www.nike.com/w/lifestyle-13jrmznik1?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
+      };
+      
+      // Get the specific category URL
+      const targetUrl = nikeUrls[offerId] || 'https://www.nike.com?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
+      
+      // Redirect to specific Nike category
       console.log('Click tracked:', clickData);
-      window.open('https://www.nike.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId, '_blank');
+      console.log('Redirecting to:', targetUrl);
+      window.open(targetUrl, '_blank');
     }
   </script>
 </body>
