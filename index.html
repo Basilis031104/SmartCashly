@@ -663,6 +663,12 @@
         <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
         <div class="profile-container">
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
+          <div id="profile-dropdown" class="profile-dropdown" style="display: none;">
+            <a href="account-settings.html" id="account-settings">⚙️ Account Settings</a>
+            <a href="click-history.html" id="click-history">📊 Click History</a>
+            <a href="#" id="refer-friend">👥 Refer a Friend</a>
+            <a href="#" id="logout-btn">🚪 Logout</a>
+          </div>
         </div>
       </div>
     </nav>
@@ -950,17 +956,10 @@
 
     // Add profile dropdown functionality
     const profileContainer = document.querySelector('.profile-container');
-    if (profileContainer) {
-      // Create dropdown menu
-      const dropdown = document.createElement('div');
-      dropdown.className = 'profile-dropdown';
-      dropdown.innerHTML = `
-        <a href="account-settings.html" id="account-settings">Account Settings</a>
-        <a href="click-history.html" id="click-history">Click History</a>
-        <a href="#" id="logout-btn">Logout</a>
-      `;
-      profileContainer.appendChild(dropdown);
-
+    const profilePic = document.getElementById('profile-pic');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    
+    if (profileContainer && profilePic && profileDropdown) {
       // Add dropdown styles
       const dropdownStyles = `
         .profile-container {
@@ -986,8 +985,7 @@
           border-radius: 8px;
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
           padding: 0.5rem 0;
-          min-width: 160px;
-          display: none;
+          min-width: 180px;
           z-index: 2000;
         }
         .profile-dropdown a {
@@ -997,21 +995,203 @@
           text-decoration: none;
           font-size: 0.9rem;
           transition: background-color 0.2s;
+          font-weight: 500;
         }
         .profile-dropdown a:hover {
           background-color: #f5f5f5;
-        }
-        .profile-container:hover .profile-dropdown {
-          display: block;
         }
       `;
       
       const styleSheet = document.createElement('style');
       styleSheet.textContent = dropdownStyles;
       document.head.appendChild(styleSheet);
+
+      // Make dropdown clickable (static) instead of hover
+      profilePic.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isVisible = profileDropdown.style.display === 'block';
+        profileDropdown.style.display = isVisible ? 'none' : 'block';
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!profileContainer.contains(e.target)) {
+          profileDropdown.style.display = 'none';
+        }
+      });
     }
 
-    // Logout functionality
+    // Refer a Friend Modal functionality
+    function showReferModal() {
+      const modal = document.createElement('div');
+      modal.id = 'refer-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+
+      modal.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 500px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+        ">
+          <button onclick="document.getElementById('refer-modal').remove()" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+          ">×</button>
+          
+          <h2 style="color: #008e45; margin-bottom: 1rem;">👥 Refer a Friend</h2>
+          <p style="margin-bottom: 1.5rem; color: #333;">Share Smartcashly with your friends and both earn rewards!</p>
+          
+          <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <p style="font-weight: bold; color: #008e45; margin-bottom: 0.5rem;">Your Referral Code:</p>
+            <div style="
+              background: white;
+              border: 2px solid #008e45;
+              border-radius: 6px;
+              padding: 0.75rem;
+              font-family: monospace;
+              font-size: 1.2rem;
+              font-weight: bold;
+              color: #008e45;
+              margin-bottom: 0.5rem;
+            " id="referral-code-display">LOADING...</div>
+            <button onclick="copyReferralCode()" style="
+              background: #008e45;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+            ">📋 Copy Code</button>
+          </div>
+
+          <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <p style="font-weight: bold; color: #008e45; margin-bottom: 0.5rem;">Share Link:</p>
+            <div style="
+              background: white;
+              border: 2px solid #008e45;
+              border-radius: 6px;
+              padding: 0.75rem;
+              font-size: 0.9rem;
+              word-break: break-all;
+              margin-bottom: 0.5rem;
+            " id="referral-link-display">LOADING...</div>
+            <button onclick="copyReferralLink()" style="
+              background: #0070f3;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+              margin-right: 0.5rem;
+            ">📋 Copy Link</button>
+            <button onclick="shareReferralLink()" style="
+              background: #28a745;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+            ">📤 Share</button>
+          </div>
+
+          <div style="font-size: 0.85rem; color: #666; margin-top: 1rem;">
+            <p>🎁 <strong>How it works:</strong></p>
+            <p>• Share your code with friends</p>
+            <p>• They sign up using your code</p>
+            <p>• You both get bonus rewards!</p>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+
+      // Generate or get existing referral code
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        const referralCode = generateReferralCode(user.uid, user.email);
+        const referralLink = `${window.location.origin}/signup.html?ref=${referralCode}`;
+        
+        document.getElementById('referral-code-display').textContent = referralCode;
+        document.getElementById('referral-link-display').textContent = referralLink;
+      }
+    }
+
+    function generateReferralCode(userId, email) {
+      // Create a referral code based on user email
+      const emailPrefix = email.split('@')[0].substring(0, 4).toUpperCase();
+      const userIdSuffix = userId.substring(0, 4).toUpperCase();
+      return `${emailPrefix}${userIdSuffix}`;
+    }
+
+    // Global functions for the modal
+    window.copyReferralCode = function() {
+      const codeElement = document.getElementById('referral-code-display');
+      navigator.clipboard.writeText(codeElement.textContent).then(() => {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    };
+
+    window.copyReferralLink = function() {
+      const linkElement = document.getElementById('referral-link-display');
+      navigator.clipboard.writeText(linkElement.textContent).then(() => {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    };
+
+    window.shareReferralLink = function() {
+      const linkElement = document.getElementById('referral-link-display');
+      const link = linkElement.textContent;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'Join Smartcashly and earn cashback!',
+          text: 'Sign up with my referral code and we both get rewards!',
+          url: link
+        });
+      } else {
+        // Fallback to copying
+        navigator.clipboard.writeText(link).then(() => {
+          alert('Link copied to clipboard! Share it with your friends.');
+        });
+      }
+    };
+
+    // Logout and menu functionality
     document.addEventListener('click', async (e) => {
       if (e.target.id === 'logout-btn') {
         e.preventDefault();
@@ -1023,6 +1203,11 @@
         } catch (err) {
           console.error('Logout error:', err);
         }
+      }
+      
+      if (e.target.id === 'refer-friend') {
+        e.preventDefault();
+        showReferModal();
       }
     });
   </script>
