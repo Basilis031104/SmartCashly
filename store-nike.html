@@ -480,6 +480,17 @@
         <div class="offer-card">
           <div class="offer-header">
             <div class="offer-logo"></div>
+            <div class="offer-type cashback">CASHBACK</div>
+          </div>
+          <h3 class="offer-title">Shop Nike & Earn Cashback</h3>
+          <p class="offer-description">Browse the full Nike collection and earn cashback on every purchase you make!</p>
+          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 7.5% Cashback</div>
+          <button class="offer-button" onclick="trackClick('nike-general')">💰 Shop & Earn</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
           <h3 class="offer-title">Women's Air Max - 40% Off</h3>
@@ -615,6 +626,7 @@
       
       // Define specific Nike category URLs with affiliate tracking
       const nikeUrls = {
+        'nike-general': 'https://www.nike.com?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'nike-airmax-40': 'https://www.nike.com/w/air-max-shoes-a6d8hzy7ok?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'nike-drifit': 'https://www.nike.com/w/dri-fit-clothing-32dxrz6ymx6?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'nike-jordan': 'https://www.nike.com/w/jordan-shoes-37eefzy7ok?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
