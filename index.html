@@ -244,14 +244,14 @@
       border: 1px solid #e9e9e9;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      z-index: 2000;
+      z-index: 10000;
       max-height: 300px;
       overflow-y: auto;
       display: none;
     }
 
     .search-autocomplete.show {
-      display: block;
+      display: block !important;
     }
 
     .autocomplete-item {
@@ -328,251 +328,6 @@
     .btn:hover { background: #0059c1 !important; }
     .btn--secondary { background: #0070f3 !important; }
     .btn--secondary:hover { background: #0059c1 !important; }
-
-    /* Navigation and dropdown styles */
-    nav {
-      position: relative;
-      z-index: 10000 !important;
-    }
-
-    #auth-nav {
-      position: relative;
-      z-index: 10000 !important;
-    }
-
-    #user-profile {
-      position: relative;
-      z-index: 10000 !important;
-    }
-
-    .profile-container {
-      position: relative;
-      cursor: pointer;
-      z-index: 10001 !important;
-    }
-
-    .profile-pic {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.3);
-      transition: border-color 0.2s;
-      object-fit: cover;
-      background: transparent !important;
-      position: relative;
-      z-index: 10001 !important;
-    }
-
-    .profile-pic:hover {
-      border-color: rgba(255,255,255,0.8);
-    }
-
-    .profile-dropdown {
-      position: fixed !important;
-      top: 80px !important;
-      right: 20px !important;
-      background: white !important;
-      border: 2px solid #008e45 !important;
-      border-radius: 8px !important;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4) !important;
-      padding: 0.5rem 0 !important;
-      min-width: 200px !important;
-      display: none !important;
-      z-index: 9999999 !important;
-    }
-
-    .profile-dropdown.show {
-      display: block !important;
-    }
-
-    .profile-dropdown a {
-      display: block !important;
-      padding: 0.75rem 1rem !important;
-      color: #333 !important;
-      text-decoration: none !important;
-      font-size: 0.9rem !important;
-      background: white !important;
-      transition: background-color 0.2s !important;
-    }
-
-    .profile-dropdown a:hover {
-      background: #f5f5f5 !important;
-    }
-
-    /* Notification styles */
-    .notification-container {
-      position: relative;
-      z-index: 10000 !important;
-    }
-
-    .notification-bell {
-      position: relative;
-      cursor: pointer;
-      font-size: 24px;
-      padding: 8px;
-      border-radius: 50%;
-      transition: background-color 0.2s;
-      z-index: 10001 !important;
-    }
-
-    .notification-bell:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .notification-badge {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      background: #ff4444;
-      color: white;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 10px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    .notification-dropdown {
-      position: fixed !important;
-      top: 80px !important;
-      right: 80px !important;
-      background: white !important;
-      border: 2px solid #008e45 !important;
-      border-radius: 12px !important;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4) !important;
-      min-width: 350px !important;
-      max-width: 400px !important;
-      display: none !important;
-      z-index: 9999999 !important;
-      max-height: 500px;
-      overflow: hidden;
-    }
-
-    .notification-dropdown.show {
-      display: block !important;
-    }
-
-    .notification-header {
-      padding: 1rem;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .notification-header h4 {
-      margin: 0;
-      color: #008e45;
-      font-size: 1.1rem;
-    }
-
-    .mark-all-read {
-      background: none;
-      border: none;
-      color: #000;
-      font-size: 0.8rem;
-      cursor: pointer;
-      text-decoration: underline;
-      font-weight: normal;
-    }
-
-    .mark-all-read:hover {
-      color: #008e45 !important;
-    }
-
-    .notification-list {
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    .notification-item {
-      display: flex;
-      padding: 1rem;
-      border-bottom: 1px solid #f0f0f0;
-      transition: background-color 0.2s;
-      gap: 12px;
-    }
-
-    .notification-item:hover {
-      background-color: #f8f9fa;
-    }
-
-    .notification-item.unread {
-      background-color: #f0f8ff;
-      border-left: 4px solid #008e45;
-    }
-
-    .notification-icon {
-      font-size: 20px;
-      flex-shrink: 0;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .notification-content {
-      flex: 1;
-    }
-
-    .notification-content p {
-      margin: 0 0 4px 0;
-      color: #000;
-      font-size: 0.9rem;
-      line-height: 1.3;
-    }
-
-    .notification-content strong {
-      color: #008e45;
-    }
-
-    .notification-time {
-      color: #000;
-      font-size: 0.75rem;
-    }
-
-    .notification-footer {
-      padding: 0.75rem 1rem;
-      border-top: 1px solid #eee;
-      text-align: center;
-      background-color: #f8f9fa;
-    }
-
-    .view-all-notifications {
-      color: #008e45;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-
-    .view-all-notifications:hover {
-      text-decoration: underline;
-      color: #006633 !important;
-    }
-
-    /* Force all notification text to be black */
-    .notification-dropdown * {
-      color: #000 !important;
-    }
-
-    .notification-dropdown .notification-content strong {
-      color: #008e45 !important;
-    }
-
-    .notification-dropdown .notification-header h4 {
-      color: #008e45 !important;
-    }
 
     main {
       flex: 1 1 auto;
@@ -900,39 +655,8 @@
       </div>
       <div id="user-profile" style="display: none; align-items: center; gap: 1rem;">
         <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
-        
-        <!-- Notification Bell -->
-        <div class="notification-container">
-          <div class="notification-bell" id="notification-bell">
-            🔔
-            <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
-          </div>
-          <div class="notification-dropdown" id="notification-dropdown">
-            <div class="notification-header">
-              <h4>🔔 Notifications</h4>
-              <button class="mark-all-read" id="mark-all-read">Mark all as read</button>
-            </div>
-            <div class="notification-list" id="notification-list">
-              <div class="no-notifications" id="no-notifications" style="padding: 2rem; text-align: center; color: #000 !important;">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔔</div>
-                <p style="color: #000 !important; font-weight: normal;">No notifications yet</p>
-                <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #000 !important; font-weight: normal;">You'll see updates about referrals and cashback here</p>
-              </div>
-            </div>
-            <div class="notification-footer">
-              <a href="#" class="view-all-notifications">View all notifications</a>
-            </div>
-          </div>
-        </div>
-        
         <div class="profile-container">
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
-          <div class="profile-dropdown" id="profile-dropdown">
-            <a href="account-settings.html">⚙️ Account Settings</a>
-            <a href="click-history.html">🛒 Click History</a>
-            <a href="#" id="refer-friend-btn">👥 Refer a Friend</a>
-            <a href="#" id="logout-btn">🚪 Logout</a>
-          </div>
         </div>
       </div>
     </nav>
@@ -996,142 +720,105 @@
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
 
-  <script type="module" src="auth.js"></script>
-  <script type="module">
+  <script>
     document.getElementById('year').textContent = 2025;
-    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-    let currentUser = null;
-
-    // Search data for autocomplete
-    const searchData = [
+    // Search data for autocomplete - Simple and working
+    const stores = [
       {
         name: 'Box Now',
         description: 'Fast and reliable delivery service',
         cashback: '35%',
         url: 'store-boxnow.html',
         icon: 'boxnow-logo.png',
-        keywords: ['box', 'now', 'delivery', 'package', 'shipping']
+        keywords: ['box', 'now', 'delivery', 'package', 'shipping', 'send']
       },
       {
         name: 'Nike',
-        description: 'Fashion store with athletic footwear and apparel',
+        description: 'Athletic footwear and sports apparel',
         cashback: '7.5%',
         url: 'store-nike.html',
         icon: 'nike-logo.png',
-        keywords: ['nike', 'shoes', 'sneakers', 'sports', 'athletic', 'apparel', 'fashion']
+        keywords: ['nike', 'shoes', 'sneakers', 'sports', 'athletic', 'apparel', 'fashion', 'clothing']
       }
     ];
 
-    // Search functionality
+    // Search functionality - Simple and direct
+    const searchInput = document.getElementById('search-input');
+    const autocomplete = document.getElementById('search-autocomplete');
     let currentFocus = -1;
-    let searchTimeout;
 
-    function setupSearch() {
-      const searchInput = document.getElementById('search-input');
-      const autocomplete = document.getElementById('search-autocomplete');
-
-      searchInput.addEventListener('input', function(e) {
-        clearTimeout(searchTimeout);
-        const query = e.target.value.trim();
-        
-        if (query.length === 0) {
-          hideAutocomplete();
-          return;
-        }
-
-        // Debounce search
-        searchTimeout = setTimeout(() => {
-          performSearch(query);
-        }, 200);
-      });
-
-      searchInput.addEventListener('keydown', function(e) {
-        const items = autocomplete.querySelectorAll('.autocomplete-item');
-        
-        if (e.keyCode === 40) { // Down arrow
-          currentFocus++;
-          addActive(items);
-          e.preventDefault();
-        } else if (e.keyCode === 38) { // Up arrow
-          currentFocus--;
-          addActive(items);
-          e.preventDefault();
-        } else if (e.keyCode === 13) { // Enter
-          e.preventDefault();
-          if (currentFocus > -1 && items[currentFocus]) {
-            items[currentFocus].click();
-          }
-        } else if (e.keyCode === 27) { // Escape
-          hideAutocomplete();
-        }
-      });
-
-      searchInput.addEventListener('blur', function() {
-        setTimeout(() => hideAutocomplete(), 150);
-      });
-
-      searchInput.addEventListener('focus', function() {
-        if (this.value.trim()) {
-          performSearch(this.value.trim());
-        }
-      });
+    // Show autocomplete dropdown
+    function showDropdown() {
+      autocomplete.classList.add('show');
     }
 
-    function performSearch(query) {
-      const results = filterStores(query);
-      displayResults(results, query);
+    // Hide autocomplete dropdown
+    function hideDropdown() {
+      autocomplete.classList.remove('show');
+      currentFocus = -1;
     }
 
-    function filterStores(query) {
-      const queryLower = query.toLowerCase();
+    // Clear search results
+    function clearResults() {
+      autocomplete.innerHTML = '';
+      hideDropdown();
+    }
+
+    // Highlight matching text
+    function highlightMatch(text, query) {
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<strong>$1</strong>');
+    }
+
+    // Search and filter stores
+    function searchStores(query) {
+      if (!query || query.length < 1) {
+        clearResults();
+        return;
+      }
+
       const results = [];
+      const queryLower = query.toLowerCase();
 
-      searchData.forEach(store => {
-        let score = 0;
+      stores.forEach(store => {
+        // Check if query matches store name or keywords
         const nameMatch = store.name.toLowerCase().includes(queryLower);
         const keywordMatch = store.keywords.some(keyword => 
           keyword.toLowerCase().includes(queryLower)
         );
 
-        if (store.name.toLowerCase().startsWith(queryLower)) {
-          score = 100; // Highest priority for name prefix match
-        } else if (nameMatch) {
-          score = 80; // High priority for name contains
-        } else if (keywordMatch) {
-          score = 60; // Medium priority for keyword match
-        }
-
-        if (score > 0) {
-          results.push({ ...store, score });
+        if (nameMatch || keywordMatch) {
+          results.push(store);
         }
       });
 
-      return results.sort((a, b) => b.score - a.score);
+      displayResults(results, query);
     }
 
+    // Display search results
     function displayResults(results, query) {
-      const autocomplete = document.getElementById('search-autocomplete');
       autocomplete.innerHTML = '';
-      currentFocus = -1;
 
       if (results.length === 0) {
         autocomplete.innerHTML = `
           <div class="no-results">
             <p>No stores found for "${query}"</p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try searching for "Nike" or "Box Now"</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike" or "Box Now"</p>
           </div>
         `;
-        showAutocomplete();
+        showDropdown();
         return;
       }
 
       results.forEach((store, index) => {
-        const div = document.createElement('div');
-        div.className = 'autocomplete-item';
-        div.setAttribute('data-url', store.url);
+        const item = document.createElement('div');
+        item.className = 'autocomplete-item';
+        item.onclick = () => {
+          window.location.href = store.url;
+        };
 
-        div.innerHTML = `
+        item.innerHTML = `
           <div class="autocomplete-icon" style="background-image: url('${store.icon}')"></div>
           <div class="autocomplete-content">
             <div class="autocomplete-name">${highlightMatch(store.name, query)}</div>
@@ -1140,330 +827,70 @@
           </div>
         `;
 
-        div.addEventListener('click', function() {
-          window.location.href = store.url;
-        });
-
-        autocomplete.appendChild(div);
+        autocomplete.appendChild(item);
       });
 
-      showAutocomplete();
+      showDropdown();
     }
 
-    function highlightMatch(text, query) {
-      const index = text.toLowerCase().indexOf(query.toLowerCase());
-      if (index >= 0) {
-        return text.substring(0, index) + 
-               '<strong>' + text.substring(index, index + query.length) + '</strong>' + 
-               text.substring(index + query.length);
+    // Event listeners for search
+    searchInput.addEventListener('input', function(e) {
+      const query = e.target.value.trim();
+      console.log('Searching for:', query); // Debug log
+      searchStores(query);
+    });
+
+    searchInput.addEventListener('focus', function() {
+      if (this.value.trim()) {
+        searchStores(this.value.trim());
       }
-      return text;
-    }
+    });
 
-    function addActive(items) {
-      if (!items) return false;
+    searchInput.addEventListener('blur', function() {
+      // Delay hiding to allow clicks
+      setTimeout(hideDropdown, 200);
+    });
+
+    // Keyboard navigation
+    searchInput.addEventListener('keydown', function(e) {
+      const items = autocomplete.querySelectorAll('.autocomplete-item');
       
-      // Remove active class from all items
+      if (e.keyCode === 40) { // Down arrow
+        currentFocus++;
+        if (currentFocus >= items.length) currentFocus = 0;
+        setActive(items);
+        e.preventDefault();
+      } else if (e.keyCode === 38) { // Up arrow
+        currentFocus--;
+        if (currentFocus < 0) currentFocus = items.length - 1;
+        setActive(items);
+        e.preventDefault();
+      } else if (e.keyCode === 13) { // Enter
+        e.preventDefault();
+        if (currentFocus > -1 && items[currentFocus]) {
+          items[currentFocus].click();
+        }
+      } else if (e.keyCode === 27) { // Escape
+        hideDropdown();
+      }
+    });
+
+    // Set active item
+    function setActive(items) {
       items.forEach(item => item.classList.remove('active'));
-      
-      // Handle bounds
-      if (currentFocus >= items.length) currentFocus = 0;
-      if (currentFocus < 0) currentFocus = items.length - 1;
-      
-      // Add active class to current item
       if (items[currentFocus]) {
         items[currentFocus].classList.add('active');
       }
     }
 
-    function showAutocomplete() {
-      document.getElementById('search-autocomplete').classList.add('show');
-    }
-
-    function hideAutocomplete() {
-      document.getElementById('search-autocomplete').classList.remove('show');
-      currentFocus = -1;
-    }
-
-    // Close autocomplete when clicking outside
+    // Click outside to close
     document.addEventListener('click', function(e) {
-      const searchBar = document.querySelector('.search-bar');
-      if (!searchBar.contains(e.target)) {
-        hideAutocomplete();
+      if (!searchInput.contains(e.target) && !autocomplete.contains(e.target)) {
+        hideDropdown();
       }
     });
 
-    window.addEventListener('load', () => {
-      console.log('🔄 Index page loaded, initializing...');
-      
-      setupSearch();
-      
-      let attempts = 0;
-      const initAuth = async () => {
-        if (typeof smartAuth !== 'undefined' || attempts > 50) {
-          const auth = getAuth();
-          console.log('🔥 Firebase auth instance:', auth);
-          
-          onAuthStateChanged(auth, (user) => {
-            console.log('🔄 Auth state changed:', user ? user.email : 'No user');
-            currentUser = user;
-            updateAuthUI(user);
-            if (user) {
-              console.log('✅ User is logged in, setting up profile...');
-              setupProfileDropdown();
-              setupReferralCode(user);
-              setTimeout(() => {
-                checkForReferralNotifications(user);
-              }, 1000);
-            } else {
-              console.log('❌ No user logged in');
-            }
-          });
-        } else {
-          attempts++;
-          setTimeout(initAuth, 100);
-        }
-      };
-      
-      initAuth();
-      setupNotifications();
-    });
-
-    window.addEventListener('focus', () => {
-      const auth = getAuth();
-      const user = auth.currentUser;
-      if (user && !currentUser) {
-        console.log('🔄 Window focused, found user:', user.email);
-        currentUser = user;
-        updateAuthUI(user);
-        setupProfileDropdown();
-      }
-    });
-
-    function updateAuthUI(user) {
-      const authButtons = document.getElementById('auth-buttons');
-      const userProfile = document.getElementById('user-profile');
-      const userEmail = document.getElementById('user-email');
-      const profilePic = document.getElementById('profile-pic');
-
-      if (user) {
-        console.log('User logged in:', user.email);
-        authButtons.style.display = 'none';
-        userProfile.style.display = 'flex';
-        userEmail.textContent = user.email;
-        
-        const savedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
-        if (savedProfilePic) {
-          profilePic.src = savedProfilePic;
-        } else if (user.photoURL) {
-          profilePic.src = user.photoURL;
-        } else {
-          const initial = user.email.charAt(0).toUpperCase();
-          profilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%23008e45'/><text x='20' y='26' text-anchor='middle' fill='white' font-size='16' font-family='Arial'>${initial}</text></svg>`;
-        }
-      } else {
-        console.log('User not logged in');
-        authButtons.style.display = 'flex';
-        userProfile.style.display = 'none';
-      }
-    }
-
-    function setupProfileDropdown() {
-      const profileContainer = document.querySelector('.profile-container');
-      const profileDropdown = document.getElementById('profile-dropdown');
-      const notificationBell = document.getElementById('notification-bell');
-      const notificationDropdown = document.getElementById('notification-dropdown');
-      
-      if (profileContainer) {
-        profileContainer.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const isVisible = profileDropdown.classList.contains('show');
-          
-          notificationDropdown.classList.remove('show');
-          
-          if (isVisible) {
-            profileDropdown.classList.remove('show');
-          } else {
-            profileDropdown.classList.add('show');
-          }
-        });
-      }
-      
-      if (notificationBell) {
-        notificationBell.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const isVisible = notificationDropdown.classList.contains('show');
-          
-          profileDropdown.classList.remove('show');
-          
-          if (isVisible) {
-            notificationDropdown.classList.remove('show');
-          } else {
-            notificationDropdown.classList.add('show');
-          }
-        });
-      }
-      
-      document.addEventListener('click', function() {
-        profileDropdown.classList.remove('show');
-        notificationDropdown.classList.remove('show');
-      });
-      
-      const logoutBtn = document.getElementById('logout-btn');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', async function(e) {
-          e.preventDefault();
-          try {
-            if (typeof smartAuth !== 'undefined') {
-              await smartAuth.signOut();
-              window.location.href = 'index.html';
-            }
-          } catch (err) {
-            console.error('Logout error:', err);
-          }
-        });
-      }
-    }
-
-    function setupNotifications() {
-      const markAllReadBtn = document.getElementById('mark-all-read');
-      const notificationBadge = document.getElementById('notification-badge');
-
-      if (markAllReadBtn) {
-        markAllReadBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          const notificationList = document.getElementById('notification-list');
-          const notificationItems = notificationList.querySelectorAll('.notification-item');
-          
-          notificationItems.forEach(item => {
-            item.remove();
-          });
-          
-          showNoNotificationsMessage();
-          notificationBadge.style.display = 'none';
-          localStorage.setItem('notifications_read', 'true');
-        });
-      }
-
-      updateNotificationBadge();
-    }
-
-    function showNoNotificationsMessage() {
-      const notificationList = document.getElementById('notification-list');
-      const noNotificationsElement = document.getElementById('no-notifications');
-      
-      if (!noNotificationsElement) {
-        const noNotifications = document.createElement('div');
-        noNotifications.className = 'no-notifications';
-        noNotifications.id = 'no-notifications';
-        noNotifications.style.cssText = 'padding: 2rem; text-align: center; color: #000 !important;';
-        noNotifications.innerHTML = `
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔔</div>
-          <p style="color: #000 !important; font-weight: normal;">No notifications yet</p>
-          <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #000 !important; font-weight: normal;">You'll see updates about referrals and cashback here</p>
-        `;
-        notificationList.appendChild(noNotifications);
-      } else {
-        noNotificationsElement.style.display = 'block';
-      }
-    }
-
-    function setupReferralCode(user) {
-      console.log('=== REFERRAL CODE SETUP ===');
-      console.log('User:', user.email);
-      
-      const referCodeElement = document.getElementById('refer-code');
-      if (!referCodeElement) {
-        console.error('Refer code element not found!');
-        return;
-      }
-      
-      const storedCode = localStorage.getItem(`referral_code_${user.uid}`);
-      
-      if (storedCode) {
-        console.log('Using stored referral code:', storedCode);
-        referCodeElement.textContent = storedCode;
-        storeReferralMapping(storedCode, user);
-        return;
-      }
-      
-      const timestamp = Date.now().toString().slice(-4);
-      const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
-      const userPart = user.uid.substring(0, 4).toUpperCase();
-      const uniqueCode = `SMART-${userPart}${randomPart}${timestamp}`;
-      
-      console.log('Generated NEW referral code:', uniqueCode);
-      
-      localStorage.setItem(`referral_code_${user.uid}`, uniqueCode);
-      referCodeElement.textContent = uniqueCode;
-      storeReferralMapping(uniqueCode, user);
-      
-      console.log('=== REFERRAL CODE SETUP COMPLETE ===');
-    }
-
-    function storeReferralMapping(referralCode, user) {
-      const mappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
-      mappings[referralCode] = {
-        userId: user.uid,
-        email: user.email,
-        displayName: user.displayName || user.email.split('@')[0],
-        createdAt: new Date().toISOString()
-      };
-      localStorage.setItem('referral_code_mappings', JSON.stringify(mappings));
-      console.log('🗂️ Stored referral mapping:', referralCode, '→', user.email);
-    }
-
-    function checkForReferralNotifications(user) {
-      console.log('=== 🔔 CHECKING FOR REFERRAL NOTIFICATIONS ===');
-      
-      const pendingNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-      const referralMappings = JSON.parse(localStorage.getItem('referral_code_mappings') || '{}');
-      const processedNotifications = JSON.parse(localStorage.getItem(`processed_notifications_${user.uid}`) || '[]');
-      
-      console.log('📦 Pending notifications:', pendingNotifications.length);
-      console.log('🗺️ Referral mappings:', Object.keys(referralMappings).length);
-      
-      let newNotifications = 0;
-      
-      pendingNotifications.forEach((notification, index) => {
-        const mapping = referralMappings[notification.referralCode];
-        
-        if (mapping && mapping.userId === user.uid && !notification.processed) {
-          if (!processedNotifications.includes(notification.id)) {
-            console.log('🎉 Creating notification for referral:', notification);
-            
-            setTimeout(() => {
-              createReferralNotification(
-                notification.newUserDisplayName, 
-                notification.referralCode,
-                notification.timestamp
-              );
-            }, 500);
-            
-            processedNotifications.push(notification.id);
-            notification.processed = true;
-            newNotifications++;
-          }
-        }
-      });
-      
-      localStorage.setItem('pending_referral_notifications', JSON.stringify(pendingNotifications));
-      localStorage.setItem(`processed_notifications_${user.uid}`, JSON.stringify(processedNotifications));
-      
-      if (newNotifications > 0) {
-        console.log(`✅ Created ${newNotifications} new referral notifications`);
-        updateNotificationBadge();
-      } else {
-        console.log('ℹ️ No new referral notifications');
-      }
-      
-      console.log('=== 🔔 NOTIFICATION CHECK COMPLETE ===');
-    }
-
-    function createReferralNotification(friendName, referralCode, timestamp = null) {
-      console.log('🔔 Creating referral notification:', {friendName, referralCode});
-      
-      const notificationList = document.getElementById('notification-list');
-      if (!notificationList) {
-        console.error('❌ Notification list not found');
+    console.log('Search functionality loaded'); // Debug log
+  </script>
+</body>
+</html>
