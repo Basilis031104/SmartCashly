@@ -480,10 +480,23 @@
         <div class="offer-card">
           <div class="offer-header">
             <div class="offer-logo"></div>
+            <div class="offer-type cashback">CASHBACK</div>
+          </div>
+          <h3 class="offer-title">Shop Box Now & Earn Cashback</h3>
+          <p class="offer-description">Browse all Box Now delivery services and earn cashback on every package you send!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 35% Cashback</div>
+          <button class="offer-button" onclick="trackClick('boxnow-general')">💰 Shop & Earn</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
           <h3 class="offer-title">Send a package for 2€!</h3>
           <p class="offer-description">Easy and fast online option to send packages for only 2€!</p>
+          <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
           <button class="offer-button" onclick="trackClick('boxnow-2euro')">📦 Get Offer</button>
         </div>
@@ -495,7 +508,7 @@
           </div>
           <h3 class="offer-title">Send a Mini Package</h3>
           <p class="offer-description">Send a mini package with 1.5€!</p>
-          <div style="height: 24px;"></div>
+          <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
           <button class="offer-button" onclick="trackClick('boxnow-mini')">📦 Get Offer</button>
         </div>
@@ -507,6 +520,7 @@
           </div>
           <h3 class="offer-title">Send a Small Package</h3>
           <p class="offer-description">Send a small package with 3€!</p>
+          <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
           <button class="offer-button" onclick="trackClick('boxnow-small')">📦 Get Offer</button>
         </div>
@@ -518,6 +532,7 @@
           </div>
           <h3 class="offer-title">Send a Medium Package</h3>
           <p class="offer-description">Send a medium package with 4€!</p>
+          <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
           <button class="offer-button" onclick="trackClick('boxnow-medium')">📦 Get Offer</button>
         </div>
@@ -529,6 +544,7 @@
           </div>
           <h3 class="offer-title">Send a Large Package</h3>
           <p class="offer-description">Send a large package with 8€!</p>
+          <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
           <button class="offer-button" onclick="trackClick('boxnow-large')">📦 Get Offer</button>
         </div>
@@ -574,9 +590,23 @@
         button.style.background = '#4CAF50';
       }, 2000);
       
+      // Define specific Box Now URLs with Smartcashly tracking
+      const boxnowUrls = {
+        'boxnow-general': 'https://steiledema.boxnow.gr/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'boxnow-2euro': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=2euro&click_id=' + clickData.clickId,
+        'boxnow-mini': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=mini&click_id=' + clickData.clickId,
+        'boxnow-small': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=small&click_id=' + clickData.clickId,
+        'boxnow-medium': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=medium&click_id=' + clickData.clickId,
+        'boxnow-large': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=large&click_id=' + clickData.clickId
+      };
+      
+      // Get the specific URL
+      const targetUrl = boxnowUrls[offerId] || 'https://steiledema.boxnow.gr/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
+      
       // Redirect to Box Now website
       console.log('Click tracked:', clickData);
-      window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=58a30ce22e1-1d64-3510-bbc7-da0f2e15ded8', '_blank');
+      console.log('Redirecting to:', targetUrl);
+      window.open(targetUrl, '_blank');
     }
   </script>
 </body>
