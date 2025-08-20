@@ -407,7 +407,8 @@
     }
 
     .store-card:first-of-type:hover,
-    .store-card:nth-of-type(2):hover {
+    .store-card:nth-of-type(2):hover,
+    .store-card:nth-of-type(3):hover {
       transform: translateY(-8px);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
       border-color: #008e45;
@@ -712,18 +713,18 @@
           <button class="shop-now-btn" onclick="window.location.href='store-nike.html'">👟 Shop Now & Earn Cashback</button>
         </div>
 
-        <div class="store-card" style="opacity: 0.6; cursor: not-allowed;">
-          <div style="width: 100px; height: 100px; background: #f0f0f0; border-radius: 12px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🚀</div>
-          <div class="store-name">More Stores</div>
-          <div class="store-description">Coming soon! We're adding more amazing partner stores with great cashback offers</div>
-          <div class="cashback-badge">💰 Up to 15% Cashback</div>
+        <div class="store-card">
+          <img src="shein-logo.png" alt="Shein Logo" class="store-logo" />
+          <div class="store-name">Shein</div>
+          <div class="store-description">Fashion store with cashback rewards on trendy clothing for women, men, and kids</div>
+          <div class="cashback-badge">💰 Up to 30% Cashback</div>
           <ul class="store-features">
-            <li>Electronics & gadgets</li>
-            <li>Fashion & accessories</li>
-            <li>Home & garden</li>
-            <li>Travel & booking</li>
+            <li>Trendy women's fashion and accessories</li>
+            <li>Men's and kids' clothing collections</li>
+            <li>Affordable prices with frequent sales</li>
+            <li>Home decor and lifestyle products</li>
           </ul>
-          <button class="shop-now-btn" disabled>🔄 Coming Soon</button>
+          <button class="shop-now-btn" onclick="window.location.href='store-shein.html'">👗 Shop Now & Earn Cashback</button>
         </div>
       </div>
     </div>
@@ -753,6 +754,14 @@
         url: 'store-nike.html',
         icon: 'nike-logo.png',
         keywords: ['nike', 'shoes', 'sneakers', 'sports', 'athletic', 'apparel', 'fashion', 'clothing']
+      },
+      {
+        name: 'Shein',
+        description: 'Fashion store with trendy clothing',
+        cashback: '30%',
+        url: 'store-shein.html',
+        icon: 'shein-logo.png',
+        keywords: ['shein', 'fashion', 'clothing', 'dresses', 'tops', 'women', 'men', 'kids', 'trendy', 'affordable']
       }
     ];
 
@@ -817,7 +826,7 @@
         autocomplete.innerHTML = `
           <div class="no-results">
             <p>No stores found for "${query}"</p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike" or "Box Now"</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", or "Shein"</p>
           </div>
         `;
         showDropdown();
