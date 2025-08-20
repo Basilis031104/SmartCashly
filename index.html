@@ -409,7 +409,8 @@
 
     .store-card:first-of-type:hover,
     .store-card:nth-of-type(2):hover,
-    .store-card:nth-of-type(3):hover {
+    .store-card:nth-of-type(3):hover,
+    .store-card:nth-of-type(4):hover {
       transform: translateY(-8px);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
       border-color: #008e45;
@@ -728,6 +729,20 @@
           <button class="shop-now-btn" onclick="window.location.href='store-shein.html'">👗 Shop Now & Earn Cashback</button>
         </div>
 
+        <div class="store-card">
+          <img src="logo-benetton.png" alt="Benetton Logo" class="store-logo" />
+          <div class="store-name">Benetton</div>
+          <div class="store-description">Fashion store with cashback rewards on colorful Italian clothing for the whole family</div>
+          <div class="cashback-badge">💰 Up to 25% Cashback</div>
+          <ul class="store-features">
+            <li>Iconic Italian fashion since 1965</li>
+            <li>Vibrant colors and multicultural style</li>
+            <li>Quality clothing for men, women & kids</li>
+            <li>Knitwear and contemporary designs</li>
+          </ul>
+          <button class="shop-now-btn" onclick="window.location.href='store-benetton.html'">👔 Shop Now & Earn Cashback</button>
+        </div>
+
         <div class="store-card" style="opacity: 0.6; cursor: not-allowed;">
           <div style="width: 100px; height: 100px; background: #f0f0f0; border-radius: 12px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🚀</div>
           <div class="store-name">More Stores</div>
@@ -752,7 +767,7 @@
   <script>
     document.getElementById('year').textContent = 2025;
 
-    // Search data for autocomplete - Simple and working
+    // Search data for autocomplete - Updated with Benetton
     const stores = [
       {
         name: 'Box Now',
@@ -777,6 +792,14 @@
         url: 'store-shein.html',
         icon: 'logo-shein.png',
         keywords: ['shein', 'fashion', 'clothing', 'dresses', 'tops', 'women', 'men', 'kids', 'trendy', 'affordable']
+      },
+      {
+        name: 'Benetton',
+        description: 'Italian fashion with colorful designs',
+        cashback: '25%',
+        url: 'store-benetton.html',
+        icon: 'logo-benetton.png',
+        keywords: ['benetton', 'fashion', 'italian', 'colorful', 'clothing', 'knitwear', 'sweaters', 'women', 'men', 'kids']
       }
     ];
 
@@ -841,7 +864,7 @@
         autocomplete.innerHTML = `
           <div class="no-results">
             <p>No stores found for "${query}"</p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", or "Shein"</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", "Shein", or "Benetton"</p>
           </div>
         `;
         showDropdown();
