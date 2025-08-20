@@ -492,6 +492,18 @@
         <div class="offer-card">
           <div class="offer-header">
             <div class="offer-logo"></div>
+            <div class="offer-type promo" style="background: #e74c3c;">COUPON</div>
+          </div>
+          <h3 class="offer-title">10% Off Your First Purchase</h3>
+          <p class="offer-description">Get an exclusive discount coupon for 10% off your first order at Shein!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">🎫 Get Exclusive Coupon</div>
+          <button class="offer-button" onclick="trackClick('shein-coupon')">🎫 Get Coupon</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
           <h3 class="offer-title">Women's Dresses - Up to 30% Off</h3>
@@ -629,6 +641,7 @@
       // Define specific Shein category URLs with affiliate tracking
       const sheinUrls = {
         'shein-general': 'https://us.shein.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-coupon': 'https://us.shein.com/coupon?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'shein-dresses': 'https://us.shein.com/Women-Dresses-c-1727.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'shein-tops': 'https://us.shein.com/Women-Tops,-Blouses-Tee-c-1766.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'shein-student': 'https://us.shein.com/student-discount?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
