@@ -492,6 +492,18 @@
         <div class="offer-card">
           <div class="offer-header">
             <div class="offer-logo"></div>
+            <div class="offer-type promo" style="background: #e74c3c;">COUPON</div>
+          </div>
+          <h3 class="offer-title">5% Off Your First Purchase</h3>
+          <p class="offer-description">Get an exclusive discount coupon for 5% off your first order at Benetton!</p>
+          <div style="height: 48px;"></div>
+          <div class="offer-cashback">🎫 Get Exclusive Coupon + Extra 25% Cashback</div>
+          <button class="offer-button" onclick="trackClick('benetton-coupon')">🎫 Get Coupon</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
           <h3 class="offer-title">Women's Sale - Up to 60% Off</h3>
@@ -508,7 +520,7 @@
           </div>
           <h3 class="offer-title">Men's Polos - 57% Off</h3>
           <p class="offer-description">Regular fit polos in 27 vibrant colors, now from £45.95 to just £19.95!</p>
-          <div style="height: 24px;"></div>
+          <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-mens-polos')">👕 Get Offer</button>
         </div>
@@ -544,7 +556,7 @@
           </div>
           <h3 class="offer-title">Women's Cropped Trousers - 30% Off</h3>
           <p class="offer-description">Stylish cropped trousers, reduced from £75.95 to £52.95 in multiple colors!</p>
-          <div style="height: 24px;"></div>
+          <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-womens-trousers')">👖 Get Offer</button>
         </div>
@@ -568,7 +580,7 @@
           </div>
           <h3 class="offer-title">Men's Jeans Collection - 25% Off</h3>
           <p class="offer-description">Classic and modern cut jeans from £59.95, perfect for any casual occasion!</p>
-          <div style="height: 24px;"></div>
+          <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-mens-jeans')">👖 Get Offer</button>
         </div>
@@ -596,6 +608,12 @@
     document.getElementById('year').textContent = 2025;
 
     function trackClick(offerId) {
+      // Handle coupon popup separately
+      if (offerId === 'benetton-coupon') {
+        showCouponModal();
+        return;
+      }
+      
       // Store click data
       const clickData = {
         store: 'Benetton',
@@ -647,6 +665,133 @@
       console.log('Redirecting to:', targetUrl);
       window.open(targetUrl, '_blank');
     }
+
+    // Coupon Modal Function
+    function showCouponModal() {
+      const modal = document.createElement('div');
+      modal.id = 'coupon-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+
+      modal.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 400px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        ">
+          <button onclick="document.getElementById('coupon-modal').remove()" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+          ">×</button>
+          
+          <h2 style="color: #008e45; margin-bottom: 1rem;">🎫 Your Coupon Code</h2>
+          <p style="margin-bottom: 1.5rem; color: #333;">Get 5% off your first purchase at Benetton!</p>
+          <p style="margin-bottom: 1.5rem; color: #ff6b35; font-weight: bold;">+ Extra 25% Cashback</p>
+          
+          <div style="
+            background: #f8f9fa;
+            border: 3px dashed #e74c3c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+          ">
+            <p style="font-weight: bold; color: #e74c3c; margin-bottom: 0.5rem;">Your Coupon Code:</p>
+            <div style="
+              background: white;
+              border: 2px solid #e74c3c;
+              border-radius: 6px;
+              padding: 1rem;
+              font-family: monospace;
+              font-size: 1.5rem;
+              font-weight: bold;
+              color: #e74c3c;
+              margin-bottom: 0.5rem;
+              letter-spacing: 2px;
+            " id="coupon-code-display">FIRST5</div>
+            <button onclick="copyCouponCode()" style="
+              background: #e74c3c;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+              margin-bottom: 0.5rem;
+            ">📋 Copy Code</button>
+          </div>
+
+          <button onclick="goToBenetton()" style="
+            background: #008e45;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+          ">🛒 Shop at Benetton Now</button>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+    }
+
+    // Global functions for the coupon modal
+    window.copyCouponCode = function() {
+      const codeElement = document.getElementById('coupon-code-display');
+      navigator.clipboard.writeText(codeElement.textContent).then(() => {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    };
+
+    window.goToBenetton = function() {
+      // Track the coupon usage
+      const clickData = {
+        store: 'Benetton',
+        offerId: 'benetton-coupon',
+        timestamp: new Date().toISOString(),
+        clickId: 'BT' + Date.now().toString().slice(-6),
+        couponCode: 'FIRST5'
+      };
+      
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      clickHistory.unshift(clickData);
+      if (clickHistory.length > 50) {
+        clickHistory.splice(50);
+      }
+      localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      
+      // Close modal and redirect to Benetton main page
+      document.getElementById('coupon-modal').remove();
+      window.open('https://us.benetton.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=coupon&partner_id=SMART2025&coupon=FIRST5', '_blank');
+    };
   </script>
 </body>
 </html>
