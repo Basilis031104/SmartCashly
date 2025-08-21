@@ -418,16 +418,6 @@
       border-color: #008e45;
     }
 
-    .store-card:last-of-type {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .store-card:last-of-type:hover {
-      transform: none;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    }
-
     .store-logo {
       width: 100px;
       height: 100px;
@@ -914,7 +904,7 @@
     <div class="stores-section">
       <h2 class="section-title">🛒 Featured Stores</h2>
       <div class="stores-grid">
-        <div class="store-card">
+        <div class="store-card" onclick="window.location.href='store-boxnow.html'" style="cursor: pointer;">
           <img src="logo-boxnow.png" alt="Box Now Logo" class="store-logo" />
           <div class="store-name">Box Now</div>
           <div class="store-description">Fast and reliable delivery service with amazing cashback rewards on every shipment</div>
@@ -925,10 +915,10 @@
             <li>Send packages from 2€</li>
             <li>Send a variety of package sizes</li>
           </ul>
-          <button class="shop-now-btn" onclick="window.location.href='store-boxnow.html'">📦 Shop Now & Earn Cashback</button>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-boxnow.html'">📦 Shop Now & Earn Cashback</button>
         </div>
 
-        <div class="store-card">
+        <div class="store-card" onclick="window.location.href='store-nike.html'" style="cursor: pointer;">
           <img src="logo-nike.png" alt="Nike Logo" class="store-logo" />
           <div class="store-name">Nike</div>
           <div class="store-description">Fashion store with cashback rewards on athletic footwear and sports equipment</div>
@@ -939,10 +929,10 @@
             <li>Men's, women's and kids' collections</li>
             <li>Limited edition releases</li>
           </ul>
-          <button class="shop-now-btn" onclick="window.location.href='store-nike.html'">👟 Shop Now & Earn Cashback</button>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-nike.html'">👟 Shop Now & Earn Cashback</button>
         </div>
 
-        <div class="store-card">
+        <div class="store-card" onclick="window.location.href='store-shein.html'" style="cursor: pointer;">
           <img src="logo-shein.png" alt="Shein Logo" class="store-logo" />
           <div class="store-name">Shein</div>
           <div class="store-description">Fashion store with cashback rewards on trendy clothing for women, men, and kids</div>
@@ -953,10 +943,10 @@
             <li>Affordable prices with frequent sales</li>
             <li>Home decor and lifestyle products</li>
           </ul>
-          <button class="shop-now-btn" onclick="window.location.href='store-shein.html'">👗 Shop Now & Earn Cashback</button>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-shein.html'">👗 Shop Now & Earn Cashback</button>
         </div>
 
-        <div class="store-card">
+        <div class="store-card" onclick="window.location.href='store-benetton.html'" style="cursor: pointer;">
           <img src="logo-benetton.png" alt="Benetton Logo" class="store-logo" />
           <div class="store-name">Benetton</div>
           <div class="store-description">Fashion store with cashback rewards on colorful Italian clothing for the whole family</div>
@@ -967,10 +957,10 @@
             <li>Quality clothing for men, women & kids</li>
             <li>Knitwear and contemporary designs</li>
           </ul>
-          <button class="shop-now-btn" onclick="window.location.href='store-benetton.html'">👕 Shop Now & Earn Cashback</button>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-benetton.html'">👕 Shop Now & Earn Cashback</button>
         </div>
 
-        <div class="store-card">
+        <div class="store-card" onclick="window.location.href='store-myprotein.html'" style="cursor: pointer;">
           <img src="logo-myprotein.png" alt="Myprotein Logo" class="store-logo" />
           <div class="store-name">Myprotein</div>
           <div class="store-description">Supplements store with cashback rewards on nutrition products</div>
@@ -981,10 +971,10 @@
             <li>Vitamins and amino acids</li>
             <li>Protein bars and health snacks</li>
           </ul>
-          <button class="shop-now-btn" onclick="window.location.href='store-myprotein.html'">💪 Shop Now & Earn Cashback</button>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-myprotein.html'">💪 Shop Now & Earn Cashback</button>
         </div>
 
-        <div class="store-card">
+        <div class="store-card" onclick="window.location.href='store-aegean.html'" style="cursor: pointer;">
           <img src="logo-aegean.png" alt="Aegean Airlines Logo" class="store-logo" />
           <div class="store-name">Aegean Airlines</div>
           <div class="store-description">Airline with cashback rewards on flight bookings to Greece and Europe</div>
@@ -995,7 +985,7 @@
             <li>Miles+Bonus loyalty program benefits</li>
             <li>Business class upgrades available</li>
           </ul>
-          <button class="shop-now-btn" onclick="window.location.href='store-aegean.html'">✈️ Shop Now & Earn Cashback</button>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-aegean.html'">✈️ Shop Now & Earn Cashback</button>
         </div>
       </div>
     </div>
