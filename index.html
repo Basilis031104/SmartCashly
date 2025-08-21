@@ -411,7 +411,8 @@
     .store-card:nth-of-type(2):hover,
     .store-card:nth-of-type(3):hover,
     .store-card:nth-of-type(4):hover,
-    .store-card:nth-of-type(5):hover {
+    .store-card:nth-of-type(5):hover,
+    .store-card:nth-of-type(6):hover {
       transform: translateY(-8px);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
       border-color: #008e45;
@@ -741,7 +742,7 @@
             <li>Quality clothing for men, women & kids</li>
             <li>Knitwear and contemporary designs</li>
           </ul>
-          <button class="shop-now-btn" onclick="window.location.href='store-benetton.html'">👔 Shop Now & Earn Cashback</button>
+          <button class="shop-now-btn" onclick="window.location.href='store-benetton.html'">👕 Shop Now & Earn Cashback</button>
         </div>
 
         <div class="store-card">
@@ -756,6 +757,20 @@
             <li>Protein bars and health snacks</li>
           </ul>
           <button class="shop-now-btn" onclick="window.location.href='store-myprotein.html'">💪 Shop Now & Earn Cashback</button>
+        </div>
+
+        <div class="store-card">
+          <img src="logo-aegean.png" alt="Aegean Airlines Logo" class="store-logo" />
+          <div class="store-name">Aegean Airlines</div>
+          <div class="store-description">Airline with cashback rewards on flight bookings to Greece and Europe</div>
+          <div class="cashback-badge">💰 Up to 15% Cashback</div>
+          <ul class="store-features">
+            <li>Flights to Athens, Thessaloniki & Greek islands</li>
+            <li>European destinations & connections</li>
+            <li>Miles+Bonus loyalty program benefits</li>
+            <li>Business class upgrades available</li>
+          </ul>
+          <button class="shop-now-btn" onclick="window.location.href='store-aegean.html'">✈️ Shop Now & Earn Cashback</button>
         </div>
 
         <div class="store-card" style="opacity: 0.6; cursor: not-allowed;">
@@ -782,7 +797,7 @@
   <script>
     document.getElementById('year').textContent = 2025;
 
-    // Search data for autocomplete - Updated with Myprotein
+    // Search data for autocomplete - Updated with all stores including Aegean
     const stores = [
       {
         name: 'Box Now',
@@ -823,6 +838,14 @@
         url: 'store-myprotein.html',
         icon: 'logo-myprotein.png',
         keywords: ['myprotein', 'supplements', 'protein', 'whey', 'creatine', 'vitamins', 'nutrition', 'fitness', 'health', 'amino', 'bcaa']
+      },
+      {
+        name: 'Aegean Airlines',
+        description: 'Airline with cashback rewards on flights',
+        cashback: '15%',
+        url: 'store-aegean.html',
+        icon: 'logo-aegean.png',
+        keywords: ['aegean', 'airline', 'flights', 'athens', 'greece', 'europe', 'travel', 'booking', 'miles', 'thessaloniki', 'islands']
       }
     ];
 
@@ -887,7 +910,7 @@
         autocomplete.innerHTML = `
           <div class="no-results">
             <p>No stores found for "${query}"</p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", "Shein", "Benetton", or "Myprotein"</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", "Shein", "Benetton", "Myprotein", or "Aegean Airlines"</p>
           </div>
         `;
         showDropdown();
