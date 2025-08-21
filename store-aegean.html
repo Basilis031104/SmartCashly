@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aegean Airlines - 15% Cashback • Smartcashly</title>
+  <style>
+    /* Advanced shiny dark yellow background with floating particles */
+    html { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+    }
+    
+    body { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* Enhanced golden floating particles overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.6) 1px, transparent 1px),
+        radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 85% 15%, rgba(255, 193, 7, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 25% 85%, rgba(255, 160, 0, 0.4) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 65% 45%, rgba(255, 235, 59, 0.5) 1px, transparent 1px);
+      background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: gentleFloat 25s ease-in-out infinite;
+      will-change: background-position;
+    }
+
+    /* Enhanced sparkle layer */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 65% 20%, rgba(255, 215, 0, 0.5) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 35% 70%, rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 60%, rgba(255, 193, 7, 0.4) 0.8px, transparent 0.8px),
+        radial-gradient(circle at 15% 80%, rgba(255, 160, 0, 0.5) 0.5px, transparent 0.5px);
+      background-size: 70px 70px, 90px 90px, 60px 60px, 80px 80px, 65px 65px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: gentleSparkle 20s ease-in-out infinite;
+      will-change: background-position;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
+      50% { background-position: 100% 50%, 100% 100%, 100% 50%, 100% 100%, 100% 50%; }
+      100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
+    }
+
+    @keyframes gentleFloat {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      33% { 
+        background-position: 30% 20%, 20% 40%, 50% 30%, 40% 10%, 60% 50%, 70% 20%;
+        opacity: 0.9;
+      }
+      66% { 
+        background-position: 60% 40%, 40% 80%, 80% 60%, 10% 70%, 30% 80%, 90% 40%;
+        opacity: 0.7;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes gentleSparkle {
+      0%, 100% { 
+        opacity: 0.4;
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+      }
+      25% { 
+        opacity: 0.8;
+        background-position: 15% 15%, 25% 25%, 35% 35%, 45% 45%, 55% 55%;
+      }
+      50% { 
+        opacity: 0.9;
+        background-position: 30% 30%, 50% 50%, 70% 70%, 90% 90%, 10% 90%;
+      }
+      75% { 
+        opacity: 0.6;
+        background-position: 20% 40%, 40% 20%, 60% 80%, 80% 60%, 100% 40%;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    }
+
+    /* Ensure content appears above particles */
+    header, main, footer {
+      position: relative;
+      z-index: 10;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 1rem 1.5rem;
+      background: #008e45 !important;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Enhanced header particles */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 75% 60%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.3) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 15% 80%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 80px 80px, 100px 100px, 60px 60px, 90px 90px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: headerParticles 20s ease-in-out infinite;
+    }
+
+    @keyframes headerParticles {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      50% { 
+        background-position: 30% 30%, 40% 40%, 20% 50%, 60% 20%;
+        opacity: 0.9;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      flex: 0 0 auto;
+      background: transparent !important;
+      position: relative;
+      z-index: 2;
+    }
+
+    .auth-nav {
+      display: flex;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      background: #0070f3 !important;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background .18s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover          { background: #0059c1 !important; }
+    .btn--secondary     { background: #0070f3 !important; }
+    .btn--secondary:hover { background: #0059c1 !important; }
+
+    main {
+      flex: 1 1 auto;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .store-header {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
+    }
+
+    .store-logo-large {
+      width: 120px;
+      height: 120px;
+      background: url('logo-aegean.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .store-details {
+      flex: 1;
+    }
+
+    .store-title {
+      font-size: 2rem;
+      color: #008e45;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .store-subtitle {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .cashback-highlight {
+      background: linear-gradient(135deg, #ff6b35, #ff8a50);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .offers-section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: #008e45;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
+      display: inline-block;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .offer-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .offer-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .offer-logo {
+      width: 50px;
+      height: 50px;
+      background: url('logo-aegean.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 6px;
+    }
+
+    .offer-type {
+      background: #2196F3;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .offer-type.cashback {
+      background: #ff6b35;
+    }
+
+    .offer-type.promo {
+      background: #2196F3;
+    }
+
+    .offer-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .offer-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .offer-cashback {
+      color: #ff6b35;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .offer-validity {
+      color: #999;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .offer-button {
+      background: #4CAF50;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+
+    .offer-button:hover {
+      background: #45a049;
+    }
+
+    footer {
+      text-align: center;
+      font-size: .875rem;
+      padding: 1rem 0;
+      background: #000000 !important;
+      color: #ffffff !important;
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    footer * {
+      position: relative;
+      z-index: 3;
+      color: #ffffff !important;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: footerParticles 15s ease-in-out infinite;
+    }
+
+    @keyframes footerParticles {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      50% { 
+        background-position: 15% 15%, 20% 20%, 25% 25%, 30% 30%;
+        opacity: 0.8;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .store-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .offers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <div style="flex:1 1 auto;"></div>
+    <nav class="auth-nav">
+      <a href="index.html" class="btn btn--secondary">Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="store-header">
+      <div class="store-logo-large"></div>
+      <div class="store-details">
+        <h1 class="store-title">Aegean Airlines</h1>
+        <p class="store-subtitle">Airline with cashback rewards on flight bookings</p>
+        <div class="cashback-highlight">💰 Earn up to 15% Cashback</div>
+        <p>Aegean Airlines is the largest Greek airline and a Star Alliance member, offering flights to Greece, Europe, and Mediterranean destinations. Book your flights to Athens, Thessaloniki, and over 50 destinations across Europe with excellent service, modern fleet, and competitive prices. Enjoy the convenience of online booking, mobile check-in, and the Miles+Bonus loyalty program while earning cashback on every flight.</p>
+      </div>
+    </div>
+
+    <div class="offers-section">
+      <h2 class="section-title">💰 Cashback Offers</h2>
+      <div class="offers-grid">
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type cashback">CASHBACK</div>
+          </div>
+          <h3 class="offer-title">Book Flights & Earn Cashback</h3>
+          <p class="offer-description">Book any Aegean Airlines flight and earn cashback on every ticket purchase!</p>
+          <div style="height: 48px;"></div>
+          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-general')">💰 Book & Earn</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo" style="background: #e74c3c;">COUPON</div>
+          </div>
+          <h3 class="offer-title">€20 Off Your Flight Booking</h3>
+          <p class="offer-description">Get an exclusive discount coupon for €20 off your flight booking!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">🎫 Get Exclusive Coupon + Extra 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-coupon')">🎫 Get Coupon</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Flights to Athens - Special Deals</h3>
+          <p class="offer-description">Discover Athens with special flight deals from major European cities!</p>
+          <div style="height: 48px;"></div>
+          <div class="offer-cashback">+ Get Extra 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-athens')">🏛️ Book Athens Flight</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Greek Islands Flights - Summer Sale</h3>
+          <p class="offer-description">Fly to beautiful Greek islands including Santorini, Mykonos, Rhodes and more!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-islands')">🏖️ Book Island Flight</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">European Destinations - Best Prices</h3>
+          <p class="offer-description">Connect to major European cities with competitive prices and great service!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-europe')">🌍 Book European Flight</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Miles+Bonus Program Benefits</h3>
+          <p class="offer-description">Join the loyalty program and earn miles on every flight for future rewards!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-miles')">🎁 Join Miles+Bonus</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Round Trip Bookings - Save More</h3>
+          <p class="offer-description">Book round trip flights and save with better prices and flexible dates!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-roundtrip')">✈️ Book Round Trip</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Business Class Upgrade</h3>
+          <p class="offer-description">Upgrade to Business Class for enhanced comfort and premium service!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-business')">👑 Upgrade to Business</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Group Bookings - Special Rates</h3>
+          <p class="offer-description">Book for groups of 9+ passengers and get special group rates and benefits!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 15% Cashback</div>
+          <button class="offer-button" onclick="trackClick('aegean-group')">👥 Book Group Travel</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = 2025;
+
+    function trackClick(offerId) {
+      // Handle coupon popup separately
+      if (offerId === 'aegean-coupon') {
+        showCouponModal();
+        return;
+      }
+      
+      // Store click data
+      const clickData = {
+        store: 'Aegean Airlines',
+        offerId: offerId,
+        timestamp: new Date().toISOString(),
+        clickId: 'AE' + Date.now().toString().slice(-6)
+      };
+      
+      // Store in localStorage for click history
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      clickHistory.unshift(clickData);
+      
+      // Keep only last 50 clicks
+      if (clickHistory.length > 50) {
+        clickHistory.splice(50);
+      }
+      
+      localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      
+      // Show success message
+      const button = event.target;
+      const originalText = button.textContent;
+      button.textContent = '✅ Tracked!';
+      button.style.background = '#28a745';
+      
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '#4CAF50';
+      }, 2000);
+      
+      // Define specific Aegean Airlines URLs with affiliate tracking
+      const aegeanUrls = {
+        'aegean-general': 'https://en.aegeanair.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'aegean-athens': 'https://en.aegeanair.com/plan/book-a-flight/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&destination=athens&click_id=' + clickData.clickId,
+        'aegean-islands': 'https://flights.aegeanair.com/en/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&destination=islands&click_id=' + clickData.clickId,
+        'aegean-europe': 'https://flights.aegeanair.com/en/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&destination=europe&click_id=' + clickData.clickId,
+        'aegean-miles': 'https://en.aegeanair.com/member/miles-and-bonus/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'aegean-roundtrip': 'https://en.aegeanair.com/plan/book-a-flight/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&trip_type=roundtrip&click_id=' + clickData.clickId,
+        'aegean-business': 'https://en.aegeanair.com/travel/onboard-experience/business-class/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'aegean-group': 'https://en.aegeanair.com/plan/booking-info/group-bookings/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
+      };
+      
+      // Get the specific URL
+      const targetUrl = aegeanUrls[offerId] || 'https://en.aegeanair.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
+      
+      // Redirect to specific Aegean Airlines page
+      console.log('Click tracked:', clickData);
+      console.log('Redirecting to:', targetUrl);
+      window.open(targetUrl, '_blank');
+    }
+
+    // Coupon Modal Function
+    function showCouponModal() {
+      const modal = document.createElement('div');
+      modal.id = 'coupon-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+
+      modal.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 400px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        ">
+          <button onclick="document.getElementById('coupon-modal').remove()" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+          ">×</button>
+          
+          <h2 style="color: #008e45; margin-bottom: 1rem;">🎫 Your Coupon Code</h2>
+          <p style="margin-bottom: 1.5rem; color: #333;">Get €20 off your flight booking at Aegean Airlines!</p>
+          <p style="margin-bottom: 1.5rem; color: #ff6b35; font-weight: bold;">+ Extra 15% Cashback</p>
+          
+          <div style="
+            background: #f8f9fa;
+            border: 3px dashed #e74c3c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+          ">
+            <p style="font-weight: bold; color: #e74c3c; margin-bottom: 0.5rem;">Your Coupon Code:</p>
+            <div style="
+              background: white;
+              border: 2px solid #e74c3c;
+              border-radius: 6px;
+              padding: 1rem;
+              font-family: monospace;
+              font-size: 1.5rem;
+              font-weight: bold;
+              color: #e74c3c;
+              margin-bottom: 0.5rem;
+              letter-spacing: 2px;
+            " id="coupon-code-display">FLY20</div>
+            <button onclick="copyCouponCode()" style="
+              background: #e74c3c;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+              margin-bottom: 0.5rem;
+            ">📋 Copy Code</button>
+          </div>
+
+          <button onclick="goToAegean()" style="
+            background: #008e45;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+          ">✈️ Book Flight Now</button>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+    }
+
+    // Global functions for the coupon modal
+    window.copyCouponCode = function() {
+      const codeElement = document.getElementById('coupon-code-display');
+      navigator.clipboard.writeText(codeElement.textContent).then(() => {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    };
+
+    window.goToAegean = function() {
+      // Track the coupon usage
+      const clickData = {
+        store: 'Aegean Airlines',
+        offerId: 'aegean-coupon',
+        timestamp: new Date().toISOString(),
+        clickId: 'AE' + Date.now().toString().slice(-6),
+        couponCode: 'FLY20'
+      };
+      
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      clickHistory.unshift(clickData);
+      if (clickHistory.length > 50) {
+        clickHistory.splice(50);
+      }
+      localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      
+      // Close modal and redirect to Aegean Airlines main page
+      document.getElementById('coupon-modal').remove();
+      window.open('https://en.aegeanair.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=coupon&partner_id=SMART2025&coupon=FLY20', '_blank');
+    };
+  </script>
+</body>
+</html>
