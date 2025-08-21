@@ -410,7 +410,8 @@
     .store-card:first-of-type:hover,
     .store-card:nth-of-type(2):hover,
     .store-card:nth-of-type(3):hover,
-    .store-card:nth-of-type(4):hover {
+    .store-card:nth-of-type(4):hover,
+    .store-card:nth-of-type(5):hover {
       transform: translateY(-8px);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
       border-color: #008e45;
@@ -743,6 +744,20 @@
           <button class="shop-now-btn" onclick="window.location.href='store-benetton.html'">👔 Shop Now & Earn Cashback</button>
         </div>
 
+        <div class="store-card">
+          <img src="logo-myprotein.png" alt="Myprotein Logo" class="store-logo" />
+          <div class="store-name">Myprotein</div>
+          <div class="store-description">Supplements store with cashback rewards on nutrition products</div>
+          <div class="cashback-badge">💰 Up to 12% Cashback</div>
+          <ul class="store-features">
+            <li>Premium whey protein powders</li>
+            <li>Creatine and pre-workout supplements</li>
+            <li>Vitamins and amino acids</li>
+            <li>Protein bars and health snacks</li>
+          </ul>
+          <button class="shop-now-btn" onclick="window.location.href='store-myprotein.html'">💪 Shop Now & Earn Cashback</button>
+        </div>
+
         <div class="store-card" style="opacity: 0.6; cursor: not-allowed;">
           <div style="width: 100px; height: 100px; background: #f0f0f0; border-radius: 12px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🚀</div>
           <div class="store-name">More Stores</div>
@@ -767,7 +782,7 @@
   <script>
     document.getElementById('year').textContent = 2025;
 
-    // Search data for autocomplete - Updated with Benetton
+    // Search data for autocomplete - Updated with Myprotein
     const stores = [
       {
         name: 'Box Now',
@@ -800,6 +815,14 @@
         url: 'store-benetton.html',
         icon: 'logo-benetton.png',
         keywords: ['benetton', 'fashion', 'italian', 'colorful', 'clothing', 'knitwear', 'sweaters', 'women', 'men', 'kids']
+      },
+      {
+        name: 'Myprotein',
+        description: 'Supplements store with nutrition products',
+        cashback: '12%',
+        url: 'store-myprotein.html',
+        icon: 'logo-myprotein.png',
+        keywords: ['myprotein', 'supplements', 'protein', 'whey', 'creatine', 'vitamins', 'nutrition', 'fitness', 'health', 'amino', 'bcaa']
       }
     ];
 
@@ -864,7 +887,7 @@
         autocomplete.innerHTML = `
           <div class="no-results">
             <p>No stores found for "${query}"</p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", "Shein", or "Benetton"</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", "Shein", "Benetton", or "Myprotein"</p>
           </div>
         `;
         showDropdown();
