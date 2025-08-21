@@ -488,9 +488,7 @@
           <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 12% Cashback</div>
           <button class="offer-button" onclick="trackClick('myprotein-general')">💰 Shop & Earn</button>
         </div>
-
-
-
+        
         <div class="offer-card">
           <div class="offer-header">
             <div class="offer-logo"></div>
@@ -508,11 +506,11 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Creatine Supplements - 35% Off</h3>
-          <p class="offer-description">Boost your performance with high-quality creatine monohydrate and advanced formulas!</p>
+          <h3 class="offer-title">Bestsellers Collection - 35% Off</h3>
+          <p class="offer-description">Shop the most popular supplements including creatine and pre-workout formulas!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 12% Cashback</div>
-          <button class="offer-button" onclick="trackClick('myprotein-creatine')">💪 Get Offer</button>
+          <button class="offer-button" onclick="trackClick('myprotein-bestsellers')">🏆 Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -520,11 +518,11 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Pre-Workout Formulas - 30% Off</h3>
-          <p class="offer-description">Energize your workouts with scientifically formulated pre-workout supplements!</p>
+          <h3 class="offer-title">Protein Collection - 25% Off</h3>
+          <p class="offer-description">Complete protein range including BCAA, amino acids, and protein supplements!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 12% Cashback</div>
-          <button class="offer-button" onclick="trackClick('myprotein-preworkout')">⚡ Get Offer</button>
+          <button class="offer-button" onclick="trackClick('myprotein-protein')">🔬 Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -532,19 +530,7 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">BCAA & Amino Acids - 25% Off</h3>
-          <p class="offer-description">Support muscle recovery with essential amino acids and BCAA supplements!</p>
-          <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 12% Cashback</div>
-          <button class="offer-button" onclick="trackClick('myprotein-bcaa')">🔬 Get Offer</button>
-        </div>
-
-        <div class="offer-card">
-          <div class="offer-header">
-            <div class="offer-logo"></div>
-            <div class="offer-type promo">OFFER</div>
-          </div>
-          <h3 class="offer-title">Vitamins & Health - 45% Off</h3>
+          <h3 class="offer-title">Healthy Ingredients - 45% Off</h3>
           <p class="offer-description">Complete your nutrition with essential vitamins, minerals, and health supplements!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 12% Cashback</div>
@@ -568,11 +554,11 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Weight Loss Supplements - 35% Off</h3>
-          <p class="offer-description">Achieve your goals with fat burners, CLA, and metabolism-boosting supplements!</p>
+          <h3 class="offer-title">Impact Protein Bar - Award Winning</h3>
+          <p class="offer-description">Try the award-winning Impact Protein Bar with 20g protein, low sugar, high fiber!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 12% Cashback</div>
-          <button class="offer-button" onclick="trackClick('myprotein-weightloss')">🔥 Get Offer</button>
+          <button class="offer-button" onclick="trackClick('myprotein-impact-bar')">🏅 Get Offer</button>
         </div>
 
         <div class="offer-card">
@@ -580,11 +566,11 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Gym Accessories - 40% Off</h3>
-          <p class="offer-description">Complete your workout setup with shakers, gym bags, lifting belts, and more!</p>
+          <h3 class="offer-title">Student Discount - 10% Off</h3>
+          <p class="offer-description">Special discount for students on all Myprotein supplements and nutrition products!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 12% Cashback</div>
-          <button class="offer-button" onclick="trackClick('myprotein-accessories')">🏋️ Get Offer</button>
+          <button class="offer-button" onclick="trackClick('myprotein-student')">🎓 Get Offer</button>
         </div>
       </div>
     </div>
@@ -598,6 +584,12 @@
     document.getElementById('year').textContent = 2025;
 
     function trackClick(offerId) {
+      // Handle coupon popup separately
+      if (offerId === 'myprotein-coupon') {
+        showCouponModal();
+        return;
+      }
+      
       // Store click data
       const clickData = {
         store: 'Myprotein',
@@ -632,13 +624,12 @@
       const myproteinUrls = {
         'myprotein-general': 'https://us.myprotein.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'myprotein-whey': 'https://us.myprotein.com/c/nutrition/protein/whey-protein/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'myprotein-creatine': 'https://us.myprotein.com/c/nutrition/creatine/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'myprotein-preworkout': 'https://us.myprotein.com/c/nutrition/pre-post-workout/pre-workout/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'myprotein-bcaa': 'https://us.myprotein.com/c/nutrition/amino-acids/bcaa/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'myprotein-vitamins': 'https://us.myprotein.com/c/nutrition/vitamins-minerals-essential-fats/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'myprotein-bars': 'https://us.myprotein.com/c/nutrition/protein-snacks/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'myprotein-weightloss': 'https://us.myprotein.com/c/nutrition/weight-management/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'myprotein-accessories': 'https://us.myprotein.com/c/clothing-accessories/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
+        'myprotein-bestsellers': 'https://us.myprotein.com/c/nutrition/bestsellers-en-us/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'myprotein-protein': 'https://us.myprotein.com/c/nutrition/protein/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'myprotein-vitamins': 'https://us.myprotein.com/c/nutrition/healthy-ingredients/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'myprotein-bars': 'https://us.myprotein.com/c/nutrition/protein/protein-bars-snacks/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'myprotein-impact-bar': 'https://us.myprotein.com/c/nutrition/healthy-food-drinks/protein-bars/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'myprotein-student': 'https://us.myprotein.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&student=true&click_id=' + clickData.clickId
       };
       
       // Get the specific category URL
@@ -649,6 +640,133 @@
       console.log('Redirecting to:', targetUrl);
       window.open(targetUrl, '_blank');
     }
+
+    // Coupon Modal Function
+    function showCouponModal() {
+      const modal = document.createElement('div');
+      modal.id = 'coupon-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+
+      modal.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 400px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        ">
+          <button onclick="document.getElementById('coupon-modal').remove()" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+          ">×</button>
+          
+          <h2 style="color: #008e45; margin-bottom: 1rem;">🎫 Your Coupon Code</h2>
+          <p style="margin-bottom: 1.5rem; color: #333;">Get 15% off your first purchase at Myprotein!</p>
+          <p style="margin-bottom: 1.5rem; color: #ff6b35; font-weight: bold;">+ Extra 12% Cashback</p>
+          
+          <div style="
+            background: #f8f9fa;
+            border: 3px dashed #e74c3c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+          ">
+            <p style="font-weight: bold; color: #e74c3c; margin-bottom: 0.5rem;">Your Coupon Code:</p>
+            <div style="
+              background: white;
+              border: 2px solid #e74c3c;
+              border-radius: 6px;
+              padding: 1rem;
+              font-family: monospace;
+              font-size: 1.5rem;
+              font-weight: bold;
+              color: #e74c3c;
+              margin-bottom: 0.5rem;
+              letter-spacing: 2px;
+            " id="coupon-code-display">WELCOME15</div>
+            <button onclick="copyCouponCode()" style="
+              background: #e74c3c;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+              margin-bottom: 0.5rem;
+            ">📋 Copy Code</button>
+          </div>
+
+          <button onclick="goToMyprotein()" style="
+            background: #008e45;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+          ">🛒 Shop at Myprotein Now</button>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+    }
+
+    // Global functions for the coupon modal
+    window.copyCouponCode = function() {
+      const codeElement = document.getElementById('coupon-code-display');
+      navigator.clipboard.writeText(codeElement.textContent).then(() => {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    };
+
+    window.goToMyprotein = function() {
+      // Track the coupon usage
+      const clickData = {
+        store: 'Myprotein',
+        offerId: 'myprotein-coupon',
+        timestamp: new Date().toISOString(),
+        clickId: 'MP' + Date.now().toString().slice(-6),
+        couponCode: 'WELCOME15'
+      };
+      
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      clickHistory.unshift(clickData);
+      if (clickHistory.length > 50) {
+        clickHistory.splice(50);
+      }
+      localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      
+      // Close modal and redirect to Myprotein main page
+      document.getElementById('coupon-modal').remove();
+      window.open('https://us.myprotein.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=coupon&partner_id=SMART2025&coupon=WELCOME15', '_blank');
+    };
   </script>
 </body>
 </html>
