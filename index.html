@@ -395,7 +395,7 @@
       padding: 2rem;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
       backdrop-filter: blur(15px);
-      border: 2px solid #008e45;
+      border: 3px solid #008e45;
       transition: all 0.3s ease;
       text-decoration: none;
       color: inherit;
@@ -827,6 +827,92 @@
       background: #006633;
     }
 
+    /* Profile dropdown with balance styles */
+    .profile-container {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s;
+      object-fit: cover;
+    }
+
+    .profile-pic:hover {
+      border-color: rgba(255,255,255,0.8);
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 0;
+      min-width: 200px;
+      z-index: 2000;
+      border: 1px solid #e0e0e0;
+      display: none;
+    }
+
+    .balance-section {
+      padding: 1rem;
+      background: linear-gradient(135deg, #008e45, #00a852);
+      color: white;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .balance-label {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+
+    .balance-amount {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .balance-pending {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: #e0e0e0;
+      margin: 0;
+    }
+
+    .profile-dropdown a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+      font-weight: 500;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .profile-dropdown a:last-child {
+      border-bottom: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .profile-dropdown a:hover {
+      background-color: #f5f5f5;
+    }
+
     @media (max-width: 480px) {
       .support-modal {
         width: 300px;
@@ -885,6 +971,12 @@
         <div class="profile-container">
           <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
           <div id="profile-dropdown" class="profile-dropdown" style="display: none;">
+            <div class="balance-section">
+              <div class="balance-label">Your Balance</div>
+              <div class="balance-amount" id="balance-amount">$24.50</div>
+              <div class="balance-pending" id="balance-pending">$12.75 pending</div>
+            </div>
+            <div class="dropdown-divider"></div>
             <a href="account-settings.html" id="account-settings">⚙️ Account Settings</a>
             <a href="click-history.html" id="click-history">📊 Click History</a>
             <a href="#" id="refer-friend">👥 Refer a Friend</a>
@@ -1363,6 +1455,64 @@
       supportSuccess.style.display = 'none';
       supportForm.style.display = 'block';
     });
+
+    // Function to update user balance dynamically
+    function updateUserBalance() {
+      // Calculate balance from click history and referrals
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      
+      // Calculate confirmed cashback (simulated)
+      let confirmedBalance = 0;
+      let pendingBalance = 0;
+      
+      // Add cashback from clicks (simulate some confirmed, some pending)
+      clickHistory.forEach((click, index) => {
+        const cashbackAmount = getCashbackAmount(click.store);
+        if (index < 5) {
+          // First 5 clicks are "confirmed"
+          confirmedBalance += cashbackAmount;
+        } else {
+          // Rest are "pending"
+          pendingBalance += cashbackAmount;
+        }
+      });
+      
+      // Add referral bonuses
+      referralNotifications.forEach(referral => {
+        if (referral.processed) {
+          confirmedBalance += 5.00; // $5 referral bonus
+        } else {
+          pendingBalance += 5.00;
+        }
+      });
+      
+      // Update the display
+      const balanceAmount = document.getElementById('balance-amount');
+      const balancePending = document.getElementById('balance-pending');
+      
+      if (balanceAmount) {
+        balanceAmount.textContent = `${confirmedBalance.toFixed(2)}`;
+      }
+      
+      if (balancePending) {
+        balancePending.textContent = `${pendingBalance.toFixed(2)} pending`;
+      }
+    }
+
+    function getCashbackAmount(storeName) {
+      // Simulate different cashback amounts based on store
+      const cashbackRates = {
+        'Box Now': 2.50,
+        'Nike': 3.25,
+        'Shein': 4.10,
+        'Benetton': 3.75,
+        'Myprotein': 2.80,
+        'Aegean Airlines': 8.50
+      };
+      
+      return cashbackRates[storeName] || 1.50;
+    }
   </script>
 
   <!-- Firebase Auth Module -->
@@ -1406,6 +1556,9 @@
           const initial = user.email.charAt(0).toUpperCase();
           profilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%23008e45'/><text x='20' y='26' text-anchor='middle' fill='white' font-size='16' font-family='Arial'>${initial}</text></svg>`;
         }
+        
+        // Update balance when user is logged in
+        updateUserBalance();
       } else {
         // User is not logged in
         console.log('User not logged in');
@@ -1420,57 +1573,16 @@
     const profileDropdown = document.getElementById('profile-dropdown');
     
     if (profileContainer && profilePic && profileDropdown) {
-      // Add dropdown styles
-      const dropdownStyles = `
-        .profile-container {
-          position: relative;
-          cursor: pointer;
-        }
-        .profile-pic {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          border: 2px solid rgba(255,255,255,0.3);
-          transition: border-color 0.2s;
-          object-fit: cover;
-        }
-        .profile-pic:hover {
-          border-color: rgba(255,255,255,0.8);
-        }
-        .profile-dropdown {
-          position: absolute;
-          top: 50px;
-          right: 0;
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-          padding: 0.5rem 0;
-          min-width: 180px;
-          z-index: 2000;
-        }
-        .profile-dropdown a {
-          display: block;
-          padding: 0.75rem 1rem;
-          color: #333;
-          text-decoration: none;
-          font-size: 0.9rem;
-          transition: background-color 0.2s;
-          font-weight: 500;
-        }
-        .profile-dropdown a:hover {
-          background-color: #f5f5f5;
-        }
-      `;
-      
-      const styleSheet = document.createElement('style');
-      styleSheet.textContent = dropdownStyles;
-      document.head.appendChild(styleSheet);
-
       // Make dropdown clickable (static) instead of hover
       profilePic.addEventListener('click', function(e) {
         e.stopPropagation();
         const isVisible = profileDropdown.style.display === 'block';
         profileDropdown.style.display = isVisible ? 'none' : 'block';
+        
+        // Update balance when dropdown is opened
+        if (!isVisible) {
+          updateUserBalance();
+        }
       });
 
       // Close dropdown when clicking outside
