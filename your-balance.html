@@ -248,7 +248,7 @@
 
     .balance-overview {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -265,21 +265,29 @@
     .balance-card.available {
       background: linear-gradient(135deg, #008e45, #00a852);
       color: white;
+      grid-column: 1;
+      grid-row: 1;
     }
 
     .balance-card.pending {
       background: linear-gradient(135deg, #ff8f00, #ffa726);
       color: white;
-    }
-
-    .balance-card.total {
-      background: linear-gradient(135deg, #2196f3, #42a5f5);
-      color: white;
+      grid-column: 2;
+      grid-row: 1;
     }
 
     .balance-card.rejected {
       background: linear-gradient(135deg, #f44336, #ef5350);
       color: white;
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .balance-card.total {
+      background: linear-gradient(135deg, #2196f3, #42a5f5);
+      color: white;
+      grid-column: 2;
+      grid-row: 2;
     }
 
     .balance-label {
@@ -555,33 +563,33 @@
       <div class="balance-overview">
         <div class="balance-card available">
           <div class="balance-label">Available Balance</div>
-          <div class="balance-amount" id="available-balance">€0.00</div>
+          <div class="balance-amount" id="available-balance">$0.00</div>
           <div class="balance-subtitle">Ready to withdraw</div>
         </div>
 
         <div class="balance-card pending">
           <div class="balance-label">Pending Amount</div>
-          <div class="balance-amount" id="pending-balance">€205.00</div>
+          <div class="balance-amount" id="pending-balance">$0.00</div>
           <div class="balance-subtitle">Processing</div>
-        </div>
-
-        <div class="balance-card total">
-          <div class="balance-label">Total Earned</div>
-          <div class="balance-amount" id="total-earned">€302.40</div>
-          <div class="balance-subtitle">All time earnings</div>
         </div>
 
         <div class="balance-card rejected">
           <div class="balance-label">Payments Made</div>
-          <div class="balance-amount" id="payments-made">€217.35</div>
+          <div class="balance-amount" id="payments-made">$0.00</div>
           <div class="balance-subtitle">Withdrawn to date</div>
+        </div>
+
+        <div class="balance-card total">
+          <div class="balance-label">Total Earned</div>
+          <div class="balance-amount" id="total-earned">$0.00</div>
+          <div class="balance-subtitle">All time earnings</div>
         </div>
       </div>
     </div>
 
     <div class="withdraw-section">
       <h3 style="color: #008e45; margin-bottom: 1rem;">💳 Withdrawal Options</h3>
-      <p style="margin-bottom: 1.5rem; color: #666;">Minimum withdrawal amount: €20.00</p>
+      <p style="margin-bottom: 1.5rem; color: #666;">Minimum withdrawal amount: $20.00</p>
       <button class="withdraw-btn" id="withdraw-btn" disabled>💰 Withdraw Money</button>
       <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">
         Withdrawals are processed within 3-5 business days
@@ -662,7 +670,7 @@
       let availableBalance = 0;
       let pendingBalance = 0;
       let totalEarned = 0;
-      let paymentsMade = 217.35; // Simulated previous withdrawals
+      let paymentsMade = 0; // Start with 0
       
       // Calculate from click history
       clickHistory.forEach((click, index) => {
@@ -688,25 +696,20 @@
         totalEarned += bonus;
       });
       
-      // Add some base amounts to make it more realistic
-      availableBalance += 15.50;
-      pendingBalance += 185.75;
-      totalEarned += 201.25;
-      
-      // Update display
-      document.getElementById('available-balance').textContent = `€${availableBalance.toFixed(2)}`;
-      document.getElementById('pending-balance').textContent = `€${pendingBalance.toFixed(2)}`;
-      document.getElementById('total-earned').textContent = `€${totalEarned.toFixed(2)}`;
-      document.getElementById('payments-made').textContent = `€${paymentsMade.toFixed(2)}`;
+      // Update display with dollar signs
+      document.getElementById('available-balance').textContent = `$${availableBalance.toFixed(2)}`;
+      document.getElementById('pending-balance').textContent = `$${pendingBalance.toFixed(2)}`;
+      document.getElementById('total-earned').textContent = `$${totalEarned.toFixed(2)}`;
+      document.getElementById('payments-made').textContent = `$${paymentsMade.toFixed(2)}`;
       
       // Enable/disable withdraw button
       const withdrawBtn = document.getElementById('withdraw-btn');
       if (availableBalance >= 20) {
         withdrawBtn.disabled = false;
-        withdrawBtn.textContent = `💰 Withdraw €${availableBalance.toFixed(2)}`;
+        withdrawBtn.textContent = `💰 Withdraw $${availableBalance.toFixed(2)}`;
       } else {
         withdrawBtn.disabled = true;
-        withdrawBtn.textContent = `💰 Withdraw Money (Min €20)`;
+        withdrawBtn.textContent = `💰 Withdraw Money (Min $20)`;
       }
     }
 
@@ -726,48 +729,7 @@
       const transactionsBody = document.getElementById('transactions-body');
       
       // Generate sample transaction data
-      const transactions = [
-        {
-          date: '2025-07-28',
-          id: '176342052',
-          type: 'Reversal',
-          store: 'Wolt',
-          amount: '70.00',
-          status: 'confirmed'
-        },
-        {
-          date: '2025-07-10',
-          id: '282491606',
-          type: 'Withdrawal',
-          store: '',
-          amount: '124.40',
-          status: 'pending'
-        },
-        {
-          date: '2025-07-08',
-          id: '568198235',
-          type: 'Reversal',
-          store: '',
-          amount: '86.00',
-          status: 'rejected'
-        },
-        {
-          date: '2025-06-04',
-          id: '453616512',
-          type: 'Cashback',
-          store: 'Wolt',
-          amount: '4.80',
-          status: 'confirmed'
-        },
-        {
-          date: '2025-06-02',
-          id: '453425157',
-          type: 'Cashback',
-          store: 'Wolt',
-          amount: '4.80',
-          status: 'confirmed'
-        }
-      ];
+      const transactions = [];
       
       // Add transactions from click history
       const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
@@ -788,6 +750,16 @@
       
       // Display transactions
       transactionsBody.innerHTML = '';
+      
+      if (transactions.length === 0) {
+        transactionsBody.innerHTML = `
+          <div style="padding: 2rem; text-align: center; color: #666;">
+            <p>No transactions yet. Start shopping to earn cashback!</p>
+          </div>
+        `;
+        return;
+      }
+      
       transactions.forEach(transaction => {
         const row = document.createElement('div');
         row.className = 'table-row';
@@ -802,7 +774,7 @@
           <div style="font-family: monospace;">${transaction.id}</div>
           <div><span class="${typeClass}">${transaction.type}</span></div>
           <div>${transaction.store}</div>
-          <div style="font-weight: bold;">€${transaction.amount}</div>
+          <div style="font-weight: bold;">$${transaction.amount}</div>
           <div><span class="status-badge ${statusClass}">${transaction.status.charAt(0).toUpperCase() + transaction.status.slice(1)}</span></div>
         `;
         
