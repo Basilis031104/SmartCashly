@@ -560,54 +560,71 @@
     document.getElementById('year').textContent = 2025;
 
     function trackClick(offerId) {
-      // Store click data
-      const clickData = {
-        store: 'Box Now',
-        offerId: offerId,
-        timestamp: new Date().toISOString(),
-        clickId: 'BN' + Date.now().toString().slice(-6)
-      };
+      console.log('trackClick called with offerId:', offerId);
       
-      // Store in localStorage for click history
-      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
-      clickHistory.unshift(clickData);
-      
-      // Keep only last 50 clicks
-      if (clickHistory.length > 50) {
-        clickHistory.splice(50);
+      try {
+        // Store click data
+        const clickData = {
+          store: 'Box Now',
+          offerId: offerId,
+          timestamp: new Date().toISOString(),
+          clickId: 'BN' + Date.now().toString().slice(-6)
+        };
+        
+        console.log('Created clickData:', clickData);
+        
+        // Store in localStorage for click history
+        const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+        clickHistory.unshift(clickData);
+        
+        // Keep only last 50 clicks
+        if (clickHistory.length > 50) {
+          clickHistory.splice(50);
+        }
+        
+        localStorage.setItem('click_history', JSON.stringify(clickHistory));
+        console.log('Stored click history successfully');
+        
+        // Show success message
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = 'Tracked!';
+        button.style.background = '#28a745';
+        
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background = '#4CAF50';
+        }, 2000);
+        
+        // Define specific Box Now URLs with Smartcashly tracking
+        const boxnowUrls = {
+          'boxnow-general': 'https://steiledema.boxnow.gr/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+          'boxnow-2euro': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=2euro&click_id=' + clickData.clickId,
+          'boxnow-mini': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=mini&click_id=' + clickData.clickId,
+          'boxnow-small': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=small&click_id=' + clickData.clickId,
+          'boxnow-medium': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=medium&click_id=' + clickData.clickId,
+          'boxnow-large': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=large&click_id=' + clickData.clickId
+        };
+        
+        // Get the specific URL
+        const targetUrl = boxnowUrls[offerId] || 'https://steiledema.boxnow.gr/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
+        
+        console.log('Opening URL:', targetUrl);
+        
+        // Redirect to Box Now website
+        window.open(targetUrl, '_blank');
+        
+      } catch (error) {
+        console.error('Error in trackClick:', error);
+        alert('Error: ' + error.message);
       }
-      
-      localStorage.setItem('click_history', JSON.stringify(clickHistory));
-      
-      // Show success message
-      const button = event.target;
-      const originalText = button.textContent;
-      button.textContent = '✅ Tracked!';
-      button.style.background = '#28a745';
-      
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.style.background = '#4CAF50';
-      }, 2000);
-      
-      // Define specific Box Now URLs with Smartcashly tracking
-      const boxnowUrls = {
-        'boxnow-general': 'https://steiledema.boxnow.gr/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'boxnow-2euro': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=2euro&click_id=' + clickData.clickId,
-        'boxnow-mini': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=mini&click_id=' + clickData.clickId,
-        'boxnow-small': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=small&click_id=' + clickData.clickId,
-        'boxnow-medium': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=medium&click_id=' + clickData.clickId,
-        'boxnow-large': 'https://steiledema.boxnow.gr/apostoli-dematos?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&offer=large&click_id=' + clickData.clickId
-      };
-      
-      // Get the specific URL
-      const targetUrl = boxnowUrls[offerId] || 'https://steiledema.boxnow.gr/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
-      
-      // Redirect to Box Now website
-      console.log('Click tracked:', clickData);
-      console.log('Redirecting to:', targetUrl);
-      window.open(targetUrl, '_blank');
     }
+    
+    // Test function - remove this after testing
+    window.testClick = function() {
+      console.log('Test button clicked');
+      trackClick('boxnow-general');
+    };
   </script>
 </body>
 </html>
