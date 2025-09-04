@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nike - 7.5% Cashback • Smartcashly</title>
+  <title>Nike - 17% Cashback • Smartcashly</title>
   <style>
     /* Advanced shiny dark yellow background with floating particles */
     html { 
@@ -469,7 +469,7 @@
       <div class="store-details">
         <h1 class="store-title">Nike</h1>
         <p class="store-subtitle">Fashion store with cashback rewards</p>
-        <div class="cashback-highlight">💰 Earn up to 7.5% Cashback</div>
+        <div class="cashback-highlight">💰 Earn up to 17% Cashback</div>
         <p>Nike is the world's leading athletic footwear and apparel brand, offering innovative products for athletes and fashion enthusiasts. From iconic sneakers to performance sportswear, Nike combines cutting-edge technology with timeless style. Shop the latest collections and earn cashback on every purchase.</p>
       </div>
     </div>
@@ -485,7 +485,7 @@
           <h3 class="offer-title">Shop at Nike & Earn Cashback</h3>
           <p class="offer-description">Browse the full Nike collection and earn cashback on every purchase you make!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 7.5% Cashback</div>
+          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-general')">💰 Shop & Earn</button>
         </div>
 
@@ -497,7 +497,7 @@
           <h3 class="offer-title">Women's Air Max - 40% Off</h3>
           <p class="offer-description">Experience revolutionary Air cushioning technology with iconic style and comfort!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <div class="offer-cashback">+ Get Extra 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-airmax-40')">👟 Get Offer</button>
         </div>
 
@@ -509,7 +509,7 @@
           <h3 class="offer-title">Dri-FIT Collection - 30% Off</h3>
           <p class="offer-description">Stay dry and fresh during intense workouts with moisture-wicking technology!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <div class="offer-cashback">+ Get Extra 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-drifit')">💪 Get Offer</button>
         </div>
 
@@ -521,7 +521,7 @@
           <h3 class="offer-title">Jordan Retro Shoes - 25% Off</h3>
           <p class="offer-description">Step into basketball legend with authentic retro designs and premium materials!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <div class="offer-cashback">+ Get Extra 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-jordan')">🏀 Get Offer</button>
         </div>
 
@@ -533,7 +533,7 @@
           <h3 class="offer-title">Running Shoes - 35% Off</h3>
           <p class="offer-description">Lightweight responsive cushioning for your best run yet - mile after mile!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <div class="offer-cashback">+ Get Extra 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-running')">🏃‍♀️ Get Offer</button>
         </div>
 
@@ -545,7 +545,7 @@
           <h3 class="offer-title">Kids' Sportswear - 30% Off</h3>
           <p class="offer-description">Durable and comfortable athletic wear designed for active young champions!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <div class="offer-cashback">+ Get Extra 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-kids')">👶 Get Offer</button>
         </div>
 
@@ -557,7 +557,7 @@
           <h3 class="offer-title">Basketball Shoes - 20% Off</h3>
           <p class="offer-description">Dominate the court with superior traction and ankle support for peak performance!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <div class="offer-cashback">+ Get Extra 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-basketball')">🏀 Get Offer</button>
         </div>
 
@@ -569,7 +569,7 @@
           <h3 class="offer-title">Training Gear - 45% Off</h3>
           <p class="offer-description">Professional equipment and accessories to elevate your fitness game to the next level!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <div class="offer-cashback">+ Get Extra 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-training')">💪 Get Offer</button>
         </div>
 
@@ -581,7 +581,7 @@
           <h3 class="offer-title">Lifestyle Shoes - 25% Off</h3>
           <p class="offer-description">Effortless style meets everyday comfort for your casual and streetwear looks!</p>
           <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 7.5% Cashback</div>
+          <div class="offer-cashback">+ Get Extra 17% Cashback</div>
           <button class="offer-button" onclick="trackClick('nike-lifestyle')">👟 Get Offer</button>
         </div>
       </div>
@@ -596,7 +596,9 @@
     document.getElementById('year').textContent = 2025;
 
     function trackClick(offerId) {
-      // Store click data
+      console.log('trackClick called with offerId:', offerId);
+      
+      // Create click data
       const clickData = {
         store: 'Nike',
         offerId: offerId,
@@ -604,18 +606,7 @@
         clickId: 'NK' + Date.now().toString().slice(-6)
       };
       
-      // Store in localStorage for click history
-      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
-      clickHistory.unshift(clickData);
-      
-      // Keep only last 50 clicks
-      if (clickHistory.length > 50) {
-        clickHistory.splice(50);
-      }
-      
-      localStorage.setItem('click_history', JSON.stringify(clickHistory));
-      
-      // Show success message
+      // Show success message on button
       const button = event.target;
       const originalText = button.textContent;
       button.textContent = '✅ Tracked!';
@@ -625,6 +616,29 @@
         button.textContent = originalText;
         button.style.background = '#4CAF50';
       }, 2000);
+      
+      // Store in localStorage safely
+      try {
+        let clickHistory = [];
+        const stored = localStorage.getItem('click_history');
+        if (stored) {
+          clickHistory = JSON.parse(stored);
+        }
+        
+        if (!Array.isArray(clickHistory)) {
+          clickHistory = [];
+        }
+        
+        clickHistory.unshift(clickData);
+        
+        if (clickHistory.length > 50) {
+          clickHistory.splice(50);
+        }
+        
+        localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      } catch (error) {
+        console.warn('Could not store click history:', error);
+      }
       
       // Define specific Nike category URLs with affiliate tracking
       const nikeUrls = {
@@ -639,17 +653,11 @@
         'nike-lifestyle': 'https://www.nike.com/w/lifestyle-shoes-13jrmz1y7ok?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
       };
       
-      // Get the specific category URL
       const targetUrl = nikeUrls[offerId] || 'https://www.nike.com?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
       
-      // Redirect to specific Nike category page
-      console.log('Click tracked:', clickData);
-      console.log('Redirecting to:', targetUrl);
+      console.log('Opening URL:', targetUrl);
       window.open(targetUrl, '_blank');
     }
   </script>
 </body>
 </html>
-
-
-
