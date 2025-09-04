@@ -663,27 +663,53 @@
     });
 
     function loadBalanceData() {
-      // Get click history and calculate balance
-      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
-      const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-      
-      let availableBalance = 0;
-      let pendingBalance = 0;
-      let totalEarned = 0;
-      let paymentsMade = 0; // Start with 0
-      
-      // Calculate from click history
-      clickHistory.forEach((click, index) => {
-        const amount = getCashbackAmount(click.store);
-        if (index < 3) {
-          // First 3 are available
-          availableBalance += amount;
-        } else {
-          // Rest are pending
-          pendingBalance += amount;
-        }
-        totalEarned += amount;
-      });
+  // Get click history and calculate balance
+  const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+  const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+  
+  let availableBalance = 0;
+  let pendingBalance = 0;
+  let totalEarned = 0;
+  let paymentsMade = 0;
+  
+  // Calculate from click history
+  clickHistory.forEach((click, index) => {
+    const amount = getCashbackAmount(click.store);
+    if (index < 3) {
+      availableBalance += amount;
+    } else {
+      pendingBalance += amount;
+    }
+    totalEarned += amount;
+  });
+  
+  // Add referral bonuses
+  referralNotifications.forEach(referral => {
+    const bonus = 5.00;
+    if (referral.processed) {
+      availableBalance += bonus;
+    } else {
+      pendingBalance += bonus;
+    }
+    totalEarned += bonus;
+  });
+  
+  // Update display with dollar signs
+  document.getElementById('available-balance').textContent = `$${availableBalance.toFixed(2)}`;
+  document.getElementById('pending-balance').textContent = `$${pendingBalance.toFixed(2)}`;
+  document.getElementById('total-earned').textContent = `$${totalEarned.toFixed(2)}`;
+  document.getElementById('payments-made').textContent = `$${paymentsMade.toFixed(2)}`;
+  
+  // Enable/disable withdraw button
+  const withdrawBtn = document.getElementById('withdraw-btn');
+  if (availableBalance >= 20) {
+    withdrawBtn.disabled = false;
+    withdrawBtn.textContent = `💰 Withdraw $${availableBalance.toFixed(2)}`;
+  } else {
+    withdrawBtn.disabled = true;
+    withdrawBtn.textContent = `💰 Withdraw Money (Min $20)`;
+  }
+}
       
       // Add referral bonuses
       referralNotifications.forEach(referral => {
@@ -938,3 +964,4 @@
   </script>
 </body>
 </html>
+
