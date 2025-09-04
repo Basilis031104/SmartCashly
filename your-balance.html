@@ -589,7 +589,7 @@
 
     <div class="withdraw-section">
       <h3 style="color: #008e45; margin-bottom: 1rem;">💳 Withdrawal Options</h3>
-      <p style="margin-bottom: 1.5rem; color: #666;">Minimum withdrawal amount: $15.00</p>
+      <p style="margin-bottom: 1.5rem; color: #666;">Minimum withdrawal amount: $20.00</p>
       <button class="withdraw-btn" id="withdraw-btn" disabled>💰 Withdraw Money</button>
       <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">
         Withdrawals are processed within 3-5 business days
@@ -696,17 +696,19 @@
         totalEarned += bonus;
       });
       
+      // NO ADDITIONAL BASE AMOUNTS - ONLY REAL EARNINGS
+      
       // Update display with dollar signs
-      document.getElementById('available-balance').textContent = `$${availableBalance.toFixed(2)}`;
-      document.getElementById('pending-balance').textContent = `$${pendingBalance.toFixed(2)}`;
-      document.getElementById('total-earned').textContent = `$${totalEarned.toFixed(2)}`;
-      document.getElementById('payments-made').textContent = `$${paymentsMade.toFixed(2)}`;
+      document.getElementById('available-balance').textContent = `${availableBalance.toFixed(2)}`;
+      document.getElementById('pending-balance').textContent = `${pendingBalance.toFixed(2)}`;
+      document.getElementById('total-earned').textContent = `${totalEarned.toFixed(2)}`;
+      document.getElementById('payments-made').textContent = `${paymentsMade.toFixed(2)}`;
       
       // Enable/disable withdraw button
       const withdrawBtn = document.getElementById('withdraw-btn');
       if (availableBalance >= 20) {
         withdrawBtn.disabled = false;
-        withdrawBtn.textContent = `💰 Withdraw $${availableBalance.toFixed(2)}`;
+        withdrawBtn.textContent = `💰 Withdraw ${availableBalance.toFixed(2)}`;
       } else {
         withdrawBtn.disabled = true;
         withdrawBtn.textContent = `💰 Withdraw Money (Min $20)`;
@@ -936,4 +938,3 @@
   </script>
 </body>
 </html>
-
