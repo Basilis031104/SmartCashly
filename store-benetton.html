@@ -494,9 +494,9 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Women's New Collection</h3>
+          <h3 class="offer-title">Women's New Collection - 30% Off</h3>
           <p class="offer-description">Discover the latest women's fashion with vibrant colors and modern designs from Benetton!</p>
-          <div style="height: 72px;"></div>
+          <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-women')">👗 Shop Women's</button>
         </div>
@@ -506,9 +506,9 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Men's Collection</h3>
+          <h3 class="offer-title">Men's Collection - 25% Off</h3>
           <p class="offer-description">Stylish men's casual wear including polos, t-shirts, and knitwear in classic Benetton colors!</p>
-          <div style="height: 72px;"></div>
+          <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-men')">👕 Shop Men's</button>
         </div>
@@ -518,9 +518,9 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Kids Collection</h3>
+          <h3 class="offer-title">Kids Collection - 40% Off</h3>
           <p class="offer-description">Colorful and comfortable clothing for boys and girls with playful prints and quality materials!</p>
-          <div style="height: 72px;"></div>
+          <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-kids')">👶 Shop Kids</button>
         </div>
@@ -530,9 +530,9 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Knitwear Essentials</h3>
+          <h3 class="offer-title">Knitwear Collection - 35% Off</h3>
           <p class="offer-description">Premium sweaters and cardigans in soft materials - Benetton's signature knitwear collection!</p>
-          <div style="height: 72px;"></div>
+          <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-knitwear')">🧥 Shop Knitwear</button>
         </div>
@@ -542,9 +542,9 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Accessories Collection</h3>
+          <h3 class="offer-title">Accessories - 50% Off</h3>
           <p class="offer-description">Complete your look with bags, scarves, and accessories in signature Benetton style!</p>
-          <div style="height: 72px;"></div>
+          <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-accessories')">👜 Shop Accessories</button>
         </div>
@@ -554,9 +554,9 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Sale Items</h3>
+          <h3 class="offer-title">Sale Items - Up to 60% Off</h3>
           <p class="offer-description">Browse discounted items from previous collections with the same quality and style!</p>
-          <div style="height: 48px;"></div>
+          <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
           <button class="offer-button" onclick="trackClick('benetton-sale')">🏷️ Shop Sale</button>
         </div>
@@ -566,11 +566,11 @@
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">United Colors Campaign</h3>
-          <p class="offer-description">Explore the iconic United Colors of Benetton campaign pieces and multicultural designs!</p>
-          <div style="height: 48px;"></div>
+          <h3 class="offer-title">Socks & Underwear - 50% Off</h3>
+          <p class="offer-description">High-quality basics and colorful socks with Benetton's signature comfort and style!</p>
+          <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 25% Cashback</div>
-          <button class="offer-button" onclick="trackClick('benetton-campaign')">🌍 Shop Campaign</button>
+          <button class="offer-button" onclick="trackClick('benetton-basics')">🧦 Shop Basics</button>
         </div>
       </div>
     </div>
@@ -589,7 +589,7 @@
         store: 'Benetton',
         offerId: offerId,
         timestamp: new Date().toISOString(),
-        clickId: 'BT' + Date.now().toString().slice(-6)
+        clickId: 'BTN' + Date.now().toString().slice(-6)
       };
       
       // Store in localStorage for click history
@@ -601,7 +601,7 @@
         clickHistory.splice(50);
       }
       
-      localStorage.setItem('click_history', JSON.stringify(clickData));
+      localStorage.setItem('click_history', JSON.stringify(clickHistory));
       
       // Show success message
       const button = event.target;
@@ -616,18 +616,18 @@
       
       // Define actual Benetton URLs with proper affiliate tracking
       const benettonUrls = {
-        'benetton-general': 'https://us.benetton.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-women': 'https://us.benetton.com/womens/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-men': 'https://us.benetton.com/mens/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-kids': 'https://us.benetton.com/kids/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-knitwear': 'https://us.benetton.com/womens/knitwear/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-accessories': 'https://us.benetton.com/accessories/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-sale': 'https://us.benetton.com/sale/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-campaign': 'https://us.benetton.com/united-colors-of-benetton/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
+        'benetton-general': 'https://us.benetton.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&aff_id=SCASH_BTN25&click_id=' + clickData.clickId,
+        'benetton-women': 'https://us.benetton.com/womens/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=women30&aff_id=SCASH_BTN25&click_id=' + clickData.clickId,
+        'benetton-men': 'https://us.benetton.com/mens/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=men25&aff_id=SCASH_BTN25&click_id=' + clickData.clickId,
+        'benetton-kids': 'https://us.benetton.com/kids/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=kids40&aff_id=SCASH_BTN25&click_id=' + clickData.clickId,
+        'benetton-knitwear': 'https://us.benetton.com/womens/knitwear/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=knitwear35&aff_id=SCASH_BTN25&click_id=' + clickData.clickId,
+        'benetton-accessories': 'https://us.benetton.com/accessories/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=accessories50&aff_id=SCASH_BTN25&click_id=' + clickData.clickId,
+        'benetton-sale': 'https://us.benetton.com/sale/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=sale60&aff_id=SCASH_BTN25&click_id=' + clickData.clickId,
+        'benetton-basics': 'https://us.benetton.com/womens/underwear-socks/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=basics50&aff_id=SCASH_BTN25&click_id=' + clickData.clickId
       };
       
       // Get the specific URL
-      const targetUrl = benettonUrls[offerId] || 'https://us.benetton.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
+      const targetUrl = benettonUrls[offerId] || 'https://us.benetton.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&aff_id=SCASH_BTN25';
       
       // Redirect to specific Benetton page
       console.log('Click tracked:', clickData);
@@ -637,4 +637,3 @@
   </script>
 </body>
 </html>
-
