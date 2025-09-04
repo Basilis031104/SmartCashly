@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Balance • Smartcashly</title>
+  <style>
+    /* Advanced shiny dark yellow background with floating particles */
+    html { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+    }
+    
+    body { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* Enhanced golden floating particles overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.6) 1px, transparent 1px),
+        radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 85% 15%, rgba(255, 193, 7, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 25% 85%, rgba(255, 160, 0, 0.4) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 65% 45%, rgba(255, 235, 59, 0.5) 1px, transparent 1px);
+      background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: gentleFloat 25s ease-in-out infinite;
+      will-change: background-position;
+    }
+
+    /* Enhanced sparkle layer */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 65% 20%, rgba(255, 215, 0, 0.5) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 35% 70%, rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 60%, rgba(255, 193, 7, 0.4) 0.8px, transparent 0.8px),
+        radial-gradient(circle at 15% 80%, rgba(255, 160, 0, 0.5) 0.5px, transparent 0.5px);
+      background-size: 70px 70px, 90px 90px, 60px 60px, 80px 80px, 65px 65px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: gentleSparkle 20s ease-in-out infinite;
+      will-change: background-position;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
+      50% { background-position: 100% 50%, 100% 100%, 100% 50%, 100% 100%, 100% 50%; }
+      100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
+    }
+
+    @keyframes gentleFloat {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      33% { 
+        background-position: 30% 20%, 20% 40%, 50% 30%, 40% 10%, 60% 50%, 70% 20%;
+        opacity: 0.9;
+      }
+      66% { 
+        background-position: 60% 40%, 40% 80%, 80% 60%, 10% 70%, 30% 80%, 90% 40%;
+        opacity: 0.7;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes gentleSparkle {
+      0%, 100% { 
+        opacity: 0.4;
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+      }
+      25% { 
+        opacity: 0.8;
+        background-position: 15% 15%, 25% 25%, 35% 35%, 45% 45%, 55% 55%;
+      }
+      50% { 
+        opacity: 0.9;
+        background-position: 30% 30%, 50% 50%, 70% 70%, 90% 90%, 10% 90%;
+      }
+      75% { 
+        opacity: 0.6;
+        background-position: 20% 40%, 40% 20%, 60% 80%, 80% 60%, 100% 40%;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    }
+
+    /* Ensure content appears above particles */
+    header, main {
+      position: relative;
+      z-index: 10;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 1rem 1.5rem;
+      background: #008e45 !important;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Enhanced header particles */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 75% 60%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.3) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 15% 80%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 80px 80px, 100px 100px, 60px 60px, 90px 90px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: headerParticles 20s ease-in-out infinite;
+    }
+
+    @keyframes headerParticles {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      50% { 
+        background-position: 30% 30%, 40% 40%, 20% 50%, 60% 20%;
+        opacity: 0.9;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      flex: 0 0 auto;
+      background: transparent !important;
+      position: relative;
+      z-index: 2;
+    }
+
+    .auth-nav {
+      display: flex;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      background: #0070f3 !important;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background .18s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover          { background: #0059c1 !important; }
+    .btn--secondary     { background: #0070f3 !important; }
+    .btn--secondary:hover { background: #0059c1 !important; }
+
+    main {
+      flex: 1 1 auto;
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .balance-container {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(15px);
+      border: 3px solid #008e45;
+      margin-bottom: 2rem;
+    }
+
+    .balance-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .balance-header h1 {
+      font-size: 2rem;
+      color: #008e45;
+      margin-bottom: 0.5rem;
+    }
+
+    .balance-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .balance-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 3px solid #008e45;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .balance-card.available {
+      background: linear-gradient(135deg, #008e45, #00a852);
+      color: white;
+    }
+
+    .balance-card.pending {
+      background: linear-gradient(135deg, #ff8f00, #ffa726);
+      color: white;
+    }
+
+    .balance-card.total {
+      background: linear-gradient(135deg, #2196f3, #42a5f5);
+      color: white;
+    }
+
+    .balance-card.rejected {
+      background: linear-gradient(135deg, #f44336, #ef5350);
+      color: white;
+    }
+
+    .balance-label {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    .balance-amount {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .balance-subtitle {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    .withdraw-section {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(15px);
+      border: 3px solid #008e45;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .withdraw-btn {
+      background: linear-gradient(135deg, #008e45, #00a852);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0 0.5rem;
+    }
+
+    .withdraw-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 142, 69, 0.4);
+    }
+
+    .withdraw-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .transactions-section {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(15px);
+      border: 3px solid #008e45;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: #008e45;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .show-entries {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .show-entries select {
+      padding: 0.5rem;
+      border: 2px solid #008e45;
+      border-radius: 6px;
+      background: white;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-box input {
+      padding: 0.5rem;
+      border: 2px solid #008e45;
+      border-radius: 6px;
+      background: white;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .transactions-table {
+      background: rgba(248, 249, 250, 0.98);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 3px solid #008e45;
+    }
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 120px 120px 150px 100px 100px 120px;
+      gap: 1rem;
+      padding: 1rem;
+      background: #008e45;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 120px 120px 150px 100px 100px 120px;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.2s;
+      font-size: 0.85rem;
+    }
+
+    .table-row:hover {
+      background: #f0f8ff;
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .status-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .status-reversal {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .status-withdrawal {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+
+    .status-cashback {
+      background: #e8f5e8;
+      color: #2e7d32;
+    }
+
+    .status-confirmed {
+      background: #e8f5e8;
+      color: #2e7d32;
+    }
+
+    .status-pending {
+      background: #fff3e0;
+      color: #f57c00;
+    }
+
+    .status-rejected {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    footer {
+      text-align: center;
+      font-size: .875rem;
+      padding: 1rem 0;
+      background: #000000 !important;
+      color: #ffffff !important;
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    footer * {
+      position: relative;
+      z-index: 3;
+      color: #ffffff !important;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: footerParticles 15s ease-in-out infinite;
+    }
+
+    @keyframes footerParticles {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      50% { 
+        background-position: 15% 15%, 20% 20%, 25% 25%, 30% 30%;
+        opacity: 0.8;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .table-header,
+      .table-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .balance-overview {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <div style="flex:1 1 auto;"></div>
+    <nav class="auth-nav">
+      <a href="index.html" class="btn btn--secondary">Home</a>
+      <a href="#" id="logout-btn" class="btn">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="balance-container">
+      <div class="balance-header">
+        <h1>💰 Your Balance</h1>
+        <p>Track your earnings and transaction history</p>
+      </div>
+
+      <div class="balance-overview">
+        <div class="balance-card available">
+          <div class="balance-label">Available Balance</div>
+          <div class="balance-amount" id="available-balance">€0.00</div>
+          <div class="balance-subtitle">Ready to withdraw</div>
+        </div>
+
+        <div class="balance-card pending">
+          <div class="balance-label">Pending Amount</div>
+          <div class="balance-amount" id="pending-balance">€205.00</div>
+          <div class="balance-subtitle">Processing</div>
+        </div>
+
+        <div class="balance-card total">
+          <div class="balance-label">Total Earned</div>
+          <div class="balance-amount" id="total-earned">€302.40</div>
+          <div class="balance-subtitle">All time earnings</div>
+        </div>
+
+        <div class="balance-card rejected">
+          <div class="balance-label">Payments Made</div>
+          <div class="balance-amount" id="payments-made">€217.35</div>
+          <div class="balance-subtitle">Withdrawn to date</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="withdraw-section">
+      <h3 style="color: #008e45; margin-bottom: 1rem;">💳 Withdrawal Options</h3>
+      <p style="margin-bottom: 1.5rem; color: #666;">Minimum withdrawal amount: €20.00</p>
+      <button class="withdraw-btn" id="withdraw-btn" disabled>💰 Withdraw Money</button>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">
+        Withdrawals are processed within 3-5 business days
+      </p>
+    </div>
+
+    <div class="transactions-section">
+      <h2 class="section-title">📊 Payment History</h2>
+      
+      <div class="controls">
+        <div class="show-entries">
+          <span>Show</span>
+          <select id="entries-select">
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <span>entries</span>
+        </div>
+        
+        <div class="search-box">
+          <span>Search:</span>
+          <input type="text" id="search-input" placeholder="Search transactions...">
+        </div>
+      </div>
+
+      <div class="transactions-table">
+        <div class="table-header">
+          <div>Date</div>
+          <div>Transaction ID</div>
+          <div>Type</div>
+          <div>Store</div>
+          <div>Amount</div>
+          <div>Status</div>
+        </div>
+        
+        <div id="transactions-body">
+          <!-- Transactions will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
+
+  <script type="module" src="auth.js"></script>
+  <script type="module">
+    // Import Firebase functions
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    let currentUser = null;
+
+    // Check if user is logged in
+    window.addEventListener('load', () => {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          currentUser = user;
+          loadBalanceData();
+          loadTransactionHistory();
+        } else {
+          // Redirect to login if not authenticated
+          window.location.href = 'login.html';
+        }
+      });
+
+      // Set the current year
+      document.getElementById('year').textContent = 2025;
+    });
+
+    function loadBalanceData() {
+      // Get click history and calculate balance
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      
+      let availableBalance = 0;
+      let pendingBalance = 0;
+      let totalEarned = 0;
+      let paymentsMade = 217.35; // Simulated previous withdrawals
+      
+      // Calculate from click history
+      clickHistory.forEach((click, index) => {
+        const amount = getCashbackAmount(click.store);
+        if (index < 3) {
+          // First 3 are available
+          availableBalance += amount;
+        } else {
+          // Rest are pending
+          pendingBalance += amount;
+        }
+        totalEarned += amount;
+      });
+      
+      // Add referral bonuses
+      referralNotifications.forEach(referral => {
+        const bonus = 5.00;
+        if (referral.processed) {
+          availableBalance += bonus;
+        } else {
+          pendingBalance += bonus;
+        }
+        totalEarned += bonus;
+      });
+      
+      // Add some base amounts to make it more realistic
+      availableBalance += 15.50;
+      pendingBalance += 185.75;
+      totalEarned += 201.25;
+      
+      // Update display
+      document.getElementById('available-balance').textContent = `€${availableBalance.toFixed(2)}`;
+      document.getElementById('pending-balance').textContent = `€${pendingBalance.toFixed(2)}`;
+      document.getElementById('total-earned').textContent = `€${totalEarned.toFixed(2)}`;
+      document.getElementById('payments-made').textContent = `€${paymentsMade.toFixed(2)}`;
+      
+      // Enable/disable withdraw button
+      const withdrawBtn = document.getElementById('withdraw-btn');
+      if (availableBalance >= 20) {
+        withdrawBtn.disabled = false;
+        withdrawBtn.textContent = `💰 Withdraw €${availableBalance.toFixed(2)}`;
+      } else {
+        withdrawBtn.disabled = true;
+        withdrawBtn.textContent = `💰 Withdraw Money (Min €20)`;
+      }
+    }
+
+    function getCashbackAmount(storeName) {
+      const cashbackRates = {
+        'Box Now': 2.50,
+        'Nike': 3.25,
+        'Shein': 4.10,
+        'Benetton': 3.75,
+        'Myprotein': 2.80,
+        'Aegean Airlines': 8.50
+      };
+      return cashbackRates[storeName] || 1.50;
+    }
+
+    function loadTransactionHistory() {
+      const transactionsBody = document.getElementById('transactions-body');
+      
+      // Generate sample transaction data
+      const transactions = [
+        {
+          date: '2025-07-28',
+          id: '176342052',
+          type: 'Reversal',
+          store: 'Wolt',
+          amount: '70.00',
+          status: 'confirmed'
+        },
+        {
+          date: '2025-07-10',
+          id: '282491606',
+          type: 'Withdrawal',
+          store: '',
+          amount: '124.40',
+          status: 'pending'
+        },
+        {
+          date: '2025-07-08',
+          id: '568198235',
+          type: 'Reversal',
+          store: '',
+          amount: '86.00',
+          status: 'rejected'
+        },
+        {
+          date: '2025-06-04',
+          id: '453616512',
+          type: 'Cashback',
+          store: 'Wolt',
+          amount: '4.80',
+          status: 'confirmed'
+        },
+        {
+          date: '2025-06-02',
+          id: '453425157',
+          type: 'Cashback',
+          store: 'Wolt',
+          amount: '4.80',
+          status: 'confirmed'
+        }
+      ];
+      
+      // Add transactions from click history
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      clickHistory.forEach((click, index) => {
+        const amount = getCashbackAmount(click.store);
+        transactions.push({
+          date: new Date(click.timestamp).toISOString().split('T')[0],
+          id: click.clickId,
+          type: 'Cashback',
+          store: click.store,
+          amount: amount.toFixed(2),
+          status: index < 3 ? 'confirmed' : 'pending'
+        });
+      });
+      
+      // Sort by date (newest first)
+      transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+      
+      // Display transactions
+      transactionsBody.innerHTML = '';
+      transactions.forEach(transaction => {
+        const row = document.createElement('div');
+        row.className = 'table-row';
+        
+        const statusClass = `status-${transaction.status}`;
+        const typeClass = transaction.type.toLowerCase() === 'reversal' ? 'status-reversal' :
+                         transaction.type.toLowerCase() === 'withdrawal' ? 'status-withdrawal' :
+                         'status-cashback';
+        
+        row.innerHTML = `
+          <div>${transaction.date}</div>
+          <div style="font-family: monospace;">${transaction.id}</div>
+          <div><span class="${typeClass}">${transaction.type}</span></div>
+          <div>${transaction.store}</div>
+          <div style="font-weight: bold;">€${transaction.amount}</div>
+          <div><span class="status-badge ${statusClass}">${transaction.status.charAt(0).toUpperCase() + transaction.status.slice(1)}</span></div>
+        `;
+        
+        transactionsBody.appendChild(row);
+      });
+    }
+
+    // Withdraw button functionality
+    document.getElementById('withdraw-btn').addEventListener('click', function() {
+      if (this.disabled) return;
+      
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+
+      modal.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 400px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        ">
+          <button onclick="this.parentElement.parentElement.remove()" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+          ">×</button>
+          
+          <h2 style="color: #008e45; margin-bottom: 1rem;">Withdrawal Request</h2>
+          <p style="margin-bottom: 1.5rem; color: #333;">Choose your withdrawal method:</p>
+          
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+            <button onclick="processWithdrawal('paypal')" style="
+              background: #0070f3;
+              color: white;
+              border: none;
+              padding: 1rem 2rem;
+              border-radius: 8px;
+              cursor: pointer;
+              font-size: 1rem;
+              font-weight: bold;
+            ">PayPal</button>
+            
+            <button onclick="processWithdrawal('bank')" style="
+              background: #008e45;
+              color: white;
+              border: none;
+              padding: 1rem 2rem;
+              border-radius: 8px;
+              cursor: pointer;
+              font-size: 1rem;
+              font-weight: bold;
+            ">Bank Transfer</button>
+          </div>
+          
+          <p style="font-size: 0.85rem; color: #666;">
+            Processing time: 3-5 business days
+          </p>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+    });
+
+    // Global function for withdrawal processing
+    window.processWithdrawal = function(method) {
+      const modal = document.querySelector('div[style*="position: fixed"]');
+      if (modal) modal.remove();
+      
+      // Show success message
+      const successMessage = document.createElement('div');
+      successMessage.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #008e45;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        z-index: 10000;
+        box-shadow: 0 4px 15px rgba(0, 142, 69, 0.3);
+      `;
+      successMessage.textContent = `Withdrawal request submitted via ${method.toUpperCase()}!`;
+      document.body.appendChild(successMessage);
+      
+      setTimeout(() => {
+        if (successMessage.parentNode) {
+          successMessage.remove();
+        }
+      }, 4000);
+      
+      // Update button state
+      const withdrawBtn = document.getElementById('withdraw-btn');
+      withdrawBtn.disabled = true;
+      withdrawBtn.textContent = 'Withdrawal Pending...';
+    };
+
+    // Search functionality
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const rows = document.querySelectorAll('.table-row');
+      
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          row.style.display = 'grid';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+
+    // Entries per page functionality
+    document.getElementById('entries-select').addEventListener('change', function(e) {
+      const limit = parseInt(e.target.value);
+      const rows = document.querySelectorAll('.table-row');
+      
+      rows.forEach((row, index) => {
+        if (index < limit) {
+          row.style.display = 'grid';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+
+    // Logout functionality
+    document.getElementById('logout-btn').addEventListener('click', async function(e) {
+      e.preventDefault();
+      try {
+        if (typeof smartAuth !== 'undefined') {
+          await smartAuth.signOut();
+          window.location.href = 'index.html';
+        }
+      } catch (err) {
+        console.error('Logout error:', err);
+      }
+    });
+  </script>
+</body>
+</html>
