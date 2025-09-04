@@ -665,4 +665,157 @@
         'shein-tops': 'https://us.shein.com/Women-Tops,-Blouses-Tee-c-1766.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'shein-student': 'https://us.shein.com/student-discount?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
         'shein-curve': 'https://us.shein.com/Curve-c-1889.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'shein-men': 'https
+        'shein-men': 'https://us.shein.com/Men-c-1978.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-accessories': 'https://us.shein.com/Women-Accessories-c-1772.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-kids': 'https://us.shein.com/Kids-c-1864.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-home': 'https://us.shein.com/Home-c-1953.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
+      };
+      
+      const targetUrl = sheinUrls[offerId] || 'https://us.shein.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
+      
+      console.log('Opening URL:', targetUrl);
+      window.open(targetUrl, '_blank');
+    }
+
+    // Coupon Modal Function
+    function showCouponModal() {
+      const modal = document.createElement('div');
+      modal.id = 'coupon-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+
+      modal.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 400px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        ">
+          <button onclick="document.getElementById('coupon-modal').remove()" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+          ">×</button>
+          
+          <h2 style="color: #008e45; margin-bottom: 1rem;">🎫 Your Coupon Code</h2>
+          <p style="margin-bottom: 1.5rem; color: #333;">Get 10% off your first purchase at Shein!</p>
+          <p style="margin-bottom: 1.5rem; color: #ff6b35; font-weight: bold;">+ Extra 30% Cashback</p>
+          
+          <div style="
+            background: #f8f9fa;
+            border: 3px dashed #e74c3c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+          ">
+            <p style="font-weight: bold; color: #e74c3c; margin-bottom: 0.5rem;">Your Coupon Code:</p>
+            <div style="
+              background: white;
+              border: 2px solid #e74c3c;
+              border-radius: 6px;
+              padding: 1rem;
+              font-family: monospace;
+              font-size: 1.5rem;
+              font-weight: bold;
+              color: #e74c3c;
+              margin-bottom: 0.5rem;
+              letter-spacing: 2px;
+            " id="coupon-code-display">EU10</div>
+            <button onclick="copyCouponCode()" style="
+              background: #e74c3c;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+              margin-bottom: 0.5rem;
+            ">📋 Copy Code</button>
+          </div>
+
+          <button onclick="goToShein()" style="
+            background: #008e45;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+          ">🛒 Shop at Shein Now</button>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+    }
+
+    // Global functions for the coupon modal
+    window.copyCouponCode = function() {
+      const codeElement = document.getElementById('coupon-code-display');
+      navigator.clipboard.writeText(codeElement.textContent).then(() => {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    };
+
+    window.goToShein = function() {
+      // Track the coupon usage
+      const clickData = {
+        store: 'Shein',
+        offerId: 'shein-coupon',
+        timestamp: new Date().toISOString(),
+        clickId: 'SH' + Date.now().toString().slice(-6),
+        couponCode: 'EU10'
+      };
+      
+      try {
+        let clickHistory = [];
+        const stored = localStorage.getItem('click_history');
+        if (stored) {
+          clickHistory = JSON.parse(stored);
+        }
+        
+        if (!Array.isArray(clickHistory)) {
+          clickHistory = [];
+        }
+        
+        clickHistory.unshift(clickData);
+        if (clickHistory.length > 50) {
+          clickHistory.splice(50);
+        }
+        localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      } catch (error) {
+        console.warn('Could not store click history:', error);
+      }
+      
+      // Close modal and redirect to Shein main page
+      document.getElementById('coupon-modal').remove();
+      window.open('https://us.shein.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=coupon&partner_id=SMART2025&coupon=EU10', '_blank');
+    };
+  </script>
+</body>
+</html>
