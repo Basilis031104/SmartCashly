@@ -1458,28 +1458,51 @@
     });
 
     // Function to update user balance dynamically
-    function updateUserBalance() {
-      // Calculate balance from click history and referrals
-      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
-      const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-      
-      // Calculate confirmed cashback (simulated)
-      let confirmedBalance = 0;
-      let pendingBalance = 0;
-      
-      // Add cashback from clicks (simulate some confirmed, some pending)
-      clickHistory.forEach((click, index) => {
-        const cashbackAmount = getCashbackAmount(click.store);
-        if (index < 5) {
-          // First 5 clicks are "confirmed"
-          confirmedBalance += cashbackAmount;
-        } else {
-          // Rest are "pending"
-          pendingBalance += cashbackAmount;
-        }
-      });
-      
-      // Add referral bonuses
+   // In index.html, replace the updateUserBalance function with this fixed version:
+
+function updateUserBalance() {
+  // Calculate balance from click history and referrals
+  const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+  const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+  
+  // Start with 0 for both confirmed and pending
+  let confirmedBalance = 0;
+  let pendingBalance = 0;
+  
+  // Add cashback from clicks (simulate some confirmed, some pending)
+  clickHistory.forEach((click, index) => {
+    const cashbackAmount = getCashbackAmount(click.store);
+    if (index < 5) {
+      // First 5 clicks are "confirmed"
+      confirmedBalance += cashbackAmount;
+    } else {
+      // Rest are "pending"
+      pendingBalance += cashbackAmount;
+    }
+  });
+  
+  // Add referral bonuses
+  referralNotifications.forEach(referral => {
+    if (referral.processed) {
+      confirmedBalance += 5.00; // $5 referral bonus
+    } else {
+      pendingBalance += 5.00;
+    }
+  });
+  
+  // Update the display with dollar signs
+  const baanceAmount = document.getElementById('balance-amount');
+  const balancePending = document.getElementById('balance-pending');
+  
+  if (balanceAmount) {
+    balanceAmount.textContent = `$${confirmedBalance.toFixed(2)}`;
+  }
+  
+  if (balancePending) {
+    balancePending.textContent = `$${pendingBalance.toFixed(2)} pending`;
+  }
+}
+
       referralNotifications.forEach(referral => {
         if (referral.processed) {
           confirmedBalance += 5.00; // $5 referral bonus
