@@ -663,53 +663,27 @@
     });
 
     function loadBalanceData() {
-  // Get click history and calculate balance
-  const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
-  const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-  
-  let availableBalance = 0;
-  let pendingBalance = 0;
-  let totalEarned = 0;
-  let paymentsMade = 0;
-  
-  // Calculate from click history
-  clickHistory.forEach((click, index) => {
-    const amount = getCashbackAmount(click.store);
-    if (index < 3) {
-      availableBalance += amount;
-    } else {
-      pendingBalance += amount;
-    }
-    totalEarned += amount;
-  });
-  
-  // Add referral bonuses
-  referralNotifications.forEach(referral => {
-    const bonus = 5.00;
-    if (referral.processed) {
-      availableBalance += bonus;
-    } else {
-      pendingBalance += bonus;
-    }
-    totalEarned += bonus;
-  });
-  
-  // Update display with dollar signs
-  document.getElementById('available-balance').textContent = `$${availableBalance.toFixed(2)}`;
-  document.getElementById('pending-balance').textContent = `$${pendingBalance.toFixed(2)}`;
-  document.getElementById('total-earned').textContent = `$${totalEarned.toFixed(2)}`;
-  document.getElementById('payments-made').textContent = `$${paymentsMade.toFixed(2)}`;
-  
-  // Enable/disable withdraw button
-  const withdrawBtn = document.getElementById('withdraw-btn');
-  if (availableBalance >= 20) {
-    withdrawBtn.disabled = false;
-    withdrawBtn.textContent = `💰 Withdraw $${availableBalance.toFixed(2)}`;
-  } else {
-    withdrawBtn.disabled = true;
-    withdrawBtn.textContent = `💰 Withdraw Money (Min $20)`;
-  }
-}
+      // Get click history and calculate balance
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      
+      let availableBalance = 0;
+      let pendingBalance = 0;
+      let totalEarned = 0;
+      let paymentsMade = 0; // Start with 0
+      
+      // Calculate from click history
+      clickHistory.forEach((click, index) => {
+        const amount = getCashbackAmount(click.store);
+        if (index < 3) {
+          // First 3 are available
+          availableBalance += amount;
+        } else {
+          // Rest are pending
+          pendingBalance += amount;
+        }
+        totalEarned += amount;
+      });
       
       // Add referral bonuses
       referralNotifications.forEach(referral => {
@@ -829,15 +803,17 @@
       `;
 
       modal.innerHTML = `
-        <div style="
+        <div id="withdrawal-modal" style="
           background: white;
           border-radius: 12px;
           padding: 2rem;
-          max-width: 400px;
+          max-width: 500px;
           width: 90%;
           text-align: center;
           position: relative;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          max-height: 80vh;
+          overflow-y: auto;
         ">
           <button onclick="this.parentElement.parentElement.remove()" style="
             position: absolute;
@@ -850,43 +826,253 @@
             color: #999;
           ">×</button>
           
-          <h2 style="color: #008e45; margin-bottom: 1rem;">Withdrawal Request</h2>
-          <p style="margin-bottom: 1.5rem; color: #333;">Choose your withdrawal method:</p>
-          
-          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
-            <button onclick="processWithdrawal('paypal')" style="
-              background: #0070f3;
-              color: white;
-              border: none;
-              padding: 1rem 2rem;
-              border-radius: 8px;
-              cursor: pointer;
-              font-size: 1rem;
-              font-weight: bold;
-            ">PayPal</button>
+          <div id="payment-selection">
+            <h2 style="color: #008e45; margin-bottom: 1rem;">💳 Withdrawal Request</h2>
+            <p style="margin-bottom: 1.5rem; color: #333;">Choose your withdrawal method:</p>
             
-            <button onclick="processWithdrawal('bank')" style="
-              background: #008e45;
-              color: white;
-              border: none;
-              padding: 1rem 2rem;
-              border-radius: 8px;
-              cursor: pointer;
-              font-size: 1rem;
-              font-weight: bold;
-            ">Bank Transfer</button>
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+              <button onclick="showPaymentForm('paypal')" style="
+                background: #0070ba;
+                color: white;
+                border: none;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+              ">💰 PayPal</button>
+              
+              <button onclick="showPaymentForm('skrill')" style="
+                background: #7b1fa2;
+                color: white;
+                border: none;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+              ">💳 Skrill</button>
+              
+              <button onclick="showPaymentForm('bank')" style="
+                background: #008e45;
+                color: white;
+                border: none;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+              ">🏦 Bank Transfer</button>
+            </div>
+            
+            <p style="font-size: 0.85rem; color: #666;">
+              Processing time: 3-5 business days
+            </p>
           </div>
-          
-          <p style="font-size: 0.85rem; color: #666;">
-            Processing time: 3-5 business days
-          </p>
+
+          <div id="payment-form" style="display: none;">
+            <!-- Forms will be dynamically inserted here -->
+          </div>
         </div>
       `;
 
       document.body.appendChild(modal);
     });
 
-    // Global function for withdrawal processing
+    // Global functions for payment processing
+    window.showPaymentForm = function(method) {
+      const selectionDiv = document.getElementById('payment-selection');
+      const formDiv = document.getElementById('payment-form');
+      
+      selectionDiv.style.display = 'none';
+      formDiv.style.display = 'block';
+      
+      let formContent = '';
+      
+      if (method === 'paypal') {
+        formContent = `
+          <h3 style="color: #0070ba; margin-bottom: 1rem;">💰 PayPal Withdrawal</h3>
+          <form id="paypal-form" style="text-align: left;">
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">PayPal Email Address:</label>
+              <input type="email" id="paypal-email" required placeholder="your-email@example.com" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #0070ba;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+              ">
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+              <button type="button" onclick="goBackToSelection()" style="
+                background: #6c757d;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                cursor: pointer;
+                flex: 1;
+              ">← Back</button>
+              <button type="submit" style="
+                background: #0070ba;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                cursor: pointer;
+                flex: 2;
+                font-weight: bold;
+              ">Submit Withdrawal</button>
+            </div>
+          </form>
+        `;
+      } else if (method === 'skrill') {
+        formContent = `
+          <h3 style="color: #7b1fa2; margin-bottom: 1rem;">💳 Skrill Withdrawal</h3>
+          <form id="skrill-form" style="text-align: left;">
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Skrill Email Address:</label>
+              <input type="email" id="skrill-email" required placeholder="your-email@example.com" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #7b1fa2;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+              ">
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+              <button type="button" onclick="goBackToSelection()" style="
+                background: #6c757d;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                cursor: pointer;
+                flex: 1;
+              ">← Back</button>
+              <button type="submit" style="
+                background: #7b1fa2;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                cursor: pointer;
+                flex: 2;
+                font-weight: bold;
+              ">Submit Withdrawal</button>
+            </div>
+          </form>
+        `;
+      } else if (method === 'bank') {
+        formContent = `
+          <h3 style="color: #008e45; margin-bottom: 1rem;">🏦 Bank Transfer Withdrawal</h3>
+          <form id="bank-form" style="text-align: left;">
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">IBAN:</label>
+              <input type="text" id="bank-iban" required placeholder="GB29 NWBK 6016 1331 9268 19" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #008e45;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+                text-transform: uppercase;
+              ">
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Full Name (Account Holder):</label>
+              <input type="text" id="bank-name" required placeholder="John Smith" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #008e45;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+              ">
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Bank Name:</label>
+              <input type="text" id="bank-bank-name" required placeholder="Bank of America" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #008e45;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+              ">
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Bank Address:</label>
+              <textarea id="bank-address" required placeholder="123 Bank Street, City, State, ZIP Code, Country" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #008e45;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+                min-height: 80px;
+                resize: vertical;
+                font-family: inherit;
+              "></textarea>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+              <button type="button" onclick="goBackToSelection()" style="
+                background: #6c757d;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                cursor: pointer;
+                flex: 1;
+              ">← Back</button>
+              <button type="submit" style="
+                background: #008e45;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                cursor: pointer;
+                flex: 2;
+                font-weight: bold;
+              ">Submit Withdrawal</button>
+            </div>
+          </form>
+        `;
+      }
+      
+      formDiv.innerHTML = formContent;
+      
+      // Add form submission handlers
+      const form = formDiv.querySelector('form');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        processWithdrawal(method);
+      });
+    };
+
+    window.goBackToSelection = function() {
+      const selectionDiv = document.getElementById('payment-selection');
+      const formDiv = document.getElementById('payment-form');
+      
+      formDiv.style.display = 'none';
+      selectionDiv.style.display = 'block';
+    };
+
+    // Updated withdrawal processing function
     window.processWithdrawal = function(method) {
       const modal = document.querySelector('div[style*="position: fixed"]');
       if (modal) modal.remove();
@@ -964,4 +1150,3 @@
   </script>
 </body>
 </html>
-
