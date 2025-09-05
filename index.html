@@ -144,7 +144,7 @@
       background: #008e45 !important;
       color: #fff;
       position: relative;
-      overflow: visible; /* CHANGED FROM HIDDEN TO VISIBLE */
+      overflow: visible;
       z-index: 1000;
     }
 
@@ -234,7 +234,7 @@
     .search-bar button:hover { background: #0059c1 !important; }
     .search-bar button svg { width: 1rem; height: 1rem; fill: #fff; }
 
-    /* Search Autocomplete Styles - FIXED Z-INDEX */
+    /* Search Autocomplete Styles */
     .search-autocomplete {
       position: absolute;
       top: 100%;
@@ -244,7 +244,7 @@
       border: 1px solid #e9e9e9;
       border-radius: 0 0 12px 12px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
-      z-index: 1010 !important; /* REASONABLE Z-INDEX ABOVE HEADER */
+      z-index: 1050 !important;
       max-height: 300px;
       overflow-y: auto;
       display: none;
@@ -262,18 +262,18 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      background: white !important; /* Ensure solid background */
+      background: white !important;
       position: relative;
-      z-index: 1011;
+      z-index: 1051;
     }
 
     .autocomplete-item:hover,
     .autocomplete-item.active {
-      background-color: #f8f9fa;
+      background-color: #f8f9fa !important;
     }
 
     .autocomplete-item.active {
-      background-color: #e3f2fd;
+      background-color: #e3f2fd !important;
       color: #1976d2;
     }
 
@@ -288,6 +288,7 @@
       background-size: cover;
       background-position: center;
       flex-shrink: 0;
+      background-color: #f0f0f0;
     }
 
     .autocomplete-content {
@@ -314,9 +315,9 @@
       padding: 20px 16px;
       text-align: center;
       color: #666;
-      background: white !important; /* Ensure solid background */
+      background: white !important;
       position: relative;
-      z-index: 1011;
+      z-index: 1051;
     }
 
     .btn {
@@ -407,12 +408,7 @@
       cursor: pointer;
     }
 
-    .store-card:first-of-type:hover,
-    .store-card:nth-of-type(2):hover,
-    .store-card:nth-of-type(3):hover,
-    .store-card:nth-of-type(4):hover,
-    .store-card:nth-of-type(5):hover,
-    .store-card:nth-of-type(6):hover {
+    .store-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
       border-color: #008e45;
@@ -618,215 +614,6 @@
       .cash-rain { display: none; }
     }
 
-    /* Support Bubble Styles */
-    .support-bubble {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1500;
-    }
-
-    .support-btn {
-      background: linear-gradient(135deg, #008e45, #00a852);
-      color: white;
-      padding: 15px 20px;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 142, 69, 0.4);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: none;
-      font-size: 16px;
-    }
-
-    .support-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(0, 142, 69, 0.5);
-      background: linear-gradient(135deg, #006633, #008e45);
-    }
-
-    .support-icon {
-      font-size: 20px;
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-5px); }
-      60% { transform: translateY(-3px); }
-    }
-
-    .support-modal {
-      position: absolute;
-      bottom: 70px;
-      right: 0;
-      width: 350px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      border: 2px solid #008e45;
-      overflow: hidden;
-      transform: scale(0.8) translateY(20px);
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    .support-modal.show {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
-
-    .support-modal-header {
-      background: linear-gradient(135deg, #008e45, #00a852);
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .support-modal-header h3 {
-      margin: 0;
-      font-size: 18px;
-    }
-
-    .close-support {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      padding: 0;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: background-color 0.2s;
-    }
-
-    .close-support:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .support-form {
-      padding: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: #333;
-      font-size: 14px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 10px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 14px;
-      transition: border-color 0.3s;
-      box-sizing: border-box;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: #008e45;
-      box-shadow: 0 0 0 3px rgba(0, 142, 69, 0.1);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 80px;
-      font-family: inherit;
-    }
-
-    .char-counter {
-      text-align: right;
-      font-size: 12px;
-      color: #666;
-      margin-top: 5px;
-    }
-
-    .char-counter.warning {
-      color: #ff6b35;
-    }
-
-    .submit-support-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #008e45, #00a852);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .submit-support-btn:hover {
-      background: linear-gradient(135deg, #006633, #008e45);
-      transform: translateY(-1px);
-    }
-
-    .submit-support-btn:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .support-success {
-      padding: 30px 20px;
-      text-align: center;
-    }
-
-    .success-icon {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    .support-success h4 {
-      color: #008e45;
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .support-success p {
-      color: #666;
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-
-    .new-request-btn {
-      background: #008e45;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s;
-    }
-
-    .new-request-btn:hover {
-      background: #006633;
-    }
-
     /* Profile dropdown with balance styles */
     .profile-container {
       position: relative;
@@ -868,8 +655,7 @@
       border-radius: 8px 8px 0 0;
     }
 
-    .balance-label 
-    {
+    .balance-label {
       font-size: 0.85rem;
       opacity: 0.9;
       margin-bottom: 0.25rem;
@@ -912,22 +698,6 @@
 
     .profile-dropdown a:hover {
       background-color: #f5f5f5;
-    }
-
-    @media (max-width: 480px) {
-      .support-modal {
-        width: 300px;
-        right: -10px;
-      }
-      
-      .support-btn {
-        padding: 12px 16px;
-        font-size: 14px;
-      }
-      
-      .support-text {
-        display: none;
-      }
     }
 
     @media (max-width: 768px) {
@@ -1085,64 +855,6 @@
     </div>
   </main>
 
-  <!-- Support Bubble -->
-  <div id="support-bubble" class="support-bubble">
-    <div id="support-btn" class="support-btn">
-      <span class="support-icon">💬</span>
-      <span class="support-text">Support</span>
-    </div>
-    
-    <div id="support-modal" class="support-modal" style="display: none;">
-      <div class="support-modal-header">
-        <h3>🛠️ Need Help?</h3>
-        <button id="close-support" class="close-support">×</button>
-      </div>
-      
-      <form id="support-form" class="support-form">
-        <div class="form-group">
-          <label for="support-email">Your Email:</label>
-          <input type="email" id="support-email" required placeholder="your@email.com">
-        </div>
-        
-        <div class="form-group">
-          <label for="problem-type">Problem Type:</label>
-          <select id="problem-type" required>
-            <option value="">Select a problem type</option>
-            <option value="account">Account Issues</option>
-            <option value="cashback">Cashback Problems</option>
-            <option value="payment">Payment Issues</option>
-            <option value="technical">Technical Problems</option>
-            <option value="store">Store/Partner Issues</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="problem-description">Problem Description:</label>
-          <textarea 
-            id="problem-description" 
-            required 
-            placeholder="Please describe your problem in detail..."
-            maxlength="1000"
-            rows="4"
-          ></textarea>
-          <div class="char-counter">
-            <span id="char-count">0</span>/1000 characters
-          </div>
-        </div>
-        
-        <button type="submit" class="submit-support-btn">📧 Send Support Request</button>
-      </form>
-      
-      <div id="support-success" class="support-success" style="display: none;">
-        <div class="success-icon">✅</div>
-        <h4>Support Request Sent!</h4>
-        <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
-        <button id="new-request" class="new-request-btn">Send Another Request</button>
-      </div>
-    </div>
-  </div>
-
   <footer>
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
@@ -1150,7 +862,7 @@
   <script>
     document.getElementById('year').textContent = 2025;
 
-    // Search data for autocomplete - Updated with all stores including Aegean
+    // Search data for autocomplete
     const stores = [
       {
         name: 'Box Now',
@@ -1202,35 +914,30 @@
       }
     ];
 
-    // Search functionality - Simple and direct
+    // Search functionality
     const searchInput = document.getElementById('search-input');
     const autocomplete = document.getElementById('search-autocomplete');
     let currentFocus = -1;
 
-    // Show autocomplete dropdown
     function showDropdown() {
       autocomplete.classList.add('show');
     }
 
-    // Hide autocomplete dropdown
     function hideDropdown() {
       autocomplete.classList.remove('show');
       currentFocus = -1;
     }
 
-    // Clear search results
     function clearResults() {
       autocomplete.innerHTML = '';
       hideDropdown();
     }
 
-    // Highlight matching text
     function highlightMatch(text, query) {
       const regex = new RegExp(`(${query})`, 'gi');
       return text.replace(regex, '<strong>$1</strong>');
     }
 
-    // Search and filter stores
     function searchStores(query) {
       if (!query || query.length < 1) {
         clearResults();
@@ -1241,7 +948,6 @@
       const queryLower = query.toLowerCase();
 
       stores.forEach(store => {
-        // Check if query matches store name or keywords
         const nameMatch = store.name.toLowerCase().includes(queryLower);
         const keywordMatch = store.keywords.some(keyword => 
           keyword.toLowerCase().includes(queryLower)
@@ -1255,7 +961,6 @@
       displayResults(results, query);
     }
 
-    // Display search results
     function displayResults(results, query) {
       autocomplete.innerHTML = '';
 
@@ -1292,10 +997,9 @@
       showDropdown();
     }
 
-    // Event listeners for search
+    // Event listeners
     searchInput.addEventListener('input', function(e) {
       const query = e.target.value.trim();
-      console.log('Searching for:', query); // Debug log
       searchStores(query);
     });
 
@@ -1306,7 +1010,6 @@
     });
 
     searchInput.addEventListener('blur', function() {
-      // Delay hiding to allow clicks
       setTimeout(hideDropdown, 200);
     });
 
@@ -1334,7 +1037,6 @@
       }
     });
 
-    // Set active item
     function setActive(items) {
       items.forEach(item => item.classList.remove('active'));
       if (items[currentFocus]) {
@@ -1349,170 +1051,31 @@
       }
     });
 
-    console.log('Search functionality loaded'); // Debug log
-
-    // Support Bubble Functionality
-    const supportBtn = document.getElementById('support-btn');
-    const supportModal = document.getElementById('support-modal');
-    const closeSupportBtn = document.getElementById('close-support');
-    const supportForm = document.getElementById('support-form');
-    const supportSuccess = document.getElementById('support-success');
-    const newRequestBtn = document.getElementById('new-request');
-    const problemDescription = document.getElementById('problem-description');
-    const charCount = document.getElementById('char-count');
-
-    // Toggle support modal
-    supportBtn.addEventListener('click', () => {
-      if (supportModal.style.display === 'none' || !supportModal.style.display) {
-        supportModal.style.display = 'block';
-        setTimeout(() => {
-          supportModal.classList.add('show');
-        }, 10);
-      } else {
-        supportModal.classList.remove('show');
-        setTimeout(() => {
-          supportModal.style.display = 'none';
-        }, 300);
-      }
-    });
-
-    // Close support modal
-    closeSupportBtn.addEventListener('click', () => {
-      supportModal.classList.remove('show');
-      setTimeout(() => {
-        supportModal.style.display = 'none';
-      }, 300);
-    });
-
-    // Close modal when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!document.querySelector('.support-bubble').contains(e.target)) {
-        supportModal.classList.remove('show');
-        setTimeout(() => {
-          supportModal.style.display = 'none';
-        }, 300);
-      }
-    });
-
-    // Character counter for problem description
-    problemDescription.addEventListener('input', () => {
-      const currentLength = problemDescription.value.length;
-      charCount.textContent = currentLength;
-      
-      const counter = charCount.parentElement;
-      if (currentLength > 900) {
-        counter.classList.add('warning');
-      } else {
-        counter.classList.remove('warning');
-      }
-    });
-
-    // Handle support form submission
-    supportForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const email = document.getElementById('support-email').value;
-      const problemType = document.getElementById('problem-type').value;
-      const description = problemDescription.value;
-      
-      // Simulate form submission
-      const submitBtn = supportForm.querySelector('.submit-support-btn');
-      const originalText = submitBtn.textContent;
-      
-      submitBtn.disabled = true;
-      submitBtn.textContent = '📤 Sending...';
-      
-      // Simulate API call delay
-      setTimeout(() => {
-        // Store support request in localStorage for demo purposes
-        const supportRequest = {
-          id: 'SUP' + Date.now().toString().slice(-6),
-          email: email,
-          problemType: problemType,
-          description: description,
-          timestamp: new Date().toISOString(),
-          status: 'submitted'
-        };
-        
-        const supportRequests = JSON.parse(localStorage.getItem('support_requests') || '[]');
-        supportRequests.unshift(supportRequest);
-        localStorage.setItem('support_requests', JSON.stringify(supportRequests));
-        
-        // Show success message
-        supportForm.style.display = 'none';
-        supportSuccess.style.display = 'block';
-        
-        // Reset form
-        supportForm.reset();
-        charCount.textContent = '0';
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-        
-        console.log('Support request submitted:', supportRequest);
-      }, 2000);
-    });
-
-    // Handle new request button
-    newRequestBtn.addEventListener('click', () => {
-      supportSuccess.style.display = 'none';
-      supportForm.style.display = 'block';
-    });
-
     // Function to update user balance dynamically
-   // In index.html, replace the updateUserBalance function with this fixed version:
-
-function updateUserBalance() {
-  // Calculate balance from click history and referrals
-  const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
-  const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-  
-  // Start with 0 for both confirmed and pending
-  let confirmedBalance = 0;
-  let pendingBalance = 0;
-  
-  // Add cashback from clicks (simulate some confirmed, some pending)
-  clickHistory.forEach((click, index) => {
-    const cashbackAmount = getCashbackAmount(click.store);
-    if (index < 5) {
-      // First 5 clicks are "confirmed"
-      confirmedBalance += cashbackAmount;
-    } else {
-      // Rest are "pending"
-      pendingBalance += cashbackAmount;
-    }
-  });
-  
-  // Add referral bonuses
-  referralNotifications.forEach(referral => {
-    if (referral.processed) {
-      confirmedBalance += 5.00; // $5 referral bonus
-    } else {
-      pendingBalance += 5.00;
-    }
-  });
-  
-  // Update the display with dollar signs
-  const baanceAmount = document.getElementById('balance-amount');
-  const balancePending = document.getElementById('balance-pending');
-  
-  if (balanceAmount) {
-    balanceAmount.textContent = `$${confirmedBalance.toFixed(2)}`;
-  }
-  
-  if (balancePending) {
-    balancePending.textContent = `$${pendingBalance.toFixed(2)} pending`;
-  }
-}
-
+    function updateUserBalance() {
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      
+      let confirmedBalance = 0;
+      let pendingBalance = 0;
+      
+      clickHistory.forEach((click, index) => {
+        const cashbackAmount = getCashbackAmount(click.store);
+        if (index < 5) {
+          confirmedBalance += cashbackAmount;
+        } else {
+          pendingBalance += cashbackAmount;
+        }
+      });
+      
       referralNotifications.forEach(referral => {
         if (referral.processed) {
-          confirmedBalance += 5.00; // $5 referral bonus
+          confirmedBalance += 5.00;
         } else {
           pendingBalance += 5.00;
         }
       });
       
-      // Update the display
       const balanceAmount = document.getElementById('balance-amount');
       const balancePending = document.getElementById('balance-pending');
       
@@ -1526,7 +1089,6 @@ function updateUserBalance() {
     }
 
     function getCashbackAmount(storeName) {
-      // Simulate different cashback amounts based on store
       const cashbackRates = {
         'Box Now': 2.50,
         'Nike': 3.25,
@@ -1548,10 +1110,8 @@ function updateUserBalance() {
 
     // Wait for DOM and Firebase to load
     window.addEventListener('load', () => {
-      // Get Firebase auth instance
       const auth = getAuth();
       
-      // Listen for authentication state changes
       onAuthStateChanged(auth, (user) => {
         updateAuthUI(user);
       });
@@ -1564,53 +1124,43 @@ function updateUserBalance() {
       const profilePic = document.getElementById('profile-pic');
 
       if (user) {
-        // User is logged in
-        console.log('User logged in:', user.email);
         authButtons.style.display = 'none';
         userProfile.style.display = 'flex';
         userEmail.textContent = user.email;
         
-        // Load profile picture from localStorage or use default
         const storedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
         if (storedProfilePic) {
           profilePic.src = storedProfilePic;
         } else if (user.photoURL) {
           profilePic.src = user.photoURL;
         } else {
-          // Default avatar with user's initial
           const initial = user.email.charAt(0).toUpperCase();
           profilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%23008e45'/><text x='20' y='26' text-anchor='middle' fill='white' font-size='16' font-family='Arial'>${initial}</text></svg>`;
         }
         
-        // Update balance when user is logged in
         updateUserBalance();
       } else {
-        // User is not logged in
-        console.log('User not logged in');
         authButtons.style.display = 'flex';
         userProfile.style.display = 'none';
       }
     }
 
-    // Add profile dropdown functionality
+    // Profile dropdown functionality
     const profileContainer = document.querySelector('.profile-container');
     const profilePic = document.getElementById('profile-pic');
     const profileDropdown = document.getElementById('profile-dropdown');
     
     if (profileContainer && profilePic && profileDropdown) {
-      // Make dropdown clickable (static) instead of hover
       profilePic.addEventListener('click', function(e) {
         e.stopPropagation();
         const isVisible = profileDropdown.style.display === 'block';
         profileDropdown.style.display = isVisible ? 'none' : 'block';
         
-        // Update balance when dropdown is opened
         if (!isVisible) {
           updateUserBalance();
         }
       });
 
-      // Close dropdown when clicking outside
       document.addEventListener('click', function(e) {
         if (!profileContainer.contains(e.target)) {
           profileDropdown.style.display = 'none';
@@ -1726,7 +1276,6 @@ function updateUserBalance() {
 
       document.body.appendChild(modal);
 
-      // Generate or get existing referral code
       const auth = getAuth();
       const user = auth.currentUser;
       if (user) {
@@ -1739,7 +1288,6 @@ function updateUserBalance() {
     }
 
     function generateReferralCode(userId, email) {
-      // Create a referral code based on user email
       const emailPrefix = email.split('@')[0].substring(0, 4).toUpperCase();
       const userIdSuffix = userId.substring(0, 4).toUpperCase();
       return `${emailPrefix}${userIdSuffix}`;
@@ -1781,7 +1329,6 @@ function updateUserBalance() {
           url: link
         });
       } else {
-        // Fallback to copying
         navigator.clipboard.writeText(link).then(() => {
           alert('Link copied to clipboard! Share it with your friends.');
         });
