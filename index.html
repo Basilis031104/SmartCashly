@@ -985,7 +985,7 @@
         item.innerHTML = `
           <div class="autocomplete-icon" style="background-image: url('${store.icon}')"></div>
           <div class="autocomplete-content">
-            <div class="autocomplete-name">${highlightMatch(store.name, query)}</div>
+            <div class="autocomplete-name"><strong>${highlightMatch(store.name, query)}</strong></div>
             <div class="autocomplete-description">${store.description}</div>
             <div class="autocomplete-cashback">💰 Up to ${store.cashback} Cashback</div>
           </div>
