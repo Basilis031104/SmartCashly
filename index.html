@@ -191,11 +191,20 @@
       z-index: 1002;
     }
 
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1 1 100%;
+      max-width: 600px;
+      margin-left: 80px;
+      z-index: 1002;
+    }
+
     .search-bar {
       position: relative;
       flex: 1 1 100%;
       max-width: 480px;
-      margin-left: 80px;
       z-index: 1002;
     }
 
@@ -233,6 +242,25 @@
 
     .search-bar button:hover { background: #0059c1 !important; }
     .search-bar button svg { width: 1rem; height: 1rem; fill: #fff; }
+
+    .view-all-stores-btn {
+      background: #0070f3 !important;
+      color: white;
+      padding: 0.55rem 1.2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgba(0, 112, 243, 0.3);
+    }
+
+    .view-all-stores-btn:hover {
+      background: #0059c1 !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 112, 243, 0.4);
+    }
 
     /* Search Autocomplete Styles */
     .search-autocomplete {
@@ -493,6 +521,175 @@
       transform: scale(1.02);
     }
 
+    /* Support Chat Button */
+    .support-chat-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #0070f3, #0059c1);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 112, 243, 0.4);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    .support-chat-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 112, 243, 0.6);
+      background: linear-gradient(135deg, #0059c1, #004494);
+    }
+
+    .support-chat-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Support Modal */
+    .support-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    .support-modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .support-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.2s;
+    }
+
+    .support-close-btn:hover {
+      color: #333;
+    }
+
+    .support-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .support-header h2 {
+      color: #008e45;
+      margin-bottom: 0.5rem;
+    }
+
+    .support-options {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .support-option {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+
+    .support-option:hover {
+      border-color: #0070f3;
+      background: #f8f9ff;
+    }
+
+    .support-option-icon {
+      width: 40px;
+      height: 40px;
+      background: #0070f3;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .support-option-content h3 {
+      margin: 0 0 0.25rem 0;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .support-option-content p {
+      margin: 0;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .support-faq {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      background: #f8f9fa;
+      padding: 1rem;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      background: #e9ecef;
+    }
+
+    .faq-answer {
+      padding: 1rem;
+      display: none;
+      color: #666;
+      line-height: 1.5;
+    }
+
     footer {
       text-align: center;
       font-size: .875rem;
@@ -706,9 +903,22 @@
         gap: 1.5rem;
       }
       
-      .search-bar {
+      .search-container {
         margin-left: 20px;
         max-width: 300px;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+      }
+
+      .view-all-stores-btn {
+        text-align: center;
+      }
+
+      .support-chat-btn {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 0.9rem !important;
       }
     }
   </style>
@@ -725,13 +935,18 @@
 
   <header>
     <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-    <form class="search-bar" action="#" method="get">
-      <input type="search" name="q" id="search-input" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
-      <button type="submit" aria-label="Search">
-        <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
-      </button>
-      <div id="search-autocomplete" class="search-autocomplete"></div>
-    </form>
+    <div class="search-container">
+      <form class="search-bar" action="#" method="get">
+        <input type="search" name="q" id="search-input" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
+        <button type="submit" aria-label="Search">
+          <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
+        </button>
+        <div id="search-autocomplete" class="search-autocomplete"></div>
+      </form>
+      <a href="all-stores.html" class="view-all-stores-btn">
+        View All Stores
+      </a>
+    </div>
     <nav class="auth-nav" id="auth-nav">
       <div id="auth-buttons" style="display: flex; gap: 0.5rem;">
         <a href="login.html" class="btn">Login</a>
@@ -763,21 +978,6 @@
     <div class="welcome-section">
       <h2>Welcome to Smartcashly</h2>
       <p>The best cashback platform</p>
-      <a href="all-stores.html" style="
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.75rem 1.5rem;
-        background: #008e45;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: background-color 0.3s;
-      " 
-      onmouseover="this.style.background='#006633'" 
-      onmouseout="this.style.background='#008e45'">
-        View All Stores
-      </a>
     </div>
 
     <div class="stores-section">
@@ -874,6 +1074,81 @@
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
 
+  <!-- Support Chat Button -->
+  <button class="support-chat-btn" id="support-chat-btn" title="Need Help?">
+    💬
+  </button>
+
+  <!-- Support Modal -->
+  <div id="support-modal" class="support-modal">
+    <div class="support-modal-content">
+      <button class="support-close-btn" onclick="closeSupportModal()">×</button>
+      
+      <div class="support-header">
+        <h2>How can we help you?</h2>
+        <p>Choose an option below or browse our FAQ</p>
+      </div>
+
+      <div class="support-options">
+        <a href="mailto:support@smartcashly.com" class="support-option">
+          <div class="support-option-icon">📧</div>
+          <div class="support-option-content">
+            <h3>Email Support</h3>
+            <p>Get help via email within 24 hours</p>
+          </div>
+        </a>
+
+        <a href="tel:+1-800-SMARTLY" class="support-option">
+          <div class="support-option-icon">📞</div>
+          <div class="support-option-content">
+            <h3>Phone Support</h3>
+            <p>Call us at 1-800-SMARTLY</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="support-faq">
+        <h3 style="color: #008e45; margin-bottom: 1rem;">Frequently Asked Questions</h3>
+        
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            How do I earn cashback? <span>+</span>
+          </button>
+          <div class="faq-answer">
+            Simply shop through our partner links! When you click on a store from Smartcashly and make a purchase, you'll automatically earn cashback that gets added to your account.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            When do I receive my cashback? <span>+</span>
+          </button>
+          <div class="faq-answer">
+            Cashback typically appears as "pending" within 24-48 hours and becomes available for withdrawal after the merchant's return period (usually 30-90 days).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            What's the minimum withdrawal amount? <span>+</span>
+          </button>
+          <div class="faq-answer">
+            The minimum withdrawal amount is $15.00. You can withdraw your cashback via PayPal, Skrill, or bank transfer once you reach this threshold.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Why is my cashback missing? <span>+</span>
+          </button>
+          <div class="faq-answer">
+            Make sure you clicked through our links and didn't use any other coupons or cashback sites. If you still don't see your cashback within 48 hours, contact our support team.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.getElementById('year').textContent = 2025;
 
@@ -948,11 +1223,6 @@
       hideDropdown();
     }
 
-    function highlightMatch(text, query) {
-      const regex = new RegExp(`(${query})`, 'gi');
-      return text.replace(regex, '<strong>$1</strong>');
-    }
-
     function searchStores(query) {
       if (!query || query.length < 1) {
         clearResults();
@@ -977,7 +1247,6 @@
     }
 
     function displayResults(results, query) {
-      console.log('displayResults called with:', results, query); // Debug log
       autocomplete.innerHTML = '';
 
       if (results.length === 0) {
@@ -998,7 +1267,6 @@
           window.location.href = store.url;
         };
 
-        // Simple HTML structure to ensure it works
         item.innerHTML = `
           <div class="autocomplete-icon" style="background-image: url('${store.icon}'); width: 32px; height: 32px; background-size: cover; border-radius: 6px; flex-shrink: 0;"></div>
           <div class="autocomplete-content" style="flex: 1;">
@@ -1008,12 +1276,10 @@
           </div>
         `;
 
-        console.log('Created item for:', store.name); // Debug log
         autocomplete.appendChild(item);
       });
 
       showDropdown();
-      console.log('Dropdown should be visible now'); // Debug log
     }
 
     // Event listeners
@@ -1070,6 +1336,38 @@
       }
     });
 
+    // Support Modal Functions
+    function openSupportModal() {
+      document.getElementById('support-modal').style.display = 'flex';
+    }
+
+    function closeSupportModal() {
+      document.getElementById('support-modal').style.display = 'none';
+    }
+
+    function toggleFAQ(button) {
+      const answer = button.nextElementSibling;
+      const icon = button.querySelector('span');
+      
+      if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        icon.textContent = '+';
+      } else {
+        answer.style.display = 'block';
+        icon.textContent = '-';
+      }
+    }
+
+    // Support button click handler
+    document.getElementById('support-chat-btn').addEventListener('click', openSupportModal);
+
+    // Close modal when clicking outside
+    document.getElementById('support-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeSupportModal();
+      }
+    });
+
     // Function to update user balance dynamically
     function updateUserBalance() {
       const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
@@ -1110,269 +1408,4 @@
     function getCashbackAmount(storeName) {
       const cashbackRates = {
         'Box Now': 2.50,
-        'Nike': 3.25,
-        'Shein': 4.10,
-        'Benetton': 3.75,
-        'Myprotein': 2.80,
-        'Aegean Airlines': 8.50
-      };
-      
-      return cashbackRates[storeName] || 1.50;
-    }
-  </script>
-
-  <!-- Firebase Auth Module -->
-  <script type="module" src="auth.js"></script>
-  <script type="module">
-    // Import Firebase functions
-    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-
-    // Wait for DOM and Firebase to load
-    window.addEventListener('load', () => {
-      const auth = getAuth();
-      
-      onAuthStateChanged(auth, (user) => {
-        updateAuthUI(user);
-      });
-    });
-
-    function updateAuthUI(user) {
-      const authButtons = document.getElementById('auth-buttons');
-      const userProfile = document.getElementById('user-profile');
-      const userEmail = document.getElementById('user-email');
-      const profilePic = document.getElementById('profile-pic');
-
-      if (user) {
-        authButtons.style.display = 'none';
-        userProfile.style.display = 'flex';
-        userEmail.textContent = user.email;
-        
-        const storedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
-        if (storedProfilePic) {
-          profilePic.src = storedProfilePic;
-        } else if (user.photoURL) {
-          profilePic.src = user.photoURL;
-        } else {
-          const initial = user.email.charAt(0).toUpperCase();
-          profilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%23008e45'/><text x='20' y='26' text-anchor='middle' fill='white' font-size='16' font-family='Arial'>${initial}</text></svg>`;
-        }
-        
-        updateUserBalance();
-      } else {
-        authButtons.style.display = 'flex';
-        userProfile.style.display = 'none';
-      }
-    }
-
-    // Profile dropdown functionality
-    const profileContainer = document.querySelector('.profile-container');
-    const profilePic = document.getElementById('profile-pic');
-    const profileDropdown = document.getElementById('profile-dropdown');
-    
-    if (profileContainer && profilePic && profileDropdown) {
-      profilePic.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const isVisible = profileDropdown.style.display === 'block';
-        profileDropdown.style.display = isVisible ? 'none' : 'block';
-        
-        if (!isVisible) {
-          updateUserBalance();
-        }
-      });
-
-      document.addEventListener('click', function(e) {
-        if (!profileContainer.contains(e.target)) {
-          profileDropdown.style.display = 'none';
-        }
-      });
-    }
-
-    // Refer a Friend Modal functionality
-    function showReferModal() {
-      const modal = document.createElement('div');
-      modal.id = 'refer-modal';
-      modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-      `;
-
-      modal.innerHTML = `
-        <div style="
-          background: white;
-          border-radius: 12px;
-          padding: 2rem;
-          max-width: 500px;
-          width: 90%;
-          text-align: center;
-          position: relative;
-        ">
-          <button onclick="document.getElementById('refer-modal').remove()" style="
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #999;
-          ">×</button>
-          
-          <h2 style="color: #008e45; margin-bottom: 1rem;">👥 Refer a Friend</h2>
-          <p style="margin-bottom: 1.5rem; color: #333;">Share Smartcashly with your friends and both earn rewards!</p>
-          
-          <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-            <p style="font-weight: bold; color: #008e45; margin-bottom: 0.5rem;">Your Referral Code:</p>
-            <div style="
-              background: white;
-              border: 2px solid #008e45;
-              border-radius: 6px;
-              padding: 0.75rem;
-              font-family: monospace;
-              font-size: 1.2rem;
-              font-weight: bold;
-              color: #008e45;
-              margin-bottom: 0.5rem;
-            " id="referral-code-display">LOADING...</div>
-            <button onclick="copyReferralCode()" style="
-              background: #008e45;
-              color: white;
-              border: none;
-              padding: 0.5rem 1rem;
-              border-radius: 6px;
-              cursor: pointer;
-              font-size: 0.9rem;
-            ">📋 Copy Code</button>
-          </div>
-
-          <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-            <p style="font-weight: bold; color: #008e45; margin-bottom: 0.5rem;">Share Link:</p>
-            <div style="
-              background: white;
-              border: 2px solid #008e45;
-              border-radius: 6px;
-              padding: 0.75rem;
-              font-size: 0.9rem;
-              word-break: break-all;
-              margin-bottom: 0.5rem;
-            " id="referral-link-display">LOADING...</div>
-            <button onclick="copyReferralLink()" style="
-              background: #0070f3;
-              color: white;
-              border: none;
-              padding: 0.5rem 1rem;
-              border-radius: 6px;
-              cursor: pointer;
-              font-size: 0.9rem;
-              margin-right: 0.5rem;
-            ">📋 Copy Link</button>
-            <button onclick="shareReferralLink()" style="
-              background: #28a745;
-              color: white;
-              border: none;
-              padding: 0.5rem 1rem;
-              border-radius: 6px;
-              cursor: pointer;
-              font-size: 0.9rem;
-            ">📤 Share</button>
-          </div>
-
-          <div style="font-size: 0.85rem; color: #666; margin-top: 1rem;">
-            <p>🎁 <strong>How it works:</strong></p>
-            <p>• Share your code with friends</p>
-            <p>• They sign up using your code</p>
-            <p>• When they accumulate 5$ from cashback, you get 15$!</p>
-          </div>
-        </div>
-      `;
-
-      document.body.appendChild(modal);
-
-      const auth = getAuth();
-      const user = auth.currentUser;
-      if (user) {
-        const referralCode = generateReferralCode(user.uid, user.email);
-        const referralLink = `${window.location.origin}/signup.html?ref=${referralCode}`;
-        
-        document.getElementById('referral-code-display').textContent = referralCode;
-        document.getElementById('referral-link-display').textContent = referralLink;
-      }
-    }
-
-    function generateReferralCode(userId, email) {
-      const emailPrefix = email.split('@')[0].substring(0, 4).toUpperCase();
-      const userIdSuffix = userId.substring(0, 4).toUpperCase();
-      return `${emailPrefix}${userIdSuffix}`;
-    }
-
-    // Global functions for the modal
-    window.copyReferralCode = function() {
-      const codeElement = document.getElementById('referral-code-display');
-      navigator.clipboard.writeText(codeElement.textContent).then(() => {
-        const button = event.target;
-        const originalText = button.textContent;
-        button.textContent = '✅ Copied!';
-        setTimeout(() => {
-          button.textContent = originalText;
-        }, 2000);
-      });
-    };
-
-    window.copyReferralLink = function() {
-      const linkElement = document.getElementById('referral-link-display');
-      navigator.clipboard.writeText(linkElement.textContent).then(() => {
-        const button = event.target;
-        const originalText = button.textContent;
-        button.textContent = '✅ Copied!';
-        setTimeout(() => {
-          button.textContent = originalText;
-        }, 2000);
-      });
-    };
-
-    window.shareReferralLink = function() {
-      const linkElement = document.getElementById('referral-link-display');
-      const link = linkElement.textContent;
-      
-      if (navigator.share) {
-        navigator.share({
-          title: 'Join Smartcashly and earn cashback!',
-          text: 'Sign up with my referral code and we both get rewards!',
-          url: link
-        });
-      } else {
-        navigator.clipboard.writeText(link).then(() => {
-          alert('Link copied to clipboard! Share it with your friends.');
-        });
-      }
-    };
-
-    // Logout and menu functionality
-    document.addEventListener('click', async (e) => {
-      if (e.target.id === 'logout-btn') {
-        e.preventDefault();
-        try {
-          if (typeof smartAuth !== 'undefined') {
-            await smartAuth.signOut();
-            window.location.href = 'index.html';
-          }
-        } catch (err) {
-          console.error('Logout error:', err);
-        }
-      }
-      
-      if (e.target.id === 'refer-friend') {
-        e.preventDefault();
-        showReferModal();
-      }
-    });
-  </script>
-</body>
-</html>
+        'Nike
