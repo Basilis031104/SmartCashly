@@ -730,58 +730,12 @@
     function loadTransactionHistory() {
       const transactionsBody = document.getElementById('transactions-body');
       
-      // Generate sample transaction data
-      const transactions = [];
-      
-      // Add transactions from click history
-      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
-      clickHistory.forEach((click, index) => {
-        const amount = getCashbackAmount(click.store);
-        transactions.push({
-          date: new Date(click.timestamp).toISOString().split('T')[0],
-          id: click.clickId,
-          type: 'Cashback',
-          store: click.store,
-          amount: amount.toFixed(2),
-          status: index < 3 ? 'confirmed' : 'pending'
-        });
-      });
-      
-      // Sort by date (newest first)
-      transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-      
-      // Display transactions
-      transactionsBody.innerHTML = '';
-      
-      if (transactions.length === 0) {
-        transactionsBody.innerHTML = `
-          <div style="padding: 2rem; text-align: center; color: #666;">
-            <p>No transactions yet. Start shopping to earn cashback!</p>
-          </div>
-        `;
-        return;
-      }
-      
-      transactions.forEach(transaction => {
-        const row = document.createElement('div');
-        row.className = 'table-row';
-        
-        const statusClass = `status-${transaction.status}`;
-        const typeClass = transaction.type.toLowerCase() === 'reversal' ? 'status-reversal' :
-                         transaction.type.toLowerCase() === 'withdrawal' ? 'status-withdrawal' :
-                         'status-cashback';
-        
-        row.innerHTML = `
-          <div>${transaction.date}</div>
-          <div style="font-family: monospace;">${transaction.id}</div>
-          <div><span class="${typeClass}">${transaction.type}</span></div>
-          <div>${transaction.store}</div>
-          <div style="font-weight: bold;">$${transaction.amount}</div>
-          <div><span class="status-badge ${statusClass}">${transaction.status.charAt(0).toUpperCase() + transaction.status.slice(1)}</span></div>
-        `;
-        
-        transactionsBody.appendChild(row);
-      });
+      // Show no transactions message
+      transactionsBody.innerHTML = `
+        <div style="padding: 2rem; text-align: center; color: #666; grid-column: 1 / -1;">
+          <p>No transactions yet. Start shopping to earn cashback!</p>
+        </div>
+      `;
     }
 
     // Withdraw button functionality
