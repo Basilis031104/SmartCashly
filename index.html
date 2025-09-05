@@ -962,6 +962,7 @@
     }
 
     function displayResults(results, query) {
+      console.log('displayResults called with:', results, query); // Debug log
       autocomplete.innerHTML = '';
 
       if (results.length === 0) {
@@ -982,19 +983,22 @@
           window.location.href = store.url;
         };
 
+        // Simple HTML structure to ensure it works
         item.innerHTML = `
-          <div class="autocomplete-icon" style="background-image: url('${store.icon}')"></div>
-          <div class="autocomplete-content">
-            <div class="autocomplete-name"><strong>${highlightMatch(store.name, query)}</strong></div>
-            <div class="autocomplete-description">${store.description}</div>
-            <div class="autocomplete-cashback">💰 Up to ${store.cashback} Cashback</div>
+          <div class="autocomplete-icon" style="background-image: url('${store.icon}'); width: 32px; height: 32px; background-size: cover; border-radius: 6px; flex-shrink: 0;"></div>
+          <div class="autocomplete-content" style="flex: 1;">
+            <div class="autocomplete-name" style="font-weight: bold; font-size: 16px; color: #000; margin-bottom: 4px;">${store.name}</div>
+            <div class="autocomplete-description" style="font-size: 14px; color: #666;">${store.description}</div>
+            <div class="autocomplete-cashback" style="font-size: 12px; color: #ff6b35; font-weight: bold;">Up to ${store.cashback} Cashback</div>
           </div>
         `;
 
+        console.log('Created item for:', store.name); // Debug log
         autocomplete.appendChild(item);
       });
 
       showDropdown();
+      console.log('Dropdown should be visible now'); // Debug log
     }
 
     // Event listeners
