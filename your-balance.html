@@ -632,7 +632,7 @@
       </div>
     </div>
   </main>
-
+  
   <footer>
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
@@ -699,10 +699,10 @@
       // NO ADDITIONAL BASE AMOUNTS - ONLY REAL EARNINGS
       
       // Update display with dollar signs
-      document.getElementById('available-balance').textContent = `${availableBalance.toFixed(2)}`;
-      document.getElementById('pending-balance').textContent = `${pendingBalance.toFixed(2)}`;
-      document.getElementById('total-earned').textContent = `${totalEarned.toFixed(2)}`;
-      document.getElementById('payments-made').textContent = `${paymentsMade.toFixed(2)}`;
+      document.getElementById('available-balance').textContent = `$${availableBalance.toFixed(2)}`;
+      document.getElementById('pending-balance').textContent = `$${pendingBalance.toFixed(2)}`;
+      document.getElementById('total-earned').textContent = `$${totalEarned.toFixed(2)}`;
+      document.getElementById('payments-made').textContent = `$${paymentsMade.toFixed(2)}`;
       
       // Enable/disable withdraw button
       const withdrawBtn = document.getElementById('withdraw-btn');
@@ -1104,3 +1104,4 @@
   </script>
 </body>
 </html>
+
