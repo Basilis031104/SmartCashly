@@ -610,6 +610,121 @@
     .cash-rain li:nth-child(19) { --start-x: 5vw; --end-x: 10vw; --start-rotation: 60deg; --end-rotation: 420deg; animation-delay: 3.5s; animation-duration: 8.9s; }
     .cash-rain li:nth-child(20) { --start-x: 95vw; --end-x: 90vw; --start-rotation: -50deg; --end-rotation: 310deg; animation-delay: 1.3s; animation-duration: 9.6s; }
 
+    /* Support Button */
+.support-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #008e45, #00a852);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 142, 69, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.support-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 142, 69, 0.6);
+  background: linear-gradient(135deg, #006633, #008e45);
+}
+
+.support-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.support-modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.support-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.support-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.support-form label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.support-form input,
+.support-form select,
+.support-form textarea {
+  padding: 0.75rem;
+  border: 2px solid #008e45;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: white;
+  color: #333;
+  font-family: inherit;
+}
+
+.support-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.support-form button {
+  background: #008e45;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 1rem;
+}
+
+.support-form button:hover {
+  background: #006633;
+}
+
+.character-count {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: right;
+  margin-top: -0.5rem;
+}
+
     @media (max-width: 480px) {
       .cash-rain { display: none; }
     }
@@ -1123,6 +1238,65 @@
 
   <!-- Firebase Auth Module -->
   <script type="module" src="auth.js"></script>
+  <!-- Support Button -->
+<button class="support-button" onclick="showSupportModal()" title="Get Support">
+  ?
+</button>
+
+<!-- Support Modal -->
+<div id="support-modal" class="support-modal">
+  <div class="support-modal-content">
+    <button class="support-close" onclick="hideSupportModal()">×</button>
+    <h2 style="color: #008e45; margin-bottom: 1rem;">Contact Support</h2>
+    <p style="margin-bottom: 1.5rem; color: #333;">
+      Need help with your account, cashback, or have questions? Send us a message and we'll respond within 24 hours.
+    </p>
+    
+    <form class="support-form" id="support-form">
+      <div>
+        <label for="support-name">Your Name</label>
+        <input type="text" id="support-name" name="name" required>
+      </div>
+      
+      <div>
+        <label for="support-email">Email Address</label>
+        <input type="email" id="support-email" name="email" required>
+      </div>
+      
+      <div>
+        <label for="support-category">Issue Category</label>
+        <select id="support-category" name="category" required>
+          <option value="">Select a category</option>
+          <option value="account">Account Issues</option>
+          <option value="cashback">Cashback Problems</option>
+          <option value="payments">Payment Issues</option>
+          <option value="technical">Technical Problems</option>
+          <option value="general">General Questions</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="support-subject">Subject</label>
+        <input type="text" id="support-subject" name="subject" required maxlength="100">
+      </div>
+      
+      <div>
+        <label for="support-message">Message (max 1000 words)</label>
+        <textarea id="support-message" name="message" required maxlength="7000" placeholder="Please describe your issue in detail..."></textarea>
+        <div class="character-count">
+          <span id="word-count">0</span> / 1000 words
+        </div>
+      </div>
+      
+      <button type="submit">Send Message</button>
+    </form>
+    
+    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee; font-size: 0.9rem; color: #666;">
+      <strong>Response Time:</strong> We typically respond within 24 hours during business days.
+    </div>
+  </div>
+</div>
   <script type="module">
     // Import Firebase functions
     import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
@@ -1134,6 +1308,82 @@
       onAuthStateChanged(auth, (user) => {
         updateAuthUI(user);
       });
+      // Support Modal Functions
+function showSupportModal() {
+  document.getElementById('support-modal').style.display = 'flex';
+  // Pre-fill email if user is logged in
+  const userEmail = document.getElementById('user-email');
+  if (userEmail && userEmail.textContent) {
+    document.getElementById('support-email').value = userEmail.textContent;
+  }
+}
+
+function hideSupportModal() {
+  document.getElementById('support-modal').style.display = 'none';
+}
+
+// Word counter
+document.addEventListener('DOMContentLoaded', function() {
+  const messageTextarea = document.getElementById('support-message');
+  const wordCountSpan = document.getElementById('word-count');
+  
+  if (messageTextarea && wordCountSpan) {
+    messageTextarea.addEventListener('input', function() {
+      const text = this.value.trim();
+      const words = text === '' ? 0 : text.split(/\s+/).length;
+      wordCountSpan.textContent = words;
+      
+      if (words > 1000) {
+        wordCountSpan.style.color = '#c62828';
+        this.style.borderColor = '#c62828';
+      } else {
+        wordCountSpan.style.color = '#666';
+        this.style.borderColor = '#008e45';
+      }
+    });
+  }
+});
+
+// Form submission
+document.addEventListener('DOMContentLoaded', function() {
+  const supportForm = document.getElementById('support-form');
+  if (supportForm) {
+    supportForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const messageText = document.getElementById('support-message').value.trim();
+      const wordCount = messageText === '' ? 0 : messageText.split(/\s+/).length;
+      
+      if (wordCount > 1000) {
+        alert('Please reduce your message to 1000 words or less.');
+        return;
+      }
+      
+      // Simulate form submission
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      
+      setTimeout(() => {
+        alert('Thank you! Your message has been sent. We will respond within 24 hours.');
+        hideSupportModal();
+        supportForm.reset();
+        document.getElementById('word-count').textContent = '0';
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }, 1500);
+    });
+  }
+});
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+  const modal = document.getElementById('support-modal');
+  if (event.target === modal) {
+    hideSupportModal();
+  }
+});
     });
 
     function updateAuthUI(user) {
