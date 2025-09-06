@@ -705,13 +705,25 @@
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
+
+    .support-bubble{position:fixed;bottom:20px;right:20px;z-index:10000}
+    .support-toggle{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#008e45,#00a852);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(0,142,69,0.4);display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;color:white;font-size:24px}
+    .support-toggle:hover{transform:scale(1.1)}
+    .support-panel{position:absolute;bottom:80px;right:0;width:320px;height:400px;background:white;border-radius:15px;box-shadow:0 10px 40px rgba(0,0,0,0.2);transform:scale(0);opacity:0;transition:all 0.3s ease;border:3px solid #008e45;overflow:hidden}
+    .support-panel.open{transform:scale(1);opacity:1}
+    .support-header{background:#008e45;color:white;padding:1rem;text-align:center;font-weight:bold}
+    .support-content{padding:1rem}
+    .support-option{display:block;padding:0.75rem;border-bottom:1px solid #eee;text-decoration:none;color:#333}
+    .support-option:hover{background:#f8f9fa}
+
+      
       
       .search-bar {
         margin-left: 20px;
         max-width: 300px;
       }
     }
-  </style>
+  </style>  
 </head>
 
 <body>
@@ -1374,6 +1386,17 @@
       }
     });
   </script>
+<div class="support-bubble">
+<button class="support-toggle" onclick="document.getElementById('supportPanel').classList.toggle('open')">💬</button>
+<div class="support-panel" id="supportPanel">
+<div class="support-header">How can we help?</div>
+<div class="support-content">
+<a href="mailto:support@smartcashly.com" class="support-option">📧 Email Support</a>
+<a href="tel:+1234567890" class="support-option">📞 Call Us</a>
+<a href="#" class="support-option">❓ FAQ</a>
+</div>
+</div>
+</div>
 </body>
 </html>
 
