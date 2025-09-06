@@ -700,184 +700,126 @@
       background-color: #f5f5f5;
     }
 
+    /* Small Support Bubble */
+    .support-bubble {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: #008e45;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 142, 69, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .support-bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 142, 69, 0.6);
+    }
+
+    .support-bubble svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .support-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .support-content {
+      background: white;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .support-header {
+      background: #008e45;
+      color: white;
+      padding: 1rem;
+      border-radius: 12px 12px 0 0;
+      position: relative;
+      text-align: center;
+    }
+
+    .support-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .support-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .support-body {
+      padding: 1.5rem;
+      line-height: 1.5;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .support-body h3 {
+      color: #008e45;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .support-body p {
+      margin-bottom: 0.8rem;
+    }
+
     @media (max-width: 768px) {
       .stores-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
-
-    /* Support Bubble Styles */
-.support-bubble {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #008e45, #00a852);
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 142, 69, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  border: 3px solid rgba(255, 255, 255, 0.2);
-}
-
-.support-bubble:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 25px rgba(0, 142, 69, 0.6);
-}
-
-.support-bubble svg {
-  width: 28px;
-  height: 28px;
-  fill: white;
-}
-
-.support-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 10000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(5px);
-}
-
-.support-content {
-  background: white;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-.support-header {
-  background: linear-gradient(135deg, #008e45, #00a852);
-  color: white;
-  padding: 1.5rem;
-  border-radius: 12px 12px 0 0;
-  position: relative;
-}
-
-.support-close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s;
-}
-
-.support-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.support-body {
-  padding: 2rem;
-  line-height: 1.6;
-  color: #333;
-}
-
-.support-body h2 {
-  color: #008e45;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-  border-bottom: 2px solid #008e45;
-  padding-bottom: 0.5rem;
-}
-
-.support-body h3 {
-  color: #006633;
-  margin-top: 1.5rem;
-  margin-bottom: 0.8rem;
-  font-size: 1.1rem;
-}
-
-.support-body p {
-  margin-bottom: 1rem;
-}
-
-.support-body ul {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-}
-
-.support-body li {
-  margin-bottom: 0.5rem;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.contact-card {
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-  border-left: 4px solid #008e45;
-}
-
-.contact-card h4 {
-  color: #008e45;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.faq-item {
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  border-left: 4px solid #008e45;
-}
-
-.faq-question {
-  font-weight: bold;
-  color: #008e45;
-  margin-bottom: 0.5rem;
-}
-
-@media (max-width: 768px) {
-  .support-content {
-    width: 95%;
-    margin: 0.5rem;
-  }
-  
-  .support-body {
-    padding: 1.5rem;
-  }
-  
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-      
       
       .search-bar {
         margin-left: 20px;
         max-width: 300px;
+      }
+
+      .support-content {
+        width: 95%;
+        max-height: 85vh;
+      }
+      
+      .support-body {
+        padding: 1rem;
       }
     }
   </style>
@@ -1042,146 +984,37 @@
   <footer>
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
-  <!-- Support Bubble -->
-<div class="support-bubble" onclick="openSupportModal()">
-  <svg viewBox="0 0 24 24">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
-  </svg>
-</div>
 
-<!-- Support Modal -->
-<div id="supportModal" class="support-modal" onclick="closeSupportModal(event)">
-  <div class="support-content" onclick="event.stopPropagation()">
-    <div class="support-header">
-      <h1>Smartcashly Help & Support</h1>
-      <button class="support-close" onclick="closeSupportModal()">&times;</button>
-    </div>
-    
-    <div class="support-body">
-      <h2>Welcome to Smartcashly Support</h2>
-      <p>We're here to help you maximize your cashback earnings and make the most of your shopping experience. Find answers to common questions and learn how to get the best deals.</p>
-      
-      <h2>How Smartcashly Works</h2>
-      <p>Smartcashly is your gateway to earning money back on purchases from your favorite stores. Here's how it works:</p>
-      <ul>
-        <li><strong>Browse Stores:</strong> Explore our partner retailers including Nike, Shein, Benetton, Box Now, Myprotein, and Aegean Airlines</li>
-        <li><strong>Click & Shop:</strong> Click through our links to visit the store and make your purchase as normal</li>
-        <li><strong>Earn Cashback:</strong> Receive a percentage of your purchase back as cashback rewards</li>
-        <li><strong>Get Paid:</strong> Withdraw your earnings once you reach the minimum threshold</li>
-      </ul>
-      
-      <h2>Frequently Asked Questions</h2>
-      
-      <div class="faq-item">
-        <div class="faq-question">How do I earn cashback?</div>
-        <p>Simply click on any store offer through Smartcashly before making your purchase. The cashback will be tracked automatically and added to your account within 24-48 hours.</p>
+  <!-- Small Support Bubble -->
+  <div class="support-bubble" onclick="openSupportModal()">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+    </svg>
+  </div>
+
+  <!-- Simple Support Modal -->
+  <div id="supportModal" class="support-modal" onclick="closeSupportModal(event)">
+    <div class="support-content" onclick="event.stopPropagation()">
+      <div class="support-header">
+        <h2>Help & Support</h2>
+        <button class="support-close" onclick="closeSupportModal()">&times;</button>
       </div>
       
-      <div class="faq-item">
-        <div class="faq-question">When will I see my cashback?</div>
-        <p>Cashback typically appears in your account within 24-48 hours of purchase. Some retailers may take up to 7 days to confirm transactions.</p>
-      </div>
-      
-      <div class="faq-item">
-        <div class="faq-question">What's the minimum withdrawal amount?</div>
-        <p>You can withdraw your earnings once you reach $15.00 in available balance. We support PayPal, Skrill, and bank transfer options.</p>
-      </div>
-      
-      <div class="faq-item">
-        <div class="faq-question">How long do withdrawals take?</div>
-        <p>PayPal and Skrill withdrawals are processed within 3-5 business days. Bank transfers may take 5-7 business days depending on your bank.</p>
-      </div>
-      
-      <div class="faq-item">
-        <div class="faq-question">Can I refer friends?</div>
-        <p>Yes! Use the referral program to earn bonus rewards when your friends sign up and start earning cashback. Both you and your friend benefit.</p>
-      </div>
-      
-      <div class="faq-item">
-        <div class="faq-question">Why isn't my cashback showing?</div>
-        <p>Ensure you clicked through our link before shopping and didn't use other coupon sites. Ad blockers can also interfere with tracking. Clear your cookies and try again.</p>
-      </div>
-      
-      <h2>Maximizing Your Earnings</h2>
-      <h3>Shopping Tips</h3>
-      <ul>
-        <li>Always start your shopping journey from Smartcashly</li>
-        <li>Check for special promotions and increased cashback rates</li>
-        <li>Combine our cashback with store sales and promotions</li>
-        <li>Use our search feature to find the best deals</li>
-        <li>Sign up for store newsletters through our links for exclusive offers</li>
-      </ul>
-      
-      <h3>Account Management</h3>
-      <ul>
-        <li>Keep your account information updated</li>
-        <li>Regularly check your click history to track earnings</li>
-        <li>Set up withdrawal preferences in advance</li>
-        <li>Monitor your pending balance for processing transactions</li>
-      </ul>
-      
-      <h2>Technical Support</h2>
-      <p>If you're experiencing technical issues:</p>
-      <ul>
-        <li>Clear your browser cache and cookies</li>
-        <li>Disable ad blockers temporarily while shopping</li>
-        <li>Ensure JavaScript is enabled in your browser</li>
-        <li>Try using a different browser or device</li>
-        <li>Check your internet connection</li>
-      </ul>
-      
-      <h2>Account Security</h2>
-      <p>Protect your Smartcashly account:</p>
-      <ul>
-        <li>Use a strong, unique password</li>
-        <li>Never share your login credentials</li>
-        <li>Log out from shared computers</li>
-        <li>Monitor your account regularly for unauthorized activity</li>
-        <li>Contact us immediately if you suspect security issues</li>
-      </ul>
-      
-      <h2>Contact Information</h2>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <h4>General Support</h4>
-          <p>Email: support@smartcashly.com<br>
-          Response time: 24-48 hours</p>
-        </div>
+      <div class="support-body">
+        <h3>How to Earn Cashback</h3>
+        <p>Click through our store links before making purchases. Cashback appears in your account within 24-48 hours.</p>
         
-        <div class="contact-card">
-          <h4>Technical Issues</h4>
-          <p>Email: tech@smartcashly.com<br>
-          Response time: 12-24 hours</p>
-        </div>
+        <h3>Withdrawal Requirements</h3>
+        <p>Minimum withdrawal is $15.00. We support PayPal, Skrill, and bank transfers with 3-5 day processing.</p>
         
-        <div class="contact-card">
-          <h4>Payment Inquiries</h4>
-          <p>Email: payments@smartcashly.com<br>
-          Response time: 24-48 hours</p>
-        </div>
+        <h3>Common Issues</h3>
+        <p>If cashback doesn't appear, ensure you clicked our link first and disable ad blockers while shopping.</p>
         
-        <div class="contact-card">
-          <h4>Partnership Opportunities</h4>
-          <p>Email: partners@smartcashly.com<br>
-          Response time: 3-5 business days</p>
-        </div>
+        <h3>Contact Support</h3>
+        <p>Email: support@smartcashly.com<br>Response time: 24-48 hours</p>
       </div>
-      
-      <h2>Important Terms</h2>
-      <p>Please review our terms of service and privacy policy for complete information about:</p>
-      <ul>
-        <li>Cashback eligibility and restrictions</li>
-        <li>Account termination policies</li>
-        <li>Data privacy and protection</li>
-        <li>Dispute resolution procedures</li>
-        <li>Service availability and limitations</li>
-      </ul>
-      
-      <p><strong>Last updated:</strong> January 2025</p>
-      <p><em>We're committed to providing excellent customer service and helping you succeed with cashback earning. Don't hesitate to reach out with any questions or concerns.</em></p>
     </div>
   </div>
-</div>
 
   <script>
     document.getElementById('year').textContent = 2025;
@@ -1286,7 +1119,7 @@
     }
 
     function displayResults(results, query) {
-      console.log('displayResults called with:', results, query); // Debug log
+      console.log('displayResults called with:', results, query);
       autocomplete.innerHTML = '';
 
       if (results.length === 0) {
@@ -1307,7 +1140,6 @@
           window.location.href = store.url;
         };
 
-        // Simple HTML structure to ensure it works
         item.innerHTML = `
           <div class="autocomplete-icon" style="background-image: url('${store.icon}'); width: 32px; height: 32px; background-size: cover; border-radius: 6px; flex-shrink: 0;"></div>
           <div class="autocomplete-content" style="flex: 1;">
@@ -1317,12 +1149,12 @@
           </div>
         `;
 
-        console.log('Created item for:', store.name); // Debug log
+        console.log('Created item for:', store.name);
         autocomplete.appendChild(item);
       });
 
       showDropdown();
-      console.log('Dropdown should be visible now'); // Debug log
+      console.log('Dropdown should be visible now');
     }
 
     // Event listeners
@@ -1345,22 +1177,22 @@
     searchInput.addEventListener('keydown', function(e) {
       const items = autocomplete.querySelectorAll('.autocomplete-item');
       
-      if (e.keyCode === 40) { // Down arrow
+      if (e.keyCode === 40) {
         currentFocus++;
         if (currentFocus >= items.length) currentFocus = 0;
         setActive(items);
         e.preventDefault();
-      } else if (e.keyCode === 38) { // Up arrow
+      } else if (e.keyCode === 38) {
         currentFocus--;
         if (currentFocus < 0) currentFocus = items.length - 1;
         setActive(items);
         e.preventDefault();
-      } else if (e.keyCode === 13) { // Enter
+      } else if (e.keyCode === 13) {
         e.preventDefault();
         if (currentFocus > -1 && items[currentFocus]) {
           items[currentFocus].click();
         }
-      } else if (e.keyCode === 27) { // Escape
+      } else if (e.keyCode === 27) {
         hideDropdown();
       }
     });
@@ -1428,6 +1260,26 @@
       
       return cashbackRates[storeName] || 1.50;
     }
+
+    // Support Modal Functions
+    function openSupportModal() {
+      document.getElementById('supportModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSupportModal(event) {
+      if (!event || event.target.id === 'supportModal' || event.target.classList.contains('support-close')) {
+        document.getElementById('supportModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeSupportModal();
+      }
+    });
   </script>
 
   <!-- Firebase Auth Module -->
@@ -1682,25 +1534,6 @@
         showReferModal();
       }
     });
-    // Support Modal Functions
-function openSupportModal() {
-  document.getElementById('supportModal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeSupportModal(event) {
-  if (!event || event.target.id === 'supportModal' || event.target.classList.contains('support-close')) {
-    document.getElementById('supportModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-}
-
-// Close modal with Escape key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeSupportModal();
-  }
-});
   </script>
 </body>
 </html>
