@@ -706,15 +706,21 @@
         gap: 1.5rem;
       }
 
-    .support-bubble{position:fixed;bottom:20px;right:20px;z-index:10000}
-    .support-toggle{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#008e45,#00a852);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(0,142,69,0.4);display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;color:white;font-size:24px}
-    .support-toggle:hover{transform:scale(1.1)}
-    .support-panel{position:absolute;bottom:80px;right:0;width:320px;height:400px;background:white;border-radius:15px;box-shadow:0 10px 40px rgba(0,0,0,0.2);transform:scale(0);opacity:0;transition:all 0.3s ease;border:3px solid #008e45;overflow:hidden}
-    .support-panel.open{transform:scale(1);opacity:1}
-    .support-header{background:#008e45;color:white;padding:1rem;text-align:center;font-weight:bold}
-    .support-content{padding:1rem}
-    .support-option{display:block;padding:0.75rem;border-bottom:1px solid #eee;text-decoration:none;color:#333}
-    .support-option:hover{background:#f8f9fa}
+.support-bubble{position:fixed;bottom:20px;right:20px;z-index:10000}
+.support-toggle{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#008e45,#00a852);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(0,142,69,0.4);display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;color:white;font-size:24px}
+.support-toggle:hover{transform:scale(1.1);box-shadow:0 6px 25px rgba(0,142,69,0.6)}
+.support-toggle.open{background:#dc3545}
+.support-panel{position:absolute;bottom:80px;right:0;width:350px;background:white;border-radius:15px;box-shadow:0 10px 40px rgba(0,0,0,0.2);transform:scale(0) translateY(20px);opacity:0;transition:all 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);transform-origin:bottom right;border:3px solid #008e45;overflow:hidden;display:none}
+.support-panel.open{transform:scale(1) translateY(0);opacity:1;display:block}
+.support-header{background:linear-gradient(135deg,#008e45,#00a852);color:white;padding:1rem;text-align:center;font-weight:bold;font-size:1.1rem}
+.support-form{padding:1.5rem}
+.support-form textarea{width:100%;min-height:120px;max-height:200px;padding:0.75rem;border:2px solid #e9ecef;border-radius:8px;font-family:inherit;font-size:0.9rem;resize:vertical;box-sizing:border-box}
+.support-form textarea:focus{outline:none;border-color:#008e45}
+.char-counter{font-size:0.8rem;color:#666;text-align:right;margin-top:0.5rem}
+.support-form button{width:100%;background:#008e45;color:white;border:none;padding:0.75rem;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:1rem;transition:background 0.3s}
+.support-form button:hover{background:#006633}
+.support-notice{font-size:0.8rem;color:#666;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid #eee}
+@media(max-width:480px){.support-panel{width:calc(100vw - 40px);right:-10px}}
 
       
       
@@ -887,6 +893,14 @@
   </footer>
 
   <script>
+const supportToggle=document.getElementById('supportToggle');
+const supportPanel=document.getElementById('supportPanel');
+const supportMessage=document.getElementById('supportMessage');
+const charCount=document.getElementById('charCount');
+supportToggle.addEventListener('click',function(){const isOpen=supportPanel.classList.contains('open');if(isOpen){supportPanel.classList.remove('open');supportToggle.classList.remove('open')}else{supportPanel.classList.add('open');supportToggle.classList.add('open')}});
+document.addEventListener('click',function(e){if(!e.target.closest('.support-bubble')){supportPanel.classList.remove('open');supportToggle.classList.remove('open')}});
+supportMessage.addEventListener('input',function(){charCount.textContent=this.value.length});
+function sendSupportMessage(){const message=supportMessage.value.trim();if(!message){alert('Please enter your message');return}const subject='Support Request - Smartcashly';const body=`Support Message:\n\n${message}\n\n---\nSent from Smartcashly Support`;window.location.href=`mailto:support@smartcashly.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;supportMessage.value='';charCount.textContent='0';supportPanel.classList.remove('open');supportToggle.classList.remove('open')}
     document.getElementById('year').textContent = 2025;
 
     // Search data for autocomplete
@@ -1386,17 +1400,18 @@
       }
     });
   </script>
-<div class="support-bubble">
-<button class="support-toggle" onclick="document.getElementById('supportPanel').classList.toggle('open')">💬</button>
-<div class="support-panel" id="supportPanel">
-<div class="support-header">How can we help?</div>
-<div class="support-content">
-<a href="mailto:support@smartcashly.com" class="support-option">📧 Email Support</a>
-<a href="tel:+1234567890" class="support-option">📞 Call Us</a>
-<a href="#" class="support-option">❓ FAQ</a>
-</div>
-</div>
-</div>
+  <div class="support-bubble">
+  <button class="support-toggle" id="supportToggle">💬</button>
+  <div class="support-panel" id="supportPanel">
+  <div class="support-header">💬 Contact Support</div>
+  <div class="support-form">
+  <textarea id="supportMessage" placeholder="Describe your issue or question here..." maxlength="1000"></textarea>
+  <div class="char-counter"><span id="charCount">0</span>/1000</div>
+  <button onclick="sendSupportMessage()">Send Message</button>
+  <div class="support-notice">📧 We typically respond within 24 hours</div>
+  </div>
+  </div>
+  </div>
 </body>
 </html>
 
