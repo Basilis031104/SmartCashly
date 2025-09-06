@@ -1,828 +1,4 @@
-</style>
-</head>
-
-<body>
-  <!-- Falling cash animation with 20 bills -->
-  <ul class="cash-rain" aria-hidden="true">
-    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
-    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
-    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
-    <li>$</li><li>$</li>
-  </ul>
-
-  <header>
-    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-    <form class="search-bar" action="#" method="get">
-      <input type="search" name="q" id="search-input" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
-      <button type="submit" aria-label="Search">
-        <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
-      </button>
-      <div id="search-autocomplete" class="search-autocomplete"></div>
-    </form>
-    <nav class="auth-nav" id="auth-nav">
-      <div id="auth-buttons" style="display: flex; gap: 0.5rem;">
-        <a href="login.html" class="btn">Login</a>
-        <a href="signup.html" class="btn btn--secondary">Sign Up</a>
-      </div>
-      <div id="user-profile" style="display: none; align-items: center; gap: 1rem;">
-        <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
-        <div class="profile-container">
-          <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
-          <div id="profile-dropdown" class="profile-dropdown" style="display: none;">
-            <div class="balance-section">
-              <div class="balance-label">Your Balance</div>
-              <div class="balance-amount" id="balance-amount">$0.00</div>
-              <div class="balance-pending" id="balance-pending">$0.00 pending</div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <a href="your-balance.html" id="your-balance">💰 Your Balance</a>
-            <a href="account-settings.html" id="account-settings">⚙️ Account Settings</a>
-            <a href="click-history.html" id="click-history">📊 Click History</a>
-            <a href="#" id="refer-friend">👥 Refer a Friend</a>
-            <a href="#" id="logout-btn">🚪 Logout</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <div class="welcome-section">
-      <h2>Welcome to Smartcashly</h2>
-      <p>The best cashback platform</p>
-      <a href="all-stores.html" style="
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.75rem 1.5rem;
-        background: #0070f3;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: background-color 0.3s;
-      " 
-      onmouseover="this.style.background='#0059c1'" 
-      onmouseout="this.style.background='#0070f3'">
-        View All Stores
-      </a>
-    </div>
-
-    <div class="stores-section">
-      <h2 class="section-title">🔥 Best offers currently</h2>
-      <div class="stores-grid">
-        <div class="store-card" onclick="window.location.href='store-boxnow.html'" style="cursor: pointer;">
-          <img src="logo-boxnow.png" alt="Box Now Logo" class="store-logo" />
-          <div class="store-name">Box Now</div>
-          <div class="store-description">Fast and reliable delivery service with amazing cashback rewards on every shipment</div>
-          <div class="cashback-badge">💰 Up to 35% Cashback</div>
-          <ul class="store-features">
-            <li>Package delivery service</li>
-            <li>International shipping options</li>
-            <li>Send packages from 2€</li>
-            <li>Send a variety of package sizes</li>
-          </ul>
-          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-boxnow.html'">📦 Shop Now & Earn Cashback</button>
-        </div>
-
-        <div class="store-card" onclick="window.location.href='store-shein.html'" style="cursor: pointer;">
-          <img src="logo-shein.png" alt="Shein Logo" class="store-logo" />
-          <div class="store-name">Shein</div>
-          <div class="store-description">Fashion store with cashback rewards on trendy clothing for women, men, and kids</div>
-          <div class="cashback-badge">💰 Up to 30% Cashback</div>
-          <ul class="store-features">
-            <li>Trendy women's fashion and accessories</li>
-            <li>Men's and kids' clothing collections</li>
-            <li>Affordable prices with frequent sales</li>
-            <li>Home decor and lifestyle products</li>
-          </ul>
-          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-shein.html'">👗 Shop Now & Earn Cashback</button>
-        </div>
-
-        <div class="store-card" onclick="window.location.href='store-benetton.html'" style="cursor: pointer;">
-          <img src="logo-benetton.png" alt="Benetton Logo" class="store-logo" />
-          <div class="store-name">Benetton (US Only)</div>
-          <div class="store-description">Fashion store with cashback rewards on colorful Italian clothing for the whole family</div>
-          <div class="cashback-badge">💰 Up to 25% Cashback</div>
-          <ul class="store-features">
-            <li>Iconic Italian fashion since 1965</li>
-            <li>Vibrant colors and multicultural style</li>
-            <li>Quality clothing for men, women & kids</li>
-            <li>Knitwear and contemporary designs</li>
-          </ul>
-          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-benetton.html'">👕 Shop Now & Earn Cashback</button>
-        </div>
-
-        <div class="store-card" onclick="window.location.href='store-myprotein.html'" style="cursor: pointer;">
-          <img src="logo-myprotein.png" alt="Myprotein Logo" class="store-logo" />
-          <div class="store-name">Myprotein</div>
-          <div class="store-description">Supplements store with cashback rewards on nutrition products</div>
-          <div class="cashback-badge">💰 Up to 20% Cashback</div>
-          <ul class="store-features">
-            <li>Premium whey protein powders</li>
-            <li>Creatine and pre-workout supplements</li>
-            <li>Vitamins and amino acids</li>
-            <li>Protein bars and health snacks</li>
-          </ul>
-          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-myprotein.html'">💪 Shop Now & Earn Cashback</button>
-        </div>
-
-        <div class="store-card" onclick="window.location.href='store-nike.html'" style="cursor: pointer;">
-          <img src="logo-nike.png" alt="Nike Logo" class="store-logo" />
-          <div class="store-name">Nike</div>
-          <div class="store-description">Fashion store with cashback rewards on athletic footwear and sports equipment</div>
-          <div class="cashback-badge">💰 Up to 17% Cashback</div>
-          <ul class="store-features">
-            <li>Athletic footwear and apparel</li>
-            <li>Sports equipment and accessories</li>
-            <li>Men's, women's and kids' collections</li>
-            <li>Limited edition releases</li>
-          </ul>
-          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-nike.html'">👟 Shop Now & Earn Cashback</button>
-        </div>
-
-        <div class="store-card" onclick="window.location.href='store-aegean.html'" style="cursor: pointer;">
-          <img src="logo-aegean.png" alt="Aegean Airlines Logo" class="store-logo" />
-          <div class="store-name">Aegean Airlines</div>
-          <div class="store-description">Airline with cashback rewards on flight bookings across Europe</div>
-          <div class="cashback-badge">💰 Up to 15% Cashback</div>
-          <ul class="store-features">
-            <li>Flights to Athens, Thessaloniki & Greek islands</li>
-            <li>European destinations & connections</li>
-            <li>Miles+Bonus loyalty program benefits</li>
-            <li>Business class upgrades available</li>
-          </ul>
-          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-aegean.html'">✈️ Shop Now & Earn Cashback</button>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    © <span id="year"></span> Smartcashly. All rights reserved.
-  </footer>
-
-  <!-- Support Button -->
-  <button class="support-button" onclick="showSupportModal()" title="Contact Support">
-    ?
-  </button>
-
-  <!-- Support Modal -->
-  <div id="support-modal" class="support-modal">
-    <div class="support-modal-content">
-      <button class="support-close" onclick="hideSupportModal()">&times;</button>
-      <h2 style="color: #008e45; margin-bottom: 0.5rem; font-size: 1.8rem;">Contact Support</h2>
-      <p style="margin-bottom: 2rem; color: #666; line-height: 1.5;">
-        Need help with your account, cashback, or have questions? Send us a message and we'll respond within 24 hours.
-      </p>
-      
-      <form class="support-form" id="support-form">
-        <div class="form-group">
-          <label for="support-name">Your Name *</label>
-          <input type="text" id="support-name" name="name" required placeholder="Enter your full name">
-        </div>
-        
-        <div class="form-group">
-          <label for="support-email">Email Address *</label>
-          <input type="email" id="support-email" name="email" required placeholder="your-email@example.com">
-        </div>
-        
-        <div class="form-group">
-          <label for="support-category">Issue Category *</label>
-          <select id="support-category" name="category" required>
-            <option value="">Select a category</option>
-            <option value="account">Account Issues</option>
-            <option value="cashback">Cashback Problems</option>
-            <option value="payments">Payment & Withdrawal Issues</option>
-            <option value="technical">Technical Problems</option>
-            <option value="stores">Store/Partner Issues</option>
-            <option value="general">General Questions</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Priority Level *</label>
-          <div class="priority-options">
-            <div class="priority-option">
-              <input type="radio" id="priority-low" name="priority" value="low" checked>
-              <label for="priority-low">Low</label>
-            </div>
-            <div class="priority-option">
-              <input type="radio" id="priority-medium" name="priority" value="medium">
-              <label for="priority-medium">Medium</label>
-            </div>
-            <div class="priority-option">
-              <input type="radio" id="priority-high" name="priority" value="high">
-              <label for="priority-high">High</label>
-            </div>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="support-subject">Subject *</label>
-          <input type="text" id="support-subject" name="subject" required maxlength="100" placeholder="Brief description of your issue">
-        </div>
-        
-        <div class="form-group">
-          <label for="support-message">Message * (Max 1000 words)</label>
-          <textarea id="support-message" name="message" required maxlength="7000" placeholder="Please describe your issue in detail. Include any relevant information such as error messages, steps you took, or when the problem occurred."></textarea>
-          <div class="character-count">
-            <span id="word-count">0</span> / 1000 words
-          </div>
-        </div>
-        
-        <button type="submit">Send Support Request</button>
-      </form>
-      
-      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #f0f0f0; font-size: 0.9rem; color: #666; text-align: center;">
-        <strong>Response Time:</strong> We typically respond within 24 hours during business days.<br>
-        <strong>Urgent Issues:</strong> For account security concerns, mark as "High Priority"
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById('year').textContent = 2025;
-
-    // Search data for autocomplete
-    const stores = [
-      {
-        name: 'Box Now',
-        description: 'Fast and reliable delivery service',
-        cashback: '35%',
-        url: 'store-boxnow.html',
-        icon: 'logo-boxnow.png',
-        keywords: ['box', 'now', 'delivery', 'package', 'shipping', 'send']
-      },
-      {
-        name: 'Nike',
-        description: 'Athletic footwear and sports apparel',
-        cashback: '17%',
-        url: 'store-nike.html',
-        icon: 'logo-nike.png',
-        keywords: ['nike', 'shoes', 'sneakers', 'sports', 'athletic', 'apparel', 'fashion', 'clothing']
-      },
-      {
-        name: 'Shein',
-        description: 'Fashion store with trendy clothing',
-        cashback: '30%',
-        url: 'store-shein.html',
-        icon: 'logo-shein.png',
-        keywords: ['shein', 'fashion', 'clothing', 'dresses', 'tops', 'women', 'men', 'kids', 'trendy', 'affordable']
-      },
-      {
-        name: 'Benetton',
-        description: 'Italian fashion with colorful designs',
-        cashback: '25%',
-        url: 'store-benetton.html',
-        icon: 'logo-benetton.png',
-        keywords: ['benetton', 'fashion', 'italian', 'colorful', 'clothing', 'knitwear', 'sweaters', 'women', 'men', 'kids']
-      },
-      {
-        name: 'Myprotein',
-        description: 'Supplements store with nutrition products',
-        cashback: '20%',
-        url: 'store-myprotein.html',
-        icon: 'logo-myprotein.png',
-        keywords: ['myprotein', 'supplements', 'protein', 'whey', 'creatine', 'vitamins', 'nutrition', 'fitness', 'health', 'amino', 'bcaa']
-      },
-      {
-        name: 'Aegean Airlines',
-        description: 'Airline with cashback rewards on flights',
-        cashback: '15%',
-        url: 'store-aegean.html',
-        icon: 'logo-aegean.png',
-        keywords: ['aegean', 'airline', 'flights', 'athens', 'greece', 'europe', 'travel', 'booking', 'miles', 'thessaloniki', 'islands']
-      }
-    ];
-
-    // Search functionality
-    const searchInput = document.getElementById('search-input');
-    const autocomplete = document.getElementById('search-autocomplete');
-    let currentFocus = -1;
-
-    function showDropdown() {
-      autocomplete.classList.add('show');
-    }
-
-    function hideDropdown() {
-      autocomplete.classList.remove('show');
-      currentFocus = -1;
-    }
-
-    function clearResults() {
-      autocomplete.innerHTML = '';
-      hideDropdown();
-    }
-
-    function highlightMatch(text, query) {
-      const regex = new RegExp(`(${query})`, 'gi');
-      return text.replace(regex, '<strong>$1</strong>');
-    }
-
-    function searchStores(query) {
-      if (!query || query.length < 1) {
-        clearResults();
-        return;
-      }
-
-      const results = [];
-      const queryLower = query.toLowerCase();
-
-      stores.forEach(store => {
-        const nameMatch = store.name.toLowerCase().includes(queryLower);
-        const keywordMatch = store.keywords.some(keyword => 
-          keyword.toLowerCase().includes(queryLower)
-        );
-
-        if (nameMatch || keywordMatch) {
-          results.push(store);
-        }
-      });
-
-      displayResults(results, query);
-    }
-
-    function displayResults(results, query) {
-      console.log('displayResults called with:', results, query);
-      autocomplete.innerHTML = '';
-
-      if (results.length === 0) {
-        autocomplete.innerHTML = `
-          <div class="no-results">
-            <p>No stores found for "${query}"</p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", "Shein", "Benetton", "Myprotein", or "Aegean Airlines"</p>
-          </div>
-        `;
-        showDropdown();
-        return;
-      }
-
-      results.forEach((store, index) => {
-        const item = document.createElement('div');
-        item.className = 'autocomplete-item';
-        item.onclick = () => {
-          window.location.href = store.url;
-        };
-
-        item.innerHTML = `
-          <div class="autocomplete-icon" style="background-image: url('${store.icon}'); width: 32px; height: 32px; background-size: cover; border-radius: 6px; flex-shrink: 0;"></div>
-          <div class="autocomplete-content" style="flex: 1;">
-            <div class="autocomplete-name" style="font-weight: bold; font-size: 16px; color: #008e45; margin-bottom: 4px;">${store.name}</div>
-            <div class="autocomplete-description" style="font-size: 14px; color: #666;">${store.description}</div>
-            <div class="autocomplete-cashback" style="font-size: 12px; color: #ff6b35; font-weight: bold;">Up to ${store.cashback} Cashback</div>
-          </div>
-        `;
-
-        console.log('Created item for:', store.name);
-        autocomplete.appendChild(item);
-      });
-
-      showDropdown();
-      console.log('Dropdown should be visible now');
-    }
-
-    // Event listeners
-    searchInput.addEventListener('input', function(e) {
-      const query = e.target.value.trim();
-      searchStores(query);
-    });
-
-    searchInput.addEventListener('focus', function() {
-      if (this.value.trim()) {
-        searchStores(this.value.trim());
-      }
-    });
-
-    searchInput.addEventListener('blur', function() {
-      setTimeout(hideDropdown, 200);
-    });
-
-    // Keyboard navigation
-    searchInput.addEventListener('keydown', function(e) {
-      const items = autocomplete.querySelectorAll('.autocomplete-item');
-      
-      if (e.keyCode === 40) { // Down arrow
-        currentFocus++;
-        if (currentFocus >= items.length) currentFocus = 0;
-        setActive(items);
-        e.preventDefault();
-      } else if (e.keyCode === 38) { // Up arrow
-        currentFocus--;
-        if (currentFocus < 0) currentFocus = items.length - 1;
-        setActive(items);
-        e.preventDefault();
-      } else if (e.keyCode === 13) { // Enter
-        e.preventDefault();
-        if (currentFocus > -1 && items[currentFocus]) {
-          items[currentFocus].click();
-        }
-      } else if (e.keyCode === 27) { // Escape
-        hideDropdown();
-      }
-    });
-
-    function setActive(items) {
-      items.forEach(item => item.classList.remove('active'));
-      if (items[currentFocus]) {
-        items[currentFocus].classList.add('active');
-      }
-    }
-
-    // Click outside to close
-    document.addEventListener('click', function(e) {
-      if (!searchInput.contains(e.target) && !autocomplete.contains(e.target)) {
-        hideDropdown();
-      }
-    });
-
-    // Function to update user balance dynamically
-    function updateUserBalance() {
-      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
-      const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
-      
-      let confirmedBalance = 0;
-      let pendingBalance = 0;
-      
-      clickHistory.forEach((click, index) => {
-        const cashbackAmount = getCashbackAmount(click.store);
-        if (index < 5) {
-          confirmedBalance += cashbackAmount;
-        } else {
-          pendingBalance += cashbackAmount;
-        }
-      });
-      
-      referralNotifications.forEach(referral => {
-        if (referral.processed) {
-          confirmedBalance += 5.00;
-        } else {
-          pendingBalance += 5.00;
-        }
-      });
-      
-      const balanceAmount = document.getElementById('balance-amount');
-      const balancePending = document.getElementById('balance-pending');
-      
-      if (balanceAmount) {
-        balanceAmount.textContent = `${confirmedBalance.toFixed(2)}`;
-      }
-      
-      if (balancePending) {
-        balancePending.textContent = `${pendingBalance.toFixed(2)} pending`;
-      }
-    }
-
-    function getCashbackAmount(storeName) {
-      const cashbackRates = {
-        'Box Now': 2.50,
-        'Nike': 3.25,
-        'Shein': 4.10,
-        'Benetton': 3.75,
-        'Myprotein': 2.80,
-        'Aegean Airlines': 8.50
-      };
-      
-      return cashbackRates[storeName] || 1.50;
-    }
-  </script>
-
-  <!-- Firebase Auth Module -->
-  <script type="module" src="auth.js"></script>
-  <script type="module">
-    // Import Firebase functions
-    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-
-    // Wait for DOM and Firebase to load
-    window.addEventListener('load', () => {
-      const auth = getAuth();
-      
-      onAuthStateChanged(auth, (user) => {
-        updateAuthUI(user);
-      });
-    });
-
-    function updateAuthUI(user) {
-      const authButtons = document.getElementById('auth-buttons');
-      const userProfile = document.getElementById('user-profile');
-      const userEmail = document.getElementById('user-email');
-      const profilePic = document.getElementById('profile-pic');
-
-      if (user) {
-        authButtons.style.display = 'none';
-        userProfile.style.display = 'flex';
-        userEmail.textContent = user.email;
-        
-        const storedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
-        if (storedProfilePic) {
-          profilePic.src = storedProfilePic;
-        } else if (user.photoURL) {
-          profilePic.src = user.photoURL;
-        } else {
-          const initial = user.email.charAt(0).toUpperCase();
-          profilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%23008e45'/><text x='20' y='26' text-anchor='middle' fill='white' font-size='16' font-family='Arial'>${initial}</text></svg>`;
-        }
-        
-        updateUserBalance();
-      } else {
-        authButtons.style.display = 'flex';
-        userProfile.style.display = 'none';
-      }
-    }
-
-    // Profile dropdown functionality
-    const profileContainer = document.querySelector('.profile-container');
-    const profilePic = document.getElementById('profile-pic');
-    const profileDropdown = document.getElementById('profile-dropdown');
-    
-    if (profileContainer && profilePic && profileDropdown) {
-      profilePic.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const isVisible = profileDropdown.style.display === 'block';
-        profileDropdown.style.display = isVisible ? 'none' : 'block';
-        
-        if (!isVisible) {
-          updateUserBalance();
-        }
-      });
-
-      document.addEventListener('click', function(e) {
-        if (!profileContainer.contains(e.target)) {
-          profileDropdown.style.display = 'none';
-        }
-      });
-    }
-
-    // Refer a Friend Modal functionality
-    function showReferModal() {
-      const modal = document.createElement('div');
-      modal.id = 'refer-modal';
-      modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-      `;
-
-      modal.innerHTML = `
-        <div style="
-          background: white;
-          border-radius: 12px;
-          padding: 2rem;
-          max-width: 500px;
-          width: 90%;
-          text-align: center;
-          position: relative;
-        ">
-          <button onclick="document.getElementById('refer-modal').remove()" style="
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #999;
-          ">×</button>
-          
-          <h2 style="color: #008e45; margin-bottom: 1rem;">Refer a Friend</h2>
-          <p style="margin-bottom: 1.5rem; color: #333;">Share Smartcashly with your friends and both earn rewards!</p>
-          
-          <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-            <p style="font-weight: bold; color: #008e45; margin-bottom: 0.5rem;">Your Referral Code:</p>
-            <div style="
-              background: white;
-              border: 2px solid #008e45;
-              border-radius: 6px;
-              padding: 0.75rem;
-              font-family: monospace;
-              font-size: 1.2rem;
-              font-weight: bold;
-              color: #008e45;
-              margin-bottom: 0.5rem;
-            " id="referral-code-display">LOADING...</div>
-            <button onclick="copyReferralCode()" style="
-              background: #008e45;
-              color: white;
-              border: none;
-              padding: 0.5rem 1rem;
-              border-radius: 6px;
-              cursor: pointer;
-              font-size: 0.9rem;
-            ">Copy Code</button>
-          </div>
-
-          <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-            <p style="font-weight: bold; color: #008e45; margin-bottom: 0.5rem;">Share Link:</p>
-            <div style="
-              background: white;
-              border: 2px solid #008e45;
-              border-radius: 6px;
-              padding: 0.75rem;
-              font-size: 0.9rem;
-              word-break: break-all;
-              margin-bottom: 0.5rem;
-            " id="referral-link-display">LOADING...</div>
-            <button onclick="copyReferralLink()" style="
-              background: #0070f3;
-              color: white;
-              border: none;
-              padding: 0.5rem 1rem;
-              border-radius: 6px;
-              cursor: pointer;
-              font-size: 0.9rem;
-              margin-right: 0.5rem;
-            ">Copy Link</button>
-            <button onclick="shareReferralLink()" style="
-              background: #28a745;
-              color: white;
-              border: none;
-              padding: 0.5rem 1rem;
-              border-radius: 6px;
-              cursor: pointer;
-              font-size: 0.9rem;
-            ">Share</button>
-          </div>
-
-          <div style="font-size: 0.85rem; color: #666; margin-top: 1rem;">
-            <p><strong>How it works:</strong></p>
-            <p>• Share your code with friends</p>
-            <p>• They sign up using your code</p>
-            <p>• When they accumulate $5 from cashback, you get $15!</p>
-          </div>
-        </div>
-      `;
-
-      document.body.appendChild(modal);
-
-      const auth = getAuth();
-      const user = auth.currentUser;
-      if (user) {
-        const referralCode = generateReferralCode(user.uid, user.email);
-        const referralLink = `${window.location.origin}/signup.html?ref=${referralCode}`;
-        
-        document.getElementById('referral-code-display').textContent = referralCode;
-        document.getElementById('referral-link-display').textContent = referralLink;
-      }
-    }
-
-    function generateReferralCode(userId, email) {
-      const emailPrefix = email.split('@')[0].substring(0, 4).toUpperCase();
-      const userIdSuffix = userId.substring(0, 4).toUpperCase();
-      return `${emailPrefix}${userIdSuffix}`;
-    }
-
-    // Global functions for the modal
-    window.copyReferralCode = function() {
-      const codeElement = document.getElementById('referral-code-display');
-      navigator.clipboard.writeText(codeElement.textContent).then(() => {
-        const button = event.target;
-        const originalText = button.textContent;
-        button.textContent = 'Copied!';
-        setTimeout(() => {
-          button.textContent = originalText;
-        }, 2000);
-      });
-    };
-
-    window.copyReferralLink = function() {
-      const linkElement = document.getElementById('referral-link-display');
-      navigator.clipboard.writeText(linkElement.textContent).then(() => {
-        const button = event.target;
-        const originalText = button.textContent;
-        button.textContent = 'Copied!';
-        setTimeout(() => {
-          button.textContent = originalText;
-        }, 2000);
-      });
-    };
-
-    window.shareReferralLink = function() {
-      const linkElement = document.getElementById('referral-link-display');
-      const link = linkElement.textContent;
-      
-      if (navigator.share) {
-        navigator.share({
-          title: 'Join Smartcashly and earn cashback!',
-          text: 'Sign up with my referral code and we both get rewards!',
-          url: link
-        });
-      } else {
-        navigator.clipboard.writeText(link).then(() => {
-          alert('Link copied to clipboard! Share it with your friends.');
-        });
-      }
-    };
-
-    // Support Modal Functions
-    function showSupportModal() {
-      document.getElementById('support-modal').style.display = 'flex';
-      // Pre-fill email if user is logged in
-      const userEmail = document.getElementById('user-email');
-      if (userEmail && userEmail.textContent) {
-        document.getElementById('support-email').value = userEmail.textContent;
-      }
-    }
-
-    function hideSupportModal() {
-      document.getElementById('support-modal').style.display = 'none';
-    }
-
-    // Make support functions global
-    window.showSupportModal = showSupportModal;
-    window.hideSupportModal = hideSupportModal;
-
-    // Word counter
-    document.addEventListener('DOMContentLoaded', function() {
-      const messageTextarea = document.getElementById('support-message');
-      const wordCountSpan = document.getElementById('word-count');
-      
-      if (messageTextarea && wordCountSpan) {
-        messageTextarea.addEventListener('input', function() {
-          const text = this.value.trim();
-          const words = text === '' ? 0 : text.split(/\s+/).length;
-          wordCountSpan.textContent = words;
-          
-          if (words > 1000) {
-            wordCountSpan.style.color = '#c62828';
-            this.style.borderColor = '#c62828';
-          } else {
-            wordCountSpan.style.color = '#666';
-            this.style.borderColor = '#008e45';
-          }
-        });
-      }
-    });
-
-    // Form submission
-    document.addEventListener('DOMContentLoaded', function() {
-      const supportForm = document.getElementById('support-form');
-      if (supportForm) {
-        supportForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const messageText = document.getElementById('support-message').value.trim();
-          const wordCount = messageText === '' ? 0 : messageText.split(/\s+/).length;
-          
-          if (wordCount > 1000) {
-            alert('Please reduce your message to 1000 words or less.');
-            return;
-          }
-          
-          // Simulate form submission
-          const submitBtn = this.querySelector('button[type="submit"]');
-          const originalText = submitBtn.textContent;
-          submitBtn.textContent = 'Sending...';
-          submitBtn.disabled = true;
-          
-          setTimeout(() => {
-            alert('Thank you! Your message has been sent. We will respond within 24 hours.');
-            hideSupportModal();
-            supportForm.reset();
-            document.getElementById('word-count').textContent = '0';
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-          }, 1500);
-        });
-      }
-    });
-
-    // Close modal when clicking outside
-    document.addEventListener('click', function(event) {
-      const modal = document.getElementById('support-modal');
-      if (event.target === modal) {
-        hideSupportModal();
-      }
-    });
-
-    // Logout and menu functionality
-    document.addEventListener('click', async (e) => {
-      if (e.target.id === 'logout-btn') {
-        e.preventDefault();
-        try {
-          if (typeof smartAuth !== 'undefined') {
-            await smartAuth.signOut();
-            window.location.href = 'index.html';
-          }
-        } catch (err) {
-          console.error('Logout error:', err);
-        }
-      }
-      
-      if (e.target.id === 'refer-friend') {
-        e.preventDefault();
-        showReferModal();
-      }
-    });
-  </script>
-</body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1486,4 +662,718 @@
       font-weight: 500;
     }
 
-    .
+    .balance-amount {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .balance-pending {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: #e0e0e0;
+      margin: 0;
+    }
+
+    .profile-dropdown a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+      font-weight: 500;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .profile-dropdown a:last-child {
+      border-bottom: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .profile-dropdown a:hover {
+      background-color: #f5f5f5;
+    }
+
+    @media (max-width: 768px) {
+      .stores-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .search-bar {
+        margin-left: 20px;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Falling cash animation with 20 bills -->
+  <ul class="cash-rain" aria-hidden="true">
+    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
+    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
+    <li>$</li><li>$</li><li>$</li><li>$</li><li>$</li><li>$</li>
+    <li>$</li><li>$</li>
+  </ul>
+
+  <header>
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <form class="search-bar" action="#" method="get">
+      <input type="search" name="q" id="search-input" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
+      </button>
+      <div id="search-autocomplete" class="search-autocomplete"></div>
+    </form>
+    <nav class="auth-nav" id="auth-nav">
+      <div id="auth-buttons" style="display: flex; gap: 0.5rem;">
+        <a href="login.html" class="btn">Login</a>
+        <a href="signup.html" class="btn btn--secondary">Sign Up</a>
+      </div>
+      <div id="user-profile" style="display: none; align-items: center; gap: 1rem;">
+        <span id="user-email" style="color: #fff; font-size: 0.9rem;"></span>
+        <div class="profile-container">
+          <img id="profile-pic" src="" alt="Profile" class="profile-pic" />
+          <div id="profile-dropdown" class="profile-dropdown" style="display: none;">
+            <div class="balance-section">
+              <div class="balance-label">Your Balance</div>
+              <div class="balance-amount" id="balance-amount">$0.00</div>
+              <div class="balance-pending" id="balance-pending">$0.00 pending</div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a href="your-balance.html" id="your-balance">💰 Your Balance</a>
+            <a href="account-settings.html" id="account-settings">⚙️ Account Settings</a>
+            <a href="click-history.html" id="click-history">📊 Click History</a>
+            <a href="#" id="refer-friend">👥 Refer a Friend</a>
+            <a href="#" id="logout-btn">🚪 Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="welcome-section">
+      <h2>Welcome to Smartcashly</h2>
+      <p>The best cashback platform</p>
+      <a href="all-stores.html" style="
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        background: #0070f3;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s;
+      " 
+      onmouseover="this.style.background='#0059c1'" 
+      onmouseout="this.style.background='#0070f3'">
+        View All Stores
+      </a>
+    </div>
+
+    <div class="stores-section">
+      <h2 class="section-title">🔥 Best offers currently</h2>
+      <div class="stores-grid">
+        <div class="store-card" onclick="window.location.href='store-boxnow.html'" style="cursor: pointer;">
+          <img src="logo-boxnow.png" alt="Box Now Logo" class="store-logo" />
+          <div class="store-name">Box Now</div>
+          <div class="store-description">Fast and reliable delivery service with amazing cashback rewards on every shipment</div>
+          <div class="cashback-badge">💰 Up to 35% Cashback</div>
+          <ul class="store-features">
+            <li>Package delivery service</li>
+            <li>International shipping options</li>
+            <li>Send packages from 2€</li>
+            <li>Send a variety of package sizes</li>
+          </ul>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-boxnow.html'">📦 Shop Now & Earn Cashback</button>
+        </div>
+
+        <div class="store-card" onclick="window.location.href='store-shein.html'" style="cursor: pointer;">
+          <img src="logo-shein.png" alt="Shein Logo" class="store-logo" />
+          <div class="store-name">Shein</div>
+          <div class="store-description">Fashion store with cashback rewards on trendy clothing for women, men, and kids</div>
+          <div class="cashback-badge">💰 Up to 30% Cashback</div>
+          <ul class="store-features">
+            <li>Trendy women's fashion and accessories</li>
+            <li>Men's and kids' clothing collections</li>
+            <li>Affordable prices with frequent sales</li>
+            <li>Home decor and lifestyle products</li>
+          </ul>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-shein.html'">👗 Shop Now & Earn Cashback</button>
+        </div>
+
+        <div class="store-card" onclick="window.location.href='store-benetton.html'" style="cursor: pointer;">
+          <img src="logo-benetton.png" alt="Benetton Logo" class="store-logo" />
+          <div class="store-name">Benetton (US Only)</div>
+          <div class="store-description">Fashion store with cashback rewards on colorful Italian clothing for the whole family</div>
+          <div class="cashback-badge">💰 Up to 25% Cashback</div>
+          <ul class="store-features">
+            <li>Iconic Italian fashion since 1965</li>
+            <li>Vibrant colors and multicultural style</li>
+            <li>Quality clothing for men, women & kids</li>
+            <li>Knitwear and contemporary designs</li>
+          </ul>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-benetton.html'">👕 Shop Now & Earn Cashback</button>
+        </div>
+
+        <div class="store-card" onclick="window.location.href='store-myprotein.html'" style="cursor: pointer;">
+          <img src="logo-myprotein.png" alt="Myprotein Logo" class="store-logo" />
+          <div class="store-name">Myprotein</div>
+          <div class="store-description">Supplements store with cashback rewards on nutrition products</div>
+          <div class="cashback-badge">💰 Up to 20% Cashback</div>
+          <ul class="store-features">
+            <li>Premium whey protein powders</li>
+            <li>Creatine and pre-workout supplements</li>
+            <li>Vitamins and amino acids</li>
+            <li>Protein bars and health snacks</li>
+          </ul>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-myprotein.html'">💪 Shop Now & Earn Cashback</button>
+        </div>
+
+        <div class="store-card" onclick="window.location.href='store-nike.html'" style="cursor: pointer;">
+          <img src="logo-nike.png" alt="Nike Logo" class="store-logo" />
+          <div class="store-name">Nike</div>
+          <div class="store-description">Fashion store with cashback rewards on athletic footwear and sports equipment</div>
+          <div class="cashback-badge">💰 Up to 17% Cashback</div>
+          <ul class="store-features">
+            <li>Athletic footwear and apparel</li>
+            <li>Sports equipment and accessories</li>
+            <li>Men's, women's and kids' collections</li>
+            <li>Limited edition releases</li>
+          </ul>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-nike.html'">👟 Shop Now & Earn Cashback</button>
+        </div>
+
+        <div class="store-card" onclick="window.location.href='store-aegean.html'" style="cursor: pointer;">
+          <img src="logo-aegean.png" alt="Aegean Airlines Logo" class="store-logo" />
+          <div class="store-name">Aegean Airlines</div>
+          <div class="store-description">Airline with cashback rewards on flight bookings across Europe</div>
+          <div class="cashback-badge">💰 Up to 15% Cashback</div>
+          <ul class="store-features">
+            <li>Flights to Athens, Thessaloniki & Greek islands</li>
+            <li>European destinations & connections</li>
+            <li>Miles+Bonus loyalty program benefits</li>
+            <li>Business class upgrades available</li>
+          </ul>
+          <button class="shop-now-btn" onclick="event.stopPropagation(); window.location.href='store-aegean.html'">✈️ Shop Now & Earn Cashback</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = 2025;
+
+    // Search data for autocomplete
+    const stores = [
+      {
+        name: 'Box Now',
+        description: 'Fast and reliable delivery service',
+        cashback: '35%',
+        url: 'store-boxnow.html',
+        icon: 'logo-boxnow.png',
+        keywords: ['box', 'now', 'delivery', 'package', 'shipping', 'send']
+      },
+      {
+        name: 'Nike',
+        description: 'Athletic footwear and sports apparel',
+        cashback: '17%',
+        url: 'store-nike.html',
+        icon: 'logo-nike.png',
+        keywords: ['nike', 'shoes', 'sneakers', 'sports', 'athletic', 'apparel', 'fashion', 'clothing']
+      },
+      {
+        name: 'Shein',
+        description: 'Fashion store with trendy clothing',
+        cashback: '30%',
+        url: 'store-shein.html',
+        icon: 'logo-shein.png',
+        keywords: ['shein', 'fashion', 'clothing', 'dresses', 'tops', 'women', 'men', 'kids', 'trendy', 'affordable']
+      },
+      {
+        name: 'Benetton',
+        description: 'Italian fashion with colorful designs',
+        cashback: '25%',
+        url: 'store-benetton.html',
+        icon: 'logo-benetton.png',
+        keywords: ['benetton', 'fashion', 'italian', 'colorful', 'clothing', 'knitwear', 'sweaters', 'women', 'men', 'kids']
+      },
+      {
+        name: 'Myprotein',
+        description: 'Supplements store with nutrition products',
+        cashback: '20%',
+        url: 'store-myprotein.html',
+        icon: 'logo-myprotein.png',
+        keywords: ['myprotein', 'supplements', 'protein', 'whey', 'creatine', 'vitamins', 'nutrition', 'fitness', 'health', 'amino', 'bcaa']
+      },
+      {
+        name: 'Aegean Airlines',
+        description: 'Airline with cashback rewards on flights',
+        cashback: '15%',
+        url: 'store-aegean.html',
+        icon: 'logo-aegean.png',
+        keywords: ['aegean', 'airline', 'flights', 'athens', 'greece', 'europe', 'travel', 'booking', 'miles', 'thessaloniki', 'islands']
+      }
+    ];
+
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    const autocomplete = document.getElementById('search-autocomplete');
+    let currentFocus = -1;
+
+    function showDropdown() {
+      autocomplete.classList.add('show');
+    }
+
+    function hideDropdown() {
+      autocomplete.classList.remove('show');
+      currentFocus = -1;
+    }
+
+    function clearResults() {
+      autocomplete.innerHTML = '';
+      hideDropdown();
+    }
+
+    function highlightMatch(text, query) {
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<strong>$1</strong>');
+    }
+
+    function searchStores(query) {
+      if (!query || query.length < 1) {
+        clearResults();
+        return;
+      }
+
+      const results = [];
+      const queryLower = query.toLowerCase();
+
+      stores.forEach(store => {
+        const nameMatch = store.name.toLowerCase().includes(queryLower);
+        const keywordMatch = store.keywords.some(keyword => 
+          keyword.toLowerCase().includes(queryLower)
+        );
+
+        if (nameMatch || keywordMatch) {
+          results.push(store);
+        }
+      });
+
+      displayResults(results, query);
+    }
+
+    function displayResults(results, query) {
+      console.log('displayResults called with:', results, query); // Debug log
+      autocomplete.innerHTML = '';
+
+      if (results.length === 0) {
+        autocomplete.innerHTML = `
+          <div class="no-results">
+            <p>No stores found for "${query}"</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Try "Nike", "Box Now", "Shein", "Benetton", "Myprotein", or "Aegean Airlines"</p>
+          </div>
+        `;
+        showDropdown();
+        return;
+      }
+
+      results.forEach((store, index) => {
+        const item = document.createElement('div');
+        item.className = 'autocomplete-item';
+        item.onclick = () => {
+          window.location.href = store.url;
+        };
+
+        // Simple HTML structure to ensure it works
+        item.innerHTML = `
+          <div class="autocomplete-icon" style="background-image: url('${store.icon}'); width: 32px; height: 32px; background-size: cover; border-radius: 6px; flex-shrink: 0;"></div>
+          <div class="autocomplete-content" style="flex: 1;">
+            <div class="autocomplete-name" style="font-weight: bold; font-size: 16px; color: #008e45; margin-bottom: 4px;">${store.name}</div>
+            <div class="autocomplete-description" style="font-size: 14px; color: #666;">${store.description}</div>
+            <div class="autocomplete-cashback" style="font-size: 12px; color: #ff6b35; font-weight: bold;">Up to ${store.cashback} Cashback</div>
+          </div>
+        `;
+
+        console.log('Created item for:', store.name); // Debug log
+        autocomplete.appendChild(item);
+      });
+
+      showDropdown();
+      console.log('Dropdown should be visible now'); // Debug log
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', function(e) {
+      const query = e.target.value.trim();
+      searchStores(query);
+    });
+
+    searchInput.addEventListener('focus', function() {
+      if (this.value.trim()) {
+        searchStores(this.value.trim());
+      }
+    });
+
+    searchInput.addEventListener('blur', function() {
+      setTimeout(hideDropdown, 200);
+    });
+
+    // Keyboard navigation
+    searchInput.addEventListener('keydown', function(e) {
+      const items = autocomplete.querySelectorAll('.autocomplete-item');
+      
+      if (e.keyCode === 40) { // Down arrow
+        currentFocus++;
+        if (currentFocus >= items.length) currentFocus = 0;
+        setActive(items);
+        e.preventDefault();
+      } else if (e.keyCode === 38) { // Up arrow
+        currentFocus--;
+        if (currentFocus < 0) currentFocus = items.length - 1;
+        setActive(items);
+        e.preventDefault();
+      } else if (e.keyCode === 13) { // Enter
+        e.preventDefault();
+        if (currentFocus > -1 && items[currentFocus]) {
+          items[currentFocus].click();
+        }
+      } else if (e.keyCode === 27) { // Escape
+        hideDropdown();
+      }
+    });
+
+    function setActive(items) {
+      items.forEach(item => item.classList.remove('active'));
+      if (items[currentFocus]) {
+        items[currentFocus].classList.add('active');
+      }
+    }
+
+    // Click outside to close
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !autocomplete.contains(e.target)) {
+        hideDropdown();
+      }
+    });
+
+    // Function to update user balance dynamically
+    function updateUserBalance() {
+      const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
+      const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
+      
+      let confirmedBalance = 0;
+      let pendingBalance = 0;
+      
+      clickHistory.forEach((click, index) => {
+        const cashbackAmount = getCashbackAmount(click.store);
+        if (index < 5) {
+          confirmedBalance += cashbackAmount;
+        } else {
+          pendingBalance += cashbackAmount;
+        }
+      });
+      
+      referralNotifications.forEach(referral => {
+        if (referral.processed) {
+          confirmedBalance += 5.00;
+        } else {
+          pendingBalance += 5.00;
+        }
+      });
+      
+      const balanceAmount = document.getElementById('balance-amount');
+      const balancePending = document.getElementById('balance-pending');
+      
+      if (balanceAmount) {
+        balanceAmount.textContent = `${confirmedBalance.toFixed(2)}`;
+      }
+      
+      if (balancePending) {
+        balancePending.textContent = `${pendingBalance.toFixed(2)} pending`;
+      }
+    }
+
+    function getCashbackAmount(storeName) {
+      const cashbackRates = {
+        'Box Now': 2.50,
+        'Nike': 3.25,
+        'Shein': 4.10,
+        'Benetton': 3.75,
+        'Myprotein': 2.80,
+        'Aegean Airlines': 8.50
+      };
+      
+      return cashbackRates[storeName] || 1.50;
+    }
+  </script>
+
+  <!-- Firebase Auth Module -->
+  <script type="module" src="auth.js"></script>
+  <script type="module">
+    // Import Firebase functions
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    // Wait for DOM and Firebase to load
+    window.addEventListener('load', () => {
+      const auth = getAuth();
+      
+      onAuthStateChanged(auth, (user) => {
+        updateAuthUI(user);
+      });
+    });
+
+    function updateAuthUI(user) {
+      const authButtons = document.getElementById('auth-buttons');
+      const userProfile = document.getElementById('user-profile');
+      const userEmail = document.getElementById('user-email');
+      const profilePic = document.getElementById('profile-pic');
+
+      if (user) {
+        authButtons.style.display = 'none';
+        userProfile.style.display = 'flex';
+        userEmail.textContent = user.email;
+        
+        const storedProfilePic = localStorage.getItem(`profile_pic_${user.uid}`);
+        if (storedProfilePic) {
+          profilePic.src = storedProfilePic;
+        } else if (user.photoURL) {
+          profilePic.src = user.photoURL;
+        } else {
+          const initial = user.email.charAt(0).toUpperCase();
+          profilePic.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%23008e45'/><text x='20' y='26' text-anchor='middle' fill='white' font-size='16' font-family='Arial'>${initial}</text></svg>`;
+        }
+        
+        updateUserBalance();
+      } else {
+        authButtons.style.display = 'flex';
+        userProfile.style.display = 'none';
+      }
+    }
+
+    // Profile dropdown functionality
+    const profileContainer = document.querySelector('.profile-container');
+    const profilePic = document.getElementById('profile-pic');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    
+    if (profileContainer && profilePic && profileDropdown) {
+      profilePic.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isVisible = profileDropdown.style.display === 'block';
+        profileDropdown.style.display = isVisible ? 'none' : 'block';
+        
+        if (!isVisible) {
+          updateUserBalance();
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!profileContainer.contains(e.target)) {
+          profileDropdown.style.display = 'none';
+        }
+      });
+    }
+
+    // Refer a Friend Modal functionality
+    function showReferModal() {
+      const modal = document.createElement('div');
+      modal.id = 'refer-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+
+      modal.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 500px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+        ">
+          <button onclick="document.getElementById('refer-modal').remove()" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+          ">×</button>
+          
+          <h2 style="color: #008e45; margin-bottom: 1rem;">👥 Refer a Friend</h2>
+          <p style="margin-bottom: 1.5rem; color: #333;">Share Smartcashly with your friends and both earn rewards!</p>
+          
+          <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <p style="font-weight: bold; color: #008e45; margin-bottom: 0.5rem;">Your Referral Code:</p>
+            <div style="
+              background: white;
+              border: 2px solid #008e45;
+              border-radius: 6px;
+              padding: 0.75rem;
+              font-family: monospace;
+              font-size: 1.2rem;
+              font-weight: bold;
+              color: #008e45;
+              margin-bottom: 0.5rem;
+            " id="referral-code-display">LOADING...</div>
+            <button onclick="copyReferralCode()" style="
+              background: #008e45;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+            ">📋 Copy Code</button>
+          </div>
+
+          <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <p style="font-weight: bold; color: #008e45; margin-bottom: 0.5rem;">Share Link:</p>
+            <div style="
+              background: white;
+              border: 2px solid #008e45;
+              border-radius: 6px;
+              padding: 0.75rem;
+              font-size: 0.9rem;
+              word-break: break-all;
+              margin-bottom: 0.5rem;
+            " id="referral-link-display">LOADING...</div>
+            <button onclick="copyReferralLink()" style="
+              background: #0070f3;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+              margin-right: 0.5rem;
+            ">📋 Copy Link</button>
+            <button onclick="shareReferralLink()" style="
+              background: #28a745;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 0.9rem;
+            ">📤 Share</button>
+          </div>
+
+          <div style="font-size: 0.85rem; color: #666; margin-top: 1rem;">
+            <p>🎁 <strong>How it works:</strong></p>
+            <p>• Share your code with friends</p>
+            <p>• They sign up using your code</p>
+            <p>• When they accumulate 5$ from cashback, you get 15$!</p>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        const referralCode = generateReferralCode(user.uid, user.email);
+        const referralLink = `${window.location.origin}/signup.html?ref=${referralCode}`;
+        
+        document.getElementById('referral-code-display').textContent = referralCode;
+        document.getElementById('referral-link-display').textContent = referralLink;
+      }
+    }
+
+    function generateReferralCode(userId, email) {
+      const emailPrefix = email.split('@')[0].substring(0, 4).toUpperCase();
+      const userIdSuffix = userId.substring(0, 4).toUpperCase();
+      return `${emailPrefix}${userIdSuffix}`;
+    }
+
+    // Global functions for the modal
+    window.copyReferralCode = function() {
+      const codeElement = document.getElementById('referral-code-display');
+      navigator.clipboard.writeText(codeElement.textContent).then(() => {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    };
+
+    window.copyReferralLink = function() {
+      const linkElement = document.getElementById('referral-link-display');
+      navigator.clipboard.writeText(linkElement.textContent).then(() => {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    };
+
+    window.shareReferralLink = function() {
+      const linkElement = document.getElementById('referral-link-display');
+      const link = linkElement.textContent;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'Join Smartcashly and earn cashback!',
+          text: 'Sign up with my referral code and we both get rewards!',
+          url: link
+        });
+      } else {
+        navigator.clipboard.writeText(link).then(() => {
+          alert('Link copied to clipboard! Share it with your friends.');
+        });
+      }
+    };
+
+    // Logout and menu functionality
+    document.addEventListener('click', async (e) => {
+      if (e.target.id === 'logout-btn') {
+        e.preventDefault();
+        try {
+          if (typeof smartAuth !== 'undefined') {
+            await smartAuth.signOut();
+            window.location.href = 'index.html';
+          }
+        } catch (err) {
+          console.error('Logout error:', err);
+        }
+      }
+      
+      if (e.target.id === 'refer-friend') {
+        e.preventDefault();
+        showReferModal();
+      }
+    });
+  </script>
+</body>
+</html>
+
