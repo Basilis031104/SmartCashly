@@ -706,7 +706,7 @@
         gap: 1.5rem;
       }
 
-      /* Support Bubble Styles */
+    /* Support Bubble Styles */
 .support-bubble {
   position: fixed;
   bottom: 30px;
@@ -873,6 +873,7 @@
     grid-template-columns: 1fr;
   }
 }
+      
       
       .search-bar {
         margin-left: 20px;
@@ -1041,6 +1042,146 @@
   <footer>
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
+  <!-- Support Bubble -->
+<div class="support-bubble" onclick="openSupportModal()">
+  <svg viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+  </svg>
+</div>
+
+<!-- Support Modal -->
+<div id="supportModal" class="support-modal" onclick="closeSupportModal(event)">
+  <div class="support-content" onclick="event.stopPropagation()">
+    <div class="support-header">
+      <h1>Smartcashly Help & Support</h1>
+      <button class="support-close" onclick="closeSupportModal()">&times;</button>
+    </div>
+    
+    <div class="support-body">
+      <h2>Welcome to Smartcashly Support</h2>
+      <p>We're here to help you maximize your cashback earnings and make the most of your shopping experience. Find answers to common questions and learn how to get the best deals.</p>
+      
+      <h2>How Smartcashly Works</h2>
+      <p>Smartcashly is your gateway to earning money back on purchases from your favorite stores. Here's how it works:</p>
+      <ul>
+        <li><strong>Browse Stores:</strong> Explore our partner retailers including Nike, Shein, Benetton, Box Now, Myprotein, and Aegean Airlines</li>
+        <li><strong>Click & Shop:</strong> Click through our links to visit the store and make your purchase as normal</li>
+        <li><strong>Earn Cashback:</strong> Receive a percentage of your purchase back as cashback rewards</li>
+        <li><strong>Get Paid:</strong> Withdraw your earnings once you reach the minimum threshold</li>
+      </ul>
+      
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">How do I earn cashback?</div>
+        <p>Simply click on any store offer through Smartcashly before making your purchase. The cashback will be tracked automatically and added to your account within 24-48 hours.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">When will I see my cashback?</div>
+        <p>Cashback typically appears in your account within 24-48 hours of purchase. Some retailers may take up to 7 days to confirm transactions.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What's the minimum withdrawal amount?</div>
+        <p>You can withdraw your earnings once you reach $15.00 in available balance. We support PayPal, Skrill, and bank transfer options.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">How long do withdrawals take?</div>
+        <p>PayPal and Skrill withdrawals are processed within 3-5 business days. Bank transfers may take 5-7 business days depending on your bank.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Can I refer friends?</div>
+        <p>Yes! Use the referral program to earn bonus rewards when your friends sign up and start earning cashback. Both you and your friend benefit.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Why isn't my cashback showing?</div>
+        <p>Ensure you clicked through our link before shopping and didn't use other coupon sites. Ad blockers can also interfere with tracking. Clear your cookies and try again.</p>
+      </div>
+      
+      <h2>Maximizing Your Earnings</h2>
+      <h3>Shopping Tips</h3>
+      <ul>
+        <li>Always start your shopping journey from Smartcashly</li>
+        <li>Check for special promotions and increased cashback rates</li>
+        <li>Combine our cashback with store sales and promotions</li>
+        <li>Use our search feature to find the best deals</li>
+        <li>Sign up for store newsletters through our links for exclusive offers</li>
+      </ul>
+      
+      <h3>Account Management</h3>
+      <ul>
+        <li>Keep your account information updated</li>
+        <li>Regularly check your click history to track earnings</li>
+        <li>Set up withdrawal preferences in advance</li>
+        <li>Monitor your pending balance for processing transactions</li>
+      </ul>
+      
+      <h2>Technical Support</h2>
+      <p>If you're experiencing technical issues:</p>
+      <ul>
+        <li>Clear your browser cache and cookies</li>
+        <li>Disable ad blockers temporarily while shopping</li>
+        <li>Ensure JavaScript is enabled in your browser</li>
+        <li>Try using a different browser or device</li>
+        <li>Check your internet connection</li>
+      </ul>
+      
+      <h2>Account Security</h2>
+      <p>Protect your Smartcashly account:</p>
+      <ul>
+        <li>Use a strong, unique password</li>
+        <li>Never share your login credentials</li>
+        <li>Log out from shared computers</li>
+        <li>Monitor your account regularly for unauthorized activity</li>
+        <li>Contact us immediately if you suspect security issues</li>
+      </ul>
+      
+      <h2>Contact Information</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h4>General Support</h4>
+          <p>Email: support@smartcashly.com<br>
+          Response time: 24-48 hours</p>
+        </div>
+        
+        <div class="contact-card">
+          <h4>Technical Issues</h4>
+          <p>Email: tech@smartcashly.com<br>
+          Response time: 12-24 hours</p>
+        </div>
+        
+        <div class="contact-card">
+          <h4>Payment Inquiries</h4>
+          <p>Email: payments@smartcashly.com<br>
+          Response time: 24-48 hours</p>
+        </div>
+        
+        <div class="contact-card">
+          <h4>Partnership Opportunities</h4>
+          <p>Email: partners@smartcashly.com<br>
+          Response time: 3-5 business days</p>
+        </div>
+      </div>
+      
+      <h2>Important Terms</h2>
+      <p>Please review our terms of service and privacy policy for complete information about:</p>
+      <ul>
+        <li>Cashback eligibility and restrictions</li>
+        <li>Account termination policies</li>
+        <li>Data privacy and protection</li>
+        <li>Dispute resolution procedures</li>
+        <li>Service availability and limitations</li>
+      </ul>
+      
+      <p><strong>Last updated:</strong> January 2025</p>
+      <p><em>We're committed to providing excellent customer service and helping you succeed with cashback earning. Don't hesitate to reach out with any questions or concerns.</em></p>
+    </div>
+  </div>
+</div>
 
   <script>
     document.getElementById('year').textContent = 2025;
@@ -1541,6 +1682,25 @@
         showReferModal();
       }
     });
+    // Support Modal Functions
+function openSupportModal() {
+  document.getElementById('supportModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSupportModal(event) {
+  if (!event || event.target.id === 'supportModal' || event.target.classList.contains('support-close')) {
+    document.getElementById('supportModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeSupportModal();
+  }
+});
   </script>
 </body>
 </html>
