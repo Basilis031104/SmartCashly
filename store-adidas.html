@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adidas - 18% Cashback • Smartcashly</title>
+  <style>
+    /* Advanced shiny dark yellow background with floating particles */
+    html { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+    }
+    
+    body { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* Enhanced golden floating particles overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.6) 1px, transparent 1px),
+        radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 85% 15%, rgba(255, 193, 7, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 25% 85%, rgba(255, 160, 0, 0.4) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 65% 45%, rgba(255, 235, 59, 0.5) 1px, transparent 1px);
+      background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: gentleFloat 25s ease-in-out infinite;
+      will-change: background-position;
+    }
+
+    /* Enhanced sparkle layer */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 65% 20%, rgba(255, 215, 0, 0.5) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 35% 70%, rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 60%, rgba(255, 193, 7, 0.4) 0.8px, transparent 0.8px),
+        radial-gradient(circle at 15% 80%, rgba(255, 160, 0, 0.5) 0.5px, transparent 0.5px);
+      background-size: 70px 70px, 90px 90px, 60px 60px, 80px 80px, 65px 65px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: gentleSparkle 20s ease-in-out infinite;
+      will-change: background-position;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
+      50% { background-position: 100% 50%, 100% 100%, 100% 50%, 100% 100%, 100% 50%; }
+      100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
+    }
+
+    @keyframes gentleFloat {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      33% { 
+        background-position: 30% 20%, 20% 40%, 50% 30%, 40% 10%, 60% 50%, 70% 20%;
+        opacity: 0.9;
+      }
+      66% { 
+        background-position: 60% 40%, 40% 80%, 80% 60%, 10% 70%, 30% 80%, 90% 40%;
+        opacity: 0.7;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes gentleSparkle {
+      0%, 100% { 
+        opacity: 0.4;
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+      }
+      25% { 
+        opacity: 0.8;
+        background-position: 15% 15%, 25% 25%, 35% 35%, 45% 45%, 55% 55%;
+      }
+      50% { 
+        opacity: 0.9;
+        background-position: 30% 30%, 50% 50%, 70% 70%, 90% 90%, 10% 90%;
+      }
+      75% { 
+        opacity: 0.6;
+        background-position: 20% 40%, 40% 20%, 60% 80%, 80% 60%, 100% 40%;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    }
+
+    /* Ensure content appears above particles */
+    header, main, footer {
+      position: relative;
+      z-index: 10;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 1rem 1.5rem;
+      background: #008e45 !important;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Enhanced header particles */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 75% 60%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.3) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 15% 80%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 80px 80px, 100px 100px, 60px 60px, 90px 90px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: headerParticles 20s ease-in-out infinite;
+    }
+
+    @keyframes headerParticles {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      50% { 
+        background-position: 30% 30%, 40% 40%, 20% 50%, 60% 20%;
+        opacity: 0.9;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      flex: 0 0 auto;
+      background: transparent !important;
+      position: relative;
+      z-index: 2;
+    }
+
+    .auth-nav {
+      display: flex;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      background: #0070f3 !important;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background .18s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover          { background: #0059c1 !important; }
+    .btn--secondary     { background: #0070f3 !important; }
+    .btn--secondary:hover { background: #0059c1 !important; }
+
+    main {
+      flex: 1 1 auto;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .store-header {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
+    }
+
+    .store-logo-large {
+      width: 120px;
+      height: 120px;
+      background: url('adidas-logo.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .store-details {
+      flex: 1;
+    }
+
+    .store-title {
+      font-size: 2rem;
+      color: #008e45;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .store-subtitle {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .cashback-highlight {
+      background: linear-gradient(135deg, #ff6b35, #ff8a50);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .offers-section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: #008e45;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
+      display: inline-block;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .offer-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .offer-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .offer-logo {
+      width: 50px;
+      height: 50px;
+      background: url('adidas-logo.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 6px;
+    }
+
+    .offer-type {
+      background: #2196F3;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .offer-type.cashback {
+      background: #ff6b35;
+    }
+
+    .offer-type.promo {
+      background: #2196F3;
+    }
+
+    .offer-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .offer-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .offer-cashback {
+      color: #ff6b35;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .offer-validity {
+      color: #999;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .offer-button {
+      background: #4CAF50;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+
+    .offer-button:hover {
+      background: #45a049;
+    }
+
+    footer {
+      text-align: center;
+      font-size: .875rem;
+      padding: 1rem 0;
+      background: #000000 !important;
+      color: #ffffff !important;
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    footer * {
+      position: relative;
+      z-index: 3;
+      color: #ffffff !important;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: footerParticles 15s ease-in-out infinite;
+    }
+
+    @keyframes footerParticles {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+      50% { 
+        background-position: 15% 15%, 20% 20%, 25% 25%, 30% 30%;
+        opacity: 0.8;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        opacity: 0.6;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .store-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .offers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <div style="flex:1 1 auto;"></div>
+    <nav class="auth-nav">
+      <a href="index.html" class="btn btn--secondary">Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="store-header">
+      <div class="store-logo-large"></div>
+      <div class="store-details">
+        <h1 class="store-title">Adidas</h1>
+        <p class="store-subtitle">Fashion store with cashback rewards on athletic apparel</p>
+        <div class="cashback-highlight">💰 Earn up to 18% Cashback</div>
+        <p>Adidas is a global leader in athletic footwear, apparel, and accessories. Founded in Germany, Adidas creates innovative products for athletes and sports enthusiasts worldwide. From iconic sneakers like Stan Smith and Ultraboost to performance sportswear and lifestyle collections, Adidas combines cutting-edge technology with timeless style. Shop the latest collections and earn cashback on every purchase.</p>
+      </div>
+    </div>
+
+    <div class="offers-section">
+      <h2 class="section-title">💰 Cashback Offers</h2>
+      <div class="offers-grid">
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type cashback">CASHBACK</div>
+          </div>
+          <h3 class="offer-title">Shop at Adidas & Earn Cashback</h3>
+          <p class="offer-description">Browse the entire Adidas collection and earn cashback on every athletic purchase you make!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 18% Cashback</div>
+          <button class="offer-button" onclick="trackClick('adidas-general')">💰 Shop & Earn</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Ultraboost Collection - 30% Off</h3>
+          <p class="offer-description">Experience premium comfort and energy return with Adidas Ultraboost running shoes!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 18% Cashback</div>
+          <button class="offer-button" onclick="trackClick('adidas-ultraboost')">👟 Get Offer</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Stan Smith Sneakers - 25% Off</h3>
+          <p class="offer-description">Classic white tennis shoes that never go out of style - the world's best-selling tennis shoe!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 18% Cashback</div>
+          <button class="offer-button" onclick="trackClick('adidas-stansmith')">👟 Get Offer</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Originals Collection - 35% Off</h3>
+          <p class="offer-description">Iconic streetwear and lifestyle pieces including tracksuits, hoodies, and retro sneakers!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 18% Cashback</div>
+          <button class="offer-button" onclick="trackClick('adidas-originals')">👕 Get Offer</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Football Boots - 20% Off</h3>
+          <p class="offer-description">Professional football boots including Predator, X, and Copa series for all playing surfaces!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 18% Cashback</div>
+          <button class="offer-button" onclick="trackClick('adidas-football')">⚽ Get Offer</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Women's Activewear - 40% Off</h3>
+          <p class="offer-description">Performance leggings, sports bras, and training tops designed for every workout!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 18% Cashback</div>
+          <button class="offer-button" onclick="trackClick('adidas-womens')">👩‍💪 Get Offer</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">NMD Sneakers - 30% Off</h3>
+          <p class="offer-description">Modern street-ready shoes with boost technology for all-day comfort and style!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 18% Cashback</div>
+          <button class="offer-button" onclick="trackClick('adidas-nmd')">👟 Get Offer</button>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Kids Collection - 25% Off</h3>
+          <p class="offer-description">Athletic wear and shoes designed specifically for young athletes and active kids!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 18% Cashback</div>
+          <button class="offer-button" onclick="trackClick('adidas-kids')">👶 Get Offer</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = 2025;
+
+    function trackClick(offerId) {
+      console.log('trackClick called with offerId:', offerId);
+      
+      // Create click data
+      const clickData = {
+        store: 'Adidas',
+        offerId: offerId,
+        timestamp: new Date().toISOString(),
+        clickId: 'AD' + Date.now().toString().slice(-6)
+      };
+      
+      // Show success message on button
+      const button = event.target;
+      const originalText = button.textContent;
+      button.textContent = '✅ Tracked!';
+      button.style.background = '#28a745';
+      
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '#4CAF50';
+      }, 2000);
+      
+      // Store in localStorage safely
+      try {
+        let clickHistory = [];
+        const stored = localStorage.getItem('click_history');
+        if (stored) {
+          clickHistory = JSON.parse(stored);
+        }
+        
+        if (!Array.isArray(clickHistory)) {
+          clickHistory = [];
+        }
+        
+        clickHistory.unshift(clickData);
+        
+        if (clickHistory.length > 50) {
+          clickHistory.splice(50);
+        }
+        
+        localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      } catch (error) {
+        console.warn('Could not store click history:', error);
+      }
+      
+      // Define specific Adidas category URLs with affiliate tracking
+      const adidasUrls = {
+        'adidas-general': 'https://www.adidas.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'adidas-ultraboost': 'https://www.adidas.com/us/ultraboost-shoes?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'adidas-stansmith': 'https://www.adidas.com/us/stan-smith-shoes?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'adidas-originals': 'https://www.adidas.com/us/originals?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'adidas-football': 'https://www.adidas.com/us/football-boots?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'adidas-womens': 'https://www.adidas.com/us/women?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'adidas-nmd': 'https://www.adidas.com/us/nmd-shoes?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'adidas-kids': 'https://www.adidas.com/us/kids?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
+      };
+      
+      const targetUrl = adidasUrls[offerId] || 'https://www.adidas.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
+      
+      console.log('Opening URL:', targetUrl);
+      window.open(targetUrl, '_blank');
+    }
+  </script>
+</body>
+</html>
