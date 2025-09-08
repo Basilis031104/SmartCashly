@@ -654,24 +654,17 @@
         console.warn('Could not store click history:', error);
       }
       
+      // Define specific Shein category URLs with affiliate tracking
       const sheinUrls = {
-        'shein-general': 'https://euqs.shein.com/?ici=euqs_tab01navbar01&src_module=topcat&src_identifier=fc%3DHome%60sc%3DMain%60tc%3DGeneral%60oc%3DAll%20Products%60ps%3Dtab01navbar01&adp=25500892&src_tab_page_id=page_select_class1756192947631&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId,
-
-        'shein-dresses': 'https://euqs.shein.com/sale/Women-Dresses-On-Sale-sc-005216847.html?ici=euqs_tab02navbar02menu01dir01&src_module=topcat&src_identifier=fc%3DWomen%60sc%3DDresses%60tc%3DCasual%20Dresses%60oc%3DSale%20Items%60ps%3Dtab02navbar02menu01dir01&adp=25500892&src_tab_page_id=page_select_class1756192947631&categoryJump=699801_!_005216847&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId,
-
-        'shein-tops': 'https://euqs.shein.com/sale/Women-Tops-Blouses-Sale-sc-005217593.html?ici=euqs_tab02navbar02menu01dir02&src_module=topcat&src_identifier=fc%3DWomen%60sc%3DTops%60tc%3DBlouses%60oc%3DSale%20Collection%60ps%3Dtab02navbar02menu01dir02&adp=25500892&src_tab_page_id=page_select_class1756192947631&categoryJump=699802_!_005217593&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId,
-
-        'shein-student': 'https://euqs.shein.com/student-verify?ici=euqs_tab06navbar06&src_module=special&src_identifier=fc%3DSpecial%60sc%3DStudent%60tc%3DDiscount%60oc%3DVerification%60ps%3Dtab06navbar06&adp=25500892&src_tab_page_id=page_select_class1756192947631&discount=student15&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId,
-
-        'shein-curve': 'https://euqs.shein.com/sale/Curve-Plus-Size-Sale-sc-005218764.html?ici=euqs_tab02navbar02menu03dir01&src_module=topcat&src_identifier=fc%3DWomen%60sc%3DCurve%60tc%3DPlus%20Size%60oc%3DSale%20Items%60ps%3Dtab02navbar02menu03dir01&adp=25500892&src_tab_page_id=page_select_class1756192947631&categoryJump=699808_!_005218764&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId,
-
-        'shein-men': 'https://euqs.shein.com/sale/Men-Clothing-Sale-sc-005219482.html?ici=euqs_tab03navbar03menu01dir01&src_module=topcat&src_identifier=fc%3DMen%60sc%3DClothing%60tc%3DShirts%60oc%3DSale%20Items%60ps%3Dtab03navbar03menu01dir01&adp=25500892&src_tab_page_id=page_select_class1756192947631&categoryJump=699805_!_005219482&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId,
-
-        'shein-accessories': 'https://euqs.shein.com/sale/Shoes-Accessories-Sale-sc-005220159.html?ici=euqs_tab02navbar02menu02dir02&src_module=topcat&src_identifier=fc%3DWomen%60sc%3DAccessories%60tc%3DShoes%60oc%3DSale%20Collection%60ps%3Dtab02navbar02menu02dir02&adp=25500892&src_tab_page_id=page_select_class1756192947631&categoryJump=699804_!_005220159&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId,
-
-        'shein-kids': 'https://euqs.shein.com/sale/Kids-Collection-Sale-sc-005221387.html?ici=euqs_tab04navbar04menu01dir01&src_module=topcat&src_identifier=fc%3DKids%60sc%3DClothing%60tc%3DGirls%60oc%3DSale%20Items%60ps%3Dtab04navbar04menu01dir01&adp=25500892&src_tab_page_id=page_select_class1756192947631&categoryJump=699806_!_005221387&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId,
-
-        'shein-home': 'https://euqs.shein.com/sale/Home-Living-Sale-sc-005222640.html?ici=euqs_tab05navbar05menu01dir01&src_module=topcat&src_identifier=fc%3DHome%60sc%3DDecor%60tc%3DBedroom%60oc%3DSale%20Collection%60ps%3Dtab05navbar05menu01dir01&adp=25500892&src_tab_page_id=page_select_class1756192947631&categoryJump=699807_!_005222640&sid=67c4f902-58a0-3868-3277-da0f2e15ded8&lkws_13924=67c4f902-58a0-3868-3277-da0f2e15ded8&ref=smartcashly&affiliateID=6606553&PID=100914861&url_from=smartcashly.com&projectId=4&cjevent=6983a7cc8ce111f082f302090a18b8fc&click_id=' + clickData.clickId
+        'shein-general': 'https://us.shein.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-dresses': 'https://us.shein.com/Women-Dresses-c-1727.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-tops': 'https://us.shein.com/Women-Tops-c-1766.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-student': 'https://us.shein.com/student-discount?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-curve': 'https://us.shein.com/Plus-Size-c-1889.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-men': 'https://us.shein.com/Men-c-1978.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-accessories': 'https://us.shein.com/Women-Accessories-c-1772.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-kids': 'https://us.shein.com/Kids-c-1864.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
+        'shein-home': 'https://us.shein.com/Home-Living-c-1953.html?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
       };
       
       const targetUrl = sheinUrls[offerId] || 'https://euqs.shein.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
@@ -818,3 +811,4 @@
   </script>
 </body>
 </html>
+
