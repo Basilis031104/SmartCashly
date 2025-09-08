@@ -84,6 +84,14 @@
       100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
     }
 
+    .auth-nav {
+      position: absolute;
+      right: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 1002;
+    }
+
     @keyframes gentleFloat {
       0% { 
         background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
@@ -138,7 +146,7 @@
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 1.25rem;
       padding: 1rem 1.5rem;
       background: #008e45 !important;
@@ -183,19 +191,19 @@
     }
 
     .logo-img {
+      position: absolute;
+      left: 1.5rem;
       height: 100px;
       width: auto;
-      flex: 0 0 auto;
       background: transparent !important;
-      position: relative;
       z-index: 1002;
     }
 
     .search-bar {
       position: relative;
-      flex: 1 1 100%;
+      flex: 0 0 auto;
       max-width: 680px;
-      margin-left: 80px;
+      width: 500px;
       z-index: 1002;
     }
 
