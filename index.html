@@ -233,6 +233,22 @@
 
     .search-bar button:hover { background: #0059c1 !important; }
     .search-bar button svg { width: 1rem; height: 1rem; fill: #fff; }
+    .all-stores-btn {
+    background: #0070f3;
+    color: white;
+    text-decoration: none;
+    padding: 0.55rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.18s;
+    white-space: nowrap;
+    margin-left: 1rem;
+    }
+
+.all-stores-btn:hover {
+  background: #0059c1;
+}
 
     /* Search Autocomplete Styles */
     .search-autocomplete {
@@ -843,6 +859,7 @@
       </button>
       <div id="search-autocomplete" class="search-autocomplete"></div>
     </form>
+    <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
     <nav class="auth-nav" id="auth-nav">
       <div id="auth-buttons" style="display: flex; gap: 0.5rem;">
         <a href="login.html" class="btn">Login</a>
@@ -874,24 +891,6 @@
     <div class="welcome-section">
       <h2>Welcome to Smartcashly</h2>
       <p>The most generous cashback platform</p>
-      <a href="all-stores.html" style="
-        display: inline-block;
-        margin-top: 1.5rem;
-        margin-bottom: 1rem;
-        padding: 0.9rem 2rem;
-        background: #0070f3;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 112, 243, 0.2);
-      " 
-      onmouseover="this.style.background='#0059c1'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(0, 112, 243, 0.3)'" 
-      onmouseout="this.style.background='#0070f3'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 112, 243, 0.2)'">
-        View All Stores
-      </a>
     </div>
 
     <div class="stores-section">
