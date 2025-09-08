@@ -630,14 +630,14 @@
       
       // Define actual Benetton URLs with proper affiliate tracking
       const benettonUrls = {
-        'benetton-general': 'https://us.benetton.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-women': 'https://us.benetton.com/womens/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-men': 'https://us.benetton.com/mens/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-kids': 'https://us.benetton.com/kids/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-knitwear': 'https://us.benetton.com/womens/knitwear/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-accessories': 'https://us.benetton.com/accessories/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-sale': 'https://us.benetton.com/sale/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId,
-        'benetton-campaign': 'https://us.benetton.com/united-colors-of-benetton/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025&click_id=' + clickData.clickId
+        'benetton-general': 'https://us.benetton.com/?clickref=' + clickData.clickId + '&lkws_13844=' + clickData.clickId + '&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198',
+        'benetton-women': 'https://us.benetton.com/womens/?clickref=' + clickData.clickId + '&lkws_13844=' + clickData.clickId + '&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198',
+        'benetton-men': 'https://us.benetton.com/mens/?clickref=' + clickData.clickId + '&lkws_13844=' + clickData.clickId + '&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198',
+        'benetton-kids': 'https://us.benetton.com/kids/?clickref=' + clickData.clickId + '&lkws_13844=' + clickData.clickId + '&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198',
+        'benetton-knitwear': 'https://us.benetton.com/womens/knitwear/?clickref=' + clickData.clickId + '&lkws_13844=' + clickData.clickId + '&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198',
+        'benetton-accessories': 'https://us.benetton.com/accessories/?clickref=' + clickData.clickId + '&lkws_13844=' + clickData.clickId + '&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198',
+        'benetton-sale': 'https://us.benetton.com/sale/?clickref=' + clickData.clickId + '&lkws_13844=' + clickData.clickId + '&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198',
+        'benetton-campaign': 'https://us.benetton.com/united-colors-of-benetton/?clickref=' + clickData.clickId + '&lkws_13844=' + clickData.clickId + '&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198'
       };
       
       const targetUrl = benettonUrls[offerId] || 'https://us.benetton.com/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
@@ -648,3 +648,4 @@
   </script>
 </body>
 </html>
+
