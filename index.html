@@ -1233,6 +1233,13 @@
 
     // Function to update user balance dynamically
     function updateUserBalance() {
+            // Clear any existing data for truly new accounts
+      if (!localStorage.getItem('account_initialized')) {
+        localStorage.removeItem('click_history');
+        localStorage.removeItem('pending_referral_notifications');
+        localStorage.setItem('account_initialized', 'true');
+      }
+      
       const clickHistory = JSON.parse(localStorage.getItem('click_history') || '[]');
       const referralNotifications = JSON.parse(localStorage.getItem('pending_referral_notifications') || '[]');
       
