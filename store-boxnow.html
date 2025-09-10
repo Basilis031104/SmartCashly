@@ -477,7 +477,7 @@
     <div class="offers-section">
       <h2 class="section-title">💰 Cashback Offers</h2>
       <div class="offers-grid">
-        <div class="offer-card">
+        <div class="offer-card" onclick="trackClick('boxnow-general')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type cashback">CASHBACK</div>
@@ -486,10 +486,10 @@
           <p class="offer-description">Browse all Box Now delivery services and earn cashback on every package you send!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 35% Cashback</div>
-          <button class="offer-button" onclick="trackClick('boxnow-general')">💰 Shop & Earn</button>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('boxnow-general')">💰 Shop & Earn</button>
         </div>
 
-        <div class="offer-card">
+       <div class="offer-card" onclick="trackClick('boxnow-2euro')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
@@ -498,10 +498,10 @@
           <p class="offer-description">Easy and fast online option to send packages for only 2€!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="trackClick('boxnow-2euro')">📦 Get Offer</button>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('boxnow-2euro')">📦 Get Offer</button>
         </div>
 
-        <div class="offer-card">
+        <div class="offer-card" onclick="trackClick('boxnow-mini')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
@@ -510,10 +510,10 @@
           <p class="offer-description">Send a mini package with 1.5€!</p>
           <div style="height: 48px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="trackClick('boxnow-mini')">📦 Get Offer</button>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('boxnow-mini')">📦 Get Offer</button>
         </div>
 
-        <div class="offer-card">
+        <div class="offer-card" onclick="trackClick('boxnow-small')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
@@ -522,10 +522,10 @@
           <p class="offer-description">Send a small package with 3€!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="trackClick('boxnow-small')">📦 Get Offer</button>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('boxnow-small')">📦 Get Offer</button>
         </div>
 
-        <div class="offer-card">
+        <div class="offer-card" onclick="trackClick('boxnow-medium')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
@@ -534,10 +534,10 @@
           <p class="offer-description">Send a medium package with 4€!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="trackClick('boxnow-medium')">📦 Get Offer</button>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('boxnow-medium')">📦 Get Offer</button>
         </div>
 
-        <div class="offer-card">
+       <div class="offer-card" onclick="trackClick('boxnow-large')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
@@ -546,7 +546,7 @@
           <p class="offer-description">Send a large package with 8€!</p>
           <div style="height: 24px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="trackClick('boxnow-large')">📦 Get Offer</button>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('boxnow-large')">📦 Get Offer</button>
         </div>
       </div>
     </div>
@@ -630,4 +630,5 @@
   </script>
 </body>
 </html>
+
 
