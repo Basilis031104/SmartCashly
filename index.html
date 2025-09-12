@@ -1021,6 +1021,15 @@
         <h3>Common Issues</h3>
         <p>If cashback doesn't appear, ensure you clicked our link first, disable ad blockers and enable third party cookies while shopping.</p>
         
+        <h3>Why Choose Us?</h3>
+        <p>Higher Cashback Rates – We give you more cashback % than other platforms, including friend referrals, so every purchase rewards you better.
+      
+        <br><br>Faster Payouts – No more waiting weeks for your money. We process and send your cashback significantly faster than the rest.
+      
+        <br><br>Simple & Reliable – Easy-to-use platform with smooth tracking and secure payments.
+      
+        <br><br>With us, you don't just save—you save more and get your money sooner.</p>
+      
         <h3>Contact Support</h3>
         <p style="margin-bottom: 1rem; color: #666;">Submit a support ticket and we'll respond within 24-48 hours</p>
         <button onclick="openContactForm()" style="
@@ -1032,16 +1041,7 @@
           cursor: pointer;
           font-weight: bold;
           width: 100%;
-        ">📝 Submit Support Ticket</button>
-
-        <h3>Why Choose Us?</h3>
-        <p>Higher Cashback Rates – We give you more cashback % than other platforms, including friend referrals, so every purchase rewards you better.
-
-        <br><br>Faster Payouts – No more waiting weeks for your money. We process and send your cashback significantly faster than the rest.
-
-        <br><br>Simple & Reliable – Easy-to-use platform with smooth tracking and secure payments.
-
-        <br><br>With us, you don’t just save—you save more and get your money sooner.</p>
+        ">Submit Support Ticket</button>
       </div>
     </div>
   </div>
@@ -1326,6 +1326,224 @@
       if (e.key === 'Escape') {
         closeSupportModal();
       }
+      // Contact Form Functions
+    function openContactForm() {
+      // Close the main support modal first
+      document.getElementById('supportModal').style.display = 'none';
+      
+      // Create contact form modal
+      const contactModal = document.createElement('div');
+      contactModal.id = 'contactModal';
+      contactModal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10001;
+      `;
+
+      contactModal.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 600px;
+          width: 90%;
+          max-height: 80vh;
+          overflow-y: auto;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        ">
+          <button onclick="closeContactForm()" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+          ">×</button>
+          
+          <h2 style="color: #008e45; margin-bottom: 1rem; text-align: center;">Submit Support Ticket</h2>
+          
+          <form id="contactForm" onsubmit="submitContactForm(event)">
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Subject Category:</label>
+              <select id="supportCategory" required style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #008e45;
+                border-radius: 6px;
+                font-size: 1rem;
+                background: white;
+              ">
+                <option value="">Select a category...</option>
+                <option value="cashback-missing">Missing Cashback</option>
+                <option value="cashback-amount">Incorrect Cashback Amount</option>
+                <option value="withdrawal">Withdrawal Issues</option>
+                <option value="account">Account Problems</option>
+                <option value="technical">Technical Issues</option>
+                <option value="store-problems">Store/Link Problems</option>
+                <option value="referral">Referral Program</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Email Address:</label>
+              <input type="email" id="supportEmail" required placeholder="your-email@example.com" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #008e45;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+              ">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Subject:</label>
+              <input type="text" id="supportSubject" required placeholder="Brief description of your issue" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #008e45;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+              ">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">
+                Description: <span id="charCount" style="color: #666; font-weight: normal;">(0/1000 characters)</span>
+              </label>
+              <textarea id="supportMessage" required placeholder="Please describe your issue in detail. Include any relevant order numbers, dates, or store names..." maxlength="1000" style="
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #008e45;
+                border-radius: 6px;
+                font-size: 1rem;
+                box-sizing: border-box;
+                min-height: 150px;
+                resize: vertical;
+                font-family: inherit;
+              "></textarea>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+              <button type="button" onclick="closeContactForm()" style="
+                background: #6c757d;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                cursor: pointer;
+                flex: 1;
+              ">Cancel</button>
+              <button type="submit" style="
+                background: #008e45;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                cursor: pointer;
+                flex: 2;
+                font-weight: bold;
+              ">Submit Ticket</button>
+            </div>
+          </form>
+          
+          <p style="font-size: 0.85rem; color: #666; margin-top: 1rem; text-align: center;">
+            Response time: 24-48 hours
+          </p>
+        </div>
+      `;
+
+      document.body.appendChild(contactModal);
+      
+      // Add character counter
+      const messageField = document.getElementById('supportMessage');
+      const charCount = document.getElementById('charCount');
+      
+      messageField.addEventListener('input', function() {
+        const count = this.value.length;
+        charCount.textContent = `(${count}/1000 characters)`;
+        charCount.style.color = count > 900 ? '#ff6b35' : '#666';
+      });
+    }
+
+    function closeContactForm() {
+      const contactModal = document.getElementById('contactModal');
+      if (contactModal) {
+        contactModal.remove();
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function submitContactForm(event) {
+      event.preventDefault();
+      
+      const category = document.getElementById('supportCategory').value;
+      const email = document.getElementById('supportEmail').value;
+      const subject = document.getElementById('supportSubject').value;
+      const message = document.getElementById('supportMessage').value;
+      
+      const ticketData = {
+        id: 'TICKET_' + Date.now(),
+        category: category,
+        email: email,
+        subject: subject,
+        message: message,
+        timestamp: new Date().toISOString(),
+        status: 'submitted'
+      };
+      
+      const tickets = JSON.parse(localStorage.getItem('support_tickets') || '[]');
+      tickets.push(ticketData);
+      localStorage.setItem('support_tickets', JSON.stringify(tickets));
+      
+      closeContactForm();
+      
+      const successMessage = document.createElement('div');
+      successMessage.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #008e45;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        z-index: 10000;
+        box-shadow: 0 4px 15px rgba(0, 142, 69, 0.3);
+      `;
+      successMessage.innerHTML = `Support ticket submitted!<br><small>Ticket ID: ${ticketData.id}</small>`;
+      document.body.appendChild(successMessage);
+      
+      setTimeout(() => {
+        if (successMessage.parentNode) {
+          successMessage.remove();
+        }
+      }, 5000);
+    }
+
+    // Make functions globally accessible
+    window.openContactForm = openContactForm;
+    window.closeContactForm = closeContactForm;
+    window.submitContactForm = submitContactForm;
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeSupportModal();
+      }
+    });
     });
     // Contact Form Functions
 function openContactForm() {
