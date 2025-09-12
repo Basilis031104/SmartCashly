@@ -1321,6 +1321,39 @@
 
   <!-- Firebase Auth Module -->
   <script type="module" src="auth.js"></script>
+  <script>
+  // Support Modal Functions - Fixed Implementation
+  function openSupportModal() {
+    const modal = document.getElementById('supportModal');
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeSupportModal(event) {
+    const modal = document.getElementById('supportModal');
+    if (!event || event.target.id === 'supportModal' || event.target.classList.contains('support-close')) {
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+  }
+
+  // Make functions globally accessible
+  window.openSupportModal = openSupportModal;
+  window.closeSupportModal = closeSupportModal;
+
+  // Enhanced Escape key handler
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeSupportModal();
+    }
+  });
+</script>
+</body>
+</html>
   <script type="module">
     // Import Firebase functions
     import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
