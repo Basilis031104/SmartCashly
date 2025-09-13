@@ -1533,22 +1533,17 @@
       }, 5000);
     }
 
-    // Make functions globally accessible
-    window.openContactForm = openContactForm;
-    window.closeContactForm = closeContactForm;
-    window.submitContactForm = submitContactForm;
+    // Make functions globally accessible - FIXED VERSION
+window.openSupportModal = openSupportModal;
+window.closeSupportModal = closeSupportModal;
 
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeSupportModal();
-      }
-    });
-    });
-    // Contact Form Functions
-function openContactForm() {
-  // Close the main support modal first
-  document.getElementById('supportModal').style.display = 'none';
+// Contact Form Functions - MOVED OUTSIDE TO BE ALWAYS AVAILABLE
+window.openContactForm = function() {
+  // Close the main support modal first if it exists
+  const supportModal = document.getElementById('supportModal');
+  if (supportModal) {
+    supportModal.style.display = 'none';
+  }
   
   // Create contact form modal
   const contactModal = document.createElement('div');
@@ -1589,7 +1584,7 @@ function openContactForm() {
         color: #999;
       ">×</button>
       
-      <h2 style="color: #008e45; margin-bottom: 1rem; text-align: center;">📝 Submit Support Ticket</h2>
+      <h2 style="color: #008e45; margin-bottom: 1rem;">📝 Submit Support Ticket</h2>
       
       <form id="contactForm" onsubmit="submitContactForm(event)">
         <div style="margin-bottom: 1rem;">
@@ -1695,26 +1690,24 @@ function openContactForm() {
     charCount.textContent = `(${count}/1000 characters)`;
     charCount.style.color = count > 900 ? '#ff6b35' : '#666';
   });
-}
+};
 
-function closeContactForm() {
+window.closeContactForm = function() {
   const contactModal = document.getElementById('contactModal');
   if (contactModal) {
     contactModal.remove();
     document.body.style.overflow = 'auto';
   }
-}
+};
 
-function submitContactForm(event) {
+window.submitContactForm = function(event) {
   event.preventDefault();
   
-  // Get form data
   const category = document.getElementById('supportCategory').value;
   const email = document.getElementById('supportEmail').value;
   const subject = document.getElementById('supportSubject').value;
   const message = document.getElementById('supportMessage').value;
   
-  // Create ticket data
   const ticketData = {
     id: 'TICKET_' + Date.now(),
     category: category,
@@ -1725,15 +1718,12 @@ function submitContactForm(event) {
     status: 'submitted'
   };
   
-  // Store ticket locally (in a real app, this would go to your backend)
   const tickets = JSON.parse(localStorage.getItem('support_tickets') || '[]');
   tickets.push(ticketData);
   localStorage.setItem('support_tickets', JSON.stringify(tickets));
   
-  // Close modal and show success
   closeContactForm();
   
-  // Show success message
   const successMessage = document.createElement('div');
   successMessage.style.cssText = `
     position: fixed;
@@ -1747,10 +1737,7 @@ function submitContactForm(event) {
     z-index: 10000;
     box-shadow: 0 4px 15px rgba(0, 142, 69, 0.3);
   `;
-  successMessage.innerHTML = `
-    ✅ Support ticket submitted successfully!<br>
-    <small>Ticket ID: ${ticketData.id}</small>
-  `;
+  successMessage.innerHTML = `✅ Support ticket submitted!<br><small>Ticket ID: ${ticketData.id}</small>`;
   document.body.appendChild(successMessage);
   
   setTimeout(() => {
@@ -1758,12 +1745,15 @@ function submitContactForm(event) {
       successMessage.remove();
     }
   }, 5000);
-}
+};
 
-// Make functions globally accessible
-window.openContactForm = openContactForm;
-window.closeContactForm = closeContactForm;
-window.submitContactForm = submitContactForm;
+// Enhanced Escape key handler
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeSupportModal();
+    closeContactForm();
+  }
+});
   </script>
 
   <!-- Firebase Auth Module -->
