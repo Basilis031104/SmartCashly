@@ -1032,16 +1032,18 @@
       
         <h3>Contact Support</h3>
         <p style="margin-bottom: 1rem; color: #666;">Submit a support ticket and we'll respond within 24-48 hours</p>
-        <button onclick="window.openContactForm()" style="
-          background: #008e45;
-          color: white;
-          border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 6px;
-          cursor: pointer;
-          font-weight: bold;
-          width: 100%;
-        ">Submit Support Ticket</button>
+        <form onsubmit="submitContactForm(event)">
+          <button type="submit" style="
+            background: #008e45;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+          ">Submit Support Ticket</button>
+        </form>
       </div>
     </div>
   </div>
