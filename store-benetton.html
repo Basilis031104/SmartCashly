@@ -5,167 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Benetton - 25% Cashback • Smartcashly</title>
   <style>
-    /* Advanced shiny green background with floating white particles */
-    html { 
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.18) 0%, transparent 40%),
-        linear-gradient(135deg, #006400 0%, #008e45 70%, #ffffff 100%) !important;
-      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+    /* Advanced shiny GREEN background, with a small WHITE wave at the bottom */
+    html {
+      background:
+        /* small white strip at the very bottom */
+        linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 86%, rgba(255,255,255,0.95) 100%),
+        /* soft light flecks for depth (subtle) */
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
+        /* Benetton-green base */
+        linear-gradient(135deg, #007a33 0%, #008e45 30%, #00a852 65%, #10b562 100%) !important;
+      background-size: 100% 100%, 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
       animation: shimmer 12s ease-in-out infinite !important;
       min-height: 100vh;
     }
-    
-    body { 
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.18) 0%, transparent 40%),
-        linear-gradient(135deg, #006400 0%, #008e45 70%, #ffffff 100%) !important;
-      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+
+    body {
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 86%, rgba(255,255,255,0.95) 100%),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
+        linear-gradient(135deg, #007a33 0%, #008e45 30%, #00a852 65%, #10b562 100%) !important;
+      background-size: 100% 100%, 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
       animation: shimmer 12s ease-in-out infinite !important;
       min-height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
     }
-    
-    /* Floating white particles */
+
+    /* Floating white particles like Shein/Adidas */
     body::before {
       content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
+      inset: 0;
+      background-image:
         radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
         radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
         radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
-        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-        radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.6) 1.5px, transparent 1.5px),
-        radial-gradient(circle at 65% 45%, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
-      background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+      background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
+      animation: particleFloat 15s ease-in-out infinite;
       pointer-events: none !important;
       z-index: 1;
-      animation: gentleFloat 25s ease-in-out infinite;
-      will-change: background-position;
-    }
-    
-    /* Sparkle layer */
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.9) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 65% 20%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 35% 70%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.6) 0.8px, transparent 0.8px),
-        radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0.5) 0.5px, transparent 0.5px);
-      background-size: 70px 70px, 90px 90px, 60px 60px, 80px 80px, 65px 65px;
-      pointer-events: none !important;
-      z-index: 1;
-      animation: gentleSparkle 20s ease-in-out infinite;
-      will-change: background-position;
     }
 
     @keyframes shimmer {
-      0% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
-      50% { background-position: 100% 50%, 100% 100%, 100% 50%, 100% 100%, 100% 50%; }
-      100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
-    }
-    @keyframes gentleFloat {
-      0% { background-position: 0% 0%; opacity: 0.4; }
-      50% { background-position: 50% 50%; opacity: 0.8; }
-      100% { background-position: 0% 0%; opacity: 0.4; }
-    }
-    @keyframes gentleSparkle {
-      0%, 100% { opacity: 0.3; background-position: 0% 0%; }
-      50% { opacity: 0.8; background-position: 50% 50%; }
+      0%   { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+      50%  { background-position: 100% 50%, 15% 15%, 20% 20%, 25% 25%, 30% 30%, 35% 35%; }
+      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    @keyframes particleFloat {
+      0%   { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; opacity: 0.5; }
+      50%  { background-position: 10% 12%, 18% 18%, 12% 20%, 10% 15%; opacity: 0.7; }
+      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; opacity: 0.5; }
     }
 
-    header, main, footer {
-      position: relative;
-      z-index: 10;
-    }
-
+    /* Layout */
+    * { box-sizing: border-box; }
+    body, h1, h2, h3, p { margin: 0; }
     body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      color: #222;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color: #111;
     }
 
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-      padding: 1rem 1.5rem;
-      background: #008e45 !important;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(90deg, #006e3a, #008e45);
       color: #fff;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.3);
       position: relative;
-      overflow: hidden;
+      z-index: 10;
+      box-shadow: 0 6px 22px rgba(0,0,0,.25);
     }
 
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-image: 
-        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-        radial-gradient(circle at 75% 60%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
-        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.3) 0.5px, transparent 0.5px),
-        radial-gradient(circle at 15% 80%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
-      background-size: 80px 80px, 100px 100px, 60px 60px, 90px 90px;
-      pointer-events: none !important;
-      z-index: 1;
-      animation: headerParticles 20s ease-in-out infinite;
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
     }
 
-    @keyframes headerParticles {
-      0% { background-position: 0% 0%; opacity: 0.6; }
-      50% { background-position: 50% 50%; opacity: 0.9; }
-      100% { background-position: 0% 0%; opacity: 0.6; }
+    .auth-nav {
+      margin-left: auto;
+      display: flex;
+      gap: .5rem;
     }
 
-    .logo-img { height: 100px; width: auto; }
-    .auth-nav { display: flex; gap: 0.5rem; }
     .btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      background: #0070f3 !important;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
       border: none;
+      padding: .6rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
       cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+      background: #ffffff;
+      color: #008e45;
+      box-shadow: 0 6px 14px rgba(0,0,0,.15);
     }
-    .btn:hover { background: #0059c1 !important; }
+
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,.18); }
 
     main {
-      flex: 1 1 auto;
-      padding: 2rem 1rem;
       max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 2;
     }
 
+    /* Store header card */
     .store-header {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
@@ -174,51 +133,286 @@
       margin-bottom: 2rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      gap: 2rem;
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
     }
 
-    .store-header img { height: 80px; }
-    .cashback-badge {
-      background: #008e45;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
+    .store-logo-large {
+      width: 120px;
+      height: 120px;
+      background: url('logo-benetton.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .store-details { flex: 1; }
+    .store-title { font-size: 2rem; color: #008e45; font-weight: 800; margin-bottom: .5rem; }
+    .store-subtitle { font-size: 1.1rem; color: #333; margin-bottom: 1rem; }
+
+    .cashback-highlight {
+      background: linear-gradient(135deg, #ff6b35, #ff8a50);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
       font-weight: bold;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
 
-    .store-content {
+    .offers-section { margin-bottom: 3rem; }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: #008e45;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
+      display: inline-block;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .offer-card {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 3px solid #008e45;
+      cursor: pointer;
+    }
+    .offer-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
+
+    .offer-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+
+    .offer-logo {
+      width: 50px; height: 50px;
+      background: url('logo-benetton.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    }
+
+    .offer-type {
+      font-size: .85rem;
+      font-weight: 700;
+      padding: .35rem .7rem;
+      border-radius: 999px;
+      color: #fff;
+      letter-spacing: .02em;
+      background: #008e45;
+      box-shadow: 0 4px 12px rgba(0, 142, 69, 0.35);
+    }
+    .offer-type.cashback { background: #ff6b35; box-shadow: 0 4px 12px rgba(255,107,53,.35); }
+    .offer-type.promo    { background: #008e45; }
+
+    .offer-title { font-size: 1.25rem; font-weight: 800; color: #111; margin: 0 0 .5rem; }
+    .offer-description { color: #333; line-height: 1.5; margin-bottom: .75rem; min-height: 48px; }
+    .offer-cashback { font-weight: 800; color: #008e45; margin: .5rem 0 1rem; }
+
+    .offer-button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: .8rem 1rem;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      width: 100%;
+      transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,.12);
+    }
+    .offer-button:hover { background: #45a049; transform: translateY(-1px); }
+
+    footer {
+      text-align: center;
+      font-size: .875rem;
+      padding: 1rem 0;
+      background: #000000 !important;
+      color: #ffffff !important;
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+    footer * { position: relative; z-index: 3; color: #ffffff !important; }
+
+    footer::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+      background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: footerParticles 15s ease-in-out infinite;
+    }
+
+    @keyframes footerParticles {
+      0%   { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; opacity: 0.6; }
+      50%  { background-position: 15% 15%, 20% 20%, 25% 25%, 30% 30%; opacity: 0.8; }
+      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; opacity: 0.6; }
+    }
+
+    @media (max-width: 768px) {
+      .store-header { flex-direction: column; text-align: center; }
+      .offers-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
+
 <body>
   <header>
-    <img src="logo-benetton.png" alt="Benetton Logo" class="logo-img">
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <div style="flex:1 1 auto;"></div>
     <nav class="auth-nav">
       <a href="index.html" class="btn btn--secondary">Home</a>
-      <a href="all-stores.html" class="btn btn--secondary">All Stores</a>
     </nav>
   </header>
 
   <main>
     <div class="store-header">
-      <img src="logo-benetton.png" alt="Benetton Logo">
-      <div class="cashback-badge">25% Cashback</div>
+      <div class="store-logo-large"></div>
+      <div class="store-details">
+        <h1 class="store-title">Benetton</h1>
+        <p class="store-subtitle">Fashion store with cashback rewards on colorful clothing</p>
+        <div class="cashback-highlight">💰 Earn up to 25% Cashback</div>
+        <p>United Colors of Benetton is an iconic Italian fashion brand known for its vibrant colors and multicultural approach to style. Since 1965, Benetton has been creating quality clothing for men, women, and children with a focus on innovation, comfort, and distinctive Italian design. Shop the latest collection and earn cashback on every purchase.</p>
+      </div>
     </div>
 
-    <div class="store-content">
-      <h2>Shop at Benetton</h2>
-      <p>Enjoy 25% cashback when you shop via Smartcashly at Benetton. Discover the latest fashion and lifestyle collections.</p>
-      <a href="#" class="btn">Shop Now</a>
+    <div class="offers-section">
+      <h2 class="section-title">💰 Cashback Offers</h2>
+      <div class="offers-grid">
+        <!-- General Cashback -->
+        <div class="offer-card" onclick="window.open('https://us.benetton.com/?clickref=&lkws_13844=&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198', '_blank')">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type cashback">CASHBACK</div>
+          </div>
+          <h3 class="offer-title">Shop at Benetton & Earn Cashback</h3>
+          <p class="offer-description">Browse the full United Colors of Benetton collection and earn cashback on every colorful purchase!</p>
+          <div style="height: 48px;"></div>
+          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 25% Cashback</div>
+          <button class="offer-button">💰 Shop & Earn</button>
+        </div>
+
+        <!-- Women's -->
+        <div class="offer-card" onclick="window.open('https://us.benetton.com/womens/?clickref=&lkws_13844=&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198', '_blank')">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Women's New Collection</h3>
+          <p class="offer-description">Discover the latest women's fashion with vibrant colors and modern designs from Benetton!</p>
+          <div style="height: 72px;"></div>
+          <div class="offer-cashback">+ Get Extra 25% Cashback</div>
+          <button class="offer-button">👗 Shop Women's</button>
+        </div>
+
+        <!-- Men's -->
+        <div class="offer-card" onclick="window.open('https://us.benetton.com/mens/?clickref=&lkws_13844=&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198', '_blank')">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Men's Collection</h3>
+          <p class="offer-description">Stylish men's casual wear including polos, t-shirts, and knitwear in classic Benetton colors!</p>
+          <div style="height: 72px;"></div>
+          <div class="offer-cashback">+ Get Extra 25% Cashback</div>
+          <button class="offer-button">👕 Shop Men's</button>
+        </div>
+
+        <!-- Kids -->
+        <div class="offer-card" onclick="window.open('https://us.benetton.com/kids/?clickref=&lkws_13844=&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198', '_blank')">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Kids' Collection</h3>
+          <p class="offer-description">Colorful and comfortable clothing for kids with playful designs and durable fabrics!</p>
+          <div style="height: 48px;"></div>
+          <div class="offer-cashback">+ Get Extra 25% Cashback</div>
+          <button class="offer-button">🧒 Shop Kids</button>
+        </div>
+
+        <!-- Knitwear -->
+        <div class="offer-card" onclick="window.open('https://us.benetton.com/knitwear/?clickref=&lkws_13844=&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198', '_blank')">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Knitwear Collection</h3>
+          <p class="offer-description">Warm sweaters, cardigans, and knit essentials in signature Benetton shades!</p>
+          <div style="height: 72px;"></div>
+          <div class="offer-cashback">+ Get Extra 25% Cashback</div>
+          <button class="offer-button">🧶 Shop Knitwear</button>
+        </div>
+
+        <!-- Accessories -->
+        <div class="offer-card" onclick="window.open('https://us.benetton.com/accessories/?clickref=&lkws_13844=&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198', '_blank')">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Accessories Collection</h3>
+          <p class="offer-description">Complete your look with bags, scarves, and accessories in signature Benetton style!</p>
+          <div style="height: 72px;"></div>
+          <div class="offer-cashback">+ Get Extra 25% Cashback</div>
+          <button class="offer-button">👜 Shop Accessories</button>
+        </div>
+
+        <!-- Sale -->
+        <div class="offer-card" onclick="window.open('https://us.benetton.com/sale/?clickref=&lkws_13844=&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198', '_blank')">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Sale Items</h3>
+          <p class="offer-description">Browse discounted items from previous collections with the same quality and style!</p>
+          <div style="height: 48px;"></div>
+          <div class="offer-cashback">+ Get Extra 25% Cashback</div>
+          <button class="offer-button">🏷️ Shop Sale</button>
+        </div>
+
+        <!-- Campaign -->
+        <div class="offer-card" onclick="window.open('https://us.benetton.com/united-colors-of-benetton/?clickref=&lkws_13844=&wgu=301920_1699198_17573577552425_6da0c412f8&wgexpiry=1788893755&utm_campaign=US_LF_AFFILIATION_UCB_Product_Affiliation_Conversion_AO&utm_source=webgains&utm_medium=affiliate&cname=1699198', '_blank')">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">United Colors Campaign</h3>
+          <p class="offer-description">Explore the iconic United Colors of Benetton campaign pieces and multicultural designs!</p>
+          <div style="height: 48px;"></div>
+          <div class="offer-cashback">+ Get Extra 25% Cashback</div>
+          <button class="offer-button">🌍 Shop Campaign</button>
+        </div>
+      </div>
     </div>
   </main>
 
-  <footer style="text-align:center; padding:1rem; background:#f4f4f4;">
-    <p>&copy; 2025 Smartcashly</p>
+  <footer>
+    © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
+
+  <script>
+    document.getElementById('year').textContent = 2025;
+  </script>
 </body>
 </html>
