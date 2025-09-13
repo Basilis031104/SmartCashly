@@ -1032,7 +1032,7 @@
       
         <h3>Contact Support</h3>
         <p style="margin-bottom: 1rem; color: #666;">Submit a support ticket and we'll respond within 24-48 hours</p>
-        <button onclick="openContactForm()" style="
+        <button onclick="window.openContactForm()" style="
           background: #008e45;
           color: white;
           border: none;
@@ -1328,153 +1328,156 @@
       }
       // Contact Form Functions
     function openContactForm() {
-      // Close the main support modal first
-      document.getElementById('supportModal').style.display = 'none';
-      
-      // Create contact form modal
-      const contactModal = document.createElement('div');
-      contactModal.id = 'contactModal';
-      contactModal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10001;
-      `;
+      // Contact Form Functions - Fixed Version
+window.openContactForm = function() {
+  // Close the main support modal first
+  document.getElementById('supportModal').style.display = 'none';
+  
+  // Create contact form modal
+  const contactModal = document.createElement('div');
+  contactModal.id = 'contactModal';
+  contactModal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+  `;
 
-      contactModal.innerHTML = `
-        <div style="
-          background: white;
-          border-radius: 12px;
-          padding: 2rem;
-          max-width: 600px;
-          width: 90%;
-          max-height: 80vh;
-          overflow-y: auto;
-          position: relative;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        ">
-          <button onclick="closeContactForm()" style="
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #999;
-          ">×</button>
-          
-          <h2 style="color: #008e45; margin-bottom: 1rem; text-align: center;">Submit Support Ticket</h2>
-          
-          <form id="contactForm" onsubmit="submitContactForm(event)">
-            <div style="margin-bottom: 1rem;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Subject Category:</label>
-              <select id="supportCategory" required style="
-                width: 100%;
-                padding: 0.75rem;
-                border: 2px solid #008e45;
-                border-radius: 6px;
-                font-size: 1rem;
-                background: white;
-              ">
-                <option value="">Select a category...</option>
-                <option value="cashback-missing">Missing Cashback</option>
-                <option value="cashback-amount">Incorrect Cashback Amount</option>
-                <option value="withdrawal">Withdrawal Issues</option>
-                <option value="account">Account Problems</option>
-                <option value="technical">Technical Issues</option>
-                <option value="store-problems">Store/Link Problems</option>
-                <option value="referral">Referral Program</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            
-            <div style="margin-bottom: 1rem;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Email Address:</label>
-              <input type="email" id="supportEmail" required placeholder="your-email@example.com" style="
-                width: 100%;
-                padding: 0.75rem;
-                border: 2px solid #008e45;
-                border-radius: 6px;
-                font-size: 1rem;
-                box-sizing: border-box;
-              ">
-            </div>
-            
-            <div style="margin-bottom: 1rem;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Subject:</label>
-              <input type="text" id="supportSubject" required placeholder="Brief description of your issue" style="
-                width: 100%;
-                padding: 0.75rem;
-                border: 2px solid #008e45;
-                border-radius: 6px;
-                font-size: 1rem;
-                box-sizing: border-box;
-              ">
-            </div>
-            
-            <div style="margin-bottom: 1rem;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">
-                Description: <span id="charCount" style="color: #666; font-weight: normal;">(0/1000 characters)</span>
-              </label>
-              <textarea id="supportMessage" required placeholder="Please describe your issue in detail. Include any relevant order numbers, dates, or store names..." maxlength="1000" style="
-                width: 100%;
-                padding: 0.75rem;
-                border: 2px solid #008e45;
-                border-radius: 6px;
-                font-size: 1rem;
-                box-sizing: border-box;
-                min-height: 150px;
-                resize: vertical;
-                font-family: inherit;
-              "></textarea>
-            </div>
-            
-            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-              <button type="button" onclick="closeContactForm()" style="
-                background: #6c757d;
-                color: white;
-                border: none;
-                padding: 0.75rem 1.5rem;
-                border-radius: 6px;
-                cursor: pointer;
-                flex: 1;
-              ">Cancel</button>
-              <button type="submit" style="
-                background: #008e45;
-                color: white;
-                border: none;
-                padding: 0.75rem 1.5rem;
-                border-radius: 6px;
-                cursor: pointer;
-                flex: 2;
-                font-weight: bold;
-              ">Submit Ticket</button>
-            </div>
-          </form>
-          
-          <p style="font-size: 0.85rem; color: #666; margin-top: 1rem; text-align: center;">
-            Response time: 24-48 hours
-          </p>
+  contactModal.innerHTML = `
+    <div style="
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    ">
+      <button onclick="window.closeContactForm()" style="
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #999;
+      ">×</button>
+      
+      <h2 style="color: #008e45; margin-bottom: 1rem;">Submit Support Ticket</h2>
+      
+      <form id="contactForm" onsubmit="window.submitContactForm(event)">
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Subject Category:</label>
+          <select id="supportCategory" required style="
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #008e45;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: white;
+          ">
+            <option value="">Select a category...</option>
+            <option value="cashback-missing">Missing Cashback</option>
+            <option value="cashback-amount">Incorrect Cashback Amount</option>
+            <option value="withdrawal">Withdrawal Issues</option>
+            <option value="account">Account Problems</option>
+            <option value="technical">Technical Issues</option>
+            <option value="store-problems">Store/Link Problems</option>
+            <option value="referral">Referral Program</option>
+            <option value="other">Other</option>
+          </select>
         </div>
-      `;
+        
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Email Address:</label>
+          <input type="email" id="supportEmail" required placeholder="your-email@example.com" style="
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #008e45;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+          ">
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">Subject:</label>
+          <input type="text" id="supportSubject" required placeholder="Brief description of your issue" style="
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #008e45;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+          ">
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #333;">
+            Description: <span id="charCount" style="color: #666; font-weight: normal;">(0/1000 characters)</span>
+          </label>
+          <textarea id="supportMessage" required placeholder="Please describe your issue in detail. Include any relevant order numbers, dates, or store names..." maxlength="1000" style="
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #008e45;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            min-height: 150px;
+            resize: vertical;
+            font-family: inherit;
+          "></textarea>
+        </div>
+        
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <button type="button" onclick="window.closeContactForm()" style="
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            flex: 1;
+          ">Cancel</button>
+          <button type="submit" style="
+            background: #008e45;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            flex: 2;
+            font-weight: bold;
+          ">Submit Ticket</button>
+        </div>
+      </form>
+      
+      <p style="font-size: 0.85rem; color: #666; margin-top: 1rem; text-align: center;">
+        Response time: 24-48 hours
+      </p>
+    </div>
+  `;
 
-      document.body.appendChild(contactModal);
-      
-      // Add character counter
-      const messageField = document.getElementById('supportMessage');
-      const charCount = document.getElementById('charCount');
-      
-      messageField.addEventListener('input', function() {
-        const count = this.value.length;
-        charCount.textContent = `(${count}/1000 characters)`;
-        charCount.style.color = count > 900 ? '#ff6b35' : '#666';
+  document.body.appendChild(contactModal);
+  
+  // Add character counter
+  const messageField = document.getElementById('supportMessage');
+  const charCount = document.getElementById('charCount');
+  
+  if (messageField && charCount) {
+    messageField.addEventListener('input', function() {
+      const count = this.value.length;
+      charCount.textContent = `(${count}/1000 characters)`;
+      charCount.style.color = count > 900 ? '#ff6b35' : '#666';
       });
     }
 
