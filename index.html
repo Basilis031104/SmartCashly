@@ -1031,22 +1031,105 @@
         <br><br>With us, you don't just save—you save more and get your money sooner.</p>
       
         <h3>Contact Support</h3>
-        <p style="margin-bottom: 1rem; color: #666;">Submit a support ticket and we'll respond within 24-48 hours</p>
-        <form onsubmit="submitContactForm(event)">
-          <button type="submit" style="
-            background: #008e45;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 100%;
-          ">Submit Support Ticket</button>
-        </form>
-      </div>
-    </div>
+<p style="margin-bottom: 1rem; color: #666;">
+  Submit a support ticket and we'll respond within 24-48 hours
+</p>
+
+<!-- Support Ticket Trigger -->
+<button onclick="document.getElementById('supportFormModal').style.display='block'" style="
+  background: #008e45;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+">
+  Submit Support Ticket
+</button>
+
+<!-- Support Ticket Modal -->
+<div id="supportFormModal" style="
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+">
+  <div style="
+    background: #fff;
+    max-width: 500px;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    position: relative;
+  ">
+    <h2 style="margin-bottom: 1rem;">Submit a Support Ticket</h2>
+
+    <!-- Close button -->
+    <button onclick="document.getElementById('supportFormModal').style.display='none'" style="
+      position: absolute;
+      top: 10px; right: 10px;
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    ">&times;</button>
+
+    <!-- The form -->
+    <form onsubmit="handleSupportSubmit(event)">
+      <label for="reason" style="font-weight: bold;">Reason for Contact</label>
+      <select id="reason" required style="width: 100%; padding: 0.5rem; margin: 0.5rem 0 1rem; border: 1px solid #ccc; border-radius: 6px;">
+        <option value="">-- Select a reason --</option>
+        <option value="payment">Payment Issue</option>
+        <option value="cashback">Cashback Not Received</option>
+        <option value="account">Account Problem</option>
+        <option value="technical">Technical Issue</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="message" style="font-weight: bold;">Describe Your Problem</label>
+      <textarea id="message" maxlength="6000" rows="8" required placeholder="Write your problem here (max 1000 words)" style="
+        width: 100%; padding: 0.5rem; margin: 0.5rem 0 1rem;
+        border: 1px solid #ccc; border-radius: 6px; resize: vertical;
+      "></textarea>
+
+      <button type="submit" style="
+        background: #008e45;
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        width: 100%;
+      ">Send Ticket</button>
+    </form>
   </div>
+</div>
+
+<script>
+  function handleSupportSubmit(event) {
+    event.preventDefault();
+    const reason = document.getElementById('reason').value;
+    const message = document.getElementById('message').value.trim();
+
+    if (!reason || !message) {
+      alert("Please choose a reason and write your message.");
+      return;
+    }
+
+    // ✅ Here you can send data to backend or save to localStorage
+    alert("Support ticket submitted! We'll get back to you within 24-48 hours.");
+
+    // Close modal & reset form
+    document.getElementById('supportFormModal').style.display = 'none';
+    event.target.reset();
+  }
+</script>
 
   <script>
     document.getElementById('year').textContent = 2025;
