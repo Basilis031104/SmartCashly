@@ -187,6 +187,7 @@
     }
 
     /* Logo positioning */
+/* Logo positioning */
 .logo-img {
   position: absolute;
   left: 1.5rem;
@@ -206,6 +207,7 @@
   margin-left: 120px;
 }
 
+/* Search input field */
 .search-bar input {
   width: 100%;
   padding: 0.55rem 2.8rem 0.55rem 1rem;
@@ -217,10 +219,12 @@
   transition: box-shadow .18s;
 }
 
+/* Search input focus state */
 .search-bar input:focus {
   box-shadow: 0 0 0 2px rgba(0,112,243,.35);
 }
 
+/* Search button */
 .search-bar button {
   position: absolute;
   right: .4rem;
@@ -238,10 +242,12 @@
   transition: background .18s;
 }
 
+/* Search button hover */
 .search-bar button:hover { 
   background: #0059c1 !important; 
 }
 
+/* Search button icon */
 .search-bar button svg { 
   width: 1rem; 
   height: 1rem; 
@@ -260,8 +266,10 @@
   transition: background 0.18s;
   white-space: nowrap;
   margin-left: 1rem;
+  z-index: 1002;
 }
 
+/* View All Stores button hover */
 .all-stores-btn:hover {
   background: #0059c1;
 }
@@ -275,6 +283,13 @@
   z-index: 1002;
 }
 
+/* Ensure main content appears below header */
+main {
+  position: relative;
+  z-index: 5;
+  margin-top: 0; /* Remove any top margin that might conflict */
+}
+    
 /* Mobile responsive */
 @media (max-width: 768px) {
   .search-bar {
@@ -681,6 +696,7 @@
 </body>
 
 </html>
+
 
 
 
