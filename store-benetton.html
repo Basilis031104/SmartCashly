@@ -6,32 +6,31 @@
   <title>Benetton - 25% Cashback • Smartcashly</title>
   <style>
     /* Advanced shiny dark yellow background with floating particles */
-      html { 
-        background: 
-          radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-          radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.18) 0%, transparent 40%),
-          linear-gradient(135deg, #4a7c6f 0%, #4a7c6f 70%, #ffffff 100%) !important;
-        background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
-        animation: shimmer 12s ease-in-out infinite !important;
-        min-height: 100vh;
-  }
-  
-  body { 
-    background: 
-      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.18) 0%, transparent 40%),
-      linear-gradient(135deg, #4a7c6f 0%, #4a7c6f 70%, #ffffff 100%) !important;
-    background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
-    animation: shimmer 12s ease-in-out infinite !important;
-    min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
+    html { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+    }
+    
+    body { 
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 160, 0, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(245, 127, 23, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #E65100 0%, #FF6F00 25%, #FF8F00 50%, #FFA000 75%, #FFB300 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
 
     /* Enhanced golden floating particles overlay */
     body::before {
@@ -457,26 +456,12 @@
 
 <body>
   <header>
-  <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-
-  <!-- Search Bar -->
-  <form class="search-bar" action="#" method="get">
-    <input type="search" name="q" id="search-input"
-           placeholder="Search stores, offers ..." 
-           aria-label="Search Smartcashly" autocomplete="off" />
-    <button type="submit" aria-label="Search">
-      <svg viewBox="0 0 24 24">
-        <path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/>
-      </svg>
-    </button>
-    <div id="search-autocomplete" class="search-autocomplete"></div>
-  </form>
-
-  <!-- All Stores Button -->
-  <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
-</header>
-
-
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <div style="flex:1 1 auto;"></div>
+    <nav class="auth-nav">
+      <a href="index.html" class="btn btn--secondary">Home</a>
+    </nav>
+  </header>
 
   <main>
     <div class="store-header">
@@ -600,8 +585,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
