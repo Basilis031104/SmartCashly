@@ -132,6 +132,67 @@
       z-index: 10;
     }
 
+    .search-bar {
+      position: relative;
+      flex: 0 0 auto;
+      max-width: 680px;
+      width: 500px;
+      z-index: 1002;
+      margin-left: 120px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.55rem 2.8rem 0.55rem 1rem;
+      border: none;
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      outline: none;
+      background: white !important;
+      transition: box-shadow .18s;
+    }
+
+    .search-bar input:focus {
+      box-shadow: 0 0 0 2px rgba(0,112,243,.35);
+    }
+
+    .search-bar button {
+      position: absolute;
+      right: .4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border: none;
+      border-radius: 50%;
+      background: #0070f3 !important;
+      cursor: pointer;
+      transition: background .18s;
+    }
+
+    .search-bar button:hover { background: #0059c1 !important; }
+    .search-bar button svg { width: 1rem; height: 1rem; fill: #fff; }
+
+    .all-stores-btn {
+      background: #0070f3;
+      color: white;
+      text-decoration: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.18s;
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+
+    .all-stores-btn:hover {
+      background: #0059c1;
+    }
+
     body {
       display: flex;
       flex-direction: column;
@@ -142,7 +203,7 @@
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 1.25rem;
       padding: 1rem 1.5rem;
       background: #008e45 !important;
@@ -456,12 +517,12 @@
 
 <body>
   <header>
-    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-    <div style="flex:1 1 auto;"></div>
-    <nav class="auth-nav">
-      <a href="index.html" class="btn btn--secondary">Home</a>
-    </nav>
-  </header>
+  <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+  <div style="flex:1 1 auto;"></div>
+  <nav class="auth-nav">
+    <a href="index.html" class="btn btn--secondary">Home</a>
+  </nav>
+</header>
 
   <main>
     <div class="store-header">
@@ -585,3 +646,4 @@
   </script>
 </body>
 </html>
+
