@@ -457,12 +457,25 @@
 
 <body>
   <header>
-    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-    <div style="flex:1 1 auto;"></div>
-    <nav class="auth-nav">
-      <a href="index.html" class="btn btn--secondary">Home</a>
-    </nav>
-  </header>
+  <img src="logo.png" alt="Smartcashly Logo" class="logo-img">
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search stores..." onkeyup="searchStores()">
+    <button onclick="searchStores()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M10 2a8 8 0 105.293 14.293l5.707 5.707 1.414-1.414-5.707-5.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <nav class="auth-nav">
+    <a href="index.html" class="btn btn--secondary">Home</a>
+    <a href="all-stores.html" class="btn btn--secondary">All Stores</a>
+  </nav>
+</header>
+
 
   <main>
     <div class="store-header">
@@ -586,4 +599,5 @@
   </script>
 </body>
 </html>
+
 
