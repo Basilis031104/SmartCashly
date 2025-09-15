@@ -457,24 +457,25 @@
 
 <body>
   <header>
-  <img src="logo.png" alt="Smartcashly Logo" class="logo-img">
+  <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
 
   <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search stores..." onkeyup="searchStores()">
-    <button onclick="searchStores()">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M10 2a8 8 0 105.293 14.293l5.707 5.707 1.414-1.414-5.707-5.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
+  <form class="search-bar" action="#" method="get">
+    <input type="search" name="q" id="search-input"
+           placeholder="Search stores, offers ..." 
+           aria-label="Search Smartcashly" autocomplete="off" />
+    <button type="submit" aria-label="Search">
+      <svg viewBox="0 0 24 24">
+        <path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/>
       </svg>
     </button>
-  </div>
+    <div id="search-autocomplete" class="search-autocomplete"></div>
+  </form>
 
-  <!-- Navigation Buttons -->
-  <nav class="auth-nav">
-    <a href="index.html" class="btn btn--secondary">Home</a>
-    <a href="all-stores.html" class="btn btn--secondary">All Stores</a>
-  </nav>
+  <!-- All Stores Button -->
+  <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
 </header>
+
 
 
   <main>
@@ -599,5 +600,6 @@
   </script>
 </body>
 </html>
+
 
 
