@@ -141,16 +141,16 @@
     }
 
     header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
-      padding: 1rem 1.5rem;
-      background: #008e45 !important;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* CHANGE THIS FROM space-between TO center */
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: #008e45 !important;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
 
     /* Enhanced header particles */
     header::before {
@@ -206,7 +206,6 @@
   margin-left: 120px;
 }
 
-/* Search input field */
 .search-bar input {
   width: 100%;
   padding: 0.55rem 2.8rem 0.55rem 1rem;
@@ -218,12 +217,10 @@
   transition: box-shadow .18s;
 }
 
-/* Search input focus state */
 .search-bar input:focus {
   box-shadow: 0 0 0 2px rgba(0,112,243,.35);
 }
 
-/* Search button */
 .search-bar button {
   position: absolute;
   right: .4rem;
@@ -241,12 +238,10 @@
   transition: background .18s;
 }
 
-/* Search button hover */
 .search-bar button:hover { 
   background: #0059c1 !important; 
 }
 
-/* Search button icon */
 .search-bar button svg { 
   width: 1rem; 
   height: 1rem; 
@@ -267,7 +262,6 @@
   margin-left: 1rem;
 }
 
-/* View All Stores button hover */
 .all-stores-btn:hover {
   background: #0059c1;
 }
@@ -550,7 +544,7 @@
 </head>
 
 <body>
-  <header>
+ <header>
   <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
   <form class="search-bar" action="#" method="get">
     <input type="search" name="q" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
@@ -687,6 +681,7 @@
 </body>
 
 </html>
+
 
 
 
