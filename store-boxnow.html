@@ -149,6 +149,8 @@
       color: #fff;
       position: relative;
       overflow: hidden;
+      z-index: 1000;
+      min-height: 80px;
     }
 
     /* Enhanced header particles */
@@ -186,107 +188,186 @@
     }
 
     /* Logo positioning */
-.logo-img {
-  position: absolute;
-  left: 1.5rem;
-  height: 100px;
-  width: auto;
-  background: transparent !important;
-  z-index: 1002;
-}
+    .logo-img {
+      position: absolute;
+      left: 1.5rem;
+      height: 100px;
+      width: auto;
+      background: transparent !important;
+      z-index: 1002;
+    }
 
-/* Search bar container */
-.search-bar {
-  position: relative;
-  flex: 0 0 auto;
-  max-width: 680px;
-  width: 500px;
-  z-index: 1002;
-  margin-left: 120px;
-}
+    /* Search bar container */
+    .search-bar {
+      position: relative;
+      flex: 0 0 auto;
+      max-width: 680px;
+      width: 500px;
+      z-index: 1002;
+      margin-left: 120px;
+    }
 
-/* Search input field */
-.search-bar input {
-  width: 100%;
-  padding: 0.55rem 2.8rem 0.55rem 1rem;
-  border: none;
-  border-radius: 9999px;
-  font-size: 0.95rem;
-  outline: none;
-  background: white !important;
-  transition: box-shadow .18s;
-}
+    /* Search input field */
+    .search-bar input {
+      width: 100%;
+      padding: 0.55rem 2.8rem 0.55rem 1rem;
+      border: none;
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      outline: none;
+      background: white !important;
+      transition: box-shadow .18s;
+    }
 
-/* Search input focus state */
-.search-bar input:focus {
-  box-shadow: 0 0 0 2px rgba(0,112,243,.35);
-}
+    /* Search input focus state */
+    .search-bar input:focus {
+      box-shadow: 0 0 0 2px rgba(0,112,243,.35);
+    }
 
-/* Search button */
-.search-bar button {
-  position: absolute;
-  right: .4rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.2rem;
-  height: 2.2rem;
-  border: none;
-  border-radius: 50%;
-  background: #0070f3 !important;
-  cursor: pointer;
-  transition: background .18s;
-}
+    /* Search button */
+    .search-bar button {
+      position: absolute;
+      right: .4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border: none;
+      border-radius: 50%;
+      background: #0070f3 !important;
+      cursor: pointer;
+      transition: background .18s;
+    }
 
-/* Search button hover */
-.search-bar button:hover { 
-  background: #0059c1 !important; 
-}
+    /* Search button hover */
+    .search-bar button:hover { 
+      background: #0059c1 !important; 
+    }
 
-/* Search button icon */
-.search-bar button svg { 
-  width: 1rem; 
-  height: 1rem; 
-  fill: #fff; 
-}
+    /* Search button icon */
+    .search-bar button svg { 
+      width: 1rem; 
+      height: 1rem; 
+      fill: #fff; 
+    }
 
-/* View All Stores button */
-.all-stores-btn {
-  background: #0070f3;
-  color: white;
-  text-decoration: none;
-  padding: 0.55rem 1.2rem;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: background 0.18s;
-  white-space: nowrap;
-  margin-left: 1rem;
-}
+    /* View All Stores button */
+    .all-stores-btn {
+      background: #0070f3;
+      color: white;
+      text-decoration: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.18s;
+      white-space: nowrap;
+      margin-left: 1rem;
+      z-index: 1002;
+    }
 
-/* View All Stores button hover */
-.all-stores-btn:hover {
-  background: #0059c1;
-}
+    /* View All Stores button hover */
+    .all-stores-btn:hover {
+      background: #0059c1;
+    }
 
-/* Auth navigation positioning */
-.auth-nav {
-  position: absolute;
-  right: 1.5rem;
-  display: flex;
-  gap: 0.5rem;
-  z-index: 1002;
-}
+    /* Auth navigation positioning */
+    .auth-nav {
+      position: absolute;
+      right: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 1002;
+    }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .search-bar {
-    margin-left: 20px;
-    max-width: 300px;
-  }
-}
+    /* Search Autocomplete Styles */
+    .search-autocomplete {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white !important;
+      border: 1px solid #e9e9e9;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
+      z-index: 1050 !important;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .search-autocomplete.show {
+      display: block !important;
+    }
+
+    .autocomplete-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f1f1f1;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: white !important;
+      position: relative;
+      z-index: 1051;
+    }
+
+    .autocomplete-item:hover,
+    .autocomplete-item.active {
+      background-color: #f8f9fa !important;
+    }
+
+    .autocomplete-item.active {
+      background-color: #e3f2fd !important;
+      color: #1976d2;
+    }
+
+    .autocomplete-item:last-child {
+      border-bottom: none;
+    }
+
+    .autocomplete-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      background-color: #f0f0f0;
+    }
+
+    .autocomplete-content {
+      flex: 1;
+    }
+
+    .autocomplete-name {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .autocomplete-description {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .autocomplete-cashback {
+      font-size: 0.8rem;
+      color: #ff6b35;
+      font-weight: bold;
+    }
+
+    .no-results {
+      padding: 20px 16px;
+      text-align: center;
+      color: #666;
+      background: white !important;
+      position: relative;
+      z-index: 1051;
+    }
 
     .btn {
       display: inline-block;
@@ -310,6 +391,9 @@
       max-width: 1200px;
       margin: 0 auto;
       width: 100%;
+      position: relative;
+      z-index: 5;
+      margin-top: 0;
     }
 
     .store-header {
@@ -331,7 +415,7 @@
       background: url('logo-boxnow.png') no-repeat center center;
       background-size: cover;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     .store-details {
@@ -528,6 +612,7 @@
       }
     }
 
+    /* Mobile responsive */
     @media (max-width: 768px) {
       .store-header {
         flex-direction: column;
@@ -537,197 +622,111 @@
       .offers-grid {
         grid-template-columns: 1fr;
       }
+
+      .search-bar {
+        margin-left: 20px;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
 
 <body>
   <header>
-  <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
-  <form class="search-bar" action="#" method="get">
-    <input type="search" name="q" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
-    <button type="submit" aria-label="Search">
-      <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
-    </button>
-  </form>
-  <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
-  <nav class="auth-nav">
-    <a href="index.html" class="btn btn--secondary">Home</a>
-  </nav>
-</header>
+    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+    <form class="search-bar" action="#" method="get">
+      <input type="search" name="q" id="search-input" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
+      </button>
+      <div id="search-autocomplete" class="search-autocomplete"></div>
+    </form>
+    <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
+    <nav class="auth-nav">
+      <a href="index.html" class="btn btn--secondary">Home</a>
+    </nav>
+  </header>
 
   <main>
     <div class="store-header">
       <div class="store-logo-large"></div>
       <div class="store-details">
         <h1 class="store-title">Box Now</h1>
-        <p class="store-subtitle">Delivery service with cashback rewards</p>
+        <p class="store-subtitle">Fast and reliable delivery service with amazing cashback rewards</p>
         <div class="cashback-highlight">💰 Earn up to 35% Cashback</div>
-        <p>Box Now is an online platform offering innovative parcel delivery and pickup services. Box Now has developed a vast network of automated parcel pickup machines (lockers), catering to both individuals and businesses. These lockers are placed in key urban locations, enabling convenient, fast, and secure 24/7 parcel deliveries.</p>
+        <p>Box Now is a modern package delivery service that makes sending packages across Europe simple and affordable. Starting from just 2€, you can send packages of various sizes with reliable tracking and fast delivery times. Perfect for personal shipments, business needs, or sending gifts to loved ones. Earn cashback on every shipment you make through our platform.</p>
       </div>
     </div>
 
     <div class="offers-section">
       <h2 class="section-title">💰 Cashback Offers</h2>
       <div class="offers-grid">
-       <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
+        <div class="offer-card" onclick="window.open('https://boxnow.gr/', '_blank')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type cashback">CASHBACK</div>
           </div>
-          <h3 class="offer-title">Shop at Box Now & Earn Cashback</h3>
-          <p class="offer-description">Browse all Box Now delivery services and earn cashback on every package you send!</p>
-          <div style="height: 24px;"></div>
-          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 35% Cashback</div>
-         <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">💰 Shop & Earn</button>
-        </div>
-
-       <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
-          <div class="offer-header">
-            <div class="offer-logo"></div>
-            <div class="offer-type promo">OFFER</div>
-          </div>
-          <h3 class="offer-title">Send a package for 2€!</h3>
-          <p class="offer-description">Easy and fast online option to send packages for only 2€!</p>
-          <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
-        </div>
-
-        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
-          <div class="offer-header">
-            <div class="offer-logo"></div>
-            <div class="offer-type promo">OFFER</div>
-          </div>
-          <h3 class="offer-title">Send a Mini Package</h3>
-          <p class="offer-description">Send a mini package with 1.5€!</p>
+          <h3 class="offer-title">Send Packages with Box Now</h3>
+          <p class="offer-description">Send packages across Europe starting from just 2€ and earn cashback on every shipment!</p>
           <div style="height: 48px;"></div>
-          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
+          <div class="offer-cashback" style="color: #ff6b35;">💰 Earn up to 35% Cashback</div>
+          <button class="offer-button">📦 Send & Earn</button>
         </div>
 
-        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
+        <div class="offer-card" onclick="window.open('https://boxnow.gr/services', '_blank')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Send a Small Package</h3>
-          <p class="offer-description">Send a small package with 3€!</p>
-          <div style="height: 24px;"></div>
+          <h3 class="offer-title">International Shipping</h3>
+          <p class="offer-description">Send packages internationally with reliable tracking and competitive rates!</p>
+          <div style="height: 72px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
+          <button class="offer-button">🌍 Ship International</button>
         </div>
 
-        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
+        <div class="offer-card" onclick="window.open('https://boxnow.gr/pricing', '_blank')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Send a Medium Package</h3>
-          <p class="offer-description">Send a medium package with 4€!</p>
-          <div style="height: 24px;"></div>
+          <h3 class="offer-title">Budget Shipping from 2€</h3>
+          <p class="offer-description">Affordable shipping solutions for small packages starting at just 2€ per shipment!</p>
+          <div style="height: 72px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
+          <button class="offer-button">💶 Ship Budget</button>
         </div>
 
-       <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
+        <div class="offer-card" onclick="window.open('https://boxnow.gr/business', '_blank')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
             <div class="offer-type promo">OFFER</div>
           </div>
-          <h3 class="offer-title">Send a Large Package</h3>
-          <p class="offer-description">Send a large package with 8€!</p>
-          <div style="height: 24px;"></div>
+          <h3 class="offer-title">Business Solutions</h3>
+          <p class="offer-description">Professional shipping services for businesses with bulk discounts and priority handling!</p>
+          <div style="height: 72px;"></div>
           <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
+          <button class="offer-button">🏢 Business Ship</button>
         </div>
-      </div>
-    </div>
-  </main>
 
-  <footer>
-    © <span id="year"></span> Smartcashly. All rights reserved.
-  </footer>
+        <div class="offer-card" onclick="window.open('https://boxnow.gr/tracking', '_blank')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Package Tracking</h3>
+          <p class="offer-description">Real-time tracking for all your shipments with detailed delivery updates and notifications!</p>
+          <div style="height: 72px;"></div>
+          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
+          <button class="offer-button">📍 Track Package</button>
+        </div>
 
-  <script>
-    document.getElementById('year').textContent = 2025;
-
-    function trackClick(offerId) {
-      console.log('trackClick called with offerId:', offerId);
-      
-      // Create click data
-      const clickData = {
-        store: 'Box Now',
-        offerId: offerId,
-        timestamp: new Date().toISOString(),
-        clickId: 'BN' + Date.now().toString().slice(-6)
-      };
-      
-      console.log('Created clickData:', clickData);
-      
-      // Show success message on button
-      const button = event.target;
-      const originalText = button.textContent;
-      button.textContent = '✅ Tracked!';
-      button.style.background = '#28a745';
-      
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.style.background = '#4CAF50';
-      }, 2000);
-      
-      // Store in localStorage safely
-      try {
-        let clickHistory = [];
-        const stored = localStorage.getItem('click_history');
-        if (stored) {
-          clickHistory = JSON.parse(stored);
-        }
-        
-        // Ensure it's an array
-        if (!Array.isArray(clickHistory)) {
-          clickHistory = [];
-        }
-        
-        clickHistory.unshift(clickData);
-        
-        // Keep only last 50 clicks
-        if (clickHistory.length > 50) {
-          clickHistory.splice(50);
-        }
-        
-        localStorage.setItem('click_history', JSON.stringify(clickHistory));
-        console.log('Stored click history successfully');
-      } catch (error) {
-        console.warn('Could not store click history:', error);
-      }
-      
-      // Define specific Box Now URLs
-      const boxnowUrls = {
-        'boxnow-general': 'https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8' + clickData.clickId,
-        'boxnow-2euro': 'https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8' + clickData.clickId,
-        'boxnow-mini': 'https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8' + clickData.clickId,
-        'boxnow-small': 'https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8' + clickData.clickId,
-        'boxnow-medium': 'https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8' + clickData.clickId,
-        'boxnow-large': 'https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8' + clickData.clickId
-      };
-      
-      // Get the specific URL
-      const targetUrl = boxnowUrls[offerId] || 'https://steiledema.boxnow.gr/?utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&partner_id=SMART2025';
-      
-      console.log('Opening URL:', targetUrl);
-      
-      // Redirect to Box Now website
-      window.open(targetUrl, '_blank');
-    }
-  </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
+        <div class="offer-card" onclick="window.open('https://boxnow.gr/express', '_blank')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Express Delivery</h3>
+          <p class="offer-description">Fast express shipping options for urgent packages with same-day and next-day delivery!</p>
+          <div style="height: 72px;"></div>
+          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
