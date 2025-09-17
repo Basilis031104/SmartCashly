@@ -201,7 +201,7 @@
   flex: 0 0 auto;
   max-width: 680px;
   width: 500px;
-  z-index: 1002;
+  z-index: 100000;
   margin-left: 120px;
 }
 
@@ -538,52 +538,47 @@
         grid-template-columns: 1fr;
       }
     }
-/* Search Autocomplete Styles - Enhanced with proper z-index */
-.search-bar {
-  position: relative !important;
-  z-index: 100000 !important;
-}
+    /* Search Autocomplete Styles - Enhanced with higher z-index */
+    .search-autocomplete {
+      position: absolute !important;
+      top: calc(100% + 5px) !important;
+      left: 0 !important;
+      right: 0 !important;
+      background: white !important;
+      border: 3px solid #008e45 !important;
+      border-radius: 0 0 12px 12px !important;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
+      z-index: 100001 !important;
+      max-height: 300px !important;
+      overflow-y: auto !important;
+      display: none !important;
+    }
 
-.search-autocomplete {
-  position: absolute !important;
-  top: calc(100% + 5px) !important;
-  left: 0 !important;
-  right: 0 !important;
-  background: white !important;
-  border: 3px solid #008e45 !important;
-  border-radius: 0 0 12px 12px !important;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
-  z-index: 100001 !important;
-  max-height: 300px !important;
-  overflow-y: auto !important;
-  display: none !important;
-}
+    .search-autocomplete.show { 
+      display: block !important; 
+    }
 
-.search-autocomplete.show { 
-  display: block !important; 
-}
+    .search-autocomplete div {
+      padding: 12px 16px !important;
+      cursor: pointer !important;
+      background: white !important;
+      border-bottom: 1px solid #eee !important;
+      color: #333 !important;
+      font-weight: 600 !important;
+      transition: background-color 0.2s ease !important;
+      position: relative !important;
+      z-index: 100002 !important;
+    }
 
-.search-autocomplete div {
-  padding: 12px 16px !important;
-  cursor: pointer !important;
-  background: white !important;
-  border-bottom: 1px solid #eee !important;
-  color: #333 !important;
-  font-weight: 600 !important;
-  transition: background-color 0.2s ease !important;
-  position: relative !important;
-  z-index: 100002 !important;
-}
+    .search-autocomplete div:hover {
+      background: #f0f8ff !important;
+      color: #008e45 !important;
+    }
 
-.search-autocomplete div:hover {
-  background: #f0f8ff !important;
-  color: #008e45 !important;
-}
-
-.search-autocomplete div:last-child {
-  border-bottom: none !important;
-  border-radius: 0 0 9px 9px !important;
-}
+    .search-autocomplete div:last-child {
+      border-bottom: none !important;
+      border-radius: 0 0 9px 9px !important;
+    }
   </style>
 </head>
 
@@ -640,42 +635,6 @@
           <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
         </div>
 
-        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
-          <div class="offer-header">
-            <div class="offer-logo"></div>
-            <div class="offer-type promo">OFFER</div>
-          </div>
-          <h3 class="offer-title">Send a Mini Package</h3>
-          <p class="offer-description">Send a mini package with 1.5€!</p>
-          <div style="height: 48px;"></div>
-          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
-        </div>
-
-        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
-          <div class="offer-header">
-            <div class="offer-logo"></div>
-            <div class="offer-type promo">OFFER</div>
-          </div>
-          <h3 class="offer-title">Send a Small Package</h3>
-          <p class="offer-description">Send a small package with 3€!</p>
-          <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
-        </div>
-
-        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
-          <div class="offer-header">
-            <div class="offer-logo"></div>
-            <div class="offer-type promo">OFFER</div>
-          </div>
-          <h3 class="offer-title">Send a Medium Package</h3>
-          <p class="offer-description">Send a medium package with 4€!</p>
-          <div style="height: 24px;"></div>
-          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
-          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
-        </div>
-
        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
           <div class="offer-header">
             <div class="offer-logo"></div>
@@ -712,7 +671,8 @@ if (searchInput && searchBar) {
     { name: 'Shein', url: 'store-shein.html' },
     { name: 'Benetton', url: 'store-benetton.html' },
     { name: 'Myprotein', url: 'store-myprotein.html' },
-    { name: 'Aegean Airlines', url: 'store-aegean.html' }
+    { name: 'Aegean Airlines', url: 'store-aegean.html' },
+    { name: 'Adidas', url: 'store-adidas.html' }
   ];
 
   searchInput.addEventListener('input', function(e) {
@@ -808,16 +768,40 @@ if (searchInput && searchBar) {
     }
   </script>
 </body>
-</html>
+</html>oli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
+        </div>
 
+        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Send a Mini Package</h3>
+          <p class="offer-description">Send a mini package with 1.5€!</p>
+          <div style="height: 48px;"></div>
+          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
+          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
+        </div>
 
+        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Send a Small Package</h3>
+          <p class="offer-description">Send a small package with 3€!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
+          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')">📦 Get Offer</button>
+        </div>
 
-
-
-
-
-
-
-
-
-
+        <div class="offer-card" onclick="window.open('https://steiledema.boxnow.gr/apostoli-dematos?lkws_13733=67c4f902-58a0-3868-3277-da0f2e15ded8', '_blank')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Send a Medium Package</h3>
+          <p class="offer-description">Send a medium package with 4€!</p>
+          <div style="height: 24px;"></div>
+          <div class="offer-cashback">+ Get Extra 35% Cashback</div>
+          <button class="offer-button" onclick="event.stopPropagation(); window.open('https://steiledema.boxnow.gr/apost
