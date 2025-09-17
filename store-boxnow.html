@@ -538,22 +538,23 @@
         grid-template-columns: 1fr;
       }
     }
-  /* Search Autocomplete Styles */
+/* Search Autocomplete Styles - Enhanced with proper z-index */
 .search-bar {
   position: relative !important;
+  z-index: 100000 !important;
 }
 
 .search-autocomplete {
   position: absolute !important;
-  top: calc(100% + 2px) !important;
+  top: calc(100% + 5px) !important;
   left: 0 !important;
   right: 0 !important;
   background: white !important;
-  border: 2px solid #008e45 !important;
+  border: 3px solid #008e45 !important;
   border-radius: 0 0 12px 12px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
-  z-index: 999999 !important;
-  max-height: 250px !important;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
+  z-index: 100001 !important;
+  max-height: 300px !important;
   overflow-y: auto !important;
   display: none !important;
 }
@@ -568,10 +569,20 @@
   background: white !important;
   border-bottom: 1px solid #eee !important;
   color: #333 !important;
+  font-weight: 600 !important;
+  transition: background-color 0.2s ease !important;
+  position: relative !important;
+  z-index: 100002 !important;
 }
 
 .search-autocomplete div:hover {
   background: #f0f8ff !important;
+  color: #008e45 !important;
+}
+
+.search-autocomplete div:last-child {
+  border-bottom: none !important;
+  border-radius: 0 0 9px 9px !important;
 }
   </style>
 </head>
@@ -798,6 +809,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
