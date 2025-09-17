@@ -198,24 +198,20 @@
 /* Search bar container */
 .search-bar {
   position: relative;
-  flex: 0 0 auto;
-  max-width: 680px;
-  width: 500px;
-  z-index: 1002;
-  margin-left: 120px;
+  z-index: 3100;
+  background: transparent; /* no extra box showing */
 }
 
-/* Search input field */
 .search-bar input {
-  width: 100%;
-  padding: 0.55rem 2.8rem 0.55rem 1rem;
+  background: #fff;           /* white input field */
   border: none;
   border-radius: 9999px;
+  padding: 0.55rem 2.8rem 0.55rem 1rem;
   font-size: 0.95rem;
-  outline: none;
-  background: white !important;
-  transition: box-shadow .18s;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* subtle shadow like homepage */
 }
+
 
 /* Search input focus state */
 .search-bar input:focus {
@@ -808,5 +804,6 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
