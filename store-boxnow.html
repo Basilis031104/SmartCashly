@@ -538,11 +538,16 @@
         grid-template-columns: 1fr;
       }
     }
-  /* Search Autocomplete Styles - FIXED Z-INDEX ISSUES */
+ header {
+  position: relative;
+  z-index: 3000; /* puts header above all backgrounds */
+}
+
 .search-bar {
   position: relative;
-  z-index: 2000; /* ensures it stays above background + particles */
+  z-index: 3100; /* ensures search bar stays above even inside header */
 }
+
 
 
 .search-autocomplete {
@@ -803,4 +808,5 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
