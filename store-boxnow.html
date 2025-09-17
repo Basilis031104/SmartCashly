@@ -48,8 +48,8 @@
         radial-gradient(circle at 25% 85%, rgba(255, 160, 0, 0.4) 1.5px, transparent 1.5px),
         radial-gradient(circle at 65% 45%, rgba(255, 235, 59, 0.5) 1px, transparent 1px);
       background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+      z-index: 0;
       pointer-events: none !important;
-      z-index: 1;
       animation: gentleFloat 25s ease-in-out infinite;
       will-change: background-position;
     }
@@ -143,17 +143,19 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       color: #222;
     }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
-      padding: 1rem 1.5rem;
-      background: #008e45 !important;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
+   header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: #008e45 !important;
+  color: #fff;
+  position: relative;
+  overflow: visible;     /* <-- was hidden */
+  z-index: 1001;         /* keep header above the page bg */
+}
+
 
     /* Enhanced header particles */
     header::before {
@@ -802,6 +804,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
