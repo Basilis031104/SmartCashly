@@ -569,11 +569,25 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 }
 
 .search-autocomplete div {
-  padding: 12px 16px !important;
-  cursor: pointer !important;
-  background: white !important;
-  border-bottom: 1px solid #eee !important;
-  color: #333 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.search-autocomplete .store-name {
+  color: #008e45;       /* Smartcashly green */
+  font-weight: 600;
+}
+
+.search-autocomplete .store-logo {
+  height: 28px;         /* adjust size to fit */
+  width: auto;
+  margin-left: 12px;
+  flex-shrink: 0;
 }
 
 .search-autocomplete div:hover {
@@ -805,6 +819,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
