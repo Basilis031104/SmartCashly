@@ -32,20 +32,25 @@
       background-color: yellow !important;
       background: yellow !important;
       color: #222;
+      padding-top: 80px;
     }
 
     /* =============  HEADER  ==================================== */
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-      padding: 1rem 1.5rem;
-      background: #008e45;
-      color: #fff;
-      margin: 0;
-      border: 0;
-    }
+  position: sticky;    /* make sure it stays at the top */
+  top: 0;
+  z-index: 1000;       /* keeps it above banners */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: #008e45;
+  color: #fff;
+  margin: 0;
+  border: 0;
+}
+
 
     .logo-img {
       height: 64px;
