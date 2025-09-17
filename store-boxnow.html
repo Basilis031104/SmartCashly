@@ -195,30 +195,35 @@
   z-index: 1002;
 }
 
-/* Search bar container */
+/* force same look as homepage */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  position: relative;
+  z-index: 3000; /* ensures header above backgrounds */
+}
+
 .search-bar {
   position: relative;
+  flex: 1 1 100%;
+  max-width: 480px;
   z-index: 3100;
-  background: transparent; /* no extra box showing */
 }
 
 .search-bar input {
-  background: #fff;           /* white input field */
+  width: 100%;
+  background: #fff;
   border: none;
   border-radius: 9999px;
   padding: 0.55rem 2.8rem 0.55rem 1rem;
   font-size: 0.95rem;
-  width: 100%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* subtle shadow like homepage */
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-
-/* Search input focus state */
-.search-bar input:focus {
-  box-shadow: 0 0 0 2px rgba(0,112,243,.35);
-}
-
-/* Search button */
 .search-bar button {
   position: absolute;
   right: .4rem;
@@ -231,22 +236,13 @@
   height: 2.2rem;
   border: none;
   border-radius: 50%;
-  background: #0070f3 !important;
+  background: #0070f3;
   cursor: pointer;
-  transition: background .18s;
 }
 
-/* Search button hover */
-.search-bar button:hover { 
-  background: #0059c1 !important; 
-}
+.search-bar button:hover { background: #0059c1; }
+.search-bar button svg   { width: 1rem; height: 1rem; fill: #fff; }
 
-/* Search button icon */
-.search-bar button svg { 
-  width: 1rem; 
-  height: 1rem; 
-  fill: #fff; 
-}
 
 /* View All Stores button */
 .all-stores-btn {
@@ -804,6 +800,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
