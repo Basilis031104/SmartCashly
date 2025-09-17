@@ -540,8 +540,10 @@
     }
   /* Search Autocomplete Styles - FIXED Z-INDEX ISSUES */
 .search-bar {
-  position: relative !important;
+  position: relative;
+  z-index: 2000; /* ensures it stays above background + particles */
 }
+
 
 .search-autocomplete {
   position: absolute !important;
@@ -801,3 +803,4 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
