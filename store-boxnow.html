@@ -53,6 +53,10 @@
       animation: gentleFloat 25s ease-in-out infinite;
       will-change: background-position;
     }
+    /* Keep page chrome above the animated background */
+header, main, footer { position: relative; z-index: 10; }
+header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow */
+
 
     /* Enhanced sparkle layer */
     body::after {
@@ -198,10 +202,10 @@
 /* Search bar container */
 .search-bar {
   position: relative;
+  z-index: 1002;
   flex: 0 0 auto;
   max-width: 680px;
   width: 500px;
-  z-index: 1002;
   margin-left: 120px;
 }
 
@@ -798,6 +802,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
