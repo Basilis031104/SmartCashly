@@ -48,8 +48,8 @@
         radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.6) 1.5px, transparent 1.5px),
         radial-gradient(circle at 65% 45%, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
       background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+      z-index: 0;
       pointer-events: none !important;
-      z-index: 1;
       animation: gentleFloat 25s ease-in-out infinite;
       will-change: background-position;
     }
@@ -148,8 +148,10 @@
       background: #008e45 !important;
       color: #fff;
       position: relative;
-      overflow: hidden;
+      overflow: visible;   /* ✅ allow dropdown to escape */
+      z-index: 1001;       /* ✅ keep header above background layers */
     }
+
 
     /* Enhanced header particles */
     header::before {
@@ -905,6 +907,7 @@
   </script>
 </body>
 </html>
+
 
 
 
