@@ -698,7 +698,52 @@
   <footer>
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
+  
+  <script>
+    // Search functionality  
+    const searchInput = document.querySelector('.search-bar input');
+    const searchBar = document.querySelector('.search-bar');
 
+    if (searchInput && searchBar) {
+      const autocomplete = document.createElement('div');
+      autocomplete.className = 'search-autocomplete';
+      searchBar.appendChild(autocomplete);
+
+      const stores = [
+        { name: 'Box Now', url: 'store-boxnow.html' },
+        { name: 'Nike', url: 'store-nike.html' },
+        { name: 'Shein', url: 'store-shein.html' },
+        { name: 'Benetton', url: 'store-benetton.html' },
+        { name: 'Myprotein', url: 'store-myprotein.html' },
+        { name: 'Aegean Airlines', url: 'store-aegean.html' },
+        { name: 'Adidas', url:'store-adidas.html'}
+      ];
+
+      searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) { 
+          autocomplete.classList.remove('show'); 
+          return; 
+        }
+        
+        const results = stores.filter(s => s.name.toLowerCase().includes(query));
+        if (results.length) {
+          autocomplete.innerHTML = results.map(s => 
+            `<div onclick="window.location.href='${s.url}'">${s.name}</div>`
+          ).join('');
+          autocomplete.classList.add('show');
+        } else {
+          autocomplete.classList.remove('show');
+        }
+      });
+
+      searchInput.addEventListener('blur', () => {
+        setTimeout(() => autocomplete.classList.remove('show'), 200);
+      });
+    }
+  </script>
+
+  <!-- your existing Shein-specific script follows -->
   <script>
     document.getElementById('year').textContent = 2025;
 
@@ -907,6 +952,7 @@
   </script>
 </body>
 </html>
+
 
 
 
