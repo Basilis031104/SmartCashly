@@ -48,8 +48,8 @@
         radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.6) 1.5px, transparent 1.5px),
         radial-gradient(circle at 65% 45%, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
       background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+      z-index: 0;
       pointer-events: none !important;
-      z-index: 1;
       animation: gentleFloat 25s ease-in-out infinite;
       will-change: background-position;
     }
@@ -140,16 +140,17 @@
     }
 
   header {
-  display: flex;
-  align-items: center;
-  justify-content: center;  /* CHANGE THIS FROM space-between TO center */
-  gap: 1.25rem;
-  padding: 1rem 1.5rem;
-  background: #008e45 !important;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 1rem 1.5rem;
+      background: #008e45 !important;
+      color: #fff;
+      position: relative;
+      overflow: visible;   /* ✅ allow dropdown to escape */
+      z-index: 1001;       /* ✅ keep header above background layers */
+    }
 
     /* Enhanced header particles */
     header::before {
@@ -251,6 +252,57 @@
   height: 1rem; 
   fill: #fff; 
 }
+
+/* Search Autocomplete Styles */
+.search-bar {
+  position: relative !important;
+}
+
+.search-autocomplete {
+  position: absolute !important;
+  top: calc(100% + 2px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: white !important;
+  border: 2px solid #008e45 !important;
+  border-radius: 0 0 12px 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  z-index: 999999 !important;
+  max-height: 250px !important;
+  overflow-y: auto !important;
+  display: none !important;
+}
+
+.search-autocomplete.show { 
+  display: block !important; 
+}
+
+.search-autocomplete div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.search-autocomplete .store-name {
+  color: #008e45;       /* Smartcashly green */
+  font-weight: 600;
+}
+
+.search-autocomplete .store-logo {
+  height: 28px;
+  width: auto;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.search-autocomplete div:hover {
+  background: #f0f8ff !important;
+}
+
 
 /* View All Stores button */
 .all-stores-btn {
@@ -673,12 +725,62 @@
     © <span id="year"></span> Smartcashly. All rights reserved.
   </footer>
 
+  <!-- ✅ Paste the search functionality block here -->
+  <script>
+    // Search functionality  
+    const searchInput = document.querySelector('.search-bar input');
+    const searchBar = document.querySelector('.search-bar');
+
+    if (searchInput && searchBar) {
+      const autocomplete = document.createElement('div');
+      autocomplete.className = 'search-autocomplete';
+      searchBar.appendChild(autocomplete);
+
+      const stores = [
+        { name: 'Box Now', url: 'store-boxnow.html' },
+        { name: 'Nike', url: 'store-nike.html' },
+        { name: 'Shein', url: 'store-shein.html' },
+        { name: 'Benetton', url: 'store-benetton.html' },
+        { name: 'Myprotein', url: 'store-myprotein.html' },
+        { name: 'Aegean Airlines', url: 'store-aegean.html' },
+        { name: 'Adidas', url:'store-adidas.html'}
+      ];
+
+      searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) { 
+          autocomplete.classList.remove('show'); 
+          return; 
+        }
+        
+        const results = stores.filter(s => s.name.toLowerCase().includes(query));
+        if (results.length) {
+          autocomplete.innerHTML = results.map(s => 
+            `<div onclick="window.location.href='${s.url}'">${s.name}</div>`
+          ).join('');
+          autocomplete.classList.add('show');
+        } else {
+          autocomplete.classList.remove('show');
+        }
+      });
+
+      searchInput.addEventListener('blur', () => {
+        setTimeout(() => autocomplete.classList.remove('show'), 200);
+      });
+    }
+  </script>
+
+  <!-- your existing Shein-specific script follows -->
+  <script>
+    document.getElementById('year').textContent = 2025;
+
   <script>
     document.getElementById('year').textContent = 2025;
   </script>
 </body>
 
 </html>
+
 
 
 
