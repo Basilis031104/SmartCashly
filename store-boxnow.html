@@ -214,14 +214,15 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 /* Search input field */
 .search-bar input {
   width: 100%;
-  padding: 0.55rem 2.8rem 0.55rem 1rem;
+  padding: 0.55rem 3rem 0.55rem 1rem;  /* ✅ extra right padding for button */
   border: none;
   border-radius: 9999px;
   font-size: 0.95rem;
   outline: none;
-  background: white !important;
+  background: white;
   transition: box-shadow .18s;
 }
+
 
 /* Search input focus state */
 .search-bar input:focus {
@@ -832,8 +833,11 @@ if (searchInput && searchBar) {
   searchInput.addEventListener('input', function(e) {
     const query = e.target.value.toLowerCase().trim();
     if (!query) { 
+      autocomplete.innerHTML = '';       // clear results
       autocomplete.classList.remove('show'); 
       return; 
+    }
+
     }
     
     const results = stores.filter(s => s.name.toLowerCase().includes(query));
@@ -927,6 +931,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
