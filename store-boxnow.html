@@ -143,18 +143,18 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       color: #222;
     }
 
-  header {
+   header {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* ✅ align items left-to-right */
-  gap: 1rem;                  /* space between logo, name, search */
+  justify-content: center;
+  gap: 1.25rem;
   padding: 1rem 1.5rem;
   background: #008e45 !important;
   color: #fff;
   position: relative;
-  z-index: 1001;
+  overflow: visible;     /* <-- was hidden */
+  z-index: 1001;         /* keep header above the page bg */
 }
-
 
 
     /* Enhanced header particles */
@@ -331,15 +331,6 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       backdrop-filter: blur(10px);
       border: 3px solid #008e45;
     }
-
-    .store-header-name {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: white;
-  margin-left: 0.5rem; /* ✅ space between logo & name */
-  white-space: nowrap;
-}
-
 
     .store-logo-large {
       width: 120px;
@@ -718,13 +709,6 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 
 <body>
   <header>
-  <img src="logo-boxnow.png" alt="Box Now logo" class="logo-img" />
-  <span class="store-header-name">Box Now</span>
-  <div class="search-bar"> ... </div>
-  <a href="all-stores.html" class="all-stores-btn">All Stores</a>
-  <nav class="auth-nav"> ... </nav>
-</header>
->
   <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
   <form class="search-bar" action="#" method="get">
     <input type="search" name="q" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
@@ -950,7 +934,6 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
-
 
 
 
