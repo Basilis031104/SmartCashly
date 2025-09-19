@@ -576,16 +576,20 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       cursor: pointer;
       font-size: 0.95rem;
       transition: background 0.2s;
+      color: #008e45 !important;   /* ✅ Smartcashly green */
+      font-weight: 600;
     }
+
     
     .search-autocomplete div:hover {
       background: #f0f8ff !important;
     }
     
     .search-autocomplete .store-name {
-      color: #008e45;   /* ✅ Smartcashly green */
+      color: #008e45 !important;
       font-weight: 600;
     }
+
     
     .search-autocomplete .store-logo {
       height: 28px;
@@ -923,6 +927,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
