@@ -833,13 +833,10 @@ if (searchInput && searchBar) {
   searchInput.addEventListener('input', function(e) {
     const query = e.target.value.toLowerCase().trim();
     if (!query) { 
-      autocomplete.innerHTML = '';       // clear results
       autocomplete.classList.remove('show'); 
       return; 
     }
 
-    }
-    
     const results = stores.filter(s => s.name.toLowerCase().includes(query));
     if (results.length) {
       autocomplete.innerHTML = results.map(s => 
@@ -931,6 +928,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
