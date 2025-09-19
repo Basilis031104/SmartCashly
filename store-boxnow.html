@@ -549,41 +549,31 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   z-index: 1002;                 /* ✅ keep search above everything */
 }
 
-    .search-autocomplete {
-      position: absolute !important;
-      top: calc(100% + 2px) !important;
-      left: 0 !important;
-      right: 0 !important;
-      background: #fff !important;
-      border: 2px solid #008e45 !important;
-      border-radius: 0 0 12px 12px !important;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
-      z-index: 999999 !important;
-      max-height: 250px !important;
-      overflow-y: auto !important;
-      display: none !important;
-    }
-    
-    .search-autocomplete.show {
-      display: block !important;
-    }
-    
     .search-autocomplete div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: background 0.2s;
-      color: #008e45 !important;   /* ✅ Smartcashly green */
-      font-weight: 600;
-    }
+  display: flex;
+  align-items: center;
+  gap: 10px;                     /* space between logo + text */
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
 
-    
-    .search-autocomplete div:hover {
-      background: #f0f8ff !important;
-    }
+.search-autocomplete .store-logo {
+  height: 24px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.search-autocomplete .store-name {
+  color: #008e45 !important;    /* ✅ same dark green as store titles */
+  font-weight: 700;             /* ✅ bold like page titles */
+}
+
+.search-autocomplete div:hover {
+  background: #f0f8ff !important;
+}
+
     
     .search-autocomplete .store-name {
       color: #008e45 !important;
@@ -843,7 +833,11 @@ if (searchInput && searchBar) {
     const results = stores.filter(s => s.name.toLowerCase().includes(query));
     if (results.length) {
       autocomplete.innerHTML = results.map(s => 
-        `<div onclick="window.location.href='${s.url}'">${s.name}</div>`
+        `<div onclick="window.location.href='${s.url}'">
+           <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
+                alt="${s.name} logo" class="store-logo">
+           <span class="store-name">${s.name}</span>
+         </div>`
       ).join('');
       autocomplete.classList.add('show');
     } else {
@@ -927,6 +921,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
