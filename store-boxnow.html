@@ -585,8 +585,8 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 }
 
 .search-autocomplete .store-logo {
-  height: 27.5px;
-  width: 27.5px;           /* ✅ force consistent square size */
+  height: 28px;
+  width: 28px;           /* ✅ force consistent square size */
   object-fit: contain;   /* ✅ keep proportions, no stretching */
   flex-shrink: 0;
   border-radius: 5px;    /* optional: soften edges */
@@ -603,15 +603,6 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       color: #008e45 !important;
       font-weight: 600;
     }
-
-    
-    .search-autocomplete .store-logo {
-      height: 28px;
-      width: auto;
-      margin-left: 12px;
-      flex-shrink: 0;
-    }
-
 
     .autocomplete-item {
       padding: 12px 16px;
@@ -936,6 +927,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
