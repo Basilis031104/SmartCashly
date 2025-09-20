@@ -330,16 +330,12 @@
 }
 
 .search-autocomplete .store-logo {
-  height: 28px;          /* consistent logo height */
-  width: 60px;           /* fixed rectangle width */
-  object-fit: contain;   /* scale logo inside box without distortion */
-  background: #fff;      /* optional: consistent background */
-  padding: 2px;          /* small padding so logos aren’t cropped */
-  border: 1px solid #ddd;/* optional: subtle border for clean alignment */
-  border-radius: 4px;    /* optional: rounded corners */
+  height: 28px;
+  width: 28px;           /* ✅ force consistent square size */
+  object-fit: contain;   /* ✅ keep proportions, no stretching */
   flex-shrink: 0;
+  border-radius: 4px;    /* optional: soften edges */
 }
-
 
 
 .search-autocomplete .store-name {
@@ -1014,6 +1010,7 @@
   </script>
 </body>
 </html>
+
 
 
 
