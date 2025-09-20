@@ -281,27 +281,30 @@
 .search-autocomplete div {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;  /* ✅ logo + text together */
+  gap: 0.75rem;                 /* ✅ space between them */
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-size: 0.95rem;
   transition: background 0.2s;
 }
 
-.search-autocomplete .store-name {
-  color: #008e45;       /* Smartcashly green */
-  font-weight: 600;
+.search-autocomplete div:hover {
+  background: #f0f8ff;
 }
 
 .search-autocomplete .store-logo {
   height: 28px;
-  width: auto;
-  margin-left: 12px;
+  width: 28px;           /* ✅ force consistent square size */
+  object-fit: contain;   /* ✅ keep proportions, no stretching */
   flex-shrink: 0;
+  border-radius: 5px;    /* optional: soften edges */
 }
 
-.search-autocomplete div:hover {
-  background: #f0f8ff !important;
+
+.search-autocomplete .store-name {
+  color: #008e45;
+  font-weight: 600;
 }
 
 
@@ -757,8 +760,12 @@
         const results = stores.filter(s => s.name.toLowerCase().includes(query));
         if (results.length) {
           autocomplete.innerHTML = results.map(s => 
-            `<div onclick="window.location.href='${s.url}'">${s.name}</div>`
-          ).join('');
+              `<div onclick="window.location.href='${s.url}'">
+                 <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
+                      alt="${s.name} logo" class="store-logo">
+                 <span class="store-name">${s.name}</span>
+               </div>`
+            ).join('');
           autocomplete.classList.add('show');
         } else {
           autocomplete.classList.remove('show');
@@ -782,5 +789,6 @@
 </body>
 
 </html>
+
 
 
