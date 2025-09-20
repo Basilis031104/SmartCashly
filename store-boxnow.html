@@ -550,15 +550,38 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   z-index: 1002;                 /* ✅ keep search above everything */
 }
 
+.search-autocomplete {
+  position: absolute !important;
+  top: calc(100% + 2px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: white !important;
+  border: 2px solid #008e45 !important;
+  border-radius: 0 0 12px 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  z-index: 999999 !important;
+  max-height: 250px !important;
+  overflow-y: auto !important;
+  display: none !important;     /* stays hidden by default */
+}
+
+.search-autocomplete.show {
+  display: block !important;    /* ✅ only shows when JS adds "show" */
+}
+
 .search-autocomplete div {
   display: flex;
   align-items: center;
+  justify-content: flex-start;  /* ✅ logo + text stay together */
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-size: 0.95rem;
   transition: background 0.2s;
-  gap: 0.75rem;          /* ✅ space between logo & text */
-  justify-content: flex-start; /* ✅ keep logo + text together on the left */
+  gap: 0.75rem;                 /* ✅ nice spacing between logo & name */
+}
+
+.search-autocomplete div:hover {
+  background: #f0f8ff !important;
 }
 
 .search-autocomplete .store-logo {
@@ -572,14 +595,6 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   font-weight: 600;
 }
 
-
-.search-autocomplete div:hover {
-  background: #f0f8ff;
-}
-
-.search-autocomplete div:hover {
-  background: #f0f8ff !important;
-}
 
 
     
@@ -929,6 +944,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
