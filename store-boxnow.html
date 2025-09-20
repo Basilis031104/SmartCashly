@@ -572,8 +572,8 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 .search-autocomplete div {
   display: flex;
   align-items: center;
-  justify-content: flex-start;  /* ✅ text next to logo */
-  gap: 0.75rem;                 /* ✅ nice spacing */
+  justify-content: flex-start;  /* ✅ logo + text together */
+  gap: 0.75rem;                 /* ✅ space between them */
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-size: 0.95rem;
@@ -592,11 +592,11 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   border-radius: 5px;    /* optional: soften edges */
 }
 
+
 .search-autocomplete .store-name {
   color: #008e45;
   font-weight: 600;
 }
-
 
 
  .search-autocomplete .store-name {
@@ -848,12 +848,12 @@ if (searchInput && searchBar) {
     const results = stores.filter(s => s.name.toLowerCase().includes(query));
     if (results.length) {
       autocomplete.innerHTML = results.map(s => 
-        `<div onclick="window.location.href='${s.url}'">
-           <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
-                alt="${s.name} logo" class="store-logo">
-           <span class="store-name">${s.name}</span>
-         </div>`
-      ).join('');
+            `<div onclick="window.location.href='${s.url}'">
+               <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
+                    alt="${s.name} logo" class="store-logo">
+               <span class="store-name">${s.name}</span>
+             </div>`
+          ).join('');
       autocomplete.classList.add('show');
     } else {
       autocomplete.classList.remove('show');
@@ -936,6 +936,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
