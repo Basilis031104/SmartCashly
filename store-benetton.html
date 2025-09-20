@@ -759,12 +759,12 @@
         const results = stores.filter(s => s.name.toLowerCase().includes(query));
         if (results.length) {
           autocomplete.innerHTML = results.map(s => 
-            `<div onclick="window.location.href='${s.url}'">
-               <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
-                    alt="${s.name} logo" class="store-logo">
-               <span class="store-name">${s.name}</span>
-             </div>`
-          ).join('');
+              `<div onclick="window.location.href='${s.url}'">
+                 <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
+                      alt="${s.name} logo" class="store-logo">
+                 <span class="store-name">${s.name}</span>
+               </div>`
+            ).join('');
           autocomplete.classList.add('show');
         } else {
           autocomplete.classList.remove('show');
@@ -786,6 +786,7 @@
   </script>
 </body>
 </html>
+
 
 
 
