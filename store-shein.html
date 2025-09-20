@@ -331,269 +331,265 @@
 
 .search-autocomplete .store-logo {
   height: 28px;
-  width: 28px;           /* ✅ force consistent square size */
-  object-fit: contain;   /* ✅ keep proportions, no stretching */
+  width: auto;
   flex-shrink: 0;
-  border-radius: 4px;    /* optional: soften edges */
 }
-
 
 .search-autocomplete .store-name {
   color: #008e45;
   font-weight: 600;
 }
 
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: #0070f3 !important;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .18s;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover          { background: #0059c1 !important; }
+.btn--secondary     { background: #0070f3 !important; }
+.btn--secondary:hover { background: #0059c1 !important; }
 
-  .btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    background: #0070f3 !important;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background .18s;
-    border: none;
-    cursor: pointer;
+main {
+  flex: 1 1 auto;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.store-header {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  backdrop-filter: blur(10px);
+  border: 3px solid #008e45;
+}
+
+.store-logo-large {
+  width: 120px;
+  height: 120px;
+  background: url('logo-shein.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.store-details {
+  flex: 1;
+}
+
+.store-title {
+  font-size: 2rem;
+  color: #008e45;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.store-subtitle {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.cashback-highlight {
+  background: linear-gradient(135deg, #ff6b35, #ff8a50);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.offers-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #008e45;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 3px solid #008e45;
+  display: inline-block;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.offer-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 3px solid #008e45;
+}
+
+.offer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.offer-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.offer-logo {
+  width: 50px;
+  height: 50px;
+  background: url('logo-shein.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 6px;
+}
+
+.offer-type {
+  background: #2196F3;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.offer-type.cashback {
+  background: #ff6b35;
+}
+
+.offer-type.promo {
+  background: #2196F3;
+}
+
+.offer-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.offer-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.offer-cashback {
+  color: #ff6b35;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.offer-validity {
+  color: #999;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.offer-button {
+  background: #4CAF50;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+.offer-button:hover {
+  background: #45a049;
+}
+
+footer {
+  text-align: center;
+  font-size: .875rem;
+  padding: 1rem 0;
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+footer * {
+  position: relative;
+  z-index: 3;
+  color: #ffffff !important;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
+  background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
+  pointer-events: none !important;
+  z-index: 1;
+  animation: footerParticles 15s ease-in-out infinite;
+}
+
+@keyframes footerParticles {
+  0% { 
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    opacity: 0.6;
   }
-  .btn:hover          { background: #0059c1 !important; }
-  .btn--secondary     { background: #0070f3 !important; }
-  .btn--secondary:hover { background: #0059c1 !important; }
-
-  main {
-    flex: 1 1 auto;
-    padding: 2rem 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+  50% { 
+    background-position: 15% 15%, 20% 20%, 25% 25%, 30% 30%;
+    opacity: 0.8;
   }
+  100% { 
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    opacity: 0.6;
+  }
+}
 
+@media (max-width: 768px) {
   .store-header {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    backdrop-filter: blur(10px);
-    border: 3px solid #008e45;
-  }
-
-  .store-logo-large {
-    width: 120px;
-    height: 120px;
-    background: url('logo-shein.png') no-repeat center center;
-    background-size: cover;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .store-details {
-    flex: 1;
-  }
-
-  .store-title {
-    font-size: 2rem;
-    color: #008e45;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-
-  .store-subtitle {
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 1rem;
-  }
-
-  .cashback-highlight {
-    background: linear-gradient(135deg, #ff6b35, #ff8a50);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-
-  .offers-section {
-    margin-bottom: 3rem;
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-    color: #008e45;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border: 3px solid #008e45;
-    display: inline-block;
-  }
-
-  .offers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .offer-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    border: 3px solid #008e45;
-  }
-
-  .offer-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  }
-
-  .offer-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .offer-logo {
-    width: 50px;
-    height: 50px;
-    background: url('logo-shein.png') no-repeat center center;
-    background-size: cover;
-    border-radius: 6px;
-  }
-
-  .offer-type {
-    background: #2196F3;
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  .offer-type.cashback {
-    background: #ff6b35;
-  }
-
-  .offer-type.promo {
-    background: #2196F3;
-  }
-
-  .offer-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 0.5rem;
-  }
-
-  .offer-description {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-  }
-
-  .offer-cashback {
-    color: #ff6b35;
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .offer-validity {
-    color: #999;
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-  }
-
-  .offer-button {
-    background: #4CAF50;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-    width: 100%;
-  }
-
-  .offer-button:hover {
-    background: #45a049;
-  }
-
-  footer {
+    flex-direction: column;
     text-align: center;
-    font-size: .875rem;
-    padding: 1rem 0;
-    background: #000000 !important;
-    color: #ffffff !important;
-    border-top: 1px solid rgba(255, 215, 0, 0.3);
-    position: relative;
-    z-index: 10;
-    overflow: hidden;
   }
-
-  footer * {
-    position: relative;
-    z-index: 3;
-    color: #ffffff !important;
+  
+  .offers-grid {
+    grid-template-columns: 1fr;
   }
-
-  footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-      radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
-      radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.4) 1px, transparent 1px),
-      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0.5px, transparent 0.5px),
-      radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.3) 1px, transparent 1px);
-    background-size: 70px 70px, 90px 90px, 50px 50px, 80px 80px;
-    pointer-events: none !important;
-    z-index: 1;
-    animation: footerParticles 15s ease-in-out infinite;
-  }
-
-  @keyframes footerParticles {
-    0% { 
-      background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-      opacity: 0.6;
-    }
-    50% { 
-      background-position: 15% 15%, 20% 20%, 25% 25%, 30% 30%;
-      opacity: 0.8;
-    }
-    100% { 
-      background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-      opacity: 0.6;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .store-header {
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .offers-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}
 </style>
 </head>
 
@@ -783,12 +779,12 @@
         const results = stores.filter(s => s.name.toLowerCase().includes(query));
         if (results.length) {
           autocomplete.innerHTML = results.map(s => 
-            `<div onclick="window.location.href='${s.url}'">
-               <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
-                    alt="${s.name} logo" class="store-logo">
-               <span class="store-name">${s.name}</span>
-             </div>`
-          ).join('');
+              `<div onclick="window.location.href='${s.url}'">
+                 <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
+                      alt="${s.name} logo" class="store-logo">
+                 <span class="store-name">${s.name}</span>
+               </div>`
+            ).join('');
          autocomplete.classList.add('show');
         } else {
           autocomplete.classList.remove('show');
@@ -1010,6 +1006,7 @@
   </script>
 </body>
 </html>
+
 
 
 
