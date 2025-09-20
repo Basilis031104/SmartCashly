@@ -330,11 +330,11 @@
 }
 
 .search-autocomplete .store-logo {
-  height: 28px;
-  width: 28px;           /* ✅ force consistent square size */
-  object-fit: contain;   /* ✅ keep proportions, no stretching */
+  height: 28px;          /* ✅ consistent height */
+  width: auto;           /* ✅ keep natural width */
+  max-width: 80px;       /* ✅ prevent extra-wide logos from breaking layout */
+  object-fit: contain;   /* ✅ scales proportionally inside height */
   flex-shrink: 0;
-  border-radius: 4px;    /* optional: soften edges */
 }
 
 
@@ -1010,6 +1010,7 @@
   </script>
 </body>
 </html>
+
 
 
 
