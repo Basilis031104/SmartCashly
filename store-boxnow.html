@@ -562,26 +562,26 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   z-index: 999999 !important;
   max-height: 250px !important;
   overflow-y: auto !important;
-  display: none !important;     /* stays hidden by default */
+  display: none; /* default hidden */
 }
 
 .search-autocomplete.show {
-  display: block !important;    /* ✅ only shows when JS adds "show" */
+  display: block; /* ✅ shows when .show is added */
 }
 
 .search-autocomplete div {
   display: flex;
   align-items: center;
-  justify-content: flex-start;  /* ✅ logo + text stay together */
+  justify-content: flex-start;  /* ✅ text next to logo */
+  gap: 0.75rem;                 /* ✅ nice spacing */
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-size: 0.95rem;
   transition: background 0.2s;
-  gap: 0.75rem;                 /* ✅ nice spacing between logo & name */
 }
 
 .search-autocomplete div:hover {
-  background: #f0f8ff !important;
+  background: #f0f8ff;
 }
 
 .search-autocomplete .store-logo {
@@ -591,14 +591,13 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 }
 
 .search-autocomplete .store-name {
-  color: #008e45;   /* Smartcashly green */
+  color: #008e45;
   font-weight: 600;
 }
 
 
 
-    
-    .search-autocomplete .store-name {
+ .search-autocomplete .store-name {
       color: #008e45 !important;
       font-weight: 600;
     }
@@ -689,15 +688,6 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       }
     }
 
-.search-autocomplete div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: background 0.2s;
-}
 
 .search-autocomplete .store-name {
   color: #008e45;       /* Smartcashly green */
@@ -944,6 +934,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
