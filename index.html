@@ -269,37 +269,30 @@
 
 .search-autocomplete div {
   display: flex;
-  align-items: center;       /* ✅ vertically align logo + text */
-  justify-content: flex-start; /* ✅ keep them left-aligned */
-  gap: 1rem;                 /* ✅ spacing between logo & name */
+  align-items: center;       /* ✅ logo + text vertically aligned */
+  justify-content: flex-start; /* ✅ both stick to the left */
+  gap: 12px;                 /* ✅ nice spacing */
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-size: 0.95rem;
   transition: background 0.2s;
 }
 
-
-.search-autocomplete div:hover {
-  background: #f0f8ff;
-}
-
 .search-autocomplete .store-logo {
+  width: 100px;   /* ✅ large square logos */
   height: 100px;
-  width: 100px;           /* ✅ force consistent square size */
-  object-fit: contain;   /* ✅ keep proportions, no stretching */
+  object-fit: contain; /* ✅ keep proportions */
   flex-shrink: 0;
-  border-radius: 5px;    /* optional: soften edges */
+  border-radius: 8px; /* optional */
 }
-
 
 .search-autocomplete .store-name {
   color: #008e45;
   font-weight: 600;
-  flex-grow: 0;    /* ✅ prevent pushing text */
+  flex-grow: 0;    /* ✅ don’t push text away */
 }
 
 
-    
 .all-stores-btn {
     background: #0070f3;
     color: white;
