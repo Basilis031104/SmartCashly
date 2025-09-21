@@ -278,13 +278,16 @@
   gap: 1rem;                   /* ✅ spacing between logo & text */
 }
 
+/* Force correct logo alignment in dropdown */
 .search-autocomplete .store-logo {
-  width: 100px;                /* ✅ keep big square logos */
-  height: 100px;
-  object-fit: contain;
-  flex-shrink: 0;              /* ✅ don’t let logo shrink */
-  margin-right: 1rem;          /* ✅ force spacing */
+  width: 100px !important;
+  height: 100px !important;
+  object-fit: contain !important;
+  margin: 0 !important;        /* ✅ remove auto-centering */
+  display: inline-block !important; /* ✅ allow text next to logo */
+  flex-shrink: 0 !important;
 }
+
 
 .search-autocomplete .store-name {
   color: #008e45;
