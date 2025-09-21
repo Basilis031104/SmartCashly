@@ -269,27 +269,27 @@
 
 .search-autocomplete div {
   display: flex;
-  align-items: center;       /* ✅ logo + text vertically aligned */
-  justify-content: flex-start; /* ✅ both stick to the left */
-  gap: 12px;                 /* ✅ nice spacing */
+  align-items: center;         /* ✅ vertically centered */
+  justify-content: flex-start; /* ✅ keep items left aligned */
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-size: 0.95rem;
   transition: background 0.2s;
+  gap: 1rem;                   /* ✅ spacing between logo & text */
 }
 
 .search-autocomplete .store-logo {
-  width: 100px;   /* ✅ large square logos */
+  width: 100px;                /* ✅ keep big square logos */
   height: 100px;
-  object-fit: contain; /* ✅ keep proportions */
-  flex-shrink: 0;
-  border-radius: 8px; /* optional */
+  object-fit: contain;
+  flex-shrink: 0;              /* ✅ don’t let logo shrink */
+  margin-right: 1rem;          /* ✅ force spacing */
 }
 
 .search-autocomplete .store-name {
   color: #008e45;
   font-weight: 600;
-  flex-grow: 0;    /* ✅ don’t push text away */
+  flex: 0 1 auto;              /* ✅ allow text to stay next to logo */
 }
 
 
