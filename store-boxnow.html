@@ -5,34 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Box Now - 35% Cashback • Smartcashly</title>
   <style>
-    /* Advanced shiny lime green background with white gradient on right */
-    html { 
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
-        linear-gradient(90deg, #32CD32 0%, #32CD32 60%, #ffffff 100%) !important; 
-        /* lime green left → white on right */
-      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 100% 100% !important;
-      animation: shimmer 12s ease-in-out infinite !important;
-      min-height: 100vh;
-    }
-    
-    body { 
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
-        linear-gradient(90deg, #32CD32 0%, #32CD32 60%, #ffffff 100%) !important;
-        /* lime green left side → fades to white on right side */
-      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 100% 100% !important;
-      animation: shimmer 12s ease-in-out infinite !important;
-      min-height: 100vh;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
+    /* Advanced shiny lime green background with floating white particles */
+      html { 
+        background: 
+          radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.18) 0%, transparent 40%),
+          linear-gradient(135deg, #32CD32 0%, #32CD32 40%, #ffffff 100%) !important;
+        background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+        animation: shimmer 12s ease-in-out infinite !important;
+        min-height: 100vh;
+      }
+      
+      body { 
+        background: 
+          radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.18) 0%, transparent 40%),
+          linear-gradient(135deg, #32CD32 0%, #32CD32 40%, #ffffff 100%) !important;
+        background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+        animation: shimmer 12s ease-in-out infinite !important;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
 
     /* Enhanced golden floating particles overlay */
     body::before {
@@ -922,6 +921,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
