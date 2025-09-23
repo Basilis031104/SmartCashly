@@ -148,9 +148,10 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   height: 80px;    
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 1.25rem;
-  padding: 1rem 1.5rem;
+  padding: 0 1rem;
+  padding-left: 0;
   background: #008e45 !important;   
   color: #fff;
   position: relative;
@@ -195,6 +196,9 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 
 /* Logo positioning */
 .logo-img {
+  margin: 0;           /* remove any margin */
+  padding: 0;          /* remove padding */
+  width: auto;
   position: absolute;
   left: 1.5rem;
   height: 100px;
@@ -932,6 +936,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
