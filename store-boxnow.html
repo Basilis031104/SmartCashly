@@ -488,11 +488,12 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
     }
 
     footer {
-      height: 80px;
-      text-align: center;
+      height: 80px;                 /* keep your set height */
+      display: flex;                /* enable flexbox */
+      align-items: center;          /* ✅ vertical centering */
+      justify-content: center;      /* ✅ horizontal centering */
       font-size: .875rem;
       font-weight: bold; 
-      padding: 1rem 1.5rem;
       background: #008e45 !important;
       color: #000000 !important;
       border-top: 1px solid rgba(255, 215, 0, 0.3);
@@ -500,6 +501,7 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       z-index: 10;
       overflow: hidden;
     }
+
 
     footer * {
       position: relative;
@@ -925,6 +927,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
