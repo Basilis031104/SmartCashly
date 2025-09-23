@@ -144,17 +144,18 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       color: #222;
     }
 
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* logo left, nav right */
-    padding: 1rem 1.5rem;
-    background: #008e45 !important;
-    color: #fff;
-    position: relative;
-    overflow: visible;
-    z-index: 1001;
+ header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 🚨 culprit */
+  padding: 1rem 1.5rem;
+  background: #008e45 !important;
+  color: #fff;
+  position: relative;
+  overflow: visible;
+  z-index: 1001;
 }
+
 
 
     /* Enhanced header particles */
@@ -955,6 +956,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
