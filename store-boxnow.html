@@ -213,10 +213,12 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 /* Search bar container */
 .search-bar {
   position: relative;
-  flex: 0 0 auto;
-  max-width: 680px;
-  width: 500px;
   z-index: 1002;
+  flex: 0 1 680px;        /* let it shrink/grow up to 680px */
+  width: 100%;            /* take full width allowed */
+  margin: 0 auto;         /* ✅ centers it */
+  display: flex;          /* to center input + button together */
+  align-items: center;
 }
 
 
@@ -941,6 +943,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
