@@ -153,7 +153,7 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   background: #008e45 !important;
   color: #fff;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   z-index: 1001;
 }
 
@@ -512,20 +512,20 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       background: #45a049;
     }
 
-    footer {
-      height: 80px;                 /* keep your set height */
-      display: flex;                /* enable flexbox */
-      align-items: center;          /* ✅ vertical centering */
-      justify-content: center;      /* ✅ horizontal centering */
-      font-size: .875rem;
-      font-weight: bold; 
-      background: #008e45 !important;
-      color: #000000 !important;
-      border-top: 1px solid rgba(255, 215, 0, 0.3);
-      position: relative;
-      z-index: 10;
-      overflow: hidden;
-    }
+  footer {
+  height: 80px;                 /* keep your set height */
+  display: flex;                /* enable flexbox */
+  align-items: center;          /* ✅ vertical centering */
+  justify-content: center;      /* ✅ horizontal centering */
+  padding: 1rem 1.5rem;
+  font-size: .875rem;
+  font-weight: bold; 
+  background: #008e45 !important;
+  color: #000000 !important;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
 
 
     footer * {
@@ -957,6 +957,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
