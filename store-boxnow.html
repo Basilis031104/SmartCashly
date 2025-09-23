@@ -200,11 +200,11 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 
 /* Wrapper sits in the middle */
 .search-wrapper {
-  flex: 1;                        /* take up middle space */
   display: flex;
-  justify-content: center;        /* center search bar + button */
+  justify-content: center; /* ✅ centers the whole block */
   align-items: center;
-  gap: 0.75rem;                   /* spacing between search and button */
+  gap: 0.75rem;
+  flex: 1;  /* ✅ makes it flexible inside header */
 }
 
 /* Search bar container */
@@ -940,6 +940,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
