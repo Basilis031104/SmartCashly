@@ -145,20 +145,17 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
     }
 
   header {
-  height: 80px;    
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.25rem;
-  padding: 0 1rem;
-  padding-left: 0;
-  background: #008e45 !important;   
-  color: #fff;
-  position: relative;
-  overflow: visible;     /* <-- was hidden */
-  z-index: 1001;         /* keep header above the page bg */
-}
-
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 1rem 1.5rem;
+      background: #008e45 !important;
+      color: #fff;
+      position: relative;
+      overflow: visible;   /* ✅ allow dropdown to escape */
+      z-index: 1001;       /* ✅ keep header above background layers */
+    }
 
     /* Enhanced header particles */
     header::before {
@@ -936,6 +933,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
