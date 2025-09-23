@@ -145,17 +145,17 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
     }
 
   header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
-      padding: 1rem 1.5rem;
-      background: #008e45 !important;
-      color: #fff;
-      position: relative;
-      overflow: visible;   /* ✅ allow dropdown to escape */
-      z-index: 1001;       /* ✅ keep header above background layers */
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* logo left, nav right */
+    padding: 1rem 1.5rem;
+    background: #008e45 !important;
+    color: #fff;
+    position: relative;
+    overflow: visible;
+    z-index: 1001;
+}
+
 
     /* Enhanced header particles */
     header::before {
@@ -193,13 +193,12 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 
 /* Logo */
 .logo-img {
-  position: absolute;
-  left: 1.5rem;
-  height: 100px;
+  height: 80px;   /* adjust size to fit header */
   width: auto;
   background: transparent !important;
-  z-index: 1002;
+  margin-right: auto; /* keeps it on the far left */
 }
+
 
 /* Wrapper sits in the middle */
 .search-wrapper {
@@ -943,6 +942,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
