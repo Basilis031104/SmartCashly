@@ -191,11 +191,8 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
       }
     }
 
-/* Logo positioning */
+/* Logo */
 .logo-img {
-  margin: 0;           /* remove any margin */
-  padding: 0;          /* remove padding */
-  width: auto;
   position: absolute;
   left: 1.5rem;
   height: 100px;
@@ -206,23 +203,24 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 
 /* Search bar container */
 .search-bar {
-  flex: 0 1 680px;
-  width: 100%;
-  margin: 0 auto;   /* ✅ centers the form */
-  display: flex;
-  align-items: center;
+  position: relative;
+  flex: 0 0 auto;
+  max-width: 680px;
+  width: 500px;
+  z-index: 1002;
 }
 
 
 /* Search input field */
+/* Input */
 .search-bar input {
   width: 100%;
-  padding: 0.55rem 3rem 0.55rem 1rem;  /* ✅ extra right padding for button */
+  padding: 0.55rem 2.8rem 0.55rem 1rem;
   border: none;
   border-radius: 9999px;
   font-size: 0.95rem;
   outline: none;
-  background: #ffffff !important; 
+  background: white !important;
   transition: box-shadow .18s;
 }
 
@@ -232,10 +230,9 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   box-shadow: 0 0 0 2px rgba(0,112,243,.35);
 }
 
-/* Search button */
 .search-bar button {
   position: absolute;
-  right: .0rem;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -262,7 +259,7 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   fill: #fff; 
 }
 
-/* View All Stores button */
+/* View All Stores */
 .all-stores-btn {
   background: #0070f3;
   color: white;
@@ -273,7 +270,6 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   font-size: 0.95rem;
   transition: background 0.18s;
   white-space: nowrap;
-  margin-left: 1rem;
 }
 
 /* View All Stores button hover */
@@ -577,14 +573,6 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   display: block; /* ✅ shows when .show is added */
 }
 
-.search-wrapper {
-  display: flex;
-  justify-content: center; /* center whole block */
-  align-items: center;
-  gap: 0.75rem;            /* spacing between input and button */
-  flex: 1;
-}
-
 .search-autocomplete div {
   display: flex;
   align-items: center;
@@ -712,19 +700,22 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
 <body>
   <header>
   <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
- <div class="search-wrapper">
-  <form class="search-bar" action="#" method="get">
-    <input type="search" name="q" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
-    <button type="submit" aria-label="Search">
-      <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
-    </button>
-  </form>
-  <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
-</div>
+  
+  <div class="search-wrapper">
+    <form class="search-bar" action="#" method="get">
+      <input type="search" name="q" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
+      </button>
+    </form>
+    <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
+  </div>
+
   <nav class="auth-nav">
     <a href="index.html" class="btn btn--secondary">Home</a>
   </nav>
 </header>
+
 
   <main>
     <div class="store-header">
@@ -941,6 +932,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
