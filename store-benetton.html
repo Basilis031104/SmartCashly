@@ -186,35 +186,42 @@
       }
     }
 
-  /* Logo positioning */
+ .center-group {
+  display: flex;
+  justify-content: center; /* center inside header */
+  align-items: center;
+  gap: 1rem;
+}
+
 .logo-img {
-  position: absolute;
-  left: 1.5rem;
-  height: 100px;
+  height: 60px;
   width: auto;
-  background: transparent !important;
-  z-index: 1002;
 }
 
-/* Search bar container */
 .search-bar {
-  position: relative;
-  flex: 0 0 auto;
-  max-width: 680px;
-  width: 500px;
-  z-index: 1002;
-  margin-left: 120px;
+  max-width: 500px;
+  width: 100%;
+  margin: 0;
 }
 
-.search-container {
+.center-group {
   display: flex;
   align-items: center;
-  justify-content: center; /* center the group */
-  gap: 1rem; /* spacing between search and button */
+  justify-content: center;
+  gap: 0.5rem; /* space between search and button */
   flex: 1;
 }
 
-/* Search input field */
+/* Search bar */
+.search-bar {
+  position: relative;
+  flex: 0 1 500px;  /* allow shrink if needed */
+  max-width: 500px;
+  width: 100%;
+  z-index: 1002;
+  margin: 0; /* remove auto margins */
+}
+
 .search-bar input {
   width: 100%;
   padding: 0.55rem 2.8rem 0.55rem 1rem;
@@ -226,15 +233,13 @@
   transition: box-shadow .18s;
 }
 
-/* Search input focus state */
 .search-bar input:focus {
   box-shadow: 0 0 0 2px rgba(0,112,243,.35);
 }
 
-/* Search button */
 .search-bar button {
   position: absolute;
-  right: .0rem;
+  right: 0.3rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -248,70 +253,8 @@
   cursor: pointer;
   transition: background .18s;
 }
-
-/* Search button hover */
-.search-bar button:hover { 
-  background: #0059c1 !important; 
-}
-
-/* Search button icon */
-.search-bar button svg { 
-  width: 1rem; 
-  height: 1rem; 
-  fill: #fff; 
-}
-
-/* Search Autocomplete Styles */
-.search-bar {
-  position: relative !important;
-}
-
-.search-autocomplete {
-  position: absolute !important;
-  top: calc(100% + 2px) !important;
-  left: 0 !important;
-  right: 0 !important;
-  background: white !important;
-  border: 2px solid #008e45 !important;
-  border-radius: 0 0 12px 12px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
-  z-index: 999999 !important;
-  max-height: 250px !important;
-  overflow-y: auto !important;
-  display: none !important;
-}
-
-.search-autocomplete.show { 
-  display: block !important; 
-}
-
-.search-autocomplete div {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;  /* ✅ logo + text together */
-  gap: 0.75rem;                 /* ✅ space between them */
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: background 0.2s;
-}
-
-.search-autocomplete div:hover {
-  background: #f0f8ff;
-}
-
-.search-autocomplete .store-logo {
-  height: 100px;
-  width: 100px;           /* ✅ force consistent square size */
-  object-fit: contain;   /* ✅ keep proportions, no stretching */
-  flex-shrink: 0;
-  border-radius: 5px;    /* optional: soften edges */
-}
-
-.search-autocomplete .store-name {
-  color: #008e45;
-  font-weight: 600;
-}
+.search-bar button:hover { background: #0059c1 !important; }
+.search-bar button svg { width: 1rem; height: 1rem; fill: #fff; }
 
 /* View All Stores button */
 .all-stores-btn {
@@ -323,14 +266,12 @@
   font-weight: 600;
   font-size: 0.95rem;
   transition: background 0.18s;
-  white-space: nowrap;
-  margin-left: 1rem;
+  white-space: nowrap;  /* keeps text in one line */
+  height: 38px;         /* matches search input height */
+  display: flex;
+  align-items: center;
 }
-
-/* View All Stores button hover */
-.all-stores-btn:hover {
-  background: #0059c1;
-}
+.all-stores-btn:hover { background: #0059c1; }
 
 /* Auth navigation positioning */
 .auth-nav {
@@ -612,12 +553,14 @@
   <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
 
   <div class="center-group">
-    <form class="search-bar" action="#" method="get">
-      <input type="search" placeholder="Search stores, coupons and offers ..." />
-      <button type="submit" aria-label="Search">🔍</button>
-    </form>
-    <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
-  </div>
+  <form class="search-bar" action="#" method="get">
+    <input type="search" name="q" placeholder="Search stores, coupons and offers ..." />
+    <button type="submit" aria-label="Search">
+      <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
+    </button>
+  </form>
+  <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
+</div>
 
   <nav class="auth-nav">
     <a href="index.html" class="btn btn--secondary">Home</a>
@@ -798,6 +741,7 @@
   </script>
 </body>
 </html>
+
 
 
 
