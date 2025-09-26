@@ -206,6 +206,14 @@
   margin-left: 120px;
 }
 
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the group */
+  gap: 1rem; /* spacing between search and button */
+  flex: 1;
+}
+
 /* Search input field */
 .search-bar input {
   width: 100%;
@@ -601,18 +609,20 @@
 
 <body>
   <header>
-    <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+  <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+
+  <div class="center-group">
     <form class="search-bar" action="#" method="get">
-      <input type="search" name="q" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
-      <button type="submit" aria-label="Search">
-        <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
-      </button>
+      <input type="search" placeholder="Search stores, coupons and offers ..." />
+      <button type="submit" aria-label="Search">🔍</button>
     </form>
     <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
-    <nav class="auth-nav">
-      <a href="index.html" class="btn btn--secondary">Home</a>
-    </nav>
-  </header>
+  </div>
+
+  <nav class="auth-nav">
+    <a href="index.html" class="btn btn--secondary">Home</a>
+  </nav>
+</header>
 
   <main>
     <div class="store-header">
@@ -788,6 +798,7 @@
   </script>
 </body>
 </html>
+
 
 
 
