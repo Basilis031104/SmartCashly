@@ -203,26 +203,24 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   z-index: 1002;
 }
 
-/* Search bar container */
-.search-bar {
-  position: relative;
-  flex: 0 0 auto;
-  max-width: 680px;
-  width: 500px;
-  z-index: 1002;
-  margin: 0 auto;   /* ⬅️ truly centers it */
-}
-
-.search-container {
+.center-group {
   display: flex;
   align-items: center;
-  justify-content: center; /* center the group */
-  gap: 1rem; /* spacing between search and button */
+  justify-content: center;
+  gap: 0.5rem; /* space between search and button */
   flex: 1;
 }
 
+/* Search bar */
+.search-bar {
+  position: relative;
+  flex: 0 1 500px;  /* allow shrink if needed */
+  max-width: 500px;
+  width: 100%;
+  z-index: 1002;
+  margin: 0; /* remove auto margins */
+}
 
-/* Search input field */
 .search-bar input {
   width: 100%;
   padding: 0.55rem 2.8rem 0.55rem 1rem;
@@ -238,10 +236,9 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   box-shadow: 0 0 0 2px rgba(0,112,243,.35);
 }
 
-/* Search button */
 .search-bar button {
   position: absolute;
-  right: .0rem;
+  right: 0.3rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -255,7 +252,6 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   cursor: pointer;
   transition: background .18s;
 }
-
 .search-bar button:hover { background: #0059c1 !important; }
 .search-bar button svg { width: 1rem; height: 1rem; fill: #fff; }
 
@@ -269,8 +265,10 @@ header { z-index: 1000; overflow: visible; }  /* allow the search UI to overflow
   font-weight: 600;
   font-size: 0.95rem;
   transition: background 0.18s;
-  white-space: nowrap;
-  margin-left: 1rem;
+  white-space: nowrap;  /* keeps text in one line */
+  height: 38px;         /* matches search input height */
+  display: flex;
+  align-items: center;
 }
 .all-stores-btn:hover { background: #0059c1; }
 
@@ -966,6 +964,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
