@@ -139,19 +139,18 @@
       color: #222;
     }
 
-    header {
+     header {
+      height: 80px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
+      justify-content: center; 
       padding: 1rem 1.5rem;
       background: #008e45 !important;
       color: #fff;
       position: relative;
-      overflow: visible;   /* ✅ allow dropdown to escape */
-      z-index: 1001;       /* ✅ keep header above background layers */
+      overflow: visible;
+      z-index: 1001;
     }
-
 
     /* Enhanced header particles */
     header::before {
@@ -187,27 +186,42 @@
       }
     }
 
-    /* Logo positioning */
-.logo-img {
-  position: absolute;
-  left: 1.5rem;
-  height: 100px;
-  width: auto;
-  background: transparent !important;
-  z-index: 1002;
+ .center-group {
+  display: flex;
+  justify-content: center; /* center inside header */
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Search bar container */
+.logo-img {
+  height: 60px;
+  width: auto;
+}
+
+.search-bar {
+  max-width: 500px;
+  width: 100%;
+  margin: 0;
+}
+
+.center-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* space between search and button */
+  flex: 1;
+}
+
+/* Search bar */
 .search-bar {
   position: relative;
-  flex: 0 0 auto;
-  max-width: 680px;
-  width: 500px;
+  flex: 0 1 500px;  /* allow shrink if needed */
+  max-width: 500px;
+  width: 100%;
   z-index: 1002;
-  margin-left: 120px;
+  margin: 0; /* remove auto margins */
 }
 
-/* Search input field */
 .search-bar input {
   width: 100%;
   padding: 0.55rem 2.8rem 0.55rem 1rem;
@@ -219,15 +233,13 @@
   transition: box-shadow .18s;
 }
 
-/* Search input focus state */
 .search-bar input:focus {
   box-shadow: 0 0 0 2px rgba(0,112,243,.35);
 }
 
-/* Search button */
 .search-bar button {
   position: absolute;
-  right: .0rem;
+  right: 0.3rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -241,18 +253,8 @@
   cursor: pointer;
   transition: background .18s;
 }
-
-/* Search button hover */
-.search-bar button:hover { 
-  background: #0059c1 !important; 
-}
-
-/* Search button icon */
-.search-bar button svg { 
-  width: 1rem; 
-  height: 1rem; 
-  fill: #fff; 
-}
+.search-bar button:hover { background: #0059c1 !important; }
+.search-bar button svg { width: 1rem; height: 1rem; fill: #fff; }
 
 /* View All Stores button */
 .all-stores-btn {
@@ -264,14 +266,12 @@
   font-weight: 600;
   font-size: 0.95rem;
   transition: background 0.18s;
-  white-space: nowrap;
-  margin-left: 1rem;
+  white-space: nowrap;  /* keeps text in one line */
+  height: 38px;         /* matches search input height */
+  display: flex;
+  align-items: center;
 }
-
-/* View All Stores button hover */
-.all-stores-btn:hover {
-  background: #0059c1;
-}
+.all-stores-btn:hover { background: #0059c1; }
 
 /* Auth navigation positioning */
 .auth-nav {
@@ -316,13 +316,22 @@
 
 .search-autocomplete div {
   display: flex;
-  align-items: center;       /* ✅ vertically align logo + text */
-  justify-content: flex-start; /* ✅ keep them left-aligned */
-  gap: 1rem;                 /* ✅ spacing between logo & name */
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
   padding: 0.75rem 1rem;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 2rem;
   transition: background 0.2s;
+}
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the group */
+  gap: 1rem; /* spacing between search and button */
+  flex: 1;
 }
 
   
@@ -330,9 +339,10 @@
   background: #f0f8ff;
 }
 
+
 .search-autocomplete .store-logo {
-  height: 100px;
-  width: 100px;           /* ✅ force consistent square size */
+  height: 120px;
+  width: 120px;           /* ✅ force consistent square size */
   object-fit: contain;   /* ✅ keep proportions, no stretching */
   flex-shrink: 0;
   border-radius: 5px;    /* optional: soften edges */
@@ -342,6 +352,7 @@
 .search-autocomplete .store-name {
   color: #008e45;
   font-weight: 600;
+  font-size: 10rem;
 }
 
 
@@ -383,12 +394,12 @@ main {
 }
 
 .store-logo-large {
-  width: 120px;
-  height: 120px;
-  background: url('logo-shein.png') no-repeat center center;
-  background-size: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      width: 120px;
+      height: 120px;
+      background: url('logo-boxnow.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .store-details {
@@ -396,11 +407,10 @@ main {
 }
 
 .store-title {
-  font-size: 2rem;
-  color: #008e45;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
+      font-size: 2.2rem;
+      color: #008e45;
+      margin-bottom: 0.1rem;
+    }
 
 .store-subtitle {
   font-size: 1.1rem;
@@ -424,18 +434,19 @@ main {
 }
 
 .section-title {
-  font-size: 1.5rem;
-  color: #008e45;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  border: 3px solid #008e45;
-  display: inline-block;
-}
+      font-size: 1.5rem;
+      color: #008e45;
+      font-weight: 650;  
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 3px solid  #0070f3;
+      display: inline-block;
+    }
+
 
 .offers-grid {
   display: grid;
@@ -444,19 +455,20 @@ main {
 }
 
 .offer-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 3px solid #008e45;
-}
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 3px solid #0070f3;
+    }
 
 .offer-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px #0059c1;
+      border-color: #0059c1;
+    }
 
 .offer-header {
   display: flex;
@@ -466,12 +478,12 @@ main {
 }
 
 .offer-logo {
-  width: 50px;
-  height: 50px;
-  background: url('logo-shein.png') no-repeat center center;
-  background-size: cover;
-  border-radius: 6px;
-}
+      width: 60px;
+      height: 60px;
+      background: url('logo-boxnow.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 6px;
+    }
 
 .offer-type {
   background: #2196F3;
@@ -492,11 +504,11 @@ main {
 }
 
 .offer-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #008e45;
+      margin-bottom: 0.5rem;
+    }
 
 .offer-description {
   color: #666;
@@ -535,16 +547,17 @@ main {
 }
 
 footer {
-  text-align: center;
-  font-size: .875rem;
-  font-weight: bold;
-  padding: 1rem 0;
+  height: 80px;                 /* keep your set height */
+  display: flex;                /* enable flexbox */
+  align-items: center;          /* ✅ vertical centering */
+  justify-content: center;      /* ✅ horizontal centering */
+  font-size: 1rem;
+  font-weight: bold; 
   background: #008e45 !important;
   color: #000000 !important;
-  border-top: 1px solid rgba(255, 215, 0, 0.3);
-  position: relative;
-  z-index: 10;
-  overflow: hidden;
+  position: relative;  
+  overflow: visible;
+  z-index: 1001;
 }
 
 footer * {
@@ -600,15 +613,19 @@ footer::before {
 </head>
 
 <body>
-  <header>
+ <header>
   <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+
+ <div class="center-group">
   <form class="search-bar" action="#" method="get">
-    <input type="search" name="q" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
+    <input type="search" name="q" placeholder="Search stores, coupons and offers ..." />
     <button type="submit" aria-label="Search">
       <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
     </button>
   </form>
   <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
+</div>
+
   <nav class="auth-nav">
     <a href="index.html" class="btn btn--secondary">Home</a>
   </nav>
@@ -752,7 +769,7 @@ footer::before {
   </main>
 
   <footer>
-    © <span id="year"></span> Smartcashly. All rights reserved.
+    ©&nbsp;<span id="year"></span>&nbsp;Smartcashly. All rights reserved.
   </footer>
   
   <script>
@@ -1012,6 +1029,7 @@ footer::before {
   </script>
 </body>
 </html>
+
 
 
 
