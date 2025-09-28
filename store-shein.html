@@ -294,7 +294,6 @@
   }
 }
 
-/* Search Autocomplete Styles */
 .search-bar {
   position: relative !important;
 }
@@ -314,43 +313,31 @@
   display: none !important;
 }
 
-.search-autocomplete.show { 
-  display: block !important; 
-}
+.search-autocomplete.show { display: block !important; }
 
 .search-autocomplete div {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 1rem;
   padding: 0.75rem 1rem;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #008e45;
   transition: background 0.2s;
 }
 
-
-.search-container {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* center the group */
-  gap: 1rem; /* spacing between search and button */
-  flex: 1;
-}
-
-  
 .search-autocomplete div:hover {
   background: #f0f8ff;
 }
 
-
 .search-autocomplete .store-logo {
-  height: 120px;
-  width: 120px;           /* ✅ force consistent square size */
-  object-fit: contain;   /* ✅ keep proportions, no stretching */
-  flex-shrink: 0;
-  border-radius: 5px;    /* optional: soften edges */
+  height: 32px;
+  width: 32px;
+  object-fit: contain;
+  border-radius: 4px;
 }
+
 
 
 .search-autocomplete .store-name {
@@ -777,52 +764,52 @@ footer::before {
   </footer>
   
   <script>
-    // Search functionality  
-    const searchInput = document.querySelector('.search-bar input');
-    const searchBar = document.querySelector('.search-bar');
+  const searchInput = document.querySelector('.search-bar input');
+  const searchBar = document.querySelector('.search-bar');
 
-    if (searchInput && searchBar) {
-      const autocomplete = document.createElement('div');
-      autocomplete.className = 'search-autocomplete';
-      searchBar.appendChild(autocomplete);
+  if (searchInput && searchBar) {
+    const autocomplete = document.createElement('div');
+    autocomplete.className = 'search-autocomplete';
+    searchBar.appendChild(autocomplete);
 
-      const stores = [
-        { name: 'Box Now', url: 'store-boxnow.html' },
-        { name: 'Nike', url: 'store-nike.html' },
-        { name: 'Shein', url: 'store-shein.html' },
-        { name: 'Benetton', url: 'store-benetton.html' },
-        { name: 'Myprotein', url: 'store-myprotein.html' },
-        { name: 'Aegean Airlines', url: 'store-aegean.html' },
-        { name: 'Adidas', url:'store-adidas.html'}
-      ];
+    const stores = [
+      { name: 'Box Now', url: 'store-boxnow.html' },
+      { name: 'Nike', url: 'store-nike.html' },
+      { name: 'Shein', url: 'store-shein.html' },
+      { name: 'Benetton', url: 'store-benetton.html' },
+      { name: 'Myprotein', url: 'store-myprotein.html' },
+      { name: 'Aegean Airlines', url: 'store-aegean.html' },
+      { name: 'Adidas', url:'store-adidas.html'}
+    ];
 
-      searchInput.addEventListener('input', function(e) {
-        const query = e.target.value.toLowerCase().trim();
-        if (!query) { 
-          autocomplete.classList.remove('show'); 
-          return; 
-        }
-        
-        const results = stores.filter(s => s.name.toLowerCase().includes(query));
-        if (results.length) {
-          autocomplete.innerHTML = results.map(s => 
-              `<div onclick="window.location.href='${s.url}'">
-                 <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
-                      alt="${s.name} logo" class="store-logo">
-                 <span class="store-name">${s.name}</span>
-               </div>`
-            ).join('');
-         autocomplete.classList.add('show');
-        } else {
-          autocomplete.classList.remove('show');
-        }
-      });
+    searchInput.addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase().trim();
+      if (!query) { 
+        autocomplete.classList.remove('show'); 
+        return; 
+      }
+      
+      const results = stores.filter(s => s.name.toLowerCase().includes(query));
+      if (results.length) {
+        autocomplete.innerHTML = results.map(s => 
+          `<div onclick="window.location.href='${s.url}'">
+             <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
+                  alt="${s.name} logo" class="store-logo">
+             <span class="store-name">${s.name}</span>
+           </div>`
+        ).join('');
+        autocomplete.classList.add('show');
+      } else {
+        autocomplete.classList.remove('show');
+      }
+    });
 
-      searchInput.addEventListener('blur', () => {
-        setTimeout(() => autocomplete.classList.remove('show'), 200);
-      });
-    }
-  </script>
+    searchInput.addEventListener('blur', () => {
+      setTimeout(() => autocomplete.classList.remove('show'), 200);
+    });
+  }
+</script>
+
 
   <!-- your existing Shein-specific script follows -->
   <script>
@@ -1033,6 +1020,7 @@ footer::before {
   </script>
 </body>
 </html>
+
 
 
 
