@@ -127,7 +127,7 @@
     }
 
     /* Ensure content appears above particles */
-    header, main, footer {
+    , main, footer {
       position: relative;
       z-index: 10;
     }
@@ -140,17 +140,17 @@
     }
 
     header {
+      height: 80px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
+      justify-content: center; 
       padding: 1rem 1.5rem;
       background: #008e45 !important;
       color: #fff;
       position: relative;
-      overflow: visible;   /* ✅ allow dropdown to escape */
-      z-index: 1001;       /* ✅ keep header above background layers */
-    } 
+      overflow: visible;
+      z-index: 1001;
+    }
 
     /* Enhanced header particles */
     header::before {
@@ -222,6 +222,14 @@
   margin: 0; /* remove auto margins */
 }
 
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the group */
+  gap: 1rem; /* spacing between search and button */
+  flex: 1;
+}
+
 .search-bar input {
   width: 100%;
   padding: 0.55rem 2.8rem 0.55rem 1rem;
@@ -235,6 +243,31 @@
 
 .search-bar input:focus {
   box-shadow: 0 0 0 2px rgba(0,112,243,.35);
+}
+
+.search-autocomplete .store-logo {
+  height: 120px;
+  width: 120px;           /* ✅ force consistent square size */
+  object-fit: contain;   /* ✅ keep proportions, no stretching */
+  flex-shrink: 0;
+  border-radius: 5px;    /* optional: soften edges */
+}
+    
+.search-autocomplete .store-name {
+  color: #008e45;
+  font-weight: 600;
+  font-size: 10rem;
+}
+    
+.search-autocomplete div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: background 0.2s;
 }
 
 .search-bar button {
@@ -330,21 +363,20 @@
     .store-logo-large {
       width: 120px;
       height: 120px;
-      background: url('logo-benetton.png') no-repeat center center;
+      background: url('logo-boxnow.png') no-repeat center center;
       background-size: cover;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
     }
 
     .store-details {
       flex: 1;
     }
 
-    .store-title {
-      font-size: 2rem;
+   .store-title {
+      font-size: 2.2rem;
       color: #008e45;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.1rem;
     }
 
     .store-subtitle {
@@ -371,14 +403,14 @@
     .section-title {
       font-size: 1.5rem;
       color: #008e45;
-      font-weight: bold;
+      font-weight: 650;  
       margin-bottom: 1.5rem;
       background: rgba(255, 255, 255, 0.95);
       padding: 1rem 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(10px);
-      border: 3px solid #008e45;
+      border: 3px solid  #0070f3;
       display: inline-block;
     }
 
@@ -395,12 +427,13 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
-      border: 3px solid #008e45;
+      border: 3px solid #0070f3;
     }
 
     .offer-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 25px #0059c1;
+      border-color: #0059c1;
     }
 
     .offer-header {
@@ -411,9 +444,9 @@
     }
 
     .offer-logo {
-      width: 80px;
-      height: 80px;
-      background: url('logo-benetton.png') no-repeat center center;
+      width: 60px;
+      height: 60px;
+      background: url('logo-shein.png') no-repeat center center;
       background-size: cover;
       border-radius: 6px;
     }
@@ -438,8 +471,8 @@
 
     .offer-title {
       font-size: 1.1rem;
-      font-weight: bold;
-      color: #333;
+      font-weight: 600;
+      color: #008e45;
       margin-bottom: 0.5rem;
     }
 
@@ -480,15 +513,17 @@
     }
 
     footer {
-      text-align: center;
-      font-size: .875rem;
-      padding: 1rem 0;
-      background: #000000 !important;
-      color: #ffffff !important;
-      border-top: 1px solid rgba(255, 215, 0, 0.3);
-      position: relative;
-      z-index: 10;
-      overflow: hidden;
+      height: 80px;                 /* keep your set height */
+      display: flex;                /* enable flexbox */
+      align-items: center;          /* ✅ vertical centering */
+      justify-content: center;      /* ✅ horizontal centering */
+      font-size: 1rem;
+      font-weight: bold; 
+      background: #008e45 !important;
+      color: #000000 !important;
+      position: relative;  
+      overflow: visible;
+      z-index: 1001;
     }
 
     footer * {
@@ -553,14 +588,12 @@
   <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
 
   <div class="center-group">
-  <form class="search-bar" action="#" method="get">
-    <input type="search" name="q" placeholder="Search stores, coupons and offers ..." />
-    <button type="submit" aria-label="Search">
-      <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
-    </button>
-  </form>
-  <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
-</div>
+    <form class="search-bar" action="#" method="get">
+      <input type="search" placeholder="Search stores, coupons and offers ..." />
+      <button type="submit" aria-label="Search">🔍</button>
+    </form>
+    <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
+  </div>
 
   <nav class="auth-nav">
     <a href="index.html" class="btn btn--secondary">Home</a>
@@ -681,7 +714,7 @@
   </main>
 
   <footer>
-    © <span id="year"></span>2025 Smartcashly. All rights reserved.
+    ©&nbsp;<span id="year"></span>&nbsp;Smartcashly. All rights reserved.
   </footer>
    <!-- ✅ Paste the search functionality block here -->
   <script>
@@ -741,6 +774,7 @@
   </script>
 </body>
 </html>
+
 
 
 
