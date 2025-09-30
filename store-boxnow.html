@@ -236,6 +236,8 @@ header::before {
 }
 
 .search-bar button {
+  font-size: 1rem; /* keeps emoji small */
+  line-height: 1;
   position: absolute;
   right: 0.3rem;
   top: 50%;
@@ -251,6 +253,7 @@ header::before {
   cursor: pointer;
   transition: background .18s;
 }
+    
 .search-bar button:hover { background: #0059c1 !important; }
 .search-bar button svg { width: 1rem; height: 1rem; fill: #fff; }
 
@@ -963,6 +966,7 @@ if (searchInput && searchBar) {
   </script>
 </body>
 </html>
+
 
 
 
