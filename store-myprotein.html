@@ -191,7 +191,7 @@
 .logo-img {
   position: absolute;
   left: 1.5rem;
-  height: 100px;
+  height: 120px;
   width: auto;
   background: transparent !important;
   z-index: 1002;
@@ -200,15 +200,15 @@
 /* Search bar container */
 .search-bar {
   position: relative;
-  flex: 0 0 auto;
-  max-width: 680px;
-  width: 500px;
+  flex: 0 1 500px;  /* allow shrink if needed */
+  max-width: 500px;
+  width: 100%;
   z-index: 1002;
-  margin-left: 120px;
+  margin: 0; /* remove auto margins */
 }
 
 /* Search input field */
-.search-bar input {
+search-bar input {
   width: 100%;
   padding: 0.55rem 2.8rem 0.55rem 1rem;
   border: none;
@@ -226,8 +226,10 @@
 
 /* Search button */
 .search-bar button {
+  font-size: 1rem; /* keeps emoji small */
+  line-height: 1;
   position: absolute;
-  right: .0rem;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -249,9 +251,7 @@
 
 /* Search button icon */
 .search-bar button svg { 
-  width: 1rem; 
-  height: 1rem; 
-  fill: #fff; 
+width: 1rem; height: 1rem; fill: #fff; 
 }
 
 /* Search Autocomplete Styles */
@@ -273,6 +273,14 @@
   overflow-y: auto !important;
   display: none !important;
 }
+
+ .search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the group */
+  gap: 1rem; /* spacing between search and button */
+  flex: 1;
+}   
 
 .search-autocomplete.show { 
   display: block !important; 
@@ -307,6 +315,14 @@
   font-weight: 600;
 }
 
+    
+.center-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* space between search and button */
+  flex: 1;
+}
 
 /* View All Stores button */
 .all-stores-btn {
@@ -318,13 +334,15 @@
   font-weight: 600;
   font-size: 0.95rem;
   transition: background 0.18s;
-  white-space: nowrap;
-  margin-left: 1rem;
+  white-space: nowrap;  /* keeps text in one line */
+  height: 38px;         /* matches search input height */
+  display: flex;
+  align-items: center;
 }
 
 /* View All Stores button hover */
-.all-stores-btn:hover {
-  background: #0059c1;
+.all-stores-btn:hover { 
+  background: #0059c1; 
 }
 
 /* Auth navigation positioning */
@@ -368,7 +386,7 @@
       width: 100%;
     }
 
-    .store-header {
+   .store-header {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
       padding: 2rem;
@@ -378,7 +396,7 @@
       align-items: center;
       gap: 2rem;
       backdrop-filter: blur(10px);
-      border: 3px solid #008e45;
+      border: 3px solid #0070f3;
     }
 
     .store-logo-large {
@@ -438,9 +456,11 @@
       border: 3px solid #008e45;
     }
 
+    
     .offer-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(-10px);
+      box-shadow: 0 8px 25px #0059c1;
+      border-color: #0059c1;
     }
 
     .offer-header {
@@ -586,17 +606,21 @@
 <body>
   <header>
   <img src="logo.png" alt="Smartcashly logo" class="logo-img" />
+
+  <div class="center-group">
   <form class="search-bar" action="#" method="get">
-    <input type="search" name="q" placeholder="Search stores, offers ..." aria-label="Search Smartcashly" autocomplete="off" />
-    <button type="submit" aria-label="Search">
-      <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 015.86 12.29l4.18 4.18a1 1 0 01-1.41 1.41l-4.18-4.18A7.5 7.5 0 1110.5 3zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
+    <input type="search" name="q" placeholder="Search stores, coupons and offers ..." />
+    <button type="submit" aria-label="Search">🔍</button>
     </button>
   </form>
   <a href="all-stores.html" class="all-stores-btn">View All Stores</a>
+ </div>
+
   <nav class="auth-nav">
     <a href="index.html" class="btn btn--secondary">Home</a>
   </nav>
 </header>
+
 
   <main>
     <div class="store-header">
@@ -774,6 +798,7 @@
 </body>
 
 </html>
+
 
 
 
