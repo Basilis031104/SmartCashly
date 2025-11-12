@@ -140,16 +140,16 @@
     }
 
     header {
+      height: 80px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
+      justify-content: center; 
       padding: 1rem 1.5rem;
       background: #008e45 !important;
       color: #fff;
       position: relative;
-      overflow: visible;   /* ✅ allow dropdown to escape */
-      z-index: 1001;       /* ✅ keep header above background layers */
+      overflow: visible;
+      z-index: 1001;
     }
 
 
@@ -289,11 +289,11 @@ width: 1rem; height: 1rem; fill: #fff;
 .search-autocomplete div {
   display: flex;
   align-items: center;
-  justify-content: flex-start;  /* ✅ logo + text together */
-  gap: 0.75rem;                 /* ✅ space between them */
+  justify-content: flex-start;
+  gap: 1rem;
   padding: 0.75rem 1rem;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 2rem;
   transition: background 0.2s;
 }
 
@@ -301,9 +301,9 @@ width: 1rem; height: 1rem; fill: #fff;
   background: #f0f8ff;
 }
 
-.search-autocomplete .store-logo {
-  height: 100px;
-  width: 100px;           /* ✅ force consistent square size */
+.search-autocomplete.store-logo {
+  height: 120px;
+  width: 120px;           /* ✅ force consistent square size */
   object-fit: contain;   /* ✅ keep proportions, no stretching */
   flex-shrink: 0;
   border-radius: 5px;    /* optional: soften edges */
@@ -313,8 +313,8 @@ width: 1rem; height: 1rem; fill: #fff;
 .search-autocomplete .store-name {
   color: #008e45;
   font-weight: 600;
+  font-size: 10rem;
 }
-
     
 .center-group {
   display: flex;
@@ -402,10 +402,10 @@ width: 1rem; height: 1rem; fill: #fff;
     .store-logo-large {
       width: 120px;
       height: 120px;
-      background: url('logo-myprotein.png') no-repeat center center;
+      background: url('logo-boxnow.png') no-repeat center center;
       background-size: cover;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
     }
 
     .store-details {
@@ -413,10 +413,9 @@ width: 1rem; height: 1rem; fill: #fff;
     }
 
     .store-title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: #008e45;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.1rem;
     }
 
     .store-subtitle {
@@ -453,12 +452,12 @@ width: 1rem; height: 1rem; fill: #fff;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
-      border: 3px solid #008e45;
+      border: 3px solid #0070f3;
     }
 
     
     .offer-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-3px);
       box-shadow: 0 8px 25px #0059c1;
       border-color: #0059c1;
     }
@@ -471,9 +470,9 @@ width: 1rem; height: 1rem; fill: #fff;
     }
 
     .offer-logo {
-      width: 50px;
-      height: 50px;
-      background: url('logo-myprotein.png') no-repeat center center;
+      width: 60px;
+      height: 60px;
+      background: url('logo-shein.png') no-repeat center center;
       background-size: cover;
       border-radius: 6px;
     }
@@ -498,8 +497,8 @@ width: 1rem; height: 1rem; fill: #fff;
 
     .offer-title {
       font-size: 1.1rem;
-      font-weight: bold;
-      color: #333;
+      font-weight: 600;
+      color: #008e45;
       margin-bottom: 0.5rem;
     }
 
@@ -540,15 +539,17 @@ width: 1rem; height: 1rem; fill: #fff;
     }
 
     footer {
-      text-align: center;
-      font-size: .875rem;
-      padding: 1rem 0;
-      background: #000000 !important;
-      color: #ffffff !important;
-      border-top: 1px solid rgba(255, 215, 0, 0.3);
-      position: relative;
-      z-index: 10;
-      overflow: hidden;
+      height: 80px;                 /* keep your set height */
+      display: flex;                /* enable flexbox */
+      align-items: center;          /* ✅ vertical centering */
+      justify-content: center;      /* ✅ horizontal centering */
+      font-size: 1rem;
+      font-weight: bold; 
+      background: #008e45 !important;
+      color: #000000 !important;
+      position: relative;  
+      overflow: visible;
+      z-index: 1001;
     }
 
     footer * {
@@ -609,7 +610,7 @@ width: 1rem; height: 1rem; fill: #fff;
 
   <div class="center-group">
   <form class="search-bar" action="#" method="get">
-    <input type="search" name="q" placeholder="Search stores, coupons and offers ..." />
+    <input type="search" name="q" placeholder="Search stores, coupons and offers ..." aria-label="Search Smartcashly" autocomplete="off" />
     <button type="submit" aria-label="Search">🔍</button>
     </button>
   </form>
@@ -735,7 +736,7 @@ width: 1rem; height: 1rem; fill: #fff;
   </main>
 
   <footer>
-    © <span id="year"></span>2025 Smartcashly. All rights reserved.
+    ©&nbsp;<span id="year"></span>&nbsp;Smartcashly. All rights reserved.
   </footer>
 
     <!-- ✅ Paste the search functionality block here -->
@@ -798,6 +799,7 @@ width: 1rem; height: 1rem; fill: #fff;
 </body>
 
 </html>
+
 
 
 
