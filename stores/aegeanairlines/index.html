@@ -843,7 +843,7 @@ background: #0059c1;
         if (results.length) {
           autocomplete.innerHTML = results.map(s => 
             `<div onclick="window.location.href='${s.url}'">
-               <img src="logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
+               <img src="/store-logos/store-logo-${s.name.toLowerCase().replace(/\s+/g,'')}.png" 
                     alt="${s.name} logo" class="store-logo">
                <span class="store-name">${s.name}</span>
              </div>`
@@ -870,6 +870,7 @@ background: #0059c1;
 </body>
 
 </html>
+
 
 
 
