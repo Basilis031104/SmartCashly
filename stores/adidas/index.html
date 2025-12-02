@@ -786,15 +786,15 @@
       searchBar.appendChild(autocomplete);
 
       const stores = [
-        { name: 'Box Now', url: 'store-boxnow.html' },
-        { name: 'Nike', url: 'store-nike.html' },
-        { name: 'Shein', url: 'store-shein.html' },
-        { name: 'Benetton', url: 'store-benetton.html' },
-        { name: 'Myprotein', url: 'store-myprotein.html' },
-        { name: 'Aegean Airlines', url: 'store-aegeanairlines.html' },
-        { name: 'Adidas', url:'store-adidas.html'}
+        { name: 'Box Now', url: '/stores/boxnow/' },
+        { name: 'Nike', url: '/stores/nike/' },
+        { name: 'Shein', url: '/stores/shein/' },
+        { name: 'Benetton', url: '/stores/benetton/' },
+        { name: 'Myprotein', url: '/stores/myprotein/' },
+        { name: 'Aegean Airlines', url: '/stores/aegeanairlines/' },
+        { name: 'Adidas', url: '/stores/adidas/' }
       ];
-
+      
       searchInput.addEventListener('input', function(e) {
         const query = e.target.value.toLowerCase().trim();
         if (!query) { 
@@ -833,3 +833,4 @@
 </body>
 
 </html>
+
