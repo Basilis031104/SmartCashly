@@ -338,10 +338,20 @@
       border-radius: 8px;
       margin-right: 1rem;
       flex-shrink: 0;
+      background-color: #fff;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       border: 2px solid #f0f0f0;
     }
+
+    /* Normalize logos whose artwork has extra whitespace inside the source image. */
+    .store-icon--tripcom { background-size: 125%; }
+    .store-icon--udemy { background-size: 190%; }
+    .store-icon--zalando { background-size: 175%; }
+    .store-icon--sephora { background-size: 135%; }
+    .store-icon--ebay { background-size: 130%; }
+    .store-icon--etsy { background-size: 120%; }
 
     .store-info {
       flex: 1;
@@ -804,7 +814,7 @@
         <button class="visit-store-btn">Visit Store</button>
       </a>
       <a href="../../stores/ebay/" class="store-item">
-        <div class="store-icon" style="background-image: url('../../store-logos/store-logo-ebay.png')"></div>
+        <div class="store-icon store-icon--ebay" style="background-image: url('../../store-logos/store-logo-ebay.png')"></div>
         <div class="store-info">
           <div class="store-name">eBay</div>
           <div class="store-category">Marketplace</div>
@@ -831,7 +841,7 @@
         <button class="visit-store-btn">Visit Store</button>
       </a>
       <a href="../../stores/sephora/" class="store-item">
-        <div class="store-icon" style="background-image: url('../../store-logos/store-logo-sephora.png')"></div>
+        <div class="store-icon store-icon--sephora" style="background-image: url('../../store-logos/store-logo-sephora.png')"></div>
         <div class="store-info">
           <div class="store-name">Sephora</div>
           <div class="store-category">Beauty</div>
@@ -939,7 +949,7 @@
         <button class="visit-store-btn">Visit Store</button>
       </a>
       <a href="../../stores/udemy/" class="store-item">
-        <div class="store-icon" style="background-image: url('../../store-logos/store-logo-udemy.png')"></div>
+        <div class="store-icon store-icon--udemy" style="background-image: url('../../store-logos/store-logo-udemy.png')"></div>
         <div class="store-info">
           <div class="store-name">Udemy</div>
           <div class="store-category">Online Learning</div>
@@ -957,7 +967,7 @@
         <button class="visit-store-btn">Visit Store</button>
       </a>
       <a href="../../stores/tripcom/" class="store-item">
-        <div class="store-icon" style="background-image: url('../../store-logos/store-logo-tripcom.png')"></div>
+        <div class="store-icon store-icon--tripcom" style="background-image: url('../../store-logos/store-logo-tripcom.png')"></div>
         <div class="store-info">
           <div class="store-name">Trip.com</div>
           <div class="store-category">Travel</div>
@@ -966,7 +976,7 @@
         <button class="visit-store-btn">Visit Store</button>
       </a>
       <a href="../../stores/etsy/" class="store-item">
-        <div class="store-icon" style="background-image: url('../../store-logos/store-logo-etsy.png')"></div>
+        <div class="store-icon store-icon--etsy" style="background-image: url('../../store-logos/store-logo-etsy.png')"></div>
         <div class="store-info">
           <div class="store-name">Etsy</div>
           <div class="store-category">Marketplace</div>
@@ -1029,7 +1039,7 @@
         <button class="visit-store-btn">Visit Store</button>
       </a>
       <a href="../../stores/zalando/" class="store-item">
-        <div class="store-icon" style="background-image: url('../../store-logos/store-logo-zalando.png')"></div>
+        <div class="store-icon store-icon--zalando" style="background-image: url('../../store-logos/store-logo-zalando.png')"></div>
         <div class="store-info">
           <div class="store-name">Zalando</div>
           <div class="store-category">Fashion</div>
