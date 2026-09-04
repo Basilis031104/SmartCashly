@@ -1038,17 +1038,27 @@ footer::before {
 
 </style>
 
-  <style data-borderless-store-logos>
+  <style data-polished-store-logos>
     .store-logo,
     .search-autocomplete .store-logo {
-      border: 0 !important;
-      border-radius: 0 !important;
-      box-shadow: none !important;
-      background-color: transparent !important;
+      border: 1px solid rgba(15, 23, 42, 0.13) !important;
+      border-radius: 14px !important;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.11) !important;
+      background-color: rgba(255, 255, 255, 0.96) !important;
       background-size: contain !important;
       background-position: center !important;
       background-repeat: no-repeat !important;
+      background-origin: content-box !important;
+      background-clip: padding-box !important;
+      box-sizing: border-box !important;
       object-fit: contain !important;
+      padding: 10px !important;
+    }
+
+    .search-autocomplete .store-logo {
+      border-radius: 10px !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.09) !important;
+      padding: 7px !important;
     }
   </style>
 </head>

@@ -810,24 +810,43 @@
 
 </style>
 
-  <style data-borderless-store-logos>
+  <style data-polished-store-logos>
     .store-logo-large,
     .offer-logo {
-      border: 0 !important;
-      border-radius: 0 !important;
-      box-shadow: none !important;
-      background-color: transparent !important;
+      border-style: solid !important;
+      border-color: rgba(15, 23, 42, 0.14) !important;
+      background-color: rgba(255, 255, 255, 0.96) !important;
       background-size: contain !important;
       background-position: center !important;
       background-repeat: no-repeat !important;
+      background-origin: content-box !important;
+      background-clip: padding-box !important;
+      box-sizing: border-box !important;
+    }
+
+    .store-logo-large {
+      border-width: 1px !important;
+      border-radius: 14px !important;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.13) !important;
+      padding: 12px !important;
+    }
+
+    .offer-logo {
+      border-width: 1px !important;
+      border-radius: 10px !important;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.11) !important;
+      padding: 6px !important;
     }
 
     .store-logo-large img,
     .offer-logo img {
+      width: 100% !important;
+      height: 100% !important;
       border: 0 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
       object-fit: contain !important;
+      display: block !important;
     }
   </style>
 </head>
