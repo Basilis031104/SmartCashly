@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plus4u - Cashback Available • Smartcashly</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="../../site-logo/smartcashly-favicon.png" />
+
+  <style>
+    html {
+      background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.20) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.18) 0%, transparent 40%), linear-gradient(135deg, #73a512 0%, #73a512 55%, #a8d34a 100%) !important;
+      background-size: 300% 300%, 250% 250%, 200% 200%, 280% 280%, 300% 300% !important;
+      animation: shimmer 12s ease-in-out infinite !important;
+      min-height: 100vh;
+    }
+
+    body {
+      background: transparent !important;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.80) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.80) 1px, transparent 1px),
+        radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.80) 1px, transparent 1px),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.80) 1px, transparent 1px),
+        radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.80) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 65% 45%, rgba(255, 255, 255, 0.80) 1px, transparent 1px);
+      background-size: 120px 120px, 160px 160px, 100px 100px, 140px 140px, 90px 90px, 110px 110px;
+      z-index: 0;
+      pointer-events: none !important;
+      animation: gentleFloat 25s ease-in-out infinite;
+      will-change: background-position;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.80) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 65% 20%, rgba(255, 255, 255, 0.80) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 35% 70%, rgba(255, 255, 255, 0.80) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.80) 0.8px, transparent 0.8px),
+        radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0.80) 0.5px, transparent 0.5px);
+      background-size: 70px 70px, 90px 90px, 60px 60px, 80px 80px, 65px 65px;
+      pointer-events: none !important;
+      z-index: 1;
+      animation: gentleSparkle 20s ease-in-out infinite;
+      will-change: background-position;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
+      50% { background-position: 100% 50%, 100% 100%, 100% 50%, 100% 100%, 100% 50%; }
+      100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 50%; }
+    }
+
+    @keyframes gentleFloat {
+      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; opacity: 0.7; }
+      33% { background-position: 30% 20%, 20% 40%, 50% 30%, 40% 10%, 60% 50%, 70% 20%; opacity: 0.9; }
+      66% { background-position: 60% 40%, 40% 80%, 80% 60%, 10% 70%, 30% 80%, 90% 40%; opacity: 0.9; }
+      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; opacity: 0.7; }
+    }
+
+    @keyframes gentleSparkle {
+      0%, 100% { opacity: 0.45; background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+      25% { opacity: 0.7; background-position: 15% 15%, 25% 25%, 35% 35%, 45% 45%, 55% 55%; }
+      50% { opacity: 0.75; background-position: 30% 30%, 50% 50%, 70% 70%, 90% 90%, 10% 90%; }
+      75% { opacity: 0.6; background-position: 20% 40%, 40% 20%, 60% 80%, 80% 60%, 100% 40%; }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    }
+
+    header, main, footer {
+      position: relative;
+      z-index: 10;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #222;
+    }
+
+    header {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1.5rem;
+      background: #008e45 !important;
+      color: #fff;
+      position: relative;
+      overflow: visible;
+      z-index: 1001;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at center 22%, rgba(255, 255, 255, 1) 1px, transparent 1px),
+        radial-gradient(circle at center 50%, rgba(255, 255, 255, 1) 1px, transparent 1px),
+        radial-gradient(circle at center 78%, rgba(255, 255, 255, 1) 1px, transparent 1px) !important;
+      background-size: 72px 100%, 72px 100%, 72px 100% !important;
+      background-position: 0 0, 24px 0, 48px 0;
+      background-repeat: repeat-x !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+      opacity: 1 !important;
+      animation: headerBubbleCycle 4s linear infinite !important;
+    }
+
+    @keyframes headerBubbleCycle {
+      from { background-position: 0 0, 24px 0, 48px 0; }
+      to { background-position: 72px 0, 96px 0, 120px 0; }
+    }
+
+    @keyframes footerBubbleCycle {
+      from { background-position: 0 0, 24px 0, 48px 0; }
+      to { background-position: -72px 0, -48px 0, -24px 0; }
+    }
+
+    .logo-img {
+      position: absolute;
+      left: 1.5rem;
+      height: 100px;
+      width: auto;
+      background: transparent !important;
+      z-index: 1002;
+    }
+
+    .center-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .search-bar {
+      position: relative !important;
+      flex: 0 1 500px;
+      max-width: 500px;
+      width: 100%;
+      z-index: 1002;
+      margin: 0;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.55rem 2.8rem 0.55rem 1rem;
+      border: none;
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      outline: none;
+      background: white !important;
+      transition: box-shadow .18s;
+    }
+
+    .search-bar input:focus {
+      box-shadow: 0 0 0 2px rgba(0,112,243,.35);
+    }
+
+    .search-bar button {
+      font-size: 1rem;
+      line-height: 1;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border: none;
+      border-radius: 50%;
+      background: #0070f3 !important;
+      cursor: pointer;
+      transition: background .18s;
+    }
+
+    .search-bar button:hover {
+      background: #0059c1 !important;
+    }
+
+    .all-stores-btn {
+      position: relative;
+      z-index: 5;
+      background: #0070f3;
+      color: white;
+      text-decoration: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.18s;
+      white-space: nowrap;
+      height: 38px;
+      display: flex;
+      align-items: center;
+    }
+
+    .all-stores-btn:hover {
+      background: #0059c1;
+    }
+
+    .auth-nav {
+      position: absolute;
+      right: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 1002;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      background: #0070f3 !important;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background .18s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #0059c1 !important;
+    }
+
+    .btn--secondary {
+      background: #0070f3 !important;
+    }
+
+    .btn--secondary:hover {
+      background: #0059c1 !important;
+    }
+
+    .search-autocomplete {
+      position: absolute !important;
+      top: calc(100% + 2px) !important;
+      left: 0 !important;
+      right: 0 !important;
+      background: white !important;
+      border: 2px solid #008e45 !important;
+      border-radius: 0 0 12px 12px !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+      z-index: 999999 !important;
+      max-height: 250px !important;
+      overflow-y: auto !important;
+      display: none;
+    }
+
+    .search-autocomplete.show {
+      display: block !important;
+    }
+
+    .search-autocomplete div {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+
+    .search-autocomplete div:hover {
+      background: #f0f8ff;
+    }
+
+    .search-autocomplete .store-logo {
+      height: 38px;
+      width: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 5px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .search-autocomplete .store-name {
+      color: #008e45;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    main {
+      flex: 1 1 auto;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      background: transparent !important;
+    }
+
+    .store-header {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      backdrop-filter: blur(10px);
+      border: 3px solid #0070f3;
+    }
+
+    .store-logo-large {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      flex-shrink: 0;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .store-logo-large img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .store-logo-large.logo-fallback::after {
+      content: 'Acer';
+      color: #111;
+      font-size: 0.95rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .store-details {
+      flex: 1;
+    }
+
+    .store-title {
+      font-size: 2.2rem;
+      color: #008e45;
+      margin-bottom: 0.1rem;
+    }
+
+    .store-subtitle {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .cashback-highlight {
+      background: linear-gradient(135deg, #ff6b35, #ff8a50);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .store-details p {
+      line-height: 1.55;
+    }
+
+    .offers-section {
+      margin-bottom: 3rem;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .offer-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 3px solid #0070f3;
+      display: flex;
+      flex-direction: column;
+      min-height: 330px;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 25px #0059c1;
+      border-color: #0059c1;
+    }
+
+    .offer-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .offer-logo {
+      width: 60px;
+      height: 60px;
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .offer-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .offer-logo.logo-fallback::after {
+      content: 'Acer';
+      color: #111;
+      font-size: 0.58rem;
+      font-weight: 900;
+    }
+
+    .offer-type {
+      background: #2196F3;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .offer-type.cashback {
+      background: #ff6b35;
+    }
+
+    .offer-type.promo {
+      background: #2196F3;
+    }
+
+    .offer-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #008e45;
+      margin-bottom: 0.5rem;
+    }
+
+    .offer-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .offer-cashback {
+      color: #ff6b35;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: auto;
+      margin-bottom: 1rem;
+    }
+
+    .offer-button {
+      background: #4CAF50;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+
+    .offer-button:hover {
+      background: #45a049;
+    }
+
+    footer {
+      height: 80px !important;
+      min-height: 80px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 1rem 1.5rem !important;
+      background: #008e45 !important;
+      color: #000 !important;
+      font-size: 1rem !important;
+      font-weight: bold !important;
+      text-align: center !important;
+      overflow: hidden !important;
+      position: relative !important;
+      z-index: 1001 !important;
+    }
+
+    footer *,
+    footer span {
+      color: #000 !important;
+      font-weight: bold !important;
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    footer::before {
+      content: '' !important;
+      position: absolute !important;
+      inset: 0 !important;
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      background-image:
+        radial-gradient(circle at center 22%, rgba(255, 255, 255, 1) 1px, transparent 1px),
+        radial-gradient(circle at center 50%, rgba(255, 255, 255, 1) 1px, transparent 1px),
+        radial-gradient(circle at center 78%, rgba(255, 255, 255, 1) 1px, transparent 1px) !important;
+      background-size: 72px 100%, 72px 100%, 72px 100% !important;
+      background-position: 0 0, 24px 0, 48px 0;
+      background-repeat: repeat-x !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+      opacity: 1 !important;
+      animation: footerBubbleCycle 4s linear infinite !important;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        height: auto;
+        min-height: 120px;
+        padding-top: 4.7rem;
+      }
+
+      .logo-img {
+        left: 50%;
+        top: 0.2rem;
+        height: 75px;
+        transform: translateX(-50%);
+      }
+
+      .center-group {
+        flex-wrap: wrap;
+      }
+
+      .search-bar {
+        margin-left: 0;
+        max-width: 300px;
+      }
+
+      .auth-nav {
+        display: none;
+      }
+
+      .store-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .offers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="../../site-logo/smartcashly-logo.png" alt="Smartcashly logo" class="logo-img" />
+    <div class="center-group">
+      <form class="search-bar" action="#" method="get">
+        <input type="search" placeholder="Search any store ..." />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="../../general/all-stores/" class="all-stores-btn">View All Stores</a>
+    </div>
+    <nav class="auth-nav"><a href="/" class="btn btn--secondary">Home</a></nav>
+  </header>
+
+  <main>
+    <div class="store-header">
+      <div class="store-logo-large">
+        <img src="../../store-logos/store-logo-plus4u.png" alt="Plus4u logo" onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');" />
+      </div>
+      <div class="store-details">
+        <h1 class="store-title">Plus4u</h1>
+        <p class="store-subtitle">Electronics with cashback rewards</p>
+        <div class="cashback-highlight">💰 Cashback available</div>
+        <p>Computers, technology, appliances, games and entertainment products.</p>
+      </div>
+    </div>
+
+    <div class="offers-section">
+      <div class="offers-grid">
+        <div class="offer-card" onclick="trackClick('plus4u-general')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"><img src="../../store-logos/store-logo-plus4u.png" alt="Plus4u logo" onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');" /></div>
+            <div class="offer-type cashback">CASHBACK</div>
+          </div>
+          <h3 class="offer-title">Shop at Plus4u &amp; Earn Cashback</h3>
+          <p class="offer-description">Start your Plus4u purchase through Smartcashly and collect cashback after the eligible order or booking is completed and approved.</p>
+          <div class="offer-cashback" style="color: #ff6b35;">💰 Cashback available</div>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('plus4u-general')">💰 Shop & Earn</button>
+        </div>
+        <div class="offer-card" onclick="trackClick('plus4u-computers')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"><img src="../../store-logos/store-logo-plus4u.png" alt="Plus4u logo" onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');" /></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Computers at Plus4u</h3>
+          <p class="offer-description">Explore computers from Plus4u and activate Smartcashly before completing an eligible purchase.</p>
+          <div class="offer-cashback">+ Cashback available</div>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('plus4u-computers')">🛍️ Get Offer</button>
+        </div>
+        <div class="offer-card" onclick="trackClick('plus4u-smartphones')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"><img src="../../store-logos/store-logo-plus4u.png" alt="Plus4u logo" onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');" /></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Smartphones at Plus4u</h3>
+          <p class="offer-description">Explore smartphones from Plus4u and activate Smartcashly before completing an eligible purchase.</p>
+          <div class="offer-cashback">+ Cashback available</div>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('plus4u-smartphones')">✨ Get Offer</button>
+        </div>
+        <div class="offer-card" onclick="trackClick('plus4u-gaming')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"><img src="../../store-logos/store-logo-plus4u.png" alt="Plus4u logo" onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');" /></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Gaming at Plus4u</h3>
+          <p class="offer-description">Explore gaming from Plus4u and activate Smartcashly before completing an eligible purchase.</p>
+          <div class="offer-cashback">+ Cashback available</div>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('plus4u-gaming')">🔎 Get Offer</button>
+        </div>
+        <div class="offer-card" onclick="trackClick('plus4u-tv-audio')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"><img src="../../store-logos/store-logo-plus4u.png" alt="Plus4u logo" onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');" /></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">TV &amp; Audio at Plus4u</h3>
+          <p class="offer-description">Explore tv &amp; audio from Plus4u and activate Smartcashly before completing an eligible purchase.</p>
+          <div class="offer-cashback">+ Cashback available</div>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('plus4u-tv-audio')">⭐ Get Offer</button>
+        </div>
+        <div class="offer-card" onclick="trackClick('plus4u-home-appliances')" style="cursor: pointer;">
+          <div class="offer-header">
+            <div class="offer-logo"><img src="../../store-logos/store-logo-plus4u.png" alt="Plus4u logo" onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');" /></div>
+            <div class="offer-type promo">OFFER</div>
+          </div>
+          <h3 class="offer-title">Home Appliances at Plus4u</h3>
+          <p class="offer-description">Explore home appliances from Plus4u and activate Smartcashly before completing an eligible purchase.</p>
+          <div class="offer-cashback">+ Cashback available</div>
+          <button class="offer-button" onclick="event.stopPropagation(); trackClick('plus4u-home-appliances')">🎁 Get Offer</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer><span class="footer-copy">©&nbsp;<span id="year">2026</span>&nbsp;Smartcashly. All rights reserved.</span></footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const searchInput = document.querySelector('.search-bar input');
+    const searchBar = document.querySelector('.search-bar');
+    if (searchInput && searchBar) {
+      const autocomplete = document.createElement('div');
+      autocomplete.className = 'search-autocomplete';
+      searchBar.appendChild(autocomplete);
+      const stores = [
+        { name: 'AB Vassilopoulos', url: '/stores/abvassilopoulos', logo: '../../store-logos/store-logo-abvassilopoulos.png' },
+        { name: 'Abito', url: '/stores/abito', logo: '../../store-logos/store-logo-abito.png' },
+        { name: 'Acer', url: '/stores/acer', logo: '../../store-logos/store-logo-acer.png' },
+        { name: 'Adidas', url: '/stores/adidas', logo: '../../store-logos/store-logo-adidas.png' },
+        { name: 'Aegean Airlines', url: '/stores/aegeanairlines', logo: '../../store-logos/store-logo-aegeanairlines.png' },
+        { name: 'Agoda', url: '/stores/agoda', logo: '../../store-logos/store-logo-agoda.png' },
+        { name: 'AirHelp', url: '/stores/airhelp', logo: '../../store-logos/store-logo-airhelp.png' },
+        { name: 'Airshop', url: '/stores/airshop', logo: '../../store-logos/store-logo-airshop.png' },
+        { name: 'Alensa', url: '/stores/alensa', logo: '../../store-logos/store-logo-alensa.png' },
+        { name: 'Alibaba', url: '/stores/alibaba', logo: '../../store-logos/store-logo-alibaba.png' },
+        { name: 'AliExpress', url: '/stores/aliexpress', logo: '../../store-logos/store-logo-aliexpress.png' },
+        { name: 'ASICS', url: '/stores/asics', logo: '../../store-logos/store-logo-asics.png' },
+        { name: 'ASOS', url: '/stores/asos', logo: '../../store-logos/store-logo-asos.png' },
+        { name: 'attica', url: '/stores/attica', logo: '../../store-logos/store-logo-attica.png' },
+        { name: 'Benetton', url: '/stores/benetton', logo: '../../store-logos/store-logo-benetton.png' },
+        { name: 'Best Buy', url: '/stores/bestbuy', logo: '../../store-logos/store-logo-bestbuy.png' },
+        { name: 'Booking.com', url: '/stores/booking', logo: '../../store-logos/store-logo-booking.png' },
+        { name: 'Bose', url: '/stores/bose', logo: '../../store-logos/store-logo-bose.png' },
+        { name: 'Box Now', url: '/stores/boxnow', logo: '../../store-logos/store-logo-boxnow.png' },
+        { name: 'Chewy', url: '/stores/chewy', logo: '../../store-logos/store-logo-chewy.png' },
+        { name: 'Clinique', url: '/stores/clinique', logo: '../../store-logos/store-logo-clinique.png' },
+        { name: 'Coursera', url: '/stores/coursera', logo: '../../store-logos/store-logo-coursera.png' },
+        { name: 'Decathlon', url: '/stores/decathlon', logo: '../../store-logos/store-logo-decathlon.png' },
+        { name: 'Dell', url: '/stores/dell', logo: '../../store-logos/store-logo-dell.png' },
+        { name: 'Domino’s Pizza', url: '/stores/dominosgr', logo: '../../store-logos/store-logo-dominosgr.png' },
+        { name: 'Dust+Cream', url: '/stores/dustandcream', logo: '../../store-logos/store-logo-dustandcream.png' },
+        { name: 'e-shop.gr', url: '/stores/eshopgr', logo: '../../store-logos/store-logo-eshopgr.png' },
+        { name: 'eBay', url: '/stores/ebay', logo: '../../store-logos/store-logo-ebay.png' },
+        { name: 'epapoutsia.gr', url: '/stores/epapoutsia', logo: '../../store-logos/store-logo-epapoutsia.png' },
+        { name: 'Etsy', url: '/stores/etsy', logo: '../../store-logos/store-logo-etsy.png' },
+        { name: 'Expedia', url: '/stores/expedia', logo: '../../store-logos/store-logo-expedia.png' },
+        { name: 'ExpressVPN', url: '/stores/expressvpn', logo: '../../store-logos/store-logo-expressvpn.png' },
+        { name: 'FARFETCH', url: '/stores/farfetch', logo: '../../store-logos/store-logo-farfetch.png' },
+        { name: 'Fenty Beauty', url: '/stores/fentybeauty', logo: '../../store-logos/store-logo-fentybeauty.png' },
+        { name: 'Foot Locker', url: '/stores/footlocker', logo: '../../store-logos/store-logo-footlocker.png' },
+        { name: 'Funky Buddha', url: '/stores/funkybuddha', logo: '../../store-logos/store-logo-funkybuddha.png' },
+        { name: 'Galerie de Beauté', url: '/stores/galeriedebeaute', logo: '../../store-logos/store-logo-galeriedebeaute.png' },
+        { name: 'Gerovital', url: '/stores/gerovital', logo: '../../store-logos/store-logo-gerovital.png' },
+        { name: 'GetYourGuide', url: '/stores/getyourguide', logo: '../../store-logos/store-logo-getyourguide.png' },
+        { name: 'H&M', url: '/stores/hm', logo: '../../store-logos/store-logo-hm.png' },
+        { name: 'HOKA', url: '/stores/hoka', logo: '../../store-logos/store-logo-hoka.png' },
+        { name: 'Hotels.com', url: '/stores/hotelscom', logo: '../../store-logos/store-logo-hotelscom.png' },
+        { name: 'HP', url: '/stores/hp', logo: '../../store-logos/store-logo-hp.png' },
+        { name: 'IANOS', url: '/stores/ianos', logo: '../../store-logos/store-logo-ianos.png' },
+        { name: 'iHerb', url: '/stores/iherb', logo: '../../store-logos/store-logo-iherb.png' },
+        { name: 'IKEA', url: '/stores/ikea', logo: '../../store-logos/store-logo-ikea.png' },
+        { name: 'JD Sports', url: '/stores/jdsports', logo: '../../store-logos/store-logo-jdsports.png' },
+        { name: 'Kiehl’s', url: '/stores/kiehls', logo: '../../store-logos/store-logo-kiehls.png' },
+        { name: 'Kiwi', url: '/stores/kiwi', logo: '../../store-logos/store-logo-kiwi.png' },
+        { name: 'Klook', url: '/stores/klook', logo: '../../store-logos/store-logo-klook.png' },
+        { name: 'Kotsovolos', url: '/stores/kotsovolos', logo: '../../store-logos/store-logo-kotsovolos.png' },
+        { name: 'La Redoute', url: '/stores/laredoute', logo: '../../store-logos/store-logo-laredoute.png' },
+        { name: 'Lenovo', url: '/stores/lenovo', logo: '../../store-logos/store-logo-lenovo.png' },
+        { name: 'LG Electronics', url: '/stores/lgelectronics', logo: '../../store-logos/store-logo-lgelectronics.png' },
+        { name: 'LOOKFANTASTIC', url: '/stores/lookfantastic', logo: '../../store-logos/store-logo-lookfantastic.png' },
+        { name: 'Lowe’s', url: '/stores/lowes', logo: '../../store-logos/store-logo-lowes.png' },
+        { name: 'Macy’s', url: '/stores/macys', logo: '../../store-logos/store-logo-macys.png' },
+        { name: 'Migato', url: '/stores/migato', logo: '../../store-logos/store-logo-migato.png' },
+        { name: 'MODIVO', url: '/stores/modivo', logo: '../../store-logos/store-logo-modivo.png' },
+        { name: 'Moustakas Toys', url: '/stores/moustakastoys', logo: '../../store-logos/store-logo-moustakastoys.png' },
+        { name: 'Myprotein', url: '/stores/myprotein', logo: '../../store-logos/store-logo-myprotein.png' },
+        { name: 'New Balance', url: '/stores/newbalance', logo: '../../store-logos/store-logo-newbalance.png' },
+        { name: 'Newegg', url: '/stores/newegg', logo: '../../store-logos/store-logo-newegg.png' },
+        { name: 'Nike', url: '/stores/nike', logo: '../../store-logos/store-logo-nike.png' },
+        { name: 'Nordstrom', url: '/stores/nordstrom', logo: '../../store-logos/store-logo-nordstrom.png' },
+        { name: 'NordVPN', url: '/stores/nordvpn', logo: '../../store-logos/store-logo-nordvpn.png' },
+        { name: 'Notino', url: '/stores/notino', logo: '../../store-logos/store-logo-notino.png' },
+        { name: 'notos', url: '/stores/notos', logo: '../../store-logos/store-logo-notos.png' },
+        { name: 'Olympic Air', url: '/stores/olympicair', logo: '../../store-logos/store-logo-olympicair.png' },
+        { name: 'Omio', url: '/stores/omio', logo: '../../store-logos/store-logo-omio.png' },
+        { name: 'Pharm24', url: '/stores/pharm24', logo: '../../store-logos/store-logo-pharm24.png' },
+        { name: 'Pink Woman', url: '/stores/pinkwoman', logo: '../../store-logos/store-logo-pinkwoman.png' },
+        { name: 'Plus4u', url: '/stores/plus4u', logo: '../../store-logos/store-logo-plus4u.png' },
+        { name: 'Prince Oliver', url: '/stores/princeoliver', logo: '../../store-logos/store-logo-princeoliver.png' },
+        { name: 'Public', url: '/stores/public', logo: '../../store-logos/store-logo-public.png' },
+        { name: 'Puma', url: '/stores/puma', logo: '../../store-logos/store-logo-puma.png' },
+        { name: 'Samsonite', url: '/stores/samsonite', logo: '../../store-logos/store-logo-samsonite.png' },
+        { name: 'Samsung', url: '/stores/samsung', logo: '../../store-logos/store-logo-samsung.png' },
+        { name: 'Sephora', url: '/stores/sephora', logo: '../../store-logos/store-logo-sephora.png' },
+        { name: 'Shein', url: '/stores/shein', logo: '../../store-logos/store-logo-shein.png' },
+        { name: 'Skechers', url: '/stores/skechers', logo: '../../store-logos/store-logo-skechers.png' },
+        { name: 'Spartoo', url: '/stores/spartoo', logo: '../../store-logos/store-logo-spartoo.png' },
+        { name: 'Spitishop', url: '/stores/spitishop', logo: '../../store-logos/store-logo-spitishop.png' },
+        { name: 'Target', url: '/stores/target', logo: '../../store-logos/store-logo-target.png' },
+        { name: 'Temu', url: '/stores/temu', logo: '../../store-logos/store-logo-temu.png' },
+        { name: 'The Body Shop', url: '/stores/thebodyshop', logo: '../../store-logos/store-logo-thebodyshop.png' },
+        { name: 'The Home Depot', url: '/stores/homedepot', logo: '../../store-logos/store-logo-homedepot.png' },
+        { name: 'Trip.com', url: '/stores/tripcom', logo: '../../store-logos/store-logo-tripcom.png' },
+        { name: 'Tsakiris Mallas', url: '/stores/tsakirismallas', logo: '../../store-logos/store-logo-tsakirismallas.png' },
+        { name: 'Udemy', url: '/stores/udemy', logo: '../../store-logos/store-logo-udemy.png' },
+        { name: 'Ulta Beauty', url: '/stores/ultabeauty', logo: '../../store-logos/store-logo-ultabeauty.png' },
+        { name: 'Under Armour', url: '/stores/underarmour', logo: '../../store-logos/store-logo-underarmour.png' },
+        { name: 'UNIQLO', url: '/stores/uniqlo', logo: '../../store-logos/store-logo-uniqlo.png' },
+        { name: 'Vrbo', url: '/stores/vrbo', logo: '../../store-logos/store-logo-vrbo.png' },
+        { name: 'Walmart', url: '/stores/walmart', logo: '../../store-logos/store-logo-walmart.png' },
+        { name: 'YOOX', url: '/stores/yoox', logo: '../../store-logos/store-logo-yoox.png' },
+        { name: 'Zalando', url: '/stores/zalando', logo: '../../store-logos/store-logo-zalando.png' },
+        { name: 'Zara', url: '/stores/zara', logo: '../../store-logos/store-logo-zara.png' }
+      ];
+      searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) { autocomplete.classList.remove('show'); return; }
+        const results = stores.filter(s => (s.aliases || [s.name]).some(name => name.toLowerCase().includes(query)));
+        if (results.length) {
+          autocomplete.innerHTML = results.map(s => `<div onclick="window.location.href='${s.url}'"><div class="store-logo" style="background-image: url('${s.logo}')"></div><span class="store-name">${s.name}</span></div>`).join('');
+          autocomplete.classList.add('show');
+        } else { autocomplete.classList.remove('show'); }
+      });
+      searchInput.addEventListener('blur', () => setTimeout(() => autocomplete.classList.remove('show'), 200));
+      searchBar.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const query = searchInput.value.toLowerCase().trim();
+        const exact = stores.find(s => (s.aliases || [s.name]).some(name => name.toLowerCase() === query));
+        const partial = stores.find(s => (s.aliases || [s.name]).some(name => name.toLowerCase().includes(query)));
+        if (exact) window.location.href = exact.url;
+        else if (partial) window.location.href = partial.url;
+      });
+    }
+
+    function saveClick(offerId) {
+      const clickData = { store: 'Plus4u', offerId, timestamp: new Date().toISOString(), clickId: 'PLU' + Date.now().toString().slice(-6) };
+      try {
+        let clickHistory = [];
+        const stored = localStorage.getItem('click_history');
+        if (stored) clickHistory = JSON.parse(stored);
+        if (!Array.isArray(clickHistory)) clickHistory = [];
+        clickHistory.unshift(clickData);
+        if (clickHistory.length > 50) clickHistory.splice(50);
+        localStorage.setItem('click_history', JSON.stringify(clickHistory));
+      } catch (error) { console.warn('Could not store click history:', error); }
+      return clickData;
+    }
+
+    function trackClick(offerId) {
+      const clickData = saveClick(offerId);
+      const storeUrls = {
+        'plus4u-general': 'https://www.plus4u.gr/',
+        'plus4u-computers': 'https://www.plus4u.gr/',
+        'plus4u-smartphones': 'https://www.plus4u.gr/',
+        'plus4u-gaming': 'https://www.plus4u.gr/',
+        'plus4u-tv-audio': 'https://www.plus4u.gr/',
+        'plus4u-home-appliances': 'https://www.plus4u.gr/'
+      };
+      const targetBase = storeUrls[offerId] || 'https://www.plus4u.gr/';
+      const separator = targetBase.includes('?') ? '&' : '?';
+      window.open(targetBase + separator + 'utm_source=smartcashly&utm_medium=affiliate&utm_campaign=cashback&utm_content=' + encodeURIComponent(offerId) + '&click_id=' + clickData.clickId, '_blank');
+    }
+  </script>
+</body>
+</html>
