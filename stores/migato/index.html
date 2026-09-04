@@ -347,10 +347,10 @@
     .store-logo-large {
       width: 120px;
       height: 120px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border-radius: 0;
+      box-shadow: none;
       flex-shrink: 0;
-      background: var(--store-background);
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -367,7 +367,7 @@
 
     .store-logo-large.logo-fallback::after {
       content: 'Migato';
-      color: rgb(var(--store-bubble-rgb));
+      color: #111;
       font-size: 0.95rem;
       font-weight: 900;
       letter-spacing: -0.02em;
@@ -443,9 +443,9 @@
     .offer-logo {
       width: 60px;
       height: 60px;
-      background: #ffffff;
-      border-radius: 6px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -462,7 +462,7 @@
     }
 
     .offer-logo.logo-fallback::after {
-      content: 'Acer';
+      content: 'Migato';
       color: #111;
       font-size: 0.58rem;
       font-weight: 900;
